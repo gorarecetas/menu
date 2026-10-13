@@ -55,6 +55,10 @@
   <section class="card" id="auth" hidden>
     <h2 id="authTitle">Entrar</h2>
     <form id="authForm" autocomplete="on">
+      <div id="nameBox" hidden>
+        <label for="nombre">Nombre</label>
+        <input id="nombre" type="text" autocomplete="given-name" autocapitalize="words" maxlength="40">
+      </div>
       <label for="email">Correo</label>
       <input id="email" type="email" inputmode="email" autocomplete="username" autocapitalize="off" spellcheck="false" required>
       <label for="pass">Contraseña</label>
@@ -76,7 +80,7 @@
     <div class="row"><button class="btn" type="button" id="logout">Salir</button></div>
   </section>
 
-  <p class="ver">Versión de prueba 0.2 · entrada con correo y contraseña</p>
+  <p class="ver">Versión de prueba 0.3 · entrada con correo y contraseña</p>
 </main>
 <script>
   const SUPABASE_URL = 'https://cawmvpfjaehennkknmoy.supabase.co';
@@ -92,6 +96,8 @@
     $('#pass').autocomplete = m === 'login' ? 'current-password' : 'new-password';
     $('#authSwitch').textContent = m === 'login' ? '¿No tienes cuenta? Crear una' : 'Ya tengo cuenta: entrar';
     $('#authMsg').textContent = '';
+    $('#nameBox').hidden = m === 'login';
+    $('#nombre').required = m !== 'login';
   }
   const msg = (el, text, kind) => { el.textContent = text; el.className = 'msg ' + (kind || ''); };
   const es = e => {
@@ -122,14 +128,14 @@
   $('#authSwitch').onclick = () => setMode(mode === 'login' ? 'signup' : 'login');
   $('#authForm').onsubmit = async ev => {
     ev.preventDefault();
-    const email = $('#email').value.trim(), password = $('#pass').value;
+    const email = $('#email').value.trim(), password = $('#pass').value, nombre = $('#nombre').value.trim();
     $('#authGo').disabled = true; msg($('#authMsg'), mode === 'login' ? 'Entrando…' : 'Creando la cuenta…');
     try {
       if (mode === 'login') {
         const { error } = await sb.auth.signInWithPassword({ email, password });
         if (error) throw error;
       } else {
-        const { data, error } = await sb.auth.signUp({ email, password, options: { emailRedirectTo: location.origin + location.pathname } });
+        const { data, error } = await sb.auth.signUp({ email, password, options: { emailRedirectTo: location.origin + location.pathname, data: { nombre } } });
         if (error) throw error;
         if (!data.session) { msg($('#authMsg'), 'Cuenta creada. Te ha llegado un correo: abre el enlace para confirmarla y después entra aquí.', 'ok'); setMode('login'); $('#email').value = email; return; }
       }
