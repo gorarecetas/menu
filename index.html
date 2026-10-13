@@ -422,7 +422,7 @@
 
   <section id="semana" hidden>
     <div class="wkbar"><button class="ar" type="button" id="wkPrev" aria-label="Semana anterior">‹</button><button class="mid" type="button" id="wkPick" aria-label="Elegir semana"><b><span id="wkRango"></span> ▾</b><small id="wkSub"></small></button><input type="date" id="wkDate" tabindex="-1" aria-hidden="true"><button class="ar" type="button" id="wkNext" aria-label="Semana siguiente">›</button><button class="ar" type="button" id="wkMenu" aria-label="Más opciones de la semana" aria-haspopup="menu">⋯</button>
-      <div class="wkpop" id="wkPop" role="menu" hidden><button type="button" data-wk16="resumen">Resumen de la semana</button><button type="button" data-wk16="libre" id="wkLibre">Marcar este día como libre</button><button type="button" data-pronto="pdf">Guardar PDF <small>0.17</small></button><hr><button type="button" data-pronto="guardarSem">Guardar esta semana <small>0.17</small></button><button type="button" data-pronto="guardarSem">Cargar una semana guardada <small>0.17</small></button></div></div>
+      <div class="wkpop" id="wkPop" role="menu" hidden><button type="button" data-wk16="resumen">Resumen de la semana</button><button type="button" data-wk16="libre" id="wkLibre">Marcar este día como libre</button><button type="button" data-pronto="pdf">Guardar PDF <small>0.17</small></button><hr><button type="button" data-wk17="guardar">Guardar esta semana</button><button type="button" data-wk17="cargar">Cargar una semana guardada</button></div></div>
     <div class="days" id="dias"></div>
     <div class="dh"><h2 id="diaTit"></h2><button type="button" id="leyenda">¿Qué es esto?</button></div>
     <div class="sum" id="resumen"></div>
@@ -462,7 +462,7 @@
     <button class="cp-act" type="button" id="cpAct" hidden></button>
   </section>
 
-  <p class="ver">Versión de prueba 0.17 a · preparaciones</p>
+  <p class="ver">Versión de prueba 0.17 b · semanas guardadas</p>
 </main>
 <nav class="nav" id="nav" hidden><button type="button" data-nav="semana" id="navSemana"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Semana</button><button type="button" data-nav="compra" id="navCompra"><i class="nbd" id="navNum" hidden></i><svg viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h3l2.6 12.4a2 2 0 0 0 2 1.6h8.2a2 2 0 0 0 2-1.6L21 7H6"/></svg>Compra</button><button type="button" data-nav="recetas" id="navRecetas"><svg viewBox="0 0 24 24"><path d="M12 6.5C10 5 7 4.5 3.5 5v14c3.5-.5 6.5 0 8.5 1.5 2-1.5 5-2 8.5-1.5V5C17 4.5 14 5 12 6.5zM12 6.5v14"/><path d="M6.5 9.5h2.5M6.5 12.5h2.5M15 9.5h2.5M15 12.5h2.5"/></svg>Recetas</button><button type="button" data-nav="alimentos" id="navAlimentos"><svg viewBox="0 0 24 24"><path d="M12 8.2c-1.3-.9-2.8-1.2-4.2-.9C5.3 7.8 4 10 4 12.8 4 17 7 21 9.6 21c1 0 1.5-.5 2.4-.5s1.4.5 2.4.5C17 21 20 17 20 12.8c0-2.8-1.3-5-3.8-5.5-1.4-.3-2.9 0-4.2.9z"/><path d="M12 8.2V5.5M12 5.5c.3-1.6 1.7-2.6 3.4-2.6-.2 1.7-1.6 2.8-3.4 2.6z"/></svg>Alimentos</button></nav>
 <dialog class="sheet" id="picker" aria-labelledby="pkTit"><div class="shh"><h2 id="pkTit">Añadir</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb">
@@ -480,7 +480,7 @@
 <dialog class="sheet" id="semDlg" aria-labelledby="asTit"><div class="shh"><h2 id="asTit">Añadir a la semana</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb"><p class="sub2"><b id="asRec"></b></p><div class="wkm"><button type="button" class="ar" data-assem="-1" aria-label="Semana anterior">‹</button><b id="asRango"></b><button type="button" class="ar" data-assem="1" aria-label="Semana siguiente">›</button></div><h3 class="q3">Día</h3><div class="d7s" id="asDias"></div><h3 class="q3">Franja</h3><div class="f4s" id="asFr"></div><p class="nota2" id="asCuando"></p></div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="asGo">Continuar</button></div></dialog>
 <dialog class="sheet" id="cpFicha" aria-labelledby="cfTit"><div class="shh"><h2 id="cfTit">Compra</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="cfBody"></div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="cfGo">Guardar</button></div></dialog>
 <dialog class="sheet" id="cpAnadir" aria-labelledby="caTit"><div class="shh"><h2 id="caTit">Añadir a la compra</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb"><label class="cp-lbl" for="caNom">Producto</label><input class="cp-inp" id="caNom" type="search" enterkeyhint="done" autocomplete="off" autocorrect="off" autocapitalize="sentences" spellcheck="false" maxlength="200"><div class="cp-sugs" id="caLista" role="listbox" hidden></div><div class="cp-two" style="margin-top:12px"><label class="cp-q" for="caCant">Cantidad (si quieres)<input class="cp-inp" id="caCant" type="text" inputmode="decimal" autocomplete="off"></label><label class="cp-q" for="caUni">Unidad<select class="cp-inp" id="caUni"></select></label></div><p class="cp-nota" id="caNota"></p></div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="caGo">Añadir</button></div></dialog>
-<dialog class="sheet" id="mpDlg" aria-labelledby="mpTit"><div class="shh"><h2 id="mpTit">Tu producto</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="mpBody"></div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="mpGo">Guardar</button></div></dialog><dialog class="sheet" id="alDlg" aria-labelledby="alTit"><div class="shh"><h2 id="alTit">Alimento</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="alBody"></div><div class="shf"><button class="btn" type="button" id="alEditar">Editar</button><button class="btn main" type="button" id="alSemana">Añadir a la semana</button></div></dialog><dialog class="sheet" id="aeDlg" aria-labelledby="aeTit"><div class="shh"><h2 id="aeTit">Nueva ficha</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="aeBody"></div><div class="shf"><button class="btn main" type="button" id="aeGo">Guardar</button></div></dialog><dialog class="sheet" id="prpDlg" aria-labelledby="prpTit"><div class="shh"><h2 id="prpTit">Preparación</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="prpBody"></div><div class="shf"><p id="prpInfo" role="status"></p><button class="btn main" type="button" id="prpGo" disabled>Guardado</button></div></dialog><div id="toast" role="status" hidden></div>
+<dialog class="sheet" id="mpDlg" aria-labelledby="mpTit"><div class="shh"><h2 id="mpTit">Tu producto</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="mpBody"></div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="mpGo">Guardar</button></div></dialog><dialog class="sheet" id="alDlg" aria-labelledby="alTit"><div class="shh"><h2 id="alTit">Alimento</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="alBody"></div><div class="shf"><button class="btn" type="button" id="alEditar">Editar</button><button class="btn main" type="button" id="alSemana">Añadir a la semana</button></div></dialog><dialog class="sheet" id="aeDlg" aria-labelledby="aeTit"><div class="shh"><h2 id="aeTit">Nueva ficha</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="aeBody"></div><div class="shf"><button class="btn main" type="button" id="aeGo">Guardar</button></div></dialog><dialog class="sheet" id="prpDlg" aria-labelledby="prpTit"><div class="shh"><h2 id="prpTit">Preparación</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="prpBody"></div><div class="shf"><p id="prpInfo" role="status"></p><button class="btn main" type="button" id="prpGo" disabled>Guardado</button></div></dialog><dialog class="sheet" id="swDlg" aria-labelledby="swTit"><div class="shh"><h2 id="swTit">Semanas guardadas</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="swBody"></div><div class="shf" style="justify-content:space-between"><button class="btn rojo" type="button" id="swBorrar" hidden>Borrar</button><span></span><button class="btn main" type="button" id="swGo">Guardar</button></div></dialog><div id="toast" role="status" hidden></div>
 <script>
   const SUPABASE_URL = 'https://cawmvpfjaehennkknmoy.supabase.co';
   const SUPABASE_KEY = 'sb_publishable_vQDbCf2dlzKlFgpbMj7u2A_1wDlteT3'; // clave pública: la protección la ponen las reglas de cada tabla
@@ -1241,6 +1241,7 @@ function initSemana() {
     if (t.id === 'wkPrev' || t.id === 'wkNext') { SEM.lunes = addDays(SEM.lunes, t.id === 'wkPrev' ? -7 : 7); SEM.dia = SEM.lunes === mondayOf(hoyIso()) ? (parseIso(hoyIso()).getDay() + 6) % 7 : 0; pintarSemana(); return; }
     if (t.id === 'wkPick') { const i = $('#wkDate'); i.value = diaSel(); try { i.showPicker(); } catch (_) { i.click(); } return; }
     if (t.id === 'wkMenu') { $('#wkPop').hidden = !$('#wkPop').hidden; return; }
+    if (t.dataset.wk17) { $('#wkPop').hidden = true; if (t.dataset.wk17 === 'guardar') abrirGuardarSemana(); else abrirCargarSemana(); return; }
     if (t.dataset.wk16) { $('#wkPop').hidden = true; if (t.dataset.wk16 === 'resumen') abrirResumen(); else alternarLibre(diaSel()); return; }
     if (t.dataset.pronto) { $('#wkPop').hidden = true; aviso(PRONTO[t.dataset.pronto]); return; }
     if (t.id === 'leyenda') { aviso('Recetas en raciones; productos en g, ml o ud. Solo se suman tus consumos. * = kcal parciales: faltan cantidades o etiquetas.'); return; }
@@ -2645,6 +2646,102 @@ function init017a() {
   $('#loBody').addEventListener('click', ev => { if (ev.target.closest('[data-prplote]')) abrirPreparacion(LOTE.id); });
 }
 
+
+/* ---------- 0.17 b · Semanas guardadas (como «Guardar semana» / «Cargar semana guardada» de la hoja 5.28 b) ----------
+   Se guarda lo apuntado de la semana con sus preparaciones (también las cocinadas antes que se comen esta semana
+   y lo que se come después de lo cocinado esta semana). Al cargar: se quita lo apuntado de la semana elegida
+   (menos las preparaciones ya hechas o que alimentan otras semanas) y se ponen las de la plantilla,
+   sin los cambios de «cantidad usada» de la semana original (decisión de Rocío, 06/10). */
+let SW = null;
+const offDia = (f, ref) => Math.round((parseIso(f) - parseIso(ref)) / 864e5);
+function grafoSemana(ref) {
+  const fin = addDays(ref, 7), en = x => x.date >= ref && x.date < fin, ids = new Set(data.entries.filter(en).map(e => e.lotId).filter(Boolean));
+  data.lots.filter(en).forEach(l => ids.add(l.lotId));
+  return { lots: data.lots.filter(l => ids.has(l.lotId)), entries: data.entries.filter(e => e.itemId && (en(e) || ids.has(e.lotId))) };
+}
+function abrirGuardarSemana() {
+  const g = grafoSemana(SEM.lunes), n = g.entries.filter(e => e.date >= SEM.lunes && e.date < addDays(SEM.lunes, 7)).length;
+  if (!n) { aviso('No hay nada apuntado esta semana.'); return; }
+  SW = { modo: 'guardar' };
+  $('#swTit').textContent = 'Guardar esta semana';
+  $('#swBody').innerHTML = `<label class="cp-lbl" for="swNom" style="margin-top:0">Nombre</label><input class="cp-inp" id="swNom" maxlength="80" autocomplete="off" value="${h('Semana del ' + parseIso(SEM.lunes).getDate() + ' de ' + MESES[parseIso(SEM.lunes).getMonth()])}">
+    <p class="aj-h">Se guardan las ${n} líneas del ${h(rangoSemana(SEM.lunes))} con sus preparaciones (${g.lots.length}). Tu menú no cambia.</p>`;
+  $('#swGo').textContent = 'Guardar'; $('#swGo').disabled = false; $('#swBorrar').hidden = true;
+  $('#swDlg').showModal();
+}
+async function guardarSemana() {
+  const nom = $('#swNom').value.trim().replace(/\s+/g, ' ');
+  if (!nom) { aviso('Ponle un nombre.'); return; }
+  const ref = SEM.lunes, g = grafoSemana(ref), sinOwner = r => { const o = Object.assign({}, r); delete o.owner; return o; };
+  const contenido = { v: 1, semana: ref, lotes: g.lots.map(l => Object.assign(sinOwner(deLote(l)), { dia: offDia(l.date, ref) })), lineas: g.entries.map(e => Object.assign(sinOwner(deLinea(e)), { dia: offDia(e.date, ref) })) };
+  $('#swGo').disabled = true;
+  const { error } = await sb.from('plantillas').upsert({ id: uuid(), owner: SESION.user.id, nombre: nom, contenido });
+  $('#swGo').disabled = false;
+  if (error) { aviso('No se ha podido guardar la semana: ' + es(error)); return; }
+  $('#swDlg').close(); aviso('Semana guardada: ' + nom + '.');
+}
+async function abrirCargarSemana() {
+  SW = { modo: 'cargar', lista: null, sel: null, borrar: false };
+  $('#swTit').textContent = 'Cargar una semana guardada';
+  $('#swBody').innerHTML = '<p class="aj-h" style="margin-top:0">Cargando…</p>'; $('#swGo').textContent = 'Cargar'; $('#swGo').disabled = true; $('#swBorrar').hidden = true;
+  $('#swDlg').showModal();
+  const { data: d, error } = await sb.from('plantillas').select('id,nombre,creado,contenido').eq('owner', SESION.user.id).order('creado', { ascending: false });
+  if (error) { $('#swBody').innerHTML = `<p class="aj-h">${h(es(error))}</p>`; return; }
+  SW.lista = (d || []).slice().sort((a, b) => String(b.creado || '').localeCompare(String(a.creado || '')));
+  SW.sel = SW.lista.length ? SW.lista[0].id : null; pintarCargar();
+}
+function previaCarga(t, ref) {
+  const fin = addDays(ref, 7), en = x => x.date >= ref && x.date < fin, c = t.contenido || {};
+  const fuera = data.entries.filter(e => !en(e)).map(e => e.lotId), quitarLotes = data.lots.filter(l => en(l) && l.status !== 'Preparado' && !fuera.includes(l.lotId));
+  const quitadas = new Set(quitarLotes.map(l => l.lotId)), lineas = data.entries.filter(e => en(e) || quitadas.has(e.lotId));
+  const fechasFuera = [...new Set((c.lineas || []).concat(c.lotes || []).map(x => addDays(ref, x.dia)).filter(f => f < ref || f >= fin))].sort();
+  return { quitarLotes, lineas, mantenidos: data.lots.filter(l => en(l) && !quitadas.has(l.lotId)).length, fechasFuera, nuevas: (c.lineas || []).length };
+}
+function pintarCargar() {
+  if (!SW.lista.length) { $('#swBody').innerHTML = '<p class="aj-h" style="margin-top:0">Aún no hay semanas guardadas. Guarda una desde el menú ⋯ con «Guardar esta semana».</p>'; $('#swGo').disabled = true; return; }
+  const t = SW.lista.find(x => x.id === SW.sel), pv = t && previaCarga(t, SEM.lunes);
+  $('#swBody').innerHTML = `<div class="mp-ops" role="radiogroup" aria-label="Semanas guardadas">${SW.lista.map(x => { const c = x.contenido || {}, on = x.id === SW.sel; return `<button type="button" role="radio" aria-checked="${on}" class="${on ? 'on' : ''}" data-swsel="${h(x.id)}"><i></i><span>${h(x.nombre)}<small>${(c.lineas || []).length} líneas · ${(c.lotes || []).length} preparaciones${x.creado ? ' · guardada el ' + h(fechaCorta(String(x.creado).slice(0, 10))) : ''}</small></span></button>`; }).join('')}</div>
+    ${pv ? `<div class="info" style="margin-top:12px">Se carga en la semana del <b>${h(rangoSemana(SEM.lunes))}</b>. Se quita lo apuntado en ella (${pv.lineas.length} ${pv.lineas.length === 1 ? 'línea' : 'líneas'}) y se ponen las ${pv.nuevas} de «${h(t.nombre)}».${pv.mantenidos ? ` Se conservan ${pv.mantenidos} ${pv.mantenidos === 1 ? 'preparación ya cocinada o que se come otra semana' : 'preparaciones ya cocinadas o que se comen otras semanas'}.` : ''}${pv.fechasFuera.length ? ` También apunta comidas fuera de esta semana: ${pv.fechasFuera.map(f => h(DIA_CORTO(f))).join(', ')}.` : ''} Las cantidades cambiadas al cocinar no se copian.</div>` : ''}
+    ${SW.borrar && t ? `<div class="libre-av" style="margin-top:10px"><span>¿Borrar «${h(t.nombre)}»? Tu menú no cambia.</span><button type="button" class="btn rojo" data-swsi>Borrar</button></div>` : ''}`;
+  $('#swGo').disabled = !t; $('#swBorrar').hidden = !t;
+}
+function cargarSemana() {
+  const t = SW.lista.find(x => x.id === SW.sel); if (!t) return;
+  const ref = SEM.lunes, c = t.contenido || {}, pv = previaCarga(t, ref);
+  const antes = { lines: pv.lineas.slice(), lots: pv.quitarLotes.slice(), moves: [], usos: [] }, mapa = new Map();
+  (c.lotes || []).forEach(r => mapa.set(r.id, uuid()));
+  // Quitar
+  const fuera = new Set(pv.lineas.map(e => e.lineId)), quitadas = new Set(pv.quitarLotes.map(l => l.lotId));
+  pv.lineas.forEach(e => { const m = movDeLinea(e.lineId); if (m) { antes.moves.push(m); data.freezerMoves = data.freezerMoves.filter(x => x !== m); borrarFila('congelador_movimientos', m.id); } marcarBorrado(e.lineId); });
+  data.entries = data.entries.filter(e => !fuera.has(e.lineId));
+  data.lots.forEach(o => { const us = (o._row && o._row.usos) || []; if (!quitadas.has(o.lotId) && us.some(u => quitadas.has(u.lot) || quitadas.has(u.from))) { antes.usos.push([o, us]); o._row.usos = us.filter(u => !quitadas.has(u.lot) && !quitadas.has(u.from)); rehacerNota(o); marcarLote(o); } });
+  data.lots = data.lots.filter(l => !quitadas.has(l.lotId)); pv.quitarLotes.forEach(l => borrarLote(l.lotId));
+  // Poner
+  const nuevosLotes = (c.lotes || []).map(r => { const id = mapa.get(r.id), row = Object.assign({}, r, { id, fecha: addDays(ref, r.dia), cambios: [], pesos: null, estado: 'Planificado', usos: (r.usos || []).filter(u => mapa.has(u.lot) && mapa.has(u.from)).map(u => Object.assign({}, u, { lot: mapa.get(u.lot), from: mapa.get(u.from) })) }); delete row.dia; const l = Object.assign(aLote(row), { _row: row }); data.lots.push(l); marcarLote(l); return l; });
+  const nuevas = (c.lineas || []).map(r => { const row = Object.assign({}, r, { id: uuid(), fecha: addDays(ref, r.dia), lote_id: r.lote_id ? mapa.get(r.lote_id) || null : null }); delete row.dia; const e = aLinea(row); if (e.date < ref || e.date >= addDays(ref, 7)) e.order = siguienteOrden(e.date, e.meal) - 1 + (r.orden || 1); data.entries.push(e); marcar(e); return e; });
+  $('#swDlg').close(); pintarTodo(); pintarGlobito();
+  aviso('Cargada «' + t.nombre + '» en la semana del ' + rangoSemana(ref) + '.', 'Deshacer', () => {
+    nuevas.forEach(e => marcarBorrado(e.lineId)); data.entries = data.entries.filter(e => !nuevas.includes(e));
+    nuevosLotes.forEach(l => borrarLote(l.lotId)); data.lots = data.lots.filter(l => !nuevosLotes.includes(l));
+    antes.lots.forEach(l => { data.lots.push(l); marcarLote(l); }); antes.lines.forEach(e => { data.entries.push(e); marcar(e); });
+    antes.moves.forEach(m => { data.freezerMoves.push(m); guardarFila('congelador_movimientos', m); });
+    antes.usos.forEach(([o, us]) => { o._row.usos = us; rehacerNota(o); marcarLote(o); });
+    pintarTodo(); pintarGlobito();
+  });
+}
+async function borrarSemanaGuardada() {
+  const t = SW.lista.find(x => x.id === SW.sel); if (!t) return;
+  const { error } = await sb.from('plantillas').delete().eq('id', t.id);
+  if (error) { aviso('No se ha podido borrar: ' + es(error)); return; }
+  SW.lista = SW.lista.filter(x => x !== t); SW.sel = SW.lista.length ? SW.lista[0].id : null; SW.borrar = false; pintarCargar(); aviso('Semana guardada borrada.');
+}
+function init017b() {
+  $('#swGo').onclick = () => { if (!SW) return; if (SW.modo === 'guardar') guardarSemana(); else cargarSemana(); };
+  $('#swBorrar').onclick = () => { if (SW && SW.modo === 'cargar') { SW.borrar = !SW.borrar; pintarCargar(); } };
+  $('#swBody').addEventListener('click', ev => { const s = ev.target.closest('[data-swsel]'); if (s) { SW.sel = s.dataset.swsel; SW.borrar = false; pintarCargar(); return; } if (ev.target.closest('[data-swsi]')) borrarSemanaGuardada(); });
+  $('#swBody').addEventListener('keydown', ev => { if (ev.key === 'Enter' && ev.target.id === 'swNom') { ev.preventDefault(); guardarSemana(); } });
+}
+
 async function abrirSemana() {
   if (!SEM.lunes) { const hoy = hoyIso(); SEM.lunes = mondayOf(hoy); SEM.dia = (parseIso(hoy).getDay() + 6) % 7; }
   if (!SEM.cargada) {
@@ -2654,7 +2751,7 @@ async function abrirSemana() {
   pintarSemana(); pintarEstado();
 }
 
-  initSemana(); init013(); initCompra(); init014b(); init014c(); init015(); init016(); init017a();
+  initSemana(); init013(); initCompra(); init014b(); init014c(); init015(); init016(); init017a(); init017b();
   sb.auth.onAuthStateChange((_ev, session) => { if ((session && session.user.id) !== (SESION && SESION.user.id)) { SEM.cargada = false; data = null; } show(session); });
   sb.auth.getSession().then(({ data }) => show(data.session));
   setMode('login');
