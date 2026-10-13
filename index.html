@@ -15,6 +15,7 @@
 <link rel="icon" href="icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
 <style>
   :root{--ink:#151311;--muted:#5f574e;--paper:#eee6da;--white:#fffdf9;--line:#d3c8b8;--red:#e5192d;--cream:#fbf1c4;--ok:#00b65b;--font:"Quicksand","Nunito","Trebuchet MS",system-ui,sans-serif}
   *{box-sizing:border-box}
@@ -22,61 +23,126 @@
   body{min-height:100dvh;padding:calc(env(safe-area-inset-top) + 20px) 16px calc(env(safe-area-inset-bottom) + 24px)}
   main{max-width:520px;margin:0 auto}
   .head{display:flex;align-items:center;gap:14px}
-  .head img{width:64px;height:64px;border-radius:50%}
+  .head img{width:60px;height:60px;border-radius:50%}
   .brand{display:inline-block;padding:4px 14px;border-radius:14px;background:var(--cream);color:var(--red);font:400 30px/1.1 "Lilita One",var(--font);letter-spacing:.02em}
   .sub{margin:2px 0 0;color:var(--muted);font-size:14px}
   .card{margin-top:18px;padding:16px;background:var(--white);border:1px solid var(--line);border-radius:18px}
-  h2{margin:0 0 8px;font-size:18px}
-  ul{list-style:none;margin:0;padding:0}
-  li{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-top:1px solid var(--line)}
-  li:first-child{border-top:0}
-  .dot{flex:none;width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;background:var(--line)}
-  .dot.ok{background:var(--ok)}
-  .dot.no{background:var(--red)}
-  small{display:block;color:var(--muted);font-size:13px}
-  ol{margin:0;padding-left:20px}
-  ol li{display:list-item;border:0;padding:4px 0}
+  h2{margin:0 0 10px;font-size:18px}
+  label{display:block;margin:10px 0 4px;font-size:14px;color:var(--muted)}
+  input{width:100%;height:44px;padding:0 12px;border:1px solid var(--line);border-radius:12px;background:var(--white);font:500 16px var(--font);color:var(--ink)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:8px 14px;border:1.5px solid var(--ink);border-radius:12px;background:transparent;color:var(--ink);font:700 15px var(--font);cursor:pointer}
+  .btn.main{background:var(--ink);color:var(--white)}
+  .row{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+  .link{background:none;border:0;padding:0;color:var(--muted);font:500 14px var(--font);text-decoration:underline;cursor:pointer;margin-top:12px}
+  .msg{margin-top:10px;font-size:14px}
+  .msg.err{color:var(--red)} .msg.ok{color:#0a7a40}
+  .stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}
+  .stat{padding:10px 12px;border:1px solid var(--line);border-radius:12px}
+  .stat b{display:block;font-size:22px}
+  .stat span{color:var(--muted);font-size:13px}
+  .chip{display:inline-block;margin-left:6px;padding:2px 8px;border-radius:999px;background:var(--cream);font:700 12px var(--font);text-transform:uppercase;letter-spacing:.04em}
   .ver{margin-top:18px;text-align:center;color:var(--muted);font-size:12px}
+  [hidden]{display:none!important}
 </style>
 </head>
 <body>
 <main>
   <div class="head">
     <img src="icon-192.png" alt="">
-    <div><span class="brand">MI MENÚ</span><p class="sub">App de prueba · semana, compra y recetas</p></div>
+    <div><span class="brand">MI MENÚ</span><p class="sub">Semana, compra y recetas</p></div>
   </div>
 
-  <section class="card">
-    <h2>Comprobaciones</h2>
-    <ul>
-      <li><span class="dot" id="dInstall">?</span><span id="tInstall">Instalada en la pantalla de inicio<small>comprobando…</small></span></li>
-      <li><span class="dot" id="dOffline">?</span><span id="tOffline">Funciona sin conexión<small>comprobando…</small></span></li>
-      <li><span class="dot" id="dNet">?</span><span id="tNet">Conexión<small>comprobando…</small></span></li>
-    </ul>
+  <section class="card" id="auth" hidden>
+    <h2 id="authTitle">Entrar</h2>
+    <form id="authForm" autocomplete="on">
+      <label for="email">Correo</label>
+      <input id="email" type="email" inputmode="email" autocomplete="username" autocapitalize="off" spellcheck="false" required>
+      <label for="pass">Contraseña</label>
+      <input id="pass" type="password" autocomplete="current-password" minlength="8" required>
+      <div class="row"><button class="btn main" type="submit" id="authGo">Entrar</button></div>
+    </form>
+    <button class="link" type="button" id="authSwitch">¿No tienes cuenta? Crear una</button>
+    <p class="msg" id="authMsg" role="status"></p>
   </section>
 
-  <section class="card" id="howto">
-    <h2>Cómo instalarla en el iPhone</h2>
-    <ol>
-      <li>Abre esta página en <b>Safari</b>.</li>
-      <li>Pulsa el botón <b>Compartir</b> (el cuadrado con la flecha hacia arriba).</li>
-      <li>Elige <b>«Añadir a pantalla de inicio»</b> y pulsa <b>Añadir</b>.</li>
-      <li>Ábrela desde el icono nuevo «Mi Menú».</li>
-    </ol>
+  <section class="card" id="home" hidden>
+    <h2>Hola<span id="who"></span></h2>
+    <p class="sub" id="email2"></p>
+    <div class="stats">
+      <div class="stat"><b id="nAli">—</b><span>alimentos</span></div>
+      <div class="stat"><b id="nRec">—</b><span>recetas</span></div>
+    </div>
+    <p class="msg" id="homeMsg"></p>
+    <div class="row"><button class="btn" type="button" id="logout">Salir</button></div>
   </section>
 
-  <p class="ver">Versión de prueba 0.1 · 13/10/2026</p>
+  <p class="ver">Versión de prueba 0.2 · entrada con correo y contraseña</p>
 </main>
 <script>
-  const set = (id, ok, text) => { const d = document.getElementById('d' + id), t = document.getElementById('t' + id); d.className = 'dot ' + (ok ? 'ok' : 'no'); d.textContent = ok ? '✓' : '×'; t.querySelector('small').textContent = text; };
-  const standalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
-  set('Install', standalone, standalone ? 'abierta desde el icono, a pantalla completa' : 'ahora la ves en el navegador; sigue los pasos de abajo');
-  if (standalone) document.getElementById('howto').style.display = 'none';
-  const net = () => set('Net', navigator.onLine, navigator.onLine ? 'con conexión' : 'sin conexión: lo que ves sale de lo guardado en el móvil');
-  net(); addEventListener('online', net); addEventListener('offline', net);
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js').then(() => navigator.serviceWorker.ready).then(() => set('Offline', true, 'lista para abrirse sin conexión')).catch(() => set('Offline', false, 'no se ha podido preparar'));
-  } else set('Offline', false, 'este navegador no lo permite');
+  const SUPABASE_URL = 'https://cawmvpfjaehennkknmoy.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_vQDbCf2dlzKlFgpbMj7u2A_1wDlteT3'; // clave pública: la protección la ponen las reglas de cada tabla
+  const $ = s => document.querySelector(s);
+  let mode = 'login';
+  const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true } });
+
+  function setMode(m) {
+    mode = m;
+    $('#authTitle').textContent = m === 'login' ? 'Entrar' : 'Crear cuenta';
+    $('#authGo').textContent = m === 'login' ? 'Entrar' : 'Crear cuenta';
+    $('#pass').autocomplete = m === 'login' ? 'current-password' : 'new-password';
+    $('#authSwitch').textContent = m === 'login' ? '¿No tienes cuenta? Crear una' : 'Ya tengo cuenta: entrar';
+    $('#authMsg').textContent = '';
+  }
+  const msg = (el, text, kind) => { el.textContent = text; el.className = 'msg ' + (kind || ''); };
+  const es = e => {
+    const t = String(e && e.message || e || '');
+    if (/Invalid login/i.test(t)) return 'Correo o contraseña incorrectos.';
+    if (/Email not confirmed/i.test(t)) return 'Falta confirmar el correo: abre el enlace que te ha llegado.';
+    if (/already registered/i.test(t)) return 'Ese correo ya tiene cuenta: entra con él.';
+    if (/Password should be/i.test(t)) return 'La contraseña debe tener al menos 8 caracteres.';
+    if (/fetch|network/i.test(t)) return 'Sin conexión. Inténtalo cuando tengas internet.';
+    return t;
+  };
+
+  async function show(session) {
+    if (!session) { $('#home').hidden = true; $('#auth').hidden = false; return; }
+    $('#auth').hidden = true; $('#home').hidden = false;
+    $('#email2').textContent = session.user.email;
+    const { data: perfil } = await sb.from('perfiles').select('nombre, es_admin').eq('id', session.user.id).maybeSingle();
+    $('#who').innerHTML = (perfil && perfil.nombre ? ', ' + perfil.nombre.replace(/[<>&]/g, '') : '') + (perfil && perfil.es_admin ? '<span class="chip">Administradora</span>' : '');
+    const [a, r] = await Promise.all([
+      sb.from('alimentos').select('id', { count: 'exact', head: true }),
+      sb.from('recetas').select('id', { count: 'exact', head: true })
+    ]);
+    if (a.error || r.error) { msg($('#homeMsg'), es(a.error || r.error), 'err'); return; }
+    $('#nAli').textContent = a.count; $('#nRec').textContent = r.count;
+    msg($('#homeMsg'), 'Conectada a tu base de datos.', 'ok');
+  }
+
+  $('#authSwitch').onclick = () => setMode(mode === 'login' ? 'signup' : 'login');
+  $('#authForm').onsubmit = async ev => {
+    ev.preventDefault();
+    const email = $('#email').value.trim(), password = $('#pass').value;
+    $('#authGo').disabled = true; msg($('#authMsg'), mode === 'login' ? 'Entrando…' : 'Creando la cuenta…');
+    try {
+      if (mode === 'login') {
+        const { error } = await sb.auth.signInWithPassword({ email, password });
+        if (error) throw error;
+      } else {
+        const { data, error } = await sb.auth.signUp({ email, password, options: { emailRedirectTo: location.origin + location.pathname } });
+        if (error) throw error;
+        if (!data.session) { msg($('#authMsg'), 'Cuenta creada. Te ha llegado un correo: abre el enlace para confirmarla y después entra aquí.', 'ok'); setMode('login'); $('#email').value = email; return; }
+      }
+    } catch (e) { msg($('#authMsg'), es(e), 'err'); }
+    finally { $('#authGo').disabled = false; }
+  };
+  $('#logout').onclick = async () => { await sb.auth.signOut(); };
+
+  sb.auth.onAuthStateChange((_ev, session) => { show(session); });
+  sb.auth.getSession().then(({ data }) => show(data.session));
+  setMode('login');
+
+  if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
 </script>
 </body>
 </html>

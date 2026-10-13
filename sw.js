@@ -1,5 +1,5 @@
-// Mi Menú · trabajador sin conexión (v0.1 de prueba)
-const VERSION = 'mimenu-v0.1';
+// Mi Menú · trabajador sin conexión (v0.2 de prueba)
+const VERSION = 'mimenu-v0.2';
 const CORE = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png', './apple-touch-icon.png'];
 
 self.addEventListener('install', e => {
@@ -13,6 +13,7 @@ self.addEventListener('activate', e => {
 // Primero la red (para recibir versiones nuevas); si no hay conexión, lo guardado.
 self.addEventListener('fetch', e => {
   if (e.request.method !== 'GET') return;
+  if (new URL(e.request.url).hostname.endsWith('supabase.co')) return; // los datos van siempre a la base de datos, nunca a la caché
   e.respondWith(
     fetch(e.request).then(res => {
       const copy = res.clone();
