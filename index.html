@@ -154,6 +154,42 @@
   #toast{position:fixed;left:16px;right:16px;bottom:calc(env(safe-area-inset-bottom) + 76px);z-index:50;max-width:520px;margin:0 auto;padding:12px 14px;border-radius:14px;background:var(--cream);color:var(--ink);font:600 14px/1.4 var(--font);box-shadow:0 6px 18px rgba(0,0,0,.15)} #toast button{margin-left:8px;min-height:36px;padding:4px 10px;border:1.5px solid var(--ink);border-radius:10px;background:none;font:700 13px var(--font);cursor:pointer}
   dialog #toast{position:sticky;bottom:8px}
 
+  /* 0.13 · cocinar, lotes y congelador */
+  .sub2{margin:0 0 12px;font:600 14.5px/1.4 var(--font);color:var(--muted)} .sub2 b{color:var(--ink)}
+  .opts{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
+  .opt2{display:flex;align-items:center;gap:12px;min-height:56px;padding:10px 14px;border:1px solid var(--line);border-radius:16px;background:var(--white);cursor:pointer}
+  .opt2.on{border:2px solid var(--ink);padding:9px 13px} .opt2 input{width:22px;height:22px;margin:0;accent-color:var(--ink);flex:none}
+  .opt2 b{display:flex;align-items:center;gap:5px;font-size:16px} .opt2 small{display:block;color:var(--muted);font-size:13.5px}
+  .g3,.g3a{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;align-items:end;margin-bottom:12px} .g3.dos{grid-template-columns:1fr 1fr} .g3a{grid-template-columns:1fr 1fr 1.5fr}
+  .g2b{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:end;margin:8px 0} .g2c{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+  .q2{display:flex;flex-direction:column;gap:4px;margin:0;font:600 13px var(--font);color:var(--muted);min-width:0}
+  .q2 input,.selc{width:100%;height:48px;padding:0 12px;border:1px solid var(--line);border-radius:12px;background:var(--white);font:600 16px var(--font);color:var(--ink);min-width:0}
+  .q2 input[inputmode=decimal]{text-align:center} .selc{appearance:auto}
+  .g3a .btn,.g2b .btn{min-height:48px}
+  .chk{display:flex;align-items:center;gap:12px;min-height:52px;padding:0 14px;margin:0 0 12px;border:1px solid var(--line);border-radius:14px;background:var(--white);font:600 15.5px var(--font);color:var(--ink);cursor:pointer} .chk input{width:22px;height:22px;margin:0;accent-color:var(--ink)}
+  .info{background:var(--azul-fondo);border:1px solid var(--azul-borde);color:var(--azul-texto);border-radius:14px;padding:10px 12px;font:600 14px/1.45 var(--font);margin-bottom:10px} .info b{font-weight:700}
+  .bal{background:var(--cream);border-radius:14px;padding:10px 12px;font:700 15px/1.4 var(--font);margin-bottom:12px} .bal.warn{background:var(--peach);color:var(--red)}
+  .btn.ancho{display:flex;width:100%;gap:8px;min-height:48px;margin-bottom:10px} .btn.az{border-color:var(--azul-foco);color:var(--azul-texto);background:var(--white)} .btn.rojo{border-color:var(--red);color:var(--red)}
+  .q3{margin:4px 0 8px;font-size:15.5px} .q3.sep{border-top:1px solid var(--line);padding-top:12px;margin-top:6px}
+  .wkm{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px} .wkm b{font-size:15px} .wkm .ar{width:44px;height:44px;border:1px solid var(--line);border-radius:12px;background:var(--white);font:700 18px var(--font);cursor:pointer;color:var(--ink)}
+  .d7s{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:6px} .f4s{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-bottom:10px}
+  .d7,.f4{min-height:50px;border:1px solid var(--line);border-radius:12px;background:var(--white);font:700 14px var(--font);color:var(--ink);cursor:pointer;padding:4px 0} .f4{font-size:13px}
+  .d7 small,.f4 small{display:block;font:600 11.5px var(--font);color:var(--muted)} .d7.on,.f4.on{background:var(--ink);border-color:var(--ink);color:var(--white)} .d7.on small,.f4.on small{color:#ddd} .d7:disabled{opacity:.4;cursor:default}
+  .nota2{display:flex;align-items:center;gap:6px;font:600 13.5px/1.4 var(--font);color:var(--muted);margin:2px 2px 10px} .nota2 svg{flex:none}
+  .cm{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px solid #e3d9cb} .cm b{display:flex;align-items:center;gap:5px;font-size:15px} .cm small{display:block;font:600 13px var(--font);color:var(--muted)}
+  .box2{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:0 14px;margin:12px 0} .box2 summary{min-height:52px;display:flex;align-items:center;font:700 16px var(--font);cursor:pointer;list-style:none} .box2 summary::after{content:'⌄';margin-left:auto;color:var(--muted)} .box2[open] summary::after{content:'⌃'} .box2[open]{padding-bottom:10px}
+  .lote.lk2{display:block;width:100%;min-height:44px;margin:4px 0 -6px;padding:6px 0;border:0;background:none;text-align:left;font:600 12.5px var(--font);color:var(--azul-texto);cursor:pointer}
+  .pl{display:block;width:100%;min-height:44px;border:0;border-top:1px solid #d3e2f5;background:none;text-align:left;font:inherit;cursor:pointer;padding:6px 0}
+  .cgrow{border-bottom:1px solid #ebe3d6;background:var(--white)} .cgrow:last-of-type{border-bottom:0} .cgrow.on{background:#fffaf0} .cgrow .g3a{padding:0 10px 10px;margin:0}
+  .cgh{display:flex;align-items:center;gap:10px;width:100%;min-height:56px;padding:10px;border:0;background:none;text-align:left;font:inherit;color:inherit;cursor:pointer}
+  .rojo2{color:var(--red);font-weight:700}
+  #pkRLista,#pkCLista{background:var(--white);border:1px solid var(--line);border-radius:14px;overflow:hidden} #pkCLista .nota2{padding:8px 10px;margin:0;background:var(--paper)}
+  #pkCat{margin-bottom:8px}
+  dialog.mini{width:min(420px,calc(100vw - 32px));padding:0;border:0;border-radius:20px;background:var(--paper);color:var(--ink)} dialog.mini::backdrop{background:rgba(21,19,17,.45)}
+  dialog.mini .shb{padding:0 16px 16px} dialog.mini .row2{display:flex;gap:10px;justify-content:flex-end}
+  .anadirsem{display:flex;width:100%;justify-content:center;min-height:48px;margin:0 0 12px}
+  .pesog{display:flex;align-items:center;gap:8px;margin:6px 0 12px} .pesog input{flex:1;min-width:0;height:52px;padding:0 14px;border:1px solid var(--line);border-radius:12px;background:var(--white);font:600 20px var(--font);color:var(--ink)} .pesog span{font:600 16px var(--font);color:var(--muted)}
+
 </style>
 </head>
 <body>
@@ -206,17 +242,22 @@
     <div id="rdet"></div>
   </section>
 
-  <p class="ver">Versión de prueba 0.12 b · semana y recetas calculadas</p>
+  <p class="ver">Versión de prueba 0.13 · cocinar, lotes y congelador</p>
 </main>
 <nav class="nav" id="nav" hidden><button type="button" data-nav="semana" id="navSemana"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Semana</button><button type="button" data-nav="compra"><svg viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h3l2.6 12.4a2 2 0 0 0 2 1.6h8.2a2 2 0 0 0 2-1.6L21 7H6"/></svg>Compra</button><button type="button" data-nav="recetas" id="navRecetas"><svg viewBox="0 0 24 24"><path d="M12 6.5C10 5 7 4.5 3.5 5v14c3.5-.5 6.5 0 8.5 1.5 2-1.5 5-2 8.5-1.5V5C17 4.5 14 5 12 6.5zM12 6.5v14"/><path d="M6.5 9.5h2.5M6.5 12.5h2.5M15 9.5h2.5M15 12.5h2.5"/></svg>Recetas</button><button type="button" data-nav="alimentos"><svg viewBox="0 0 24 24"><path d="M12 8.2c-1.3-.9-2.8-1.2-4.2-.9C5.3 7.8 4 10 4 12.8 4 17 7 21 9.6 21c1 0 1.5-.5 2.4-.5s1.4.5 2.4.5C17 21 20 17 20 12.8c0-2.8-1.3-5-3.8-5.5-1.4-.3-2.9 0-4.2.9z"/><path d="M12 8.2V5.5M12 5.5c.3-1.6 1.7-2.6 3.4-2.6-.2 1.7-1.6 2.8-3.4 2.6z"/></svg>Alimentos</button></nav>
 <dialog class="sheet" id="picker" aria-labelledby="pkTit"><div class="shh"><h2 id="pkTit">Añadir</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb">
-  <div class="tabs"><button type="button" data-pktipo="alimentos" class="on">Alimentos</button><button type="button" data-pktipo="recetas">Recetas</button><button type="button" data-pktipo="libre">Comida libre</button></div>
+  <div class="tabs"><button type="button" data-pktipo="alimentos" class="on">Alimentos</button><button type="button" data-pktipo="recetas">Recetas</button><button type="button" data-pktipo="congelador">Congelador</button><button type="button" data-pktipo="libre">Comida libre</button></div>
   <div id="pkAli"><input class="search" id="pkQ" type="search" placeholder="Buscar alimento" autocomplete="off" enterkeyhint="search"><div id="pkLista"></div></div>
-  <div id="pkRec" hidden><p class="note" style="font-size:14px">Para poner una receta en el menú hace falta «Cocinar» (raciones, lote…). Llega en la 0.13. Mientras, puedes verlas en «Recetas».</p></div>
+  <div id="pkRec" hidden><select class="selc" id="pkCat" aria-label="Categoría"></select><input class="search" id="pkRQ" type="search" placeholder="Buscar receta o ingrediente" autocomplete="off" enterkeyhint="search"><div id="pkRLista"></div></div><div id="pkCong" hidden><div id="pkCLista"></div></div>
   <div id="pkLibre" hidden><label for="libreNom">Qué has comido</label><input id="libreNom" type="text" maxlength="60" autocomplete="off" autocapitalize="sentences"><label for="libreK">Kcal aproximadas (si lo sabes)</label><input id="libreK" type="text" inputmode="decimal" autocomplete="off" placeholder="?"><div class="row"><button class="btn main" type="button" id="libreAdd">Añadir comida libre</button></div></div>
 </div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="pkAdd" disabled>Añadir</button></div></dialog>
 <dialog class="sheet" id="copia" aria-labelledby="cpTit"><div class="shh"><h2 id="cpTit">Copiar a otros días</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb"><p class="note" style="font-size:14px">Elige días con esta franja vacía. Se copian los mismos alimentos y cantidades. Las recetas solo se copian si a su lote le quedan raciones.</p><div id="cpDias"></div></div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="cpGo">Copiar</button></div></dialog>
 <dialog class="sheet" id="ajDlg" aria-labelledby="ajTit"><div class="shh"><h2 id="ajTit">Ajustes</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb"><p style="margin:0;font-weight:700" id="ajNombre"></p><p class="sub" id="ajCorreo"></p><p class="note" style="font-size:14px">Objetivos: <span id="ajObj"></span>.</p><p class="note" style="font-size:14px">Personas, días libres, objetivos y carrito por franja se podrán cambiar aquí en la 0.16.</p></div><div class="shf"><button class="btn" type="button" id="salir">Salir</button><button class="btn main" type="button" data-cerrar>Cerrar</button></div></dialog>
+<dialog class="sheet" id="prepDlg" aria-labelledby="prTit"><div class="shh"><h2 id="prTit">Preparar o aprovechar</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="prBody"></div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="prGo">Añadir al menú</button></div></dialog>
+<dialog class="sheet" id="loteDlg" aria-labelledby="loTit"><div class="shh"><h2 id="loTit">Preparación</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="loBody"></div></dialog>
+<dialog class="sheet" id="congDlg" aria-labelledby="cgTit"><div class="shh"><h2 id="cgTit">Al congelador</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="cgBody"></div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="cgGo">Congelar</button></div></dialog>
+<dialog class="mini" id="pesoDlg" aria-labelledby="peTit"><div class="shh"><h2 id="peTit">Peso de 1 ud</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb"><label class="q2" for="peG"><span id="peLab">Pesa 1 ud en la báscula</span></label><div class="pesog"><input id="peG" type="text" inputmode="decimal" autocomplete="off" placeholder="g"><span>g</span></div><div class="info" id="peInfo"></div><div class="row2"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="peGo">Guardar</button></div></div></dialog>
+<dialog class="sheet" id="semDlg" aria-labelledby="asTit"><div class="shh"><h2 id="asTit">Añadir a la semana</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb"><p class="sub2"><b id="asRec"></b></p><div class="wkm"><button type="button" class="ar" data-assem="-1" aria-label="Semana anterior">‹</button><b id="asRango"></b><button type="button" class="ar" data-assem="1" aria-label="Semana siguiente">›</button></div><h3 class="q3">Día</h3><div class="d7s" id="asDias"></div><h3 class="q3">Franja</h3><div class="f4s" id="asFr"></div><p class="nota2" id="asCuando"></p></div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="asGo">Continuar</button></div></dialog>
 <div id="toast" role="status" hidden></div>
 <script>
   const SUPABASE_URL = 'https://cawmvpfjaehennkknmoy.supabase.co';
@@ -401,6 +442,7 @@
     const v = valoresReceta(id);
     $('#rdet').innerHTML = `<h2 class="pt">${h(r.nombre)}</h2>
       <div class="dchips">${frec(r.frecuencia)}${chips.join('')}</div>
+      <button type="button" class="btn main anadirsem" data-anadirsem="${h(r.id)}">Añadir a la semana</button>
       <div class="box"><div class="kc"><div><b>${r.kcal_pdf == null ? '—' : num(Math.round(r.kcal_pdf))}</b><span>kcal</span></div>
         <div><b>${r.proteina_pdf == null ? '—' : num(r.proteina_pdf)}</b><span>g proteína</span></div>
         <div><b>${r.hidratos_pdf == null ? '—' : num(r.hidratos_pdf)}</b><span>g hidratos</span></div>
@@ -551,7 +593,7 @@ function lotDelta(lot,key){let d=0;for(const i of data.ingredients.filter(x=>x.i
 function calc(entry,key){const it=item(entry.itemId);if(!it||blank(entry.own))return null;if(Number(entry.own)===0)return 0;if(it.prep){const per=prepData(entry).per[key];return per===null?null:per*Number(entry.own);}let v=n(it[key]);if(v===null)return null;if(entry.lotId&&!isProduct(entry.itemId)){const lot=data.lots.find(l=>l.lotId===entry.lotId);if(lot&&Number(lot.prepared)>0&&(String(lot.note||'').includes(ADJ_MARK)||String(lot.note||'').includes(BUY_MARK)))v=Math.max(0,v+lotDelta(lot,key)/Number(lot.prepared));}return v*Number(entry.own)/(isProduct(entry.itemId)?100:1);}
 function lotGrams(i,lot,p){if(!(Number(lot.prepared)>0))return null;if(n(i.amount)===null)return 0;/* v5.19 · «al gusto»: base 0 g */const a=Number(i.amount)/Number(i.portions||1)*Number(lot.prepared);return toGrams(i,p,a,i.unit);}
 function usage(lotId){return data.entries.filter(e=>e.lotId===lotId).reduce((a,e)=>a+(n(e.own)||0)+(n(e.others)||0),0);}
-function available(lot){return blank(lot.prepared)?null:Math.round((Number(lot.prepared)-usage(lot.lotId)-lotRecipeUsed(lot))*1e9)/1e9;}
+function available(lot){return blank(lot.prepared)?null:Math.round((Number(lot.prepared)-usage(lot.lotId)-lotRecipeUsed(lot)-congeladoDe(lot.lotId))*1e9)/1e9;}
 function sameDayComplete(lot){const lines=data.entries.filter(e=>e.lotId===lot.lotId);return !blank(lot.prepared)&&available(lot)<=1e-9&&lotRecipeUsed(lot)<=1e-9&&/* v5.22 · con raciones en otra receta sigue visible como preparación */lines.length>0&&lines.every(e=>e.date===lot.date);}
 const EQUIVALENCE_DEFAULTS={aoveSpray:0.26,aoveTsp:4.5,aoveTbsp:13.5,aoveMl:0.91};
 function eq(key){const v=Number(data?.settings?.[key]);return v>0?v:EQUIVALENCE_DEFAULTS[key];}
@@ -596,7 +638,7 @@ function aProducto(a) {
 function aReceta(r) {
   const d = (r.origen && r.origen.datos) || {};
   return { id: r.id, name: r.nombre, category: r.categoria || '', frequency: r.frecuencia || '', kcal: r.kcal_pdf, protein: r.proteina_pdf, fat: r.grasa_pdf, carbs: r.hidratos_pdf,
-    portions: Number(r.raciones_lote) || 1, quantitySingular: d.S || 'ración', quantityPlural: d.T || 'raciones', quantityPerPortion: Number(String(d.U || '1').replace(',', '.')) || 1 };
+    portions: Number(r.raciones_lote) || 1, fridgeDays: r.dias_nevera, freezable: r.congelable, quantitySingular: d.S || 'ración', quantityPlural: d.T || 'raciones', quantityPerPortion: Number(String(d.U || '1').replace(',', '.')) || 1 };
 }
 /* 0.12 b · la receta cuenta lo calculado con las fichas si está completa; si no, lo del PDF (Rocío, 13/10/2026) */
 const PDF_FIJO = { 'P1-01': 'Pendiente de revisar con el PDF: parece que falta algún ingrediente.' }; // Ratatouille: Rocío mira el PDF
@@ -646,14 +688,16 @@ async function todo(q) { const out = []; for (let from = 0; ; from += 1000) { co
 
 async function cargarDatos() {
   const uid = SESION.user.id;
-  const [ali, rec, ing, med, per, lin, lot] = await Promise.all([
+  const [ali, rec, ing, med, per, lin, lot, cng, mov] = await Promise.all([
     todo(() => sb.from('alimentos').select('id,nombre,kcal,proteina,grasa,hidratos,sal,categoria,unidad,g_por_unidad,cantidad_habitual,nombre_compra,grupo,casero')),
-    todo(() => sb.from('recetas').select('id,nombre,categoria,frecuencia,raciones_lote,kcal_pdf,proteina_pdf,grasa_pdf,hidratos_pdf,origen')),
+    todo(() => sb.from('recetas').select('id,nombre,categoria,frecuencia,raciones_lote,kcal_pdf,proteina_pdf,grasa_pdf,hidratos_pdf,dias_nevera,congelable,origen')),
     todo(() => sb.from('ingredientes_receta').select('receta_id,orden,nombre,alimento_id,receta_base_id,cantidad,unidad,al_gusto,no_se_compra,nombre_compra,marca,g_por_unidad').order('orden')),
     todo(() => sb.from('medidas').select('alimento_id,medida,gramos,por_comprobar')),
     sb.from('perfiles').select('*').eq('id', uid).maybeSingle(),
     todo(() => sb.from('lineas').select('*').eq('owner', uid)),
-    todo(() => sb.from('lotes').select('*').eq('owner', uid))
+    todo(() => sb.from('lotes').select('*').eq('owner', uid)),
+    todo(() => sb.from('congelador').select('*').eq('owner', uid)),
+    todo(() => sb.from('congelador_movimientos').select('*').eq('owner', uid))
   ]);
   if (per.error) throw per.error;
   const recipes = rec.map(aReceta), measures = {};
@@ -662,51 +706,70 @@ async function cargarDatos() {
   SEM.perfil = p;
   data = { products: ali.map(aProducto), recipes, ingredients: ing.map(i => aIngrediente(i, recipes)), measures,
     settings: { aoveSpray: eqv.aove_pulv, aoveTsp: eqv.aove_cdta, aoveTbsp: eqv.aove_cda, aoveMl: eqv.aove_ml, cartDefaults: p.carrito_por_franja || {}, goalKcal: p.objetivo_kcal, goalProtein: p.objetivo_proteina, people: p.personas || 2 },
-    entries: lin.map(aLinea), lots: lot.map(aLote) };
+    entries: lin.map(aLinea), lots: lot.map(l => Object.assign(aLote(l), { _row: l })), freezer: cng, freezerMoves: mov };
   calcularRecetas();
   reenviarPendientes();
   SEM.cargada = true;
 }
 
-/* --- Guardado por detrás --- */
+/* --- Guardado por detrás (0.13: líneas, lotes y congelador) --- */
 const PEND_KEY = () => 'mimenu-pendiente-' + (SESION && SESION.user.id);
-let porGuardar = new Map(), porBorrar = new Set(), lotesPorGuardar = new Set(), tGuardar = null, guardando = false, fallo = false;
+const nuevaCola = () => ({ up: { lotes: new Map(), congelador: new Map(), congelador_movimientos: new Map() }, del: { lotes: new Set(), congelador: new Set(), congelador_movimientos: new Set() } });
+let porGuardar = new Map(), porBorrar = new Set(), COLA = nuevaCola(), tGuardar = null, guardando = false, fallo = false;
 function marcar(e) { porGuardar.set(e.lineId, e); porBorrar.delete(e.lineId); diario(); programar(); }
 function marcarBorrado(id) { porGuardar.delete(id); porBorrar.add(id); diario(); programar(); }
-function marcarLote(l) { lotesPorGuardar.add(l.lotId); diario(); programar(); }
-function diario() { try { localStorage.setItem(PEND_KEY(), JSON.stringify({ up: [...porGuardar.values()].map(deLinea), del: [...porBorrar], lots: [...lotesPorGuardar].map(id => { const l = data.lots.find(x => x.lotId === id); return l ? { id, a_la_compra: l.includeShopping !== false } : null; }).filter(Boolean) })); } catch (_) {} }
+function marcarLote(l) { COLA.up.lotes.set(l.lotId, l); COLA.del.lotes.delete(l.lotId); diario(); programar(); }
+function borrarLote(id) { COLA.up.lotes.delete(id); COLA.del.lotes.add(id); diario(); programar(); }
+function guardarFila(t, row) { COLA.up[t].set(row.id, row); COLA.del[t].delete(row.id); diario(); programar(); }
+function borrarFila(t, id) { COLA.up[t].delete(id); COLA.del[t].add(id); diario(); programar(); }
+const filaDe = (t, x) => t === 'lotes' ? deLote(x) : x;
+function diario() { try { localStorage.setItem(PEND_KEY(), JSON.stringify({ v: 2, up: [...porGuardar.values()].map(deLinea), del: [...porBorrar],
+  tup: Object.fromEntries(Object.entries(COLA.up).map(([t, m]) => [t, [...m.values()].map(x => filaDe(t, x))])), tdel: Object.fromEntries(Object.entries(COLA.del).map(([t, d]) => [t, [...d]])) })); } catch (_) {} }
 function reenviarPendientes() {
   let p = null; try { p = JSON.parse(localStorage.getItem(PEND_KEY()) || 'null'); } catch (_) {}
   if (!p) return;
+  const tup = p.tup || {}, tdel = p.tdel || {};
+  (tup.lotes || []).forEach(r => { const l = Object.assign(aLote(r), { _row: r }), i = data.lots.findIndex(x => x.lotId === l.lotId); if (i >= 0) data.lots[i] = l; else data.lots.push(l); COLA.up.lotes.set(l.lotId, l); });
   (p.up || []).forEach(r => { const e = aLinea(r), i = data.entries.findIndex(x => x.lineId === e.lineId); if (i >= 0) data.entries[i] = e; else data.entries.push(e); porGuardar.set(e.lineId, e); });
   (p.del || []).forEach(id => { data.entries = data.entries.filter(x => x.lineId !== id); porBorrar.add(id); });
-  (p.lots || []).forEach(x => { const l = data.lots.find(y => y.lotId === x.id); if (l) { l.includeShopping = x.a_la_compra; lotesPorGuardar.add(l.lotId); } });
-  if (porGuardar.size || porBorrar.size || lotesPorGuardar.size) programar(50);
+  (p.lots || []).forEach(x => { const l = data.lots.find(y => y.lotId === x.id); if (l) { l.includeShopping = x.a_la_compra; COLA.up.lotes.set(l.lotId, l); } }); // diario de la 0.12
+  for (const [t, lista] of [['congelador', data.freezer], ['congelador_movimientos', data.freezerMoves]]) {
+    (tup[t] || []).forEach(r => { const i = lista.findIndex(x => x.id === r.id); if (i >= 0) lista[i] = r; else lista.push(r); COLA.up[t].set(r.id, r); });
+    (tdel[t] || []).forEach(id => { const i = lista.findIndex(x => x.id === id); if (i >= 0) lista.splice(i, 1); COLA.del[t].add(id); });
+  }
+  (tdel.lotes || []).forEach(id => { data.lots = data.lots.filter(x => x.lotId !== id); data.entries = data.entries.filter(e => e.lotId !== id); COLA.del.lotes.add(id); });
+  if (pendiente()) programar(50);
 }
 function programar(ms = 1200) { pintarEstado(); clearTimeout(tGuardar); tGuardar = setTimeout(guardarYa, ms); }
 async function guardarYa() {
   if (guardando) { programar(400); return; }
-  if (!porGuardar.size && !porBorrar.size && !lotesPorGuardar.size) { pintarEstado(); return; }
+  if (!pendiente()) { pintarEstado(); return; }
   guardando = true; pintarEstado();
-  const up = [...porGuardar.values()], del = [...porBorrar], lots = [...lotesPorGuardar];
-  porGuardar = new Map(); porBorrar = new Set(); lotesPorGuardar = new Set();
+  const up = [...porGuardar.values()], del = [...porBorrar], cola = COLA;
+  porGuardar = new Map(); porBorrar = new Set(); COLA = nuevaCola();
+  const filas = t => [...cola.up[t].values()].map(x => filaDe(t, x)), paso = async q => { const { error } = await q; if (error) throw error; };
   try {
-    if (up.length) { const { error } = await sb.from('lineas').upsert(up.map(deLinea)); if (error) throw error; }
-    if (del.length) { const { error } = await sb.from('lineas').delete().in('id', del); if (error) throw error; }
-    for (const id of lots) { const l = data.lots.find(x => x.lotId === id); if (!l) continue; const { error } = await sb.from('lotes').update({ a_la_compra: l.includeShopping !== false }).eq('id', id); if (error) throw error; }
+    if (cola.up.lotes.size) await paso(sb.from('lotes').upsert(filas('lotes')));
+    if (up.length) await paso(sb.from('lineas').upsert(up.map(deLinea)));
+    if (cola.up.congelador.size) await paso(sb.from('congelador').upsert(filas('congelador')));
+    if (cola.up.congelador_movimientos.size) await paso(sb.from('congelador_movimientos').upsert(filas('congelador_movimientos')));
+    if (cola.del.congelador_movimientos.size) await paso(sb.from('congelador_movimientos').delete().in('id', [...cola.del.congelador_movimientos]));
+    if (del.length) await paso(sb.from('lineas').delete().in('id', del));
+    if (cola.del.congelador.size) await paso(sb.from('congelador').delete().in('id', [...cola.del.congelador]));
+    if (cola.del.lotes.size) await paso(sb.from('lotes').delete().in('id', [...cola.del.lotes]));
     fallo = false;
   } catch (err) {
     up.forEach(e => { if (!porGuardar.has(e.lineId) && !porBorrar.has(e.lineId)) porGuardar.set(e.lineId, e); });
     del.forEach(id => { if (!porGuardar.has(id)) porBorrar.add(id); });
-    lots.forEach(id => lotesPorGuardar.add(id));
+    for (const t of Object.keys(cola.up)) { cola.up[t].forEach((x, id) => { if (!COLA.up[t].has(id) && !COLA.del[t].has(id)) COLA.up[t].set(id, x); }); cola.del[t].forEach(id => { if (!COLA.up[t].has(id)) COLA.del[t].add(id); }); }
     fallo = true; console.warn('No se ha podido guardar', err);
     guardando = false; diario(); programar(8000); return;
   }
   guardando = false;
-  if (porGuardar.size || porBorrar.size || lotesPorGuardar.size) { diario(); programar(300); }
+  if (pendiente()) { diario(); programar(300); }
   else { try { localStorage.removeItem(PEND_KEY()); } catch (_) {} pintarEstado(); }
 }
-function pendiente() { return porGuardar.size || porBorrar.size || lotesPorGuardar.size; }
+function pendiente() { return porGuardar.size || porBorrar.size || Object.values(COLA.up).some(m => m.size) || Object.values(COLA.del).some(d => d.size); }
 function pintarEstado() {
   const el = $('#guardado'); if (!el) return;
   const st = fallo ? ['err', 'Sin guardar · reintentando'] : guardando ? ['run', 'Guardando…'] : pendiente() ? ['run', 'Guardando…'] : ['ok', 'Guardado'];
@@ -774,14 +837,15 @@ function mostrado(e, campo) {
 }
 function casilla(e, campo, etiqueta, unidad) { return `<label class="q"><span>${etiqueta}${unidad ? ' · ' + h(unidad) : ''}</span><input data-cant="${campo}" data-linea="${h(e.lineId)}" type="text" inputmode="decimal" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value="${h(mostrado(e, campo))}" placeholder="?" aria-label="${etiqueta} · ${h(item(e.itemId)?.name || '')}"></label>`; }
 function estadoLote(e) {
-  const lot = data.lots.find(l => l.lotId === e.lotId); if (!lot) return '';
+  const lot = data.lots.find(l => l.lotId === e.lotId); if (!lot) { const cg = movDeLinea(e.lineId), cgc = cg && data.freezer.find(c => c.id === cg.congelador_id); return cg ? `<div class="lote">${ICO_CONGELA} Del congelador${cgc ? ' · congelado el ' + h(fechaCorta(cgc.fecha_congelado)) : ''}</div>` : ''; }
   const quedan = available(lot);
   const txt = e.date !== lot.date ? '↳ Preparado el ' + fechaLarga(lot.date).replace(' · ', ' ').toLowerCase()
     : blank(lot.prepared) ? 'Faltan las raciones preparadas'
     : sameDayComplete(lot) ? 'Preparar: ' + recipeAmount(lot.recipeId, lot.prepared)
     : 'Preparar: ' + recipeAmount(lot.recipeId, lot.prepared) + (quedan > 1e-9 ? ' · quedan ' + recipeAmount(lot.recipeId, quedan) + ' sin asignar' : ' · todo repartido');
   const peso = weighSummary(lot);
-  return `<div class="lote">${h(txt)}${lot.status === 'Preparado' ? ' · <b>preparado</b>' : ''}</div>${peso ? `<div class="nota">${h(peso)}</div>` : ''}`;
+  const cg = movDeLinea(e.lineId), cgc = cg && data.freezer.find(c => c.id === cg.congelador_id);
+  return `${cg ? `<div class="lote">${ICO_CONGELA} Del congelador${cgc ? ' · congelado el ' + h(fechaCorta(cgc.fecha_congelado)) : ''}</div>` : ''}<button type="button" class="lote lk2" data-lote="${h(lot.lotId)}">${h(txt)}${lot.status === 'Preparado' ? ' · <b>preparado</b>' : ''} ›</button>${peso ? `<div class="nota">${h(peso)}</div>` : ''}`;
 }
 function lineaHTML(e) {
   const it = item(e.itemId), id = h(e.lineId), k = calc(e, 'kcal');
@@ -808,7 +872,7 @@ function otrosDiasHTML() {
   const lots = data.lots.filter(l => !sameDayComplete(l) && l.date < end && (l.date >= ref || rel.has(l.lotId) || (available(l) || 0) > 0) && available(l) > 1e-9).sort((a, b) => a.date.localeCompare(b.date));
   if (!lots.length) return '';
   const abierto = $('#otrosDias').dataset.abierto === '1';
-  return `<button class="prep" data-otros="1" aria-expanded="${abierto}"><span class="pi">▣</span><span>Preparaciones para otros días</span><span class="c">${lots.length} ${lots.length === 1 ? 'lote' : 'lotes'}</span><span>${abierto ? '⌃' : '⌄'}</span></button>${abierto ? `<div class="preplist">${lots.map(l => `<div class="pl"><b>${h(recipe(l.recipeId)?.name || l.recipeId)}</b><span>${h(fechaLarga(l.date))} · ${h(l.meal)} · quedan ${h(recipeAmount(l.recipeId, available(l)))}</span></div>`).join('')}</div>` : ''}`;
+  return `<button class="prep" data-otros="1" aria-expanded="${abierto}"><span class="pi">▣</span><span>Preparaciones para otros días</span><span class="c">${lots.length} ${lots.length === 1 ? 'lote' : 'lotes'}</span><span>${abierto ? '⌃' : '⌄'}</span></button>${abierto ? `<div class="preplist">${lots.map(l => `<button type="button" class="pl" data-lote="${h(l.lotId)}"><b>${h(recipe(l.recipeId)?.name || l.recipeId)}</b><span>${h(fechaLarga(l.date))} · ${h(l.meal)} · quedan ${h(recipeAmount(l.recipeId, available(l)))} ›</span></button>`).join('')}</div>` : ''}`;
 }
 
 /* --- Acciones --- */
@@ -827,6 +891,8 @@ function cambiarCantidad(inp) {
   }
   if (inp.dataset.cant === 'others' && val === null) val = 0;
   if (e[inp.dataset.cant] === val) return;
+  const mv = movDeLinea(e.lineId);
+  if (mv) { const c = data.freezer.find(x => x.id === mv.congelador_id), nuevo = (inp.dataset.cant === 'own' ? (val || 0) : (n(e.own) || 0)) + (inp.dataset.cant === 'others' ? (val || 0) : (n(e.others) || 0)); if (c && nuevo > congQuedan(c) + Number(mv.raciones) + 1e-9) { aviso('En el congelador solo quedan ' + racionTxt(c.receta_id, congQuedan(c) + Number(mv.raciones)) + '.'); inp.value = mostrado(e, inp.dataset.cant); return; } mv.raciones = nuevo; guardarFila('congelador_movimientos', mv); }
   e[inp.dataset.cant] = val; marcar(e); pintarSemana();
 }
 function cambiarMedida(sel) {
@@ -844,8 +910,9 @@ function cambiarCarro(id) {
 }
 function quitarLinea(id) {
   const e = ent(id); if (!e) return;
-  data.entries = data.entries.filter(x => x.lineId !== id); marcarBorrado(id); pintarSemana();
-  aviso('Quitado: ' + (item(e.itemId)?.name || 'línea'), 'Deshacer', () => { data.entries.push(e); marcar(e); pintarSemana(); });
+  const m = movDeLinea(id); if (m) { data.freezerMoves = data.freezerMoves.filter(x => x !== m); borrarFila('congelador_movimientos', m.id); }
+  data.entries = data.entries.filter(x => x.lineId !== id); marcarBorrado(id); pintarTodo();
+  aviso('Quitado: ' + (item(e.itemId)?.name || 'línea') + (m ? ' (vuelve al congelador)' : ''), 'Deshacer', () => { data.entries.push(e); marcar(e); if (m) { data.freezerMoves.push(m); guardarFila('congelador_movimientos', m); } pintarTodo(); if ($('#loteDlg').open) pintarLote(); });
 }
 function siguienteOrden(fecha, meal) { return dayEntries(fecha, meal).reduce((a, e) => Math.max(a, e.order || 0), 0) + 1; }
 function nuevaLinea(fecha, meal, itemId, extra = {}) {
@@ -858,14 +925,15 @@ function nuevaLinea(fecha, meal, itemId, extra = {}) {
 /* --- Selector «+ Añadir» --- */
 let PICK = { meal: '', fecha: '', tipo: 'alimentos', sel: new Set() };
 function abrirSelector(meal) {
-  PICK = { meal, fecha: diaSel(), tipo: 'alimentos', sel: new Set() };
+  PICK = { meal, fecha: diaSel(), tipo: 'alimentos', sel: new Set(), cong: '' };
   $('#pkTit').textContent = 'Añadir a ' + meal.toLowerCase() + ' · ' + fechaLarga(PICK.fecha).split(' · ')[0].toLowerCase();
   $('#pkQ').value = ''; pintarSelector(); $('#picker').showModal();
   setTimeout(() => { if (!matchMedia('(pointer:coarse)').matches) $('#pkQ').focus(); }, 50);
 }
 function pintarSelector() {
   document.querySelectorAll('[data-pktipo]').forEach(b => b.classList.toggle('on', b.dataset.pktipo === PICK.tipo));
-  $('#pkAli').hidden = PICK.tipo !== 'alimentos'; $('#pkLibre').hidden = PICK.tipo !== 'libre'; $('#pkRec').hidden = PICK.tipo !== 'recetas';
+  $('#pkAli').hidden = PICK.tipo !== 'alimentos'; $('#pkLibre').hidden = PICK.tipo !== 'libre'; $('#pkRec').hidden = PICK.tipo !== 'recetas'; $('#pkCong').hidden = PICK.tipo !== 'congelador'; $('#pkAdd').hidden = PICK.tipo !== 'alimentos';
+  if (PICK.tipo === 'recetas') pintarSelectorRecetas(); else if (PICK.tipo === 'congelador') pintarSelectorCongelador();
   if (PICK.tipo === 'alimentos') {
     const q = norm($('#pkQ').value.trim());
     const lista = data.products.filter(p => !q || norm(p.name).includes(q) || norm(p.shop).includes(q) || norm(category(p)).includes(q)).sort(byFoodName);
@@ -908,7 +976,7 @@ function hacerCopia() {
     const c = Object.assign({}, e, { lineId: uuid(), date: f, order: siguienteOrden(f, COPIA.meal) }); data.entries.push(c); marcar(c); n2++;
   }
   $('#copia').close(); pintarSemana();
-  aviso(n2 ? 'Copiado a ' + dias.length + (dias.length === 1 ? ' día.' : ' días.') + (sinRac ? ' ' + sinRac + ' receta' + (sinRac === 1 ? '' : 's') + ' sin raciones de sobra: se añadirán al cocinar (0.13).' : '') : 'No se ha copiado nada: las recetas no tienen raciones de sobra.');
+  aviso(n2 ? 'Copiado a ' + dias.length + (dias.length === 1 ? ' día.' : ' días.') + (sinRac ? ' ' + sinRac + ' receta' + (sinRac === 1 ? '' : 's') + ' sin raciones de sobra: repártelas desde su preparación.' : '') : 'No se ha copiado nada: las recetas no tienen raciones de sobra.');
 }
 
 /* --- Avisos --- */
@@ -937,6 +1005,7 @@ function initSemana() {
     if (t.dataset.carro) { cambiarCarro(t.dataset.carro); return; }
     if (t.dataset.quitar) { quitarLinea(t.dataset.quitar); return; }
     if (t.dataset.verreceta) { pila = ['semana']; location.hash = 'receta/' + encodeURIComponent(t.dataset.verreceta); return; }
+    if (t.dataset.lote) { abrirLote(t.dataset.lote); return; }
     if (t.dataset.otros) { const o = $('#otrosDias'); o.dataset.abierto = o.dataset.abierto === '1' ? '' : '1'; o.innerHTML = otrosDiasHTML(); return; }
   });
   $('#semana').addEventListener('change', e => { const t = e.target; if (t.dataset.cant) cambiarCantidad(t); else if (t.dataset.medida) cambiarMedida(t); });
@@ -948,6 +1017,9 @@ function initSemana() {
     if (t.dataset.pktipo) { PICK.tipo = t.dataset.pktipo; pintarSelector(); return; }
     if (t.dataset.pkp) { const id = t.dataset.pkp; PICK.sel.has(id) ? PICK.sel.delete(id) : PICK.sel.add(id); t.querySelector('.cb').classList.toggle('on'); $('#pkAdd').textContent = PICK.sel.size ? 'Añadir ' + PICK.sel.size : 'Añadir'; $('#pkAdd').disabled = !PICK.sel.size; return; }
     if (t.id === 'pkAdd' || t.id === 'libreAdd') { anadirSeleccion(); return; }
+    if (t.dataset.pkr) { const id = t.dataset.pkr; $('#picker').close(); abrirPreparar(id, PICK.fecha, PICK.meal); return; }
+    if (t.dataset.pkc) { PICK.cong = PICK.cong === t.dataset.pkc ? '' : t.dataset.pkc; pintarSelectorCongelador(); return; }
+    if (t.id === 'pcAdd') { anadirDelCongelador(); return; }
   });
   $('#pkQ').addEventListener('input', pintarSelector);
   $('#cpGo').onclick = hacerCopia;
@@ -955,6 +1027,347 @@ function initSemana() {
   document.querySelectorAll('[data-nav]').forEach(b => b.onclick = () => { const v = b.dataset.nav; if (PRONTO[v]) { aviso(PRONTO[v]); return; } pila = []; location.hash = v; });
   $('#ajustes').onclick = () => $('#ajDlg').showModal();
   $('#salir').onclick = async () => { await guardarYa(); await sb.auth.signOut(); $('#ajDlg').close(); data = null; SEM.cargada = false; REC = null; ING_TXT = {}; location.hash = ''; };
+}
+
+
+/* ---------- 0.13 · Cocinar, lotes y congelador (maquetas aprobadas por Rocío el 13/10/2026) ---------- */
+const ICO_BASCULA = '<svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M12 6v3.5M6 9.5h12l2 10.5H4z"/><circle cx="12" cy="15" r="2.2"/><path d="M12 15l1.2-1.2"/></svg>';
+const ICO_CONG20 = ICO_CONGELA.replace('width="15" height="15"', 'width="20" height="20"');
+const recipeInput = (id, v) => v === null ? null : Number((v / recipeMeasure(id).factor).toPrecision(12));
+const DIA_CORTO = f => DAYS[(parseIso(f).getDay() + 6) % 7].toLowerCase() + ' ' + parseIso(f).getDate();
+const fechaCorta = f => { const d = parseIso(f); return String(d.getDate()).padStart(2, '0') + '/' + String(d.getMonth() + 1).padStart(2, '0'); };
+const fechaEs = f => { const d = parseIso(f); return String(d.getDate()).padStart(2, '0') + '/' + String(d.getMonth() + 1).padStart(2, '0') + '/' + d.getFullYear(); };
+const masMeses = (f, m) => { const d = parseIso(f), dia = d.getDate(); d.setMonth(d.getMonth() + m); if (d.getDate() !== dia) d.setDate(0); return iso(d); };
+const esAdmin = () => !!(SEM.perfil && SEM.perfil.es_admin);
+const cosas = (f, m) => { const k = dayEntries(f, m).filter(e => e.itemId).length; return k ? k + (k === 1 ? ' cosa' : ' cosas') : 'vacía'; };
+function racionTxt(id, v) { return recipeAmount(id, Math.round(v * 1e6) / 1e6); }
+function kcalRacion(recipeId, lotId) { const v = calc({ itemId: recipeId, own: 1, others: 0, lotId: lotId || '' }, 'kcal'); return v === null ? null : Math.round(v); }
+
+/* Lotes: la fila de Supabase va en l._row; la nota con las marcas ⟦…⟧ se rehace para el núcleo de cálculo */
+function nuevaFilaLote(id) { return { id, cambios: [], compra_producto: {}, caldo: {}, pesos: null, nota: null, usos: [] }; }
+function deLote(l) {
+  const r = l._row || {};
+  return { id: l.lotId, owner: SESION.user.id, receta_id: l.recipeId, fecha: l.date, franja: l.meal, raciones: Number(l.prepared), a_la_compra: l.includeShopping !== false,
+    estado: l.status === 'Preparado' ? 'Preparado' : 'Planificado', cambios: r.cambios || [], compra_producto: r.compra_producto || {}, caldo: r.caldo || {}, pesos: r.pesos ?? null, nota: r.nota ?? null, usos: r.usos || [] };
+}
+function rehacerNota(l) { l.note = aLote(deLote(l)).note; }
+
+/* Congelador: lo que queda = raciones congeladas − lo que ya se ha puesto en el menú (movimientos) */
+function movsDe(cid) { return (data.freezerMoves || []).filter(m => m.congelador_id === cid); }
+function congQuedan(c) { return Math.round((Number(c.raciones) - movsDe(c.id).reduce((a, m) => a + (Number(m.raciones) || 0), 0)) * 1e6) / 1e6; }
+function congeladoDe(lotId) { return (data && data.freezer || []).filter(c => c.lote_id === lotId).reduce((a, c) => a + Math.max(0, congQuedan(c)), 0); }
+function movDeLinea(lineId) { return (data.freezerMoves || []).find(m => m.linea_id === lineId); }
+function caducaPronto(c) { return c.caduca && c.caduca <= addDays(hoyIso(), 7); }
+
+/* Pesos que faltan en una receta («Cogollo (1 ud, sin peso)») */
+function pesosQueFaltan(recipeId) {
+  const x = CALC[recipeId]; if (!x || !x.c) return [];
+  return x.c.missing.map(m => /^(.*) \((.*), sin peso\)$/.exec(m)).filter(Boolean).map(([, nombre, cuanto]) => {
+    const i = data.ingredients.find(y => y.id === recipeId && y.name === nombre); const p = i && cookBase(i);
+    return i && p ? { recipeId, nombre, cuanto, i, p, u: normMeasure(i.unit) } : null;
+  }).filter(Boolean);
+}
+const nombreCorto = t => t.replace(/\s*\(.*\)\s*$/, '').toLowerCase();
+
+/* ===== «Preparar o aprovechar» ===== */
+let PREP = null;
+function abrirPreparar(recipeId, fecha, meal) {
+  const r = recipe(recipeId); if (!r) return;
+  const otros = ['Comida', 'Cena'].includes(meal) ? Math.max(0, (Number(data.settings.people) || 1) - 1) : 0;
+  PREP = { recipeId, fecha, meal, src: '', own: 1, others: otros, prepared: Math.max(Number(r.portions) || 1, 1 + otros), compra: !!(data.settings.cartDefaults || {})[meal] };
+  pintarPreparar(); $('#prepDlg').showModal();
+}
+function fuentesPreparar() {
+  const { recipeId, fecha } = PREP;
+  const lotes = data.lots.filter(l => l.recipeId === recipeId && l.date <= fecha && !blank(l.prepared) && available(l) > 1e-9).sort((a, b) => b.date.localeCompare(a.date));
+  const cong = (data.freezer || []).filter(c => c.receta_id === recipeId && congQuedan(c) > 1e-9).sort((a, b) => String(a.caduca || '9').localeCompare(String(b.caduca || '9')));
+  return { lotes, cong };
+}
+function pintarPreparar() {
+  const P = PREP, r = recipe(P.recipeId), { lotes, cong } = fuentesPreparar(), f = recipeMeasure(P.recipeId).factor, cocinar = !P.src;
+  const opt = (v, t, s) => `<label class="opt2${P.src === v ? ' on' : ''}"><input type="radio" name="prSrc" value="${h(v)}"${P.src === v ? ' checked' : ''}><span><b>${t}</b><small>${s}</small></span></label>`;
+  const falta = cocinar ? pesosQueFaltan(P.recipeId) : [];
+  const calcK = CALC[P.recipeId] && CALC[P.recipeId].c;
+  $('#prBody').innerHTML = `<p class="sub2"><b>${h(r.name)}</b> · ${h(P.meal.toLowerCase())} del ${h(DIA_CORTO(P.fecha))} · receta original: ${h(recipeAmount(P.recipeId, r.portions))}</p>
+    <div class="opts">${opt('', 'Cocinar ahora', 'Nuevo lote para este día')}${lotes.map(l => opt(l.lotId, 'Lote del ' + h(DIA_CORTO(l.date)), 'quedan ' + h(racionTxt(l.recipeId, available(l))))).join('')}${cong.map(c => opt('cong:' + c.id, ICO_CONGELA + ' Del congelador', 'quedan ' + h(racionTxt(c.receta_id, congQuedan(c))) + ' · congelado el ' + h(fechaCorta(c.fecha_congelado)))).join('')}</div>
+    <div class="g3${cocinar ? '' : ' dos'}">${cocinar ? `<label class="q2"><span>Preparar</span><input id="prPrep" type="text" inputmode="decimal" autocomplete="off" value="${h(fmt.format(P.prepared * f))}"></label>` : ''}<label class="q2"><span>Yo</span><input id="prYo" type="text" inputmode="decimal" autocomplete="off" value="${h(fmt.format(P.own * f))}"></label><label class="q2"><span>Otros</span><input id="prOt" type="text" inputmode="decimal" autocomplete="off" value="${h(fmt.format(P.others * f))}"></label></div>
+    ${cocinar ? `<label class="chk"><input type="checkbox" id="prCompra"${P.compra ? ' checked' : ''}><span>Ingredientes a la compra</span></label>` : ''}
+    ${falta.length ? `<div class="info"><b>${falta.length === 1 ? 'Falta un peso' : 'Faltan ' + falta.length + ' pesos'} para calcular la receta:</b> ${falta.map(x => h(x.cuanto + ' de ' + nombreCorto(x.nombre))).join(', ')}. Pésalo cuando lo cocines y desde entonces se calcula entera.${calcK ? ' Ahora cuenta ' + kc(calcK.kcal) + ' kcal sin ' + (falta.length === 1 ? 'eso' : 'eso') + '.' : ''}</div>${falta.map((x, k) => `<button type="button" class="btn az ancho" data-pesar="${k}">${ICO_BASCULA}Pesar ${h(x.cuanto.replace(/^1 ud$/, '1') + ' ' + nombreCorto(x.nombre))}</button>`).join('')}` : ''}
+    <div class="bal" id="prBal"></div>`;
+  balancePreparar();
+}
+function leerPreparar() {
+  const P = PREP, id = P.recipeId, g = sel => { const el = $(sel); if (!el) return null; const v = parseNum(el.value); return Number.isNaN(v) ? NaN : recipeInput(id, v ?? 0); };
+  const yo = g('#prYo'), ot = g('#prOt'), pr = $('#prPrep') ? g('#prPrep') : null;
+  if (!Number.isNaN(yo)) P.own = yo; if (!Number.isNaN(ot)) P.others = ot; if (pr !== null && !Number.isNaN(pr)) P.prepared = pr;
+  if ($('#prCompra')) P.compra = $('#prCompra').checked;
+  return !(Number.isNaN(yo) || Number.isNaN(ot) || Number.isNaN(pr));
+}
+function capacidadPreparar() {
+  const P = PREP; if (!P.src) return P.prepared;
+  if (P.src.startsWith('cong:')) { const c = data.freezer.find(x => x.id === P.src.slice(5)); return c ? congQuedan(c) : 0; }
+  const l = data.lots.find(x => x.lotId === P.src); return l ? available(l) : 0;
+}
+function balancePreparar() {
+  const P = PREP, ok = leerPreparar(), u = recipeMeasure(P.recipeId).unit, f = recipeMeasure(P.recipeId).factor, el = $('#prBal');
+  if (!ok) { el.textContent = 'Escribe números (con coma o punto).'; el.className = 'bal warn'; return; }
+  const cap = capacidadPreparar(), resto = Math.round((cap - P.own - P.others) * 1e9) / 1e9;
+  el.className = 'bal' + (resto < 0 ? ' warn' : '');
+  el.textContent = !(cap > 0) ? 'Indica la cantidad que preparas.' : resto < 0 ? (P.src ? 'No quedan tantas raciones.' : 'Lo que se come ahora supera lo que preparas.')
+    : 'En esta comida: ' + fmt.format((P.own + P.others) * f) + ' ' + u + ' · Para otros días: ' + fmt.format(resto * f);
+}
+function confirmarPreparar() {
+  const P = PREP; if (!leerPreparar()) { aviso('Escribe números (con coma o punto).'); return; }
+  if (!(P.own + P.others > 0)) { aviso('Pon al menos una ración para ti o para otros.'); return; }
+  const cap = capacidadPreparar();
+  if (P.own + P.others > cap + 1e-9) { aviso(P.src ? 'No quedan tantas raciones.' : 'Lo que se come ahora no puede superar lo que preparas.'); return; }
+  let lotId = '', mov = null, nuevo = null;
+  if (!P.src) {
+    if (!(P.prepared > 0)) { aviso('Indica cuántas raciones preparas.'); return; }
+    lotId = uuid(); nuevo = { lotId, date: P.fecha, meal: P.meal, recipeId: P.recipeId, prepared: P.prepared, status: 'Planificado', includeShopping: P.compra, note: '', _row: nuevaFilaLote(lotId) };
+    data.lots.push(nuevo); marcarLote(nuevo);
+  } else if (P.src.startsWith('cong:')) {
+    const c = data.freezer.find(x => x.id === P.src.slice(5)); lotId = c.lote_id && data.lots.some(l => l.lotId === c.lote_id) ? c.lote_id : '';
+    mov = { id: uuid(), owner: SESION.user.id, congelador_id: c.id, linea_id: null, raciones: P.own + P.others, motivo: 'comida', fecha: P.fecha };
+  } else lotId = P.src;
+  const e = nuevaLinea(P.fecha, P.meal, P.recipeId, { own: P.own, others: P.others, lotId, includeShopping: false });
+  data.entries.push(e); marcar(e);
+  if (mov) { mov.linea_id = e.lineId; data.freezerMoves.push(mov); guardarFila('congelador_movimientos', mov); }
+  $('#prepDlg').close(); pintarTodo();
+  aviso('Añadida al ' + DIA_CORTO(P.fecha) + ' · ' + P.meal.toLowerCase() + '.');
+  if (nuevo && available(nuevo) > 1e-9) abrirLote(nuevo.lotId);
+}
+function pintarTodo() { if (!$('#semana').hidden) pintarSemana(); }
+
+/* ===== Ventana del lote ===== */
+let LOTE = null;
+function abrirLote(lotId) {
+  const l = data.lots.find(x => x.lotId === lotId); if (!l) return;
+  const hoy = hoyIso(), dia = hoy <= l.date ? addDays(l.date, 1) : hoy, q = available(l) || 0;
+  LOTE = { id: lotId, fecha: dia, lunes: mondayOf(dia), meal: l.meal, own: Math.min(1, q), others: Math.max(0, Math.min(1, q - Math.min(1, q))) };
+  $('#loTit').textContent = recipe(l.recipeId)?.name || 'Preparación';
+  pintarLote(); $('#loteDlg').showModal();
+}
+function baseTargets13(l) { const r = recipe(l.recipeId), ids = new Set((r && r.usedInRecipeIds) || []); return data.lots.filter(x => x.lotId !== l.lotId && ids.has(x.recipeId) && x.date >= l.date && !blank(x.prepared)).sort((a, b) => a.date.localeCompare(b.date) || MEALS.indexOf(a.meal) - MEALS.indexOf(b.meal)); }
+function pintarLote() {
+  const l = data.lots.find(x => x.lotId === LOTE.id); if (!l) { $('#loteDlg').close(); return; }
+  const r = recipe(l.recipeId), id = l.recipeId, f = recipeMeasure(id).factor, q = available(l) || 0, usadas = lotRecipeUsed(l), cong = congeladoDe(l.lotId), lineas = data.entries.filter(e => e.lotId === l.lotId).sort((a, b) => a.date.localeCompare(b.date) || MEALS.indexOf(a.meal) - MEALS.indexOf(b.meal));
+  const bal = 'Preparar: ' + (blank(l.prepared) ? 'por definir' : racionTxt(id, l.prepared)) + ' · Asignadas: ' + fmt.format(usage(l.lotId) * f) + (usadas > 0 ? ' · En recetas: ' + fmt.format(usadas * f) : '') + (cong > 0 ? ' · Congeladas: ' + fmt.format(cong * f) : '') + ' · Sin asignar: ' + (blank(l.prepared) ? '—' : fmt.format(q * f));
+  const dias = [0, 1, 2, 3, 4, 5, 6].map(i => { const d = addDays(LOTE.lunes, i), off = d < l.date; return `<button type="button" class="d7${d === LOTE.fecha ? ' on' : ''}" data-ldia="${d}"${off ? ' disabled' : ''}>${DMIN[i].charAt(0)}<small>${parseIso(d).getDate()}</small></button>`; }).join('');
+  const frs = MAIN_MEALS.map(m => `<button type="button" class="f4${m === LOTE.meal ? ' on' : ''}" data-lfr="${m}">${m}<small>${cosas(LOTE.fecha, m)}</small></button>`).join('');
+  const dn = Number(r && r.fridgeDays) || 0, nev = dn ? `<p class="nota2">${ICO_NEVERA} En la nevera aguanta hasta el ${h(DIA_CORTO(addDays(l.date, dn)))}.</p>` : '';
+  const puedeCong = q > 1e-9 && !(r && r.freezable === false);
+  const base = r && (r.usedInRecipeIds || []).length && q > 1e-9 ? (() => { const ts = baseTargets13(l); return `<details class="box2"><summary>Usar en una receta</summary><p class="nota2">Lo que no comas tal cual va dentro de otra receta. No cuenta kcal aquí: ya las cuenta esa receta.</p>${ts.length ? `<select class="selc" id="buTarget">${ts.map(t => `<option value="${h(t.lotId)}">${h(recipe(t.recipeId)?.name || 'Receta')} · ${h(DIA_CORTO(t.date))}, ${h(t.meal.toLowerCase())}</option>`).join('')}</select><div class="g2b"><label class="q2"><span>Raciones de base</span><input id="buN" type="text" inputmode="decimal" autocomplete="off" value="${h(fmt.format(q * f))}"></label><button type="button" class="btn main" id="buGo">Usar</button></div>` : '<p class="nota2">Planifica primero la receta donde la vas a usar.</p>'}</details>`; })() : '';
+  const usos = lotRecipeUses(l).map(u => { const t = data.lots.find(x => x.lotId === u.lot); return `<div class="cm"><div><b>${h(DIA_CORTO(t.date).replace(/^./, c => c.toUpperCase()))} · ${h(t.meal.toLowerCase())} · en ${h(recipe(t.recipeId)?.name || 'receta')}</b><small>${h(racionTxt(id, u.n))} de base</small></div><button type="button" class="ic x" data-buquitar="${h(t.lotId)}" aria-label="Quitar la base de esa receta">×</button></div>`; }).join('');
+  const congs = (data.freezer || []).filter(c => c.lote_id === l.lotId).map(c => `<div class="cm"><div><b>${ICO_CONGELA} Al congelador · ${h(racionTxt(id, c.raciones))}</b><small>Congelado el ${h(fechaCorta(c.fecha_congelado))}${c.caduca ? ' · antes del ' + h(fechaCorta(c.caduca)) : ''} · quedan ${h(racionTxt(id, congQuedan(c)))}</small></div>${movsDe(c.id).length ? '' : `<button type="button" class="ic x" data-congquitar="${h(c.id)}" aria-label="Sacar del congelador">×</button>`}</div>`).join('');
+  const coms = lineas.map(e => `<div class="cm"><div><b>${h(DIA_CORTO(e.date).replace(/^./, c => c.toUpperCase()))} · ${h(e.meal.toLowerCase())}</b><small>Yo: ${h(racionTxt(id, n(e.own) || 0))} · Otros: ${h(racionTxt(id, n(e.others) || 0))}${movDeLinea(e.lineId) ? ' · del congelador' : ''}</small></div><button type="button" class="ic x" data-loquitar="${h(e.lineId)}" aria-label="Quitar esta comida">×</button></div>`).join('');
+  $('#loBody').innerHTML = `<div class="bal">${h(bal)}</div>
+    ${q > 1e-9 ? `<h3 class="q3">¿Cuándo os coméis lo que queda?</h3>
+      <div class="wkm"><button type="button" class="ar" data-lsem="-1" aria-label="Semana anterior">‹</button><b>${h(rangoSemana(LOTE.lunes))}</b><button type="button" class="ar" data-lsem="1" aria-label="Semana siguiente">›</button></div>
+      <div class="d7s">${dias}</div><div class="f4s">${frs}</div>
+      <div class="g3a"><label class="q2"><span>Yo</span><input id="loYo" type="text" inputmode="decimal" autocomplete="off" value="${h(fmt.format(LOTE.own * f))}"></label><label class="q2"><span>Otros</span><input id="loOt" type="text" inputmode="decimal" autocomplete="off" value="${h(fmt.format(LOTE.others * f))}"></label><button type="button" class="btn main" id="loAdd">Añadir al ${h(DAYS[(parseIso(LOTE.fecha).getDay() + 6) % 7].toLowerCase())}</button></div>
+      ${nev}${puedeCong ? `<button type="button" class="btn ancho" id="loCong">${ICO_CONG20}Congelar lo que sobra · ${h(racionTxt(id, q))}</button>` : ''}`
+      : `<p class="nota2">${blank(l.prepared) ? 'Indica las raciones preparadas antes de repartir.' : 'Todas las raciones están repartidas. Puedes revisar sus comidas o editar la preparación.'}</p>${nev}`}
+    ${base}
+    <h3 class="q3 sep">Comidas de esta preparación</h3>${coms + usos + congs || '<p class="nota2">Todavía no hay comidas de esta preparación.</p>'}
+    <details class="box2"${q > 1e-9 ? '' : ' open'}><summary>Editar preparación</summary>
+      <div class="g2c"><label class="q2"><span>Fecha</span><input id="leFecha" type="date" value="${h(l.date)}"></label><label class="q2"><span>Franja</span><select class="selc" id="leFr">${MAIN_MEALS.map(m => `<option${m === l.meal ? ' selected' : ''}>${m}</option>`).join('')}</select></label>
+      <label class="q2"><span>Preparar · raciones</span><input id="lePrep" type="text" inputmode="decimal" autocomplete="off" value="${blank(l.prepared) ? '' : h(fmt.format(l.prepared * f))}"></label><label class="q2"><span>Estado</span><select class="selc" id="leEst"><option${l.status !== 'Preparado' ? ' selected' : ''}>Planificado</option><option${l.status === 'Preparado' ? ' selected' : ''}>Preparado</option></select></label></div>
+      <label class="chk"><input type="checkbox" id="leCompra"${l.includeShopping !== false ? ' checked' : ''}><span>Ingredientes a la compra</span></label>
+      <div class="g2b"><button type="button" class="btn rojo" id="leBorrar">Eliminar preparación</button><button type="button" class="btn main" id="leGo">Guardar cambios</button></div></details>`;
+}
+function leerLote() { const l = data.lots.find(x => x.lotId === LOTE.id), g = s => { const v = parseNum($(s)?.value); return Number.isNaN(v) ? NaN : recipeInput(l.recipeId, v ?? 0); }; const a = g('#loYo'), b = g('#loOt'); if (!Number.isNaN(a)) LOTE.own = a; if (!Number.isNaN(b)) LOTE.others = b; return !(Number.isNaN(a) || Number.isNaN(b)); }
+function asignarLote() {
+  const l = data.lots.find(x => x.lotId === LOTE.id); if (!l) return;
+  if (!leerLote()) { aviso('Escribe números (con coma o punto).'); return; }
+  const { fecha, meal, own, others } = LOTE;
+  if (fecha < l.date) { aviso('No se puede comer antes de prepararlo.'); return; }
+  if (!(own + others > 0)) { aviso('Asigna al menos alguna ración.'); return; }
+  if (own + others > (available(l) || 0) + 1e-9) { aviso('No quedan tantas raciones sin asignar.'); return; }
+  let e = data.entries.find(x => x.lotId === l.lotId && x.date === fecha && x.meal === meal && !movDeLinea(x.lineId));
+  if (e) { e.own = (n(e.own) || 0) + own; e.others = (n(e.others) || 0) + others; } else { e = nuevaLinea(fecha, meal, l.recipeId, { own, others, lotId: l.lotId, includeShopping: false }); data.entries.push(e); }
+  marcar(e); const q = available(l) || 0; LOTE.own = Math.min(1, q); LOTE.others = Math.max(0, Math.min(1, q - LOTE.own));
+  pintarLote(); pintarTodo(); aviso('Añadido al ' + DIA_CORTO(fecha) + ' · ' + meal.toLowerCase() + '.');
+}
+function guardarEdicionLote() {
+  const l = data.lots.find(x => x.lotId === LOTE.id); if (!l) return;
+  const v = parseNum($('#lePrep').value), prepared = Number.isNaN(v) || v === null ? null : recipeInput(l.recipeId, v), date = $('#leFecha').value, meal = $('#leFr').value;
+  if (!(prepared > 0)) { aviso('Indica las raciones que preparas.'); return; }
+  if (prepared + 1e-9 < usage(l.lotId) + lotRecipeUsed(l) + congeladoDe(l.lotId)) { aviso('No puede tener menos raciones que las ya asignadas o congeladas.'); return; }
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) { aviso('Elige la fecha de la preparación.'); return; }
+  if (data.entries.some(e => e.lotId === l.lotId && e.date < date)) { aviso('La preparación no puede ser después de una de sus comidas.'); return; }
+  Object.assign(l, { prepared, date, meal, status: $('#leEst').value === 'Preparado' ? 'Preparado' : 'Planificado', includeShopping: $('#leCompra').checked });
+  marcarLote(l); pintarLote(); pintarTodo(); aviso('Preparación guardada.');
+}
+function eliminarLote() {
+  const l = data.lots.find(x => x.lotId === LOTE.id); if (!l) return;
+  const ls = data.entries.filter(e => e.lotId === l.lotId && !movDeLinea(e.lineId)), deCong = data.entries.filter(e => e.lotId === l.lotId && movDeLinea(e.lineId));
+  aviso('¿Eliminar la preparación' + (ls.length ? ' y sus ' + ls.length + (ls.length === 1 ? ' comida' : ' comidas') : '') + '?' + (deCong.length ? ' Lo que ya sacaste del congelador se queda en el menú.' : ''), 'Eliminar', () => {
+    ls.forEach(e => { data.entries = data.entries.filter(x => x !== e); marcarBorrado(e.lineId); });
+    deCong.forEach(e => { e.lotId = ''; marcar(e); });
+    data.lots.forEach(o => { const us = (o._row && o._row.usos) || []; if (us.some(u => u.lot === l.lotId || u.from === l.lotId)) { o._row.usos = us.filter(u => u.lot !== l.lotId && u.from !== l.lotId); rehacerNota(o); if (o !== l) marcarLote(o); } });
+    (data.freezer || []).filter(c => c.lote_id === l.lotId).forEach(c => { c.lote_id = null; guardarFila('congelador', c); });
+    data.lots = data.lots.filter(x => x !== l); borrarLote(l.lotId);
+    $('#loteDlg').close(); pintarTodo(); aviso('Preparación eliminada.');
+  });
+}
+function usarEnReceta() {
+  const l = data.lots.find(x => x.lotId === LOTE.id), t = $('#buTarget')?.value; if (!l || !data.lots.some(x => x.lotId === t)) { aviso('Elige la receta donde la vas a usar.'); return; }
+  const v = parseNum($('#buN').value), k = Number.isNaN(v) || v === null ? 0 : recipeInput(l.recipeId, v);
+  if (!(k > 0)) { aviso('Indica cuántas raciones de base vas a usar.'); return; }
+  if (k > (available(l) || 0) + 1e-9) { aviso('No quedan tantas raciones sin asignar.'); return; }
+  const us = (l._row.usos = l._row.usos || []), old = us.find(u => u.from === l.lotId && u.lot === t);
+  if (old) old.n = Math.round((Number(old.n) + k) * 1e6) / 1e6; else us.push({ from: l.lotId, lot: t, n: k });
+  rehacerNota(l); marcarLote(l); pintarLote(); pintarTodo(); aviso('Base reservada para esa receta.');
+}
+function quitarUsoBase(t) { const l = data.lots.find(x => x.lotId === LOTE.id); if (!l) return; l._row.usos = (l._row.usos || []).filter(u => !(u.from === l.lotId && u.lot === t)); rehacerNota(l); marcarLote(l); pintarLote(); pintarTodo(); }
+
+/* ===== Al congelador ===== */
+let CONG = null;
+function abrirCongelar() {
+  const l = data.lots.find(x => x.lotId === LOTE.id); if (!l) return;
+  const q = available(l) || 0, f = recipeMeasure(l.recipeId).factor, hoy = hoyIso(), fecha = hoy < l.date ? l.date : hoy;
+  const pesa = (() => { const g = lotWeigh(l); if (!g) return ''; const food = g.p.reduce((a, x) => a + Math.max(0, (Number(x.t) || 0) - (Number(x.r) || 0)), 0), per = food / Math.max(1, Number(g.n) || 1); return per > 0 ? String(Math.round(per)) : ''; })();
+  CONG = { lotId: l.lotId };
+  const k = kcalRacion(l.recipeId, l.lotId);
+  $('#cgBody').innerHTML = `<p class="sub2"><b>${h(recipe(l.recipeId)?.name || '')}</b> · preparado el ${h(DIA_CORTO(l.date))}</p>
+    <div class="g2c"><label class="q2"><span>Raciones</span><input id="cgN" type="text" inputmode="decimal" autocomplete="off" value="${h(fmt.format(q * f))}"></label><label class="q2"><span>Gramos por ración</span><input id="cgG" type="text" inputmode="decimal" autocomplete="off" value="${h(pesa)}" placeholder="opcional"></label>
+    <label class="q2"><span>Congelado el</span><input id="cgF" type="date" value="${fecha}"></label><label class="q2"><span>Consumir antes de</span><input id="cgC" type="date" value="${masMeses(fecha, 3)}"></label></div>
+    <div class="info">${k === null ? '' : 'Cada ración: <b>' + kc(k) + ' kcal</b>. '}Cuando la pongas en el menú, se descuenta sola del congelador.</div>
+    <p class="nota2">Consumir antes de: 3 meses por defecto; lo puedes cambiar.</p>`;
+  $('#congDlg').showModal();
+}
+function confirmarCongelar() {
+  const l = data.lots.find(x => x.lotId === CONG.lotId); if (!l) return;
+  const v = parseNum($('#cgN').value), k = Number.isNaN(v) || v === null ? 0 : recipeInput(l.recipeId, v), g = parseNum($('#cgG').value), fecha = $('#cgF').value, cad = $('#cgC').value;
+  if (!(k > 0)) { aviso('Indica cuántas raciones congelas.'); return; }
+  if (k > (available(l) || 0) + 1e-9) { aviso('No quedan tantas raciones sin asignar.'); return; }
+  if (Number.isNaN(g)) { aviso('Los gramos tienen que ser un número.'); return; }
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(fecha)) { aviso('Elige el día en que lo congelas.'); return; }
+  if (cad && cad < fecha) { aviso('«Consumir antes de» no puede ser anterior a cuando se congela.'); return; }
+  const c = { id: uuid(), owner: SESION.user.id, lote_id: l.lotId, receta_id: l.recipeId, nombre: recipe(l.recipeId)?.name || 'Receta', raciones: k, gramos_racion: g, fecha_congelado: fecha, caduca: cad || null, nota: null };
+  data.freezer.push(c); guardarFila('congelador', c);
+  $('#congDlg').close(); pintarLote(); pintarTodo(); aviso(racionTxt(l.recipeId, k).replace(/^./, x => x.toUpperCase()) + ' al congelador.');
+}
+function sacarDelCongelador(cid) {
+  const c = data.freezer.find(x => x.id === cid); if (!c || movsDe(cid).length) return;
+  data.freezer = data.freezer.filter(x => x !== c); borrarFila('congelador', cid); pintarLote(); pintarTodo();
+  aviso('Sacado del congelador: las raciones vuelven a la preparación.', 'Deshacer', () => { data.freezer.push(c); guardarFila('congelador', c); if ($('#loteDlg').open) pintarLote(); pintarTodo(); });
+}
+
+/* ===== Peso de 1 ud (o 1 cda…) que falta ===== */
+let PESO = null;
+function abrirPeso(x) {
+  PESO = x; const nom = nombreCorto(x.nombre), u = x.cuanto.replace(/^[\d.,]+\s*/, '') || x.u;
+  $('#peTit').textContent = 'Peso de 1 ' + u + ' · ' + nom.charAt(0).toUpperCase() + nom.slice(1);
+  $('#peLab').textContent = 'Pesa 1 ' + u + ' de ' + nom + ' en la báscula';
+  $('#peG').value = ''; pintarPesoInfo(); $('#pesoDlg').showModal();
+  setTimeout(() => { if (!matchMedia('(pointer:coarse)').matches) $('#peG').focus(); }, 50);
+}
+function pintarPesoInfo() {
+  const x = PESO, g = parseNum($('#peG').value), c = CALC[x.recipeId] && CALC[x.recipeId].c, por = n(x.i.amount) === null ? null : Number(x.i.amount) / (Number(x.i.portions) || 1), kp = n(x.p.kcal);
+  const est = g > 0 && c && por !== null && kp !== null ? Math.round(c.kcal + por * g * kp / 100) : null;
+  $('#peInfo').innerHTML = 'Se guarda para todas las recetas que llevan ' + h(nombreCorto(x.nombre)) + '.' + (est !== null ? ' Esta receta pasa a <b>≈ ' + kc(est) + ' kcal</b> por ración.' : '');
+}
+async function guardarPeso() {
+  const x = PESO, g = parseNum($('#peG').value);
+  if (!(g > 0)) { aviso('Escribe los gramos que marca la báscula.'); return; }
+  const owner = esAdmin() ? null : SESION.user.id, btn = $('#peGo'); btn.disabled = true;
+  try {
+    const { data: ex, error: e1 } = await sb.from('medidas').select('id, owner').eq('alimento_id', x.p.id).eq('medida', x.u); if (e1) throw e1;
+    const mia = (ex || []).find(m => (m.owner || null) === owner);
+    const fila = { id: mia ? mia.id : uuid(), owner, alimento_id: x.p.id, medida: x.u, gramos: g, por_comprobar: false, origen: { fuente: 'Pesado al cocinar en la web', fecha: hoyIso(), receta: x.recipeId } };
+    const { error } = await sb.from('medidas').upsert(fila); if (error) throw error;
+  } catch (err) { btn.disabled = false; aviso('No se ha podido guardar el peso: ' + es(err)); return; }
+  btn.disabled = false;
+  (data.measures[x.p.id] = data.measures[x.p.id] || {})[x.u] = { g, check: false };
+  calcularRecetas();
+  if (REC) REC.forEach(r => { const v = valoresReceta(r.id); if (v) { r.kcal_pdf = v.kcal; r.proteina_pdf = v.protein; r.grasa_pdf = v.fat; r.hidratos_pdf = v.carbs; } });
+  $('#pesoDlg').close(); if ($('#prepDlg').open) pintarPreparar(); pintarTodo();
+  if (!$('#receta').hidden) ruta();
+  aviso('Guardado: 1 ' + (x.cuanto.replace(/^[\d.,]+\s*/, '') || x.u) + ' de ' + nombreCorto(x.nombre) + ' = ' + fmt.format(g) + ' g.');
+}
+
+/* ===== «Añadir a la semana» desde la ficha de la receta ===== */
+let ASEM = null;
+function abrirAnadirSemana(recipeId) {
+  if (!SEM.lunes) { const hoy = hoyIso(); SEM.lunes = mondayOf(hoy); SEM.dia = (parseIso(hoy).getDay() + 6) % 7; }
+  const hoy = hoyIso(), dia = SEM.lunes === mondayOf(hoy) ? hoy : SEM.lunes;
+  ASEM = { recipeId, lunes: mondayOf(dia), fecha: dia, meal: 'Comida' };
+  $('#asRec').textContent = recipe(recipeId)?.name || ''; pintarAnadirSemana(); $('#semDlg').showModal();
+}
+function pintarAnadirSemana() {
+  const A = ASEM;
+  $('#asRango').textContent = rangoSemana(A.lunes) + (A.lunes === mondayOf(hoyIso()) ? ' · esta semana' : '');
+  $('#asDias').innerHTML = [0, 1, 2, 3, 4, 5, 6].map(i => { const d = addDays(A.lunes, i); return `<button type="button" class="d7${d === A.fecha ? ' on' : ''}" data-asdia="${d}">${DMIN[i].charAt(0)}<small>${parseIso(d).getDate()}</small></button>`; }).join('');
+  $('#asFr').innerHTML = MAIN_MEALS.map(m => `<button type="button" class="f4${m === A.meal ? ' on' : ''}" data-asfr="${m}">${m}<small>${cosas(A.fecha, m)}</small></button>`).join('');
+  $('#asCuando').textContent = fechaLarga(A.fecha).split(' · ')[0] + ' ' + parseIso(A.fecha).getDate() + ' · ' + A.meal.toLowerCase();
+}
+
+/* ===== «+ Añadir»: pestañas Recetas y Congelador ===== */
+function pintarSelectorRecetas() {
+  const cats = [...new Set(data.recipes.map(r => r.category || 'Otras'))].sort((a, b) => a.localeCompare(b, 'es'));
+  const sel = $('#pkCat'), cur = sel.value; sel.innerHTML = '<option value="">Todas las categorías</option>' + cats.map(c => `<option${c === cur ? ' selected' : ''}>${h(c)}</option>`).join('');
+  const q = norm($('#pkRQ').value.trim()), cat = sel.value;
+  const ingTxt = id => data.ingredients.filter(i => i.id === id).map(i => norm(i.name)).join(' ');
+  const lista = data.recipes.filter(r => (!cat || (r.category || 'Otras') === cat) && (!q || norm(r.name).includes(q) || ingTxt(r.id).includes(q))).sort((a, b) => a.name.localeCompare(b.name, 'es'));
+  const col = { DIARIA: '#00b65b', FRECUENTE: '#ff7a1a', OCASIONAL: '#e5192d' };
+  $('#pkRLista').innerHTML = lista.length ? lista.map(r => { const fq = String(r.frequency || '').toUpperCase(); return `<button type="button" class="pkrow" data-pkr="${h(r.id)}"><span class="pkn"><b>${h(r.name)}</b><small>${h(r.category || 'Otras')} · ${h(recipeAmount(r.id, r.portions))} por ficha${fq ? ` · <span style="color:${col[fq] || 'inherit'};font-weight:700">${h(fq)}</span>` : ''}</small></span><span class="pkk">${r.kcal == null ? '—' : kc(r.kcal)}<small>kcal/ración</small></span></button>`; }).join('')
+    : '<div class="empty">No hay recetas con esa búsqueda.</div>';
+}
+function pintarSelectorCongelador() {
+  const lista = (data.freezer || []).filter(c => congQuedan(c) > 1e-9).sort((a, b) => String(a.caduca || '9999').localeCompare(String(b.caduca || '9999')) || String(a.fecha_congelado).localeCompare(String(b.fecha_congelado)));
+  if (!lista.length) { $('#pkCLista').innerHTML = '<div class="empty">El congelador está vacío. Desde una preparación, «Congelar lo que sobra».</div>'; return; }
+  $('#pkCLista').innerHTML = lista.map(c => { const k = kcalRacion(c.receta_id, c.lote_id && data.lots.some(l => l.lotId === c.lote_id) ? c.lote_id : ''), on = PICK.cong === c.id, f = recipeMeasure(c.receta_id).factor, pronto = caducaPronto(c);
+    return `<div class="cgrow${on ? ' on' : ''}"><button type="button" class="cgh" data-pkc="${h(c.id)}" aria-expanded="${on}"><span class="pkn"><b>${h(c.nombre)}</b><small>${h(racionTxt(c.receta_id, congQuedan(c)))} · congelado el ${h(fechaCorta(c.fecha_congelado))}${c.caduca ? ' · <span class="' + (pronto ? 'rojo2' : '') + '">' + (c.caduca < hoyIso() ? 'caducó el ' : 'antes del ') + h(fechaCorta(c.caduca)) + '</span>' : ''}</small></span><span class="pkk">${k === null ? '—' : kc(k)}<small>kcal/ración</small></span></button>
+      ${on ? `<div class="g3a"><label class="q2"><span>Yo</span><input id="pcYo" type="text" inputmode="decimal" autocomplete="off" value="${h(fmt.format(Math.min(1, congQuedan(c)) * f))}"></label><label class="q2"><span>Otros</span><input id="pcOt" type="text" inputmode="decimal" autocomplete="off" value="${h(fmt.format(Math.max(0, Math.min(((['Comida', 'Cena'].includes(PICK.meal) ? (Number(data.settings.people) || 1) - 1 : 0)), congQuedan(c) - Math.min(1, congQuedan(c)))) * f))}"></label><button type="button" class="btn main" id="pcAdd">Añadir</button></div>` : ''}</div>`; }).join('') + `<p class="nota2">${ICO_CONGELA} Lo que caduca antes sale primero y en rojo.</p>`;
+}
+function anadirDelCongelador() {
+  const c = data.freezer.find(x => x.id === PICK.cong); if (!c) return;
+  const g = s => { const v = parseNum($(s).value); return Number.isNaN(v) ? NaN : recipeInput(c.receta_id, v ?? 0); }, own = g('#pcYo'), others = g('#pcOt');
+  if (Number.isNaN(own) || Number.isNaN(others)) { aviso('Escribe números (con coma o punto).'); return; }
+  if (!(own + others > 0)) { aviso('Pon al menos una ración.'); return; }
+  if (own + others > congQuedan(c) + 1e-9) { aviso('Solo quedan ' + racionTxt(c.receta_id, congQuedan(c)) + '.'); return; }
+  const lotId = c.lote_id && data.lots.some(l => l.lotId === c.lote_id) ? c.lote_id : '';
+  const e = nuevaLinea(PICK.fecha, PICK.meal, c.receta_id, { own, others, lotId, includeShopping: false }); data.entries.push(e); marcar(e);
+  const m = { id: uuid(), owner: SESION.user.id, congelador_id: c.id, linea_id: e.lineId, raciones: own + others, motivo: 'comida', fecha: PICK.fecha }; data.freezerMoves.push(m); guardarFila('congelador_movimientos', m);
+  $('#picker').close(); pintarTodo(); aviso('Del congelador a ' + PICK.meal.toLowerCase() + ' · ' + DIA_CORTO(PICK.fecha) + '.');
+}
+
+/* ===== Eventos 0.13 ===== */
+function init013() {
+  $('#prepDlg').addEventListener('change', e => { if (e.target.name === 'prSrc') { leerPreparar(); PREP.src = e.target.value; pintarPreparar(); } else if (e.target.id === 'prCompra') leerPreparar(); });
+  $('#prepDlg').addEventListener('input', e => { if (/^pr(Yo|Ot|Prep)$/.test(e.target.id)) balancePreparar(); });
+  $('#prepDlg').addEventListener('click', e => { const t = e.target.closest('[data-pesar]'); if (t) abrirPeso(pesosQueFaltan(PREP.recipeId)[Number(t.dataset.pesar)]); });
+  $('#prGo').onclick = confirmarPreparar;
+  $('#loteDlg').addEventListener('click', e => {
+    const t = e.target.closest('button'); if (!t || t.disabled) return;
+    if (t.dataset.lsem) { leerLote(); LOTE.lunes = addDays(LOTE.lunes, 7 * Number(t.dataset.lsem)); const l = data.lots.find(x => x.lotId === LOTE.id), i = (parseIso(LOTE.fecha).getDay() + 6) % 7, d = addDays(LOTE.lunes, i); LOTE.fecha = l && d < l.date ? l.date : d; pintarLote(); return; }
+    if (t.dataset.ldia) { leerLote(); LOTE.fecha = t.dataset.ldia; pintarLote(); return; }
+    if (t.dataset.lfr) { leerLote(); LOTE.meal = t.dataset.lfr; pintarLote(); return; }
+    if (t.id === 'loAdd') { asignarLote(); return; }
+    if (t.id === 'loCong') { leerLote(); abrirCongelar(); return; }
+    if (t.id === 'buGo') { usarEnReceta(); return; }
+    if (t.dataset.buquitar) { quitarUsoBase(t.dataset.buquitar); return; }
+    if (t.dataset.congquitar) { sacarDelCongelador(t.dataset.congquitar); return; }
+    if (t.dataset.loquitar) { quitarLinea(t.dataset.loquitar); pintarLote(); return; }
+    if (t.id === 'leGo') { guardarEdicionLote(); return; }
+    if (t.id === 'leBorrar') { eliminarLote(); return; }
+  });
+  $('#cgGo').onclick = confirmarCongelar;
+  $('#peG').addEventListener('input', pintarPesoInfo);
+  $('#peG').addEventListener('keydown', e => { if (e.key === 'Enter') guardarPeso(); });
+  $('#peGo').onclick = guardarPeso;
+  $('#semDlg').addEventListener('click', e => {
+    const t = e.target.closest('button'); if (!t) return;
+    if (t.dataset.assem) { ASEM.lunes = addDays(ASEM.lunes, 7 * Number(t.dataset.assem)); ASEM.fecha = addDays(ASEM.lunes, (parseIso(ASEM.fecha).getDay() + 6) % 7); pintarAnadirSemana(); return; }
+    if (t.dataset.asdia) { ASEM.fecha = t.dataset.asdia; pintarAnadirSemana(); return; }
+    if (t.dataset.asfr) { ASEM.meal = t.dataset.asfr; pintarAnadirSemana(); return; }
+    if (t.id === 'asGo') { $('#semDlg').close(); abrirPreparar(ASEM.recipeId, ASEM.fecha, ASEM.meal); }
+  });
+  $('#rdet').addEventListener('click', e => { const b = e.target.closest('[data-anadirsem]'); if (b) abrirAnadirSemana(b.dataset.anadirsem); });
+  $('#pkCat').addEventListener('change', pintarSelectorRecetas);
+  $('#pkRQ').addEventListener('input', pintarSelectorRecetas);
 }
 
 async function abrirSemana() {
@@ -968,7 +1381,7 @@ async function abrirSemana() {
   pintarSemana(); pintarEstado();
 }
 
-  initSemana();
+  initSemana(); init013();
   sb.auth.onAuthStateChange((_ev, session) => { if ((session && session.user.id) !== (SESION && SESION.user.id)) { SEM.cargada = false; data = null; } show(session); });
   sb.auth.getSession().then(({ data }) => show(data.session));
   setMode('login');
