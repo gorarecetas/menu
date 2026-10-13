@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mi Menú</title>
+<meta name="description" content="Menú semanal y compra de Rocío">
+<meta name="theme-color" content="#eee6da">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Mi Menú">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#151311;--muted:#5f574e;--paper:#eee6da;--white:#fffdf9;--line:#d3c8b8;--red:#e5192d;--cream:#fbf1c4;--ok:#00b65b;--font:"Quicksand","Nunito","Trebuchet MS",system-ui,sans-serif}
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--paper);color:var(--ink);font:500 16px/1.45 var(--font)}
+  body{min-height:100dvh;padding:calc(env(safe-area-inset-top) + 20px) 16px calc(env(safe-area-inset-bottom) + 24px)}
+  main{max-width:520px;margin:0 auto}
+  .head{display:flex;align-items:center;gap:14px}
+  .head img{width:64px;height:64px;border-radius:50%}
+  .brand{display:inline-block;padding:4px 14px;border-radius:14px;background:var(--cream);color:var(--red);font:400 30px/1.1 "Lilita One",var(--font);letter-spacing:.02em}
+  .sub{margin:2px 0 0;color:var(--muted);font-size:14px}
+  .card{margin-top:18px;padding:16px;background:var(--white);border:1px solid var(--line);border-radius:18px}
+  h2{margin:0 0 8px;font-size:18px}
+  ul{list-style:none;margin:0;padding:0}
+  li{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-top:1px solid var(--line)}
+  li:first-child{border-top:0}
+  .dot{flex:none;width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;background:var(--line)}
+  .dot.ok{background:var(--ok)}
+  .dot.no{background:var(--red)}
+  small{display:block;color:var(--muted);font-size:13px}
+  ol{margin:0;padding-left:20px}
+  ol li{display:list-item;border:0;padding:4px 0}
+  .ver{margin-top:18px;text-align:center;color:var(--muted);font-size:12px}
+</style>
+</head>
+<body>
+<main>
+  <div class="head">
+    <img src="icon-192.png" alt="">
+    <div><span class="brand">MI MENÚ</span><p class="sub">App de prueba · semana, compra y recetas</p></div>
+  </div>
+
+  <section class="card">
+    <h2>Comprobaciones</h2>
+    <ul>
+      <li><span class="dot" id="dInstall">?</span><span id="tInstall">Instalada en la pantalla de inicio<small>comprobando…</small></span></li>
+      <li><span class="dot" id="dOffline">?</span><span id="tOffline">Funciona sin conexión<small>comprobando…</small></span></li>
+      <li><span class="dot" id="dNet">?</span><span id="tNet">Conexión<small>comprobando…</small></span></li>
+    </ul>
+  </section>
+
+  <section class="card" id="howto">
+    <h2>Cómo instalarla en el iPhone</h2>
+    <ol>
+      <li>Abre esta página en <b>Safari</b>.</li>
+      <li>Pulsa el botón <b>Compartir</b> (el cuadrado con la flecha hacia arriba).</li>
+      <li>Elige <b>«Añadir a pantalla de inicio»</b> y pulsa <b>Añadir</b>.</li>
+      <li>Ábrela desde el icono nuevo «Mi Menú».</li>
+    </ol>
+  </section>
+
+  <p class="ver">Versión de prueba 0.1 · 13/10/2026</p>
+</main>
+<script>
+  const set = (id, ok, text) => { const d = document.getElementById('d' + id), t = document.getElementById('t' + id); d.className = 'dot ' + (ok ? 'ok' : 'no'); d.textContent = ok ? '✓' : '×'; t.querySelector('small').textContent = text; };
+  const standalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+  set('Install', standalone, standalone ? 'abierta desde el icono, a pantalla completa' : 'ahora la ves en el navegador; sigue los pasos de abajo');
+  if (standalone) document.getElementById('howto').style.display = 'none';
+  const net = () => set('Net', navigator.onLine, navigator.onLine ? 'con conexión' : 'sin conexión: lo que ves sale de lo guardado en el móvil');
+  net(); addEventListener('online', net); addEventListener('offline', net);
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js').then(() => navigator.serviceWorker.ready).then(() => set('Offline', true, 'lista para abrirse sin conexión')).catch(() => set('Offline', false, 'no se ha podido preparar'));
+  } else set('Offline', false, 'este navegador no lo permite');
+</script>
+</body>
+</html>
