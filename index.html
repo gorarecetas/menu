@@ -60,12 +60,15 @@
   .rrow:last-child{border-bottom:0}
   .rn{font-weight:700;font-size:15px;line-height:1.3} .rm{font-size:12.5px;color:var(--muted)}
   .rk{text-align:right;white-space:nowrap;font-size:11.5px;color:var(--muted)} .rk b{display:block;font-size:15px;color:var(--ink)}
-  .tag{display:inline-block;font-size:11px;font-weight:700;padding:1px 6px;border-radius:6px;background:#e6f0fb;color:#2c5c8f;margin-left:4px}
-  .tag.nv{background:#eef5e8;color:#3d6b28}
+  .rm{display:flex;align-items:center;flex-wrap:wrap;gap:2px 8px;margin-top:2px}
+  .fq{display:inline-block;color:#fff;font-weight:700;font-size:10.5px;letter-spacing:.04em;padding:2px 8px;border-radius:99px;text-transform:uppercase}
+  .fq.diaria{background:#00b65b} .fq.frecuente{background:#ff7a1a} .fq.ocasional{background:#e5192d} .fq.otra{background:var(--ink)}
+  .ic{display:inline-flex;align-items:center;gap:3px;color:var(--muted);font-size:12.5px} .ic svg{display:block;flex:none}
   .empty{padding:14px;color:var(--muted);font-size:14px}
   .back{background:none;border:0;padding:6px 0;font:500 14px var(--font);color:var(--muted);cursor:pointer}
   .dchips{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 10px}
-  .dchips span{padding:4px 10px;border:1px solid var(--line);border-radius:999px;font-size:13px;background:var(--white)}
+  .dchips>span{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border:1px solid var(--line);border-radius:999px;font-size:13px;background:var(--white)}
+  .dchips>.fq{font-size:12px;padding:5px 12px;border:0}
   .box{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:10px 12px;margin-bottom:10px}
   .box h3{margin:0 0 6px;font-size:15px}
   .kc{display:flex;gap:18px;align-items:baseline} .kc b{font-size:22px} .kc span{font-size:13px;color:var(--muted)}
@@ -129,7 +132,7 @@
     <div id="rdet"></div>
   </section>
 
-  <p class="ver">Versión de prueba 0.7 · recetario para consultar</p>
+  <p class="ver">Versión de prueba 0.8 · recetario para consultar</p>
 </main>
 <script>
   const SUPABASE_URL = 'https://cawmvpfjaehennkknmoy.supabase.co';
@@ -183,7 +186,11 @@
   };
 
   // ---------- Recetario ----------
-  const CAT_CORTA = { 'Platos principales':'Platos', 'Bases y fondos':'Bases', 'Ensaladas y bowls':'Ensaladas', 'Guarniciones y entrantes':'Guarniciones', 'Postres y snacks':'Postres', 'Cremas y sopas':'Cremas', 'Panes y masas':'Panes' };
+  const ICO_NEVERA = '<svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="19" rx="2.5"/><path d="M6 9h12M9.5 5v1.5M9.5 12v3.5"/></svg>';
+  const ICO_CONGELA = '<svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M9.5 4.5 12 7l2.5-2.5M9.5 19.5 12 17l2.5 2.5"/><path transform="rotate(60 12 12)" d="M12 2v20M9.5 4.5 12 7l2.5-2.5M9.5 19.5 12 17l2.5 2.5"/><path transform="rotate(120 12 12)" d="M12 2v20M9.5 4.5 12 7l2.5-2.5M9.5 19.5 12 17l2.5 2.5"/></svg>';
+  const frec = f => { const k = String(f || '').trim().toUpperCase(); if (!k) return ''; const c = { DIARIA:'diaria', FRECUENTE:'frecuente', OCASIONAL:'ocasional' }[k] || 'otra'; return `<span class="fq ${c}" title="Frecuencia">${h(k)}</span>`; };
+  const nevera = (d, largo) => d ? `<span class="ic" title="Días en la nevera" aria-label="Nevera: ${d} días">${ICO_NEVERA}${d} ${largo ? 'días' : 'd'}</span>` : '';
+  const congela = (c, largo) => c ? `<span class="ic" title="Se puede congelar" aria-label="Se puede congelar">${ICO_CONGELA}${largo ? 'Se congela' : ''}</span>` : '';
   const h = t => String(t == null ? '' : t).replace(/[&<>"]/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]));
   const norm = t => String(t || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
   const FRAC = { 0.125:'⅛', 0.25:'¼', 0.333:'⅓', 0.5:'½', 0.667:'⅔', 0.75:'¾' };
@@ -211,12 +218,12 @@
     const cats = {}; REC.forEach(r => { const c = r.categoria || 'Otras'; cats[c] = (cats[c] || 0) + 1; });
     const orden = Object.keys(cats).sort((a, b) => cats[b] - cats[a]);
     $('#cats').innerHTML = `<button class="fchip${cat ? '' : ' on'}" data-cat="">Todas<i>${REC.length}</i></button>` +
-      orden.map(c => `<button class="fchip${cat === c ? ' on' : ''}" data-cat="${h(c)}">${h(CAT_CORTA[c] || c)}<i>${cats[c]}</i></button>`).join('');
+      orden.map(c => `<button class="fchip${cat === c ? ' on' : ''}" data-cat="${h(c)}">${h(c)}<i>${cats[c]}</i></button>`).join('');
     const q = norm($('#q').value.trim());
     const vis = REC.filter(r => (!cat || (r.categoria || 'Otras') === cat) && (!q || norm(r.nombre).includes(q) || (ING_TXT[r.id] || '').includes(q)));
     $('#rlist').innerHTML = vis.length ? vis.map(r => `<button class="rrow" data-id="${h(r.id)}"><div>
         <div class="rn">${h(r.nombre)}</div>
-        <div class="rm">${h(r.categoria || '')} · ${raciones(r.raciones_lote)}${r.congelable ? '<span class="tag">Congela</span>' : ''}${r.dias_nevera ? `<span class="tag nv">Nevera ${r.dias_nevera} d</span>` : ''}</div>
+        <div class="rm">${frec(r.frecuencia)}<span>${raciones(r.raciones_lote)}</span>${nevera(r.dias_nevera)}${congela(r.congelable)}</div>
       </div><div class="rk"><b>${r.kcal_pdf == null ? '—' : num(Math.round(r.kcal_pdf))}</b>kcal/ración</div></button>`).join('')
       : '<div class="empty">No hay recetas con esa búsqueda.</div>';
   }
@@ -241,11 +248,11 @@
     const lista = ing.data || [];
     const conCant = lista.filter(i => i.cantidad != null && !i.al_gusto);
     const gusto = lista.filter(i => !(i.cantidad != null && !i.al_gusto)).map(i => i.nombre.replace(/\s+al gusto\b/i, '').trim()).map(t => /^.[A-ZÁÉÍÓÚÑ]/.test(t) ? t : t.charAt(0).toLowerCase() + t.slice(1));
-    const chips = [r.categoria, raciones(r.raciones_lote), r.frecuencia ? r.frecuencia.charAt(0) + r.frecuencia.slice(1).toLowerCase() : '',
-      r.congelable ? 'Se congela' : '', r.dias_nevera ? `Nevera ${r.dias_nevera} días` : ''].filter(Boolean);
+    const chips = [r.categoria ? `<span>${h(r.categoria)}</span>` : '', `<span>${raciones(r.raciones_lote)}</span>`,
+      r.dias_nevera ? `<span>${nevera(r.dias_nevera, true)}</span>` : '', r.congelable ? `<span>${congela(true, true)}</span>` : ''].filter(Boolean);
     const cons = (d.data && d.data.conservacion || '').trim();
     $('#rdet').innerHTML = `<h2 class="pt">${h(r.nombre)}</h2>
-      <div class="dchips">${chips.map(c => `<span>${h(c)}</span>`).join('')}</div>
+      <div class="dchips">${frec(r.frecuencia)}${chips.join('')}</div>
       <div class="box"><div class="kc"><div><b>${r.kcal_pdf == null ? '—' : num(Math.round(r.kcal_pdf))}</b> <span>kcal</span></div>
         <div><b>${r.proteina_pdf == null ? '—' : num(r.proteina_pdf)}</b> <span>g proteína</span></div></div>
         <div class="note">Por ración · dato orientativo del PDF. Cuando cada ingrediente esté unido a su ficha, se calculará con los datos reales.</div></div>
