@@ -390,6 +390,10 @@
   .prp-inf .verrec{margin:0;min-height:44px}
   #prpDlg .shf{align-items:center} #prpInfo{flex:1;font-size:13px;line-height:1.35;color:var(--muted)} #prpInfo b{display:block;color:var(--ink);font-size:14px}
 
+  /* ---------- 0.17 c · PDF ---------- */
+  .rec-acc{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;margin:0 0 12px} .rec-acc .anadirsem{margin:0} .rec-acc .btn{min-height:48px}
+  .pdf-acc{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px} .pdf-acc .btn{flex:1;min-height:48px;justify-content:center;text-decoration:none;display:inline-flex;align-items:center}
+
 </style>
 </head>
 <body>
@@ -422,7 +426,7 @@
 
   <section id="semana" hidden>
     <div class="wkbar"><button class="ar" type="button" id="wkPrev" aria-label="Semana anterior">‹</button><button class="mid" type="button" id="wkPick" aria-label="Elegir semana"><b><span id="wkRango"></span> ▾</b><small id="wkSub"></small></button><input type="date" id="wkDate" tabindex="-1" aria-hidden="true"><button class="ar" type="button" id="wkNext" aria-label="Semana siguiente">›</button><button class="ar" type="button" id="wkMenu" aria-label="Más opciones de la semana" aria-haspopup="menu">⋯</button>
-      <div class="wkpop" id="wkPop" role="menu" hidden><button type="button" data-wk16="resumen">Resumen de la semana</button><button type="button" data-wk16="libre" id="wkLibre">Marcar este día como libre</button><button type="button" data-pronto="pdf">Guardar PDF <small>0.17</small></button><hr><button type="button" data-wk17="guardar">Guardar esta semana</button><button type="button" data-wk17="cargar">Cargar una semana guardada</button></div></div>
+      <div class="wkpop" id="wkPop" role="menu" hidden><button type="button" data-wk16="resumen">Resumen de la semana</button><button type="button" data-wk16="libre" id="wkLibre">Marcar este día como libre</button><button type="button" data-wk17="pdf">Guardar PDF</button><hr><button type="button" data-wk17="guardar">Guardar esta semana</button><button type="button" data-wk17="cargar">Cargar una semana guardada</button></div></div>
     <div class="days" id="dias"></div>
     <div class="dh"><h2 id="diaTit"></h2><button type="button" id="leyenda">¿Qué es esto?</button></div>
     <div class="sum" id="resumen"></div>
@@ -462,7 +466,7 @@
     <button class="cp-act" type="button" id="cpAct" hidden></button>
   </section>
 
-  <p class="ver">Versión de prueba 0.17 b · semanas guardadas</p>
+  <p class="ver">Versión de prueba 0.17 c · PDF</p>
 </main>
 <nav class="nav" id="nav" hidden><button type="button" data-nav="semana" id="navSemana"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Semana</button><button type="button" data-nav="compra" id="navCompra"><i class="nbd" id="navNum" hidden></i><svg viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h3l2.6 12.4a2 2 0 0 0 2 1.6h8.2a2 2 0 0 0 2-1.6L21 7H6"/></svg>Compra</button><button type="button" data-nav="recetas" id="navRecetas"><svg viewBox="0 0 24 24"><path d="M12 6.5C10 5 7 4.5 3.5 5v14c3.5-.5 6.5 0 8.5 1.5 2-1.5 5-2 8.5-1.5V5C17 4.5 14 5 12 6.5zM12 6.5v14"/><path d="M6.5 9.5h2.5M6.5 12.5h2.5M15 9.5h2.5M15 12.5h2.5"/></svg>Recetas</button><button type="button" data-nav="alimentos" id="navAlimentos"><svg viewBox="0 0 24 24"><path d="M12 8.2c-1.3-.9-2.8-1.2-4.2-.9C5.3 7.8 4 10 4 12.8 4 17 7 21 9.6 21c1 0 1.5-.5 2.4-.5s1.4.5 2.4.5C17 21 20 17 20 12.8c0-2.8-1.3-5-3.8-5.5-1.4-.3-2.9 0-4.2.9z"/><path d="M12 8.2V5.5M12 5.5c.3-1.6 1.7-2.6 3.4-2.6-.2 1.7-1.6 2.8-3.4 2.6z"/></svg>Alimentos</button></nav>
 <dialog class="sheet" id="picker" aria-labelledby="pkTit"><div class="shh"><h2 id="pkTit">Añadir</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb">
@@ -480,7 +484,7 @@
 <dialog class="sheet" id="semDlg" aria-labelledby="asTit"><div class="shh"><h2 id="asTit">Añadir a la semana</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb"><p class="sub2"><b id="asRec"></b></p><div class="wkm"><button type="button" class="ar" data-assem="-1" aria-label="Semana anterior">‹</button><b id="asRango"></b><button type="button" class="ar" data-assem="1" aria-label="Semana siguiente">›</button></div><h3 class="q3">Día</h3><div class="d7s" id="asDias"></div><h3 class="q3">Franja</h3><div class="f4s" id="asFr"></div><p class="nota2" id="asCuando"></p></div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="asGo">Continuar</button></div></dialog>
 <dialog class="sheet" id="cpFicha" aria-labelledby="cfTit"><div class="shh"><h2 id="cfTit">Compra</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="cfBody"></div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="cfGo">Guardar</button></div></dialog>
 <dialog class="sheet" id="cpAnadir" aria-labelledby="caTit"><div class="shh"><h2 id="caTit">Añadir a la compra</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb"><label class="cp-lbl" for="caNom">Producto</label><input class="cp-inp" id="caNom" type="search" enterkeyhint="done" autocomplete="off" autocorrect="off" autocapitalize="sentences" spellcheck="false" maxlength="200"><div class="cp-sugs" id="caLista" role="listbox" hidden></div><div class="cp-two" style="margin-top:12px"><label class="cp-q" for="caCant">Cantidad (si quieres)<input class="cp-inp" id="caCant" type="text" inputmode="decimal" autocomplete="off"></label><label class="cp-q" for="caUni">Unidad<select class="cp-inp" id="caUni"></select></label></div><p class="cp-nota" id="caNota"></p></div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="caGo">Añadir</button></div></dialog>
-<dialog class="sheet" id="mpDlg" aria-labelledby="mpTit"><div class="shh"><h2 id="mpTit">Tu producto</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="mpBody"></div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="mpGo">Guardar</button></div></dialog><dialog class="sheet" id="alDlg" aria-labelledby="alTit"><div class="shh"><h2 id="alTit">Alimento</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="alBody"></div><div class="shf"><button class="btn" type="button" id="alEditar">Editar</button><button class="btn main" type="button" id="alSemana">Añadir a la semana</button></div></dialog><dialog class="sheet" id="aeDlg" aria-labelledby="aeTit"><div class="shh"><h2 id="aeTit">Nueva ficha</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="aeBody"></div><div class="shf"><button class="btn main" type="button" id="aeGo">Guardar</button></div></dialog><dialog class="sheet" id="prpDlg" aria-labelledby="prpTit"><div class="shh"><h2 id="prpTit">Preparación</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="prpBody"></div><div class="shf"><p id="prpInfo" role="status"></p><button class="btn main" type="button" id="prpGo" disabled>Guardado</button></div></dialog><dialog class="sheet" id="swDlg" aria-labelledby="swTit"><div class="shh"><h2 id="swTit">Semanas guardadas</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="swBody"></div><div class="shf" style="justify-content:space-between"><button class="btn rojo" type="button" id="swBorrar" hidden>Borrar</button><span></span><button class="btn main" type="button" id="swGo">Guardar</button></div></dialog><div id="toast" role="status" hidden></div>
+<dialog class="sheet" id="mpDlg" aria-labelledby="mpTit"><div class="shh"><h2 id="mpTit">Tu producto</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="mpBody"></div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="mpGo">Guardar</button></div></dialog><dialog class="sheet" id="alDlg" aria-labelledby="alTit"><div class="shh"><h2 id="alTit">Alimento</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="alBody"></div><div class="shf"><button class="btn" type="button" id="alEditar">Editar</button><button class="btn main" type="button" id="alSemana">Añadir a la semana</button></div></dialog><dialog class="sheet" id="aeDlg" aria-labelledby="aeTit"><div class="shh"><h2 id="aeTit">Nueva ficha</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="aeBody"></div><div class="shf"><button class="btn main" type="button" id="aeGo">Guardar</button></div></dialog><dialog class="sheet" id="prpDlg" aria-labelledby="prpTit"><div class="shh"><h2 id="prpTit">Preparación</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="prpBody"></div><div class="shf"><p id="prpInfo" role="status"></p><button class="btn main" type="button" id="prpGo" disabled>Guardado</button></div></dialog><dialog class="sheet" id="swDlg" aria-labelledby="swTit"><div class="shh"><h2 id="swTit">Semanas guardadas</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="swBody"></div><div class="shf" style="justify-content:space-between"><button class="btn rojo" type="button" id="swBorrar" hidden>Borrar</button><span></span><button class="btn main" type="button" id="swGo">Guardar</button></div></dialog><dialog class="sheet" id="pdfDlg" aria-labelledby="pdfTit"><div class="shh"><h2 id="pdfTit">PDF</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb"><p id="pdfStatus" role="status" aria-live="polite" style="margin:0;font-size:15px"></p><div class="pdf-acc"><a id="pdfOpen" class="btn" target="_blank" rel="noopener" hidden>Abrir</a><button type="button" class="btn" id="pdfShare" hidden>Compartir</button><a id="pdfDownload" class="btn" download hidden>Descargar</a></div><p class="aj-h" id="pdfHint" hidden></p></div></dialog><div id="toast" role="status" hidden></div>
 <script>
   const SUPABASE_URL = 'https://cawmvpfjaehennkknmoy.supabase.co';
   const SUPABASE_KEY = 'sb_publishable_vQDbCf2dlzKlFgpbMj7u2A_1wDlteT3'; // clave pública: la protección la ponen las reglas de cada tabla
@@ -664,9 +668,10 @@
       r.dias_nevera ? `<span>${nevera(r.dias_nevera, true)}</span>` : '', r.congelable ? `<span>${congela(true, true)}</span>` : ''].filter(Boolean);
     const cons = (d.data && d.data.conservacion || '').trim();
     const v = valoresReceta(id);
+    window.RECDET = { r, pasos: d.data && d.data.pasos, lista };
     $('#rdet').innerHTML = `<h2 class="pt">${h(r.nombre)}</h2>
       <div class="dchips">${frec(r.frecuencia)}${chips.join('')}</div>
-      <button type="button" class="btn main anadirsem" data-anadirsem="${h(r.id)}">Añadir a la semana</button>
+      <div class="rec-acc"><button type="button" class="btn main anadirsem" data-anadirsem="${h(r.id)}">Añadir a la semana</button><button type="button" class="btn" data-recpdf aria-label="Receta en PDF">PDF</button></div>
       <div class="box"><div class="kc"><div><b>${r.kcal_pdf == null ? '—' : num(Math.round(r.kcal_pdf))}</b><span>kcal</span></div>
         <div><b>${r.proteina_pdf == null ? '—' : num(r.proteina_pdf)}</b><span>g proteína</span></div>
         <div><b>${r.hidratos_pdf == null ? '—' : num(r.hidratos_pdf)}</b><span>g hidratos</span></div>
@@ -1231,7 +1236,7 @@ function aviso(txt, accion, fn) {
   if (accion) $('#toastAcc').onclick = () => { t.hidden = true; fn(); };
   clearTimeout(tAviso); tAviso = setTimeout(() => { t.hidden = true; }, accion ? 6000 : 3200);
 }
-const PRONTO = { pdf: 'Guardar PDF llega en la 0.17.', guardarSem: 'Guardar y cargar semanas llega en la 0.17.' };
+const PRONTO = {};
 
 /* --- Eventos de la Semana --- */
 function initSemana() {
@@ -1241,7 +1246,7 @@ function initSemana() {
     if (t.id === 'wkPrev' || t.id === 'wkNext') { SEM.lunes = addDays(SEM.lunes, t.id === 'wkPrev' ? -7 : 7); SEM.dia = SEM.lunes === mondayOf(hoyIso()) ? (parseIso(hoyIso()).getDay() + 6) % 7 : 0; pintarSemana(); return; }
     if (t.id === 'wkPick') { const i = $('#wkDate'); i.value = diaSel(); try { i.showPicker(); } catch (_) { i.click(); } return; }
     if (t.id === 'wkMenu') { $('#wkPop').hidden = !$('#wkPop').hidden; return; }
-    if (t.dataset.wk17) { $('#wkPop').hidden = true; if (t.dataset.wk17 === 'guardar') abrirGuardarSemana(); else abrirCargarSemana(); return; }
+    if (t.dataset.wk17) { $('#wkPop').hidden = true; if (t.dataset.wk17 === 'guardar') abrirGuardarSemana(); else if (t.dataset.wk17 === 'pdf') prepareWeekPdf(); else abrirCargarSemana(); return; }
     if (t.dataset.wk16) { $('#wkPop').hidden = true; if (t.dataset.wk16 === 'resumen') abrirResumen(); else alternarLibre(diaSel()); return; }
     if (t.dataset.pronto) { $('#wkPop').hidden = true; aviso(PRONTO[t.dataset.pronto]); return; }
     if (t.id === 'leyenda') { aviso('Recetas en raciones; productos en g, ml o ud. Solo se suman tus consumos. * = kcal parciales: faltan cantidades o etiquetas.'); return; }
@@ -2742,6 +2747,115 @@ function init017b() {
   $('#swBody').addEventListener('keydown', ev => { if (ev.key === 'Enter' && ev.target.id === 'swNom') { ev.preventDefault(); guardarSemana(); } });
 }
 
+
+/* ---------- 0.17 c · PDF de la semana (menú y compra) y de la receta: el mismo diseño de la hoja 5.28 b (jsPDF, Quicksand y Lilita One) ---------- */
+const PDF_LIB = { script: 'https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js', fonts: [
+  ['Quicksand-500.ttf', 'https://cdn.jsdelivr.net/npm/@expo-google-fonts/quicksand@0.4.1/500Medium/Quicksand_500Medium.ttf', 'Quicksand', 'normal', 500],
+  ['Quicksand-600.ttf', 'https://cdn.jsdelivr.net/npm/@expo-google-fonts/quicksand@0.4.1/600SemiBold/Quicksand_600SemiBold.ttf', 'Quicksand', 'normal', 600],
+  ['Quicksand-700.ttf', 'https://cdn.jsdelivr.net/npm/@expo-google-fonts/quicksand@0.4.1/700Bold/Quicksand_700Bold.ttf', 'Quicksand', 'normal', 700],
+  ['LilitaOne.ttf', 'https://cdn.jsdelivr.net/npm/@expo-google-fonts/lilita-one@0.4.1/400Regular/LilitaOne_400Regular.ttf', 'Lilita', 'normal', 400]] };
+let pdfKit = null, pdfObjectUrl = null, pdfFile = null;
+async function loadPdfKit(){if(pdfKit)return pdfKit;const timeout=(p,ms)=>Promise.race([p,new Promise((_,no)=>setTimeout(()=>no(new Error('tiempo de espera agotado')),ms))]);
+  if(!(window.jspdf&&window.jspdf.jsPDF))await timeout(new Promise((ok,no)=>{const s=document.createElement('script');s.src=PDF_LIB.script;s.async=true;s.onload=()=>ok();s.onerror=()=>no(new Error('no se pudo cargar la librería del PDF'));document.head.appendChild(s);}),25000);
+  if(!(window.jspdf&&window.jspdf.jsPDF))throw new Error('la librería del PDF no está disponible');
+  const fonts=await Promise.all(PDF_LIB.fonts.map(async f=>{const r=await timeout(fetch(f[1]),25000);if(!r.ok)throw new Error('no se pudo cargar la letra '+f[2]);const b=new Uint8Array(await r.arrayBuffer());let s='';for(let i=0;i<b.length;i+=0x8000)s+=String.fromCharCode.apply(null,b.subarray(i,i+0x8000));return {file:f[0],b64:btoa(s),name:f[2],style:f[3],weight:f[4],bytes:b.length};}));
+  pdfKit={jsPDF:window.jspdf.jsPDF,fonts};return pdfKit;}
+function newPdfDoc(){const k=pdfKit,doc=new k.jsPDF({unit:'pt',format:'a4',compress:true});k.fonts.forEach(f=>{doc.addFileToVFS(f.file,f.b64);doc.addFont(f.file,f.name,f.style,f.weight);});doc.setLineHeightFactor(1.5);return doc;}
+const PDF_MONTHS=new Intl.DateTimeFormat('es-ES',{day:'numeric',month:'long'}),PDF_LONG=new Intl.DateTimeFormat('es-ES',{day:'numeric',month:'long',year:'numeric'});
+function pdfWeekTitle(L){const a=new Date(L+'T12:00:00'),b=new Date(addDays(L,6)+'T12:00:00'),mb=PDF_MONTHS.format(b);return a.getMonth()===b.getMonth()?'Semana del '+a.getDate()+' al '+mb:'Semana del '+PDF_MONTHS.format(a)+' al '+mb;}
+function pdfWeekModel(L){
+  const antes=data.activeWeek;data.activeWeek=L;let shops,lines;try{shops=shopping(false);lines=shopLines(shops);}finally{data.activeWeek=antes;}
+  const days=DAYS.map((name,i)=>{const date=addDays(L,i),rows=dayEntries(date).filter(e=>e.itemId),st=statsDia(date);
+    const meals=rows.length?MEALS.map(meal=>{const list=rows.filter(e=>e.meal===meal);if(!list.length)return null;return {label:meal,items:list.map(e=>{const lot=data.lots.find(l=>l.lotId===e.lotId),kcal=calc(e,'kcal');return {name:item(e.itemId)?.name||'Alimento',detail:' · '+cantidadLinea(e)+(kcal===null?(isFree(e.itemId)?'':' · kcal pendientes'):' · '+kc(kcal)+' kcal')+(lot&&e.date!==lot.date?' · preparado el '+DIA_CORTO(lot.date):'')};})};}).filter(Boolean):[];
+    return {name,date:PDF_MONTHS.format(new Date(date+'T12:00:00')),pill:rows.length?kc(st.kcal)+' kcal'+(st.kMiss?' · parcial':'')+(esLibre(date)?' · día libre':''):'',empty:rows.length?'':(esLibre(date)?'Día libre':'Sin planificar'),meals};});
+  const groups=new Map();lines.forEach(i=>{const t=String(i.text).replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').replace(/&#39;/g,"'").replace(/<[^>]*>/g,'');if(!groups.has(i.category))groups.set(i.category,[]);groups.get(i.category).push({name:i.name,qty:/por definir/i.test(t)&&!/\d/.test(t)?'':t});});
+  const extras=[];if((shops.pantry||[]).length||(shops.pantryUnknown||[]).length)extras.push({title:'Despensa habitual · reponer solo si falta',lines:shops.pantry.map(i=>i.name+' · '+(i.text!==undefined?i.text:fmt.format((i.manualId?{amount:i.amount}:shoppingQuantity(i,i.amount)).amount)+' '+(i.manualId?i.unit:shoppingQuantity(i,i.amount).unit))).concat(shops.pantryUnknown.length?[shops.pantryUnknown.join(' · ')+' · al gusto/sin medida']:[])});
+  if((shops.unknown||[]).length)extras.push({title:'Revisar cantidades o ingredientes',lines:shops.unknown.map(x=>x.name+' · '+x.raw)});
+  if((shops.conditional||[]).length)extras.push({title:'Opciones de receta',lines:shops.conditional.map(x=>x.recipe+' · '+x.raw+'. '+x.note)});
+  const title=pdfWeekTitle(L);
+  return {title,subtitle:'Menú y lista de la compra',days,shop:{title:'Lista de la compra',subtitle:'Pendiente · '+title.charAt(0).toLowerCase()+title.slice(1),groups:[...groups.entries()].sort((a,b)=>compareCategory(a[0],b[0])).map(([category,items])=>({category,items})),extras,note:'Las kcal son las de tus consumos. Se omiten los productos ya marcados como comprados. Las preparaciones sin «Ingredientes a la compra» no aparecen.'},filename:'Menu_y_compra_'+L+'.pdf'};}
+function splitRecipeNotes(text){
+  const source=String(text||''),lines=source.split('\n'),title=/^\s*[A-ZÁÉÍÓÚÜÑ][^:\n]{2,40}:/,step=/^[ \t]*\d+[.)][ \t]*\S/;
+  let cut=-1;for(let i=1;i<lines.length;i++){if(!lines[i-1].trim()&&title.test(lines[i])&&!step.test(lines[i])){cut=i;break;}}
+  if(cut<0||lines.slice(cut).some(l=>step.test(l)))return {steps:source,notes:[]};
+  const notes=[];let block=[];const flush=()=>{if(block.length)notes.push(block);block=[];};
+  lines.slice(cut).forEach(l=>{if(!l.trim())flush();else block.push(l.trim());});flush();
+  return {steps:lines.slice(0,cut).join('\n'),notes:notes.map(b=>{const first=b[0],colon=first.indexOf(':');if(!title.test(first))return {title:'',body:b.join(' ')};const rest=first.slice(colon+1).trim();return rest.length<=25?{title:first,body:b.slice(1).join(' ')}:{title:first.slice(0,colon+1),body:[rest,...b.slice(1)].join(' ')};})};}
+function stepList(text){const source=String(text||'').trim(),marker=/^[ \t]*\d+[.)][ \t]*(?=[A-Za-zÁÉÍÓÚÜÑáéíóúüñ¿¡])/gm,matches=[...source.matchAll(marker)],tidy=s=>s.trim().replace(/\s*\n\s*/g,' ');if(!matches.length)return {intro:tidy(source),steps:[]};return {intro:tidy(source.slice(0,matches[0].index)),steps:matches.map((m,k)=>tidy(source.slice(m.index+m[0].length,k+1<matches.length?matches[k+1].index:source.length)))};}
+function recipeNutritionUnit(id){const m=recipeMeasure(id);return m.factor===1?m.singular:fmt.format(m.factor)+' '+m.unit;}
+/* Receta: datos de la ficha que se acaba de pintar (window.RECDET: fila de recetas, pasos e ingredientes) */
+function pdfRecipeModel(D){const r=D.r,N=Number(r.raciones_lote)||1,parts=splitRecipeNotes(D.pasos),st=stepList(parts.steps),v=data?valoresReceta(r.id):null,K=k=>v&&v[k]!=null?v[k]:r[{kcal:'kcal_pdf',protein:'proteina_pdf',fat:'grasa_pdf',carbs:'hidratos_pdf'}[k]];
+  const unidad=data?recipeNutritionUnit(r.id):'ración',racTxt=data?recipeAmount(r.id,N):(N===1?'1 ración':fmt.format(N)+' raciones');
+  const pills=[{text:racTxt,hi:true}];if(K('kcal')!=null)pills.push({text:kc(K('kcal'))+' kcal/'+unidad});if(r.dias_nevera)pills.push({text:'Nevera: '+r.dias_nevera+(Number(r.dias_nevera)===1?' día':' días')});if(r.congelable)pills.push({text:'Se puede congelar'});
+  const nut=[[K('kcal'),' kcal','Energía'],[K('protein'),' g','Proteínas'],[K('fat'),' g','Grasas'],[K('carbs'),' g','Hidratos']].filter(c=>c[0]!==null&&c[0]!==undefined).map(c=>({value:(c[1]===' kcal'?kc(c[0]):fmt.format(Math.round(Number(c[0])*10)/10))+c[1],label:c[2]}));
+  return {header:'Receta para '+racTxt,sub:'',eyebrow:r.categoria||'Receta',title:r.nombre,pills,
+    ingredients:D.lista.map(i=>({name:i.nombre,qty:i.cantidad!=null&&!i.al_gusto?fmt.format(Number(i.cantidad))+' '+(unitWord(Number(i.cantidad),i.unidad)||''):(/al gusto/i.test(i.nombre)||i.al_gusto?'Al gusto':'Sin medida')})),
+    intro:st.intro,steps:st.steps.length?st.steps:(st.intro?[]:['Preparación pendiente.']),notes:parts.notes,nutrition:nut,nutritionUnit:unidad,note:'',
+    foot:'Sacada de Mi Menú el '+PDF_LONG.format(new Date())+'.',filename:'Receta - '+r.nombre.replace(/[\\/:*?"<>|]+/g,' ').trim()+' - '+racTxt+'.pdf'};}
+const PDFC={ink:'#151311',red:'#e5192d',cream:'#fbf1c4',muted:'#5f574e',line:'#d3c8b8',white:'#fffdf9',sep:'#eee5d8'},PX=0.75;
+function pdfPainter(doc){const W=595.28,H=841.89,ML=50*PX,MT=46*PX,CW=W-2*ML,BOTTOM=H-MT;let y=MT;const p={doc,W,H,ML,CW,get y(){return y;},set y(v){y=v;},
+  font(weight,size,color,family){doc.setFont(family||'Quicksand','normal',family==='Lilita'?400:weight);doc.setFontSize(size);doc.setTextColor(color||PDFC.ink);},
+  width(t){return doc.getTextWidth(t);},
+  lines(t,w){return doc.splitTextToSize(String(t||''),w);},
+  text(t,x,yy,o){const s=doc.getFontSize(),lh=doc.getLineHeightFactor();doc.text(t,x,yy+s*(lh/2+0.33),Object.assign({baseline:'alphabetic'},o||{}));},
+  mid(t,x,cy,o){doc.text(t,x,cy+0.33*doc.getFontSize(),Object.assign({baseline:'alphabetic'},o||{}));},
+  tracked(t,x,yy,sp,align){const s=String(t);let w=0;const ws=[...s].map(ch=>{const cw=doc.getTextWidth(ch);w+=cw;return cw;});w+=sp*(s.length-1);let cx=align==='right'?x-w:align==='center'?x-w/2:x;[...s].forEach((ch,i)=>{doc.text(ch,cx,yy,{baseline:'alphabetic'});cx+=ws[i]+sp;});return w;},
+  rrect(x,yy,w,h,r,fill,stroke,lw){if(fill)doc.setFillColor(fill);if(stroke){doc.setDrawColor(stroke);doc.setLineWidth(lw||1*PX);}doc.roundedRect(x,yy,w,h,r,r,fill&&stroke?'FD':fill?'F':'S');},
+  hline(x1,x2,yy,color,lw){doc.setDrawColor(color);doc.setLineWidth(lw||1*PX);doc.line(x1,yy,x2,yy);},
+  ensure(h,slack=0){if(y+h>BOTTOM+slack&&y>MT+1){doc.addPage();y=MT;return true;}return false;},
+  remaining(){return BOTTOM-y;},
+  newPage(){doc.addPage();y=MT;},
+  header(title,sub){const lh=49*PX;p.font(400,30*PX,PDFC.red,'Lilita');const lw=p.width('MI MENÚ')+36*PX;p.rrect(ML,y,lw,lh,14*PX,PDFC.cream);p.mid('MI MENÚ',ML+18*PX,y+lh/2+1*PX);p.font(700,19*PX);doc.text(title,W-ML,sub?y+lh/2-1*PX:y+lh/2+0.33*19*PX,{baseline:'alphabetic',align:'right'});if(sub){p.font(500,13*PX,PDFC.muted);doc.text(sub,W-ML,y+lh/2+15*PX,{baseline:'alphabetic',align:'right'});}y+=lh+20*PX;},
+  rule(){doc.setFillColor(PDFC.red);doc.roundedRect(ML,y,180*PX,2*PX,1,1,'F');y+=2*PX+18*PX;},
+  pill(t,x,yy,hi){p.font(600,13*PX);const w=p.width(t)+24*PX,h=28*PX;p.rrect(x,yy,w,h,h/2,hi?PDFC.cream:PDFC.white,hi?PDFC.cream:PDFC.line,1*PX);doc.setTextColor(PDFC.ink);p.mid(t,x+12*PX,yy+h/2);return w;},
+  h4(t){p.ensure(60*PX);p.font(700,17*PX);y+=22*PX;p.text(t,ML,y);y+=17*PX*1.5+4*PX;},
+};return p;}
+function pdfDrawWeek(doc,m){const p=pdfPainter(doc),ML=p.ML,CW=p.CW;p.header(m.title,m.subtitle);
+  const dayHeight=d=>{let h=0;p.font(700,19*PX);h+=11*PX+19*PX*1.3+9*PX+1;if(d.empty){p.font(500,14.5*PX);h+=9*PX*2+14.5*PX*1.5;}d.meals.forEach(meal=>{h+=9*PX*2+1;meal.items.forEach(it=>{p.font(600,14.5*PX);const n=p.lines(it.name+it.detail,CW-32*PX-82*PX-12*PX).length;h+=n*14.5*PX*1.5;});});return h;};
+  m.days.forEach(d=>{const h=dayHeight(d);p.ensure(h);const top=p.y,x=ML;
+    let yy=top+11*PX;const cy=yy+19*PX*1.3/2,base=cy+0.33*19*PX;p.font(700,19*PX);doc.text(d.name,x+16*PX,base,{baseline:'alphabetic'});const nw=p.width(d.name);p.font(600,14*PX,PDFC.red);doc.text(d.date,x+16*PX+nw+8*PX,base,{baseline:'alphabetic'});
+    if(d.pill){p.font(700,13*PX);const pw=p.width(d.pill)+22*PX,ph=22*PX;p.rrect(x+CW-16*PX-pw,cy-ph/2,pw,ph,ph/2,PDFC.cream);doc.setTextColor(PDFC.ink);p.mid(d.pill,x+CW-16*PX-pw/2,cy,{align:'center'});}
+    yy+=19*PX*1.3+9*PX;p.hline(x,x+CW,yy,PDFC.line);yy+=1;
+    if(d.empty){yy+=9*PX;p.font(500,14.5*PX,PDFC.muted);p.text(d.empty,x+16*PX+82*PX+12*PX,yy);yy+=14.5*PX*1.5+9*PX;}
+    d.meals.forEach((meal,k)=>{yy+=9*PX;p.font(700,11*PX,PDFC.muted);p.tracked(meal.label.toUpperCase(),x+16*PX,yy+14.5*PX*(0.75+0.33),0.8*PX);let ty=yy;meal.items.forEach(it=>{const tx=x+16*PX+82*PX+12*PX,maxw=CW-32*PX-82*PX-12*PX;p.font(600,14.5*PX);const name=it.name,nameW=p.width(name),lines=p.lines(name+it.detail,maxw);
+        if(lines.length&&lines[0].startsWith(name)){p.text(name,tx,ty);p.font(500,13.5*PX,PDFC.muted);doc.text(lines[0].slice(name.length),tx+nameW,ty+14.5*PX*(0.75+0.33),{baseline:'alphabetic'});if(lines.length>1)p.text(lines.slice(1),tx,ty+14.5*PX*1.5);}
+        else{p.text(lines,tx,ty);}
+        ty+=lines.length*14.5*PX*1.5;});yy=ty+9*PX;if(k<d.meals.length-1){p.hline(x,x+CW,yy,PDFC.sep);yy+=1;}});
+    p.rrect(x,top,CW,h,16*PX,null,PDFC.ink,1.5*PX);p.y=top+h+14*PX;});
+  p.newPage();p.header(m.shop.title,m.shop.subtitle);p.font(700,22*PX);p.text('Para comprar',ML,p.y);p.y+=22*PX*1.3+6*PX;p.rule();
+  const colW=(CW-14*PX)/2,rowH=t=>{p.font(600,14.5*PX);return Math.max(1,p.lines(t,colW-28*PX-30*PX-70*PX).length)*14.5*PX*1.5+22*PX;};
+  if(!m.shop.groups.length){p.font(500,14.5*PX,PDFC.muted);p.text('No hay ingredientes pendientes de comprar.',ML,p.y);p.y+=30*PX;}
+  m.shop.groups.forEach((g,gi)=>{const first=rowH(g.items[0].name);p.ensure(12*PX*1.5+8*PX+first+(gi?16*PX:4*PX));p.y+=gi?16*PX:4*PX;p.font(700,12*PX,PDFC.red);p.tracked(g.category.toUpperCase(),ML,p.y+12*PX*(0.75+0.33),1*PX);p.y+=12*PX*1.5+8*PX;
+    for(let i=0;i<g.items.length;i+=2){const pair=g.items.slice(i,i+2),h=Math.max(...pair.map(it=>rowH(it.name)));p.ensure(h);pair.forEach((it,k)=>{const x=ML+k*(colW+14*PX);p.rrect(x,p.y,colW,h,14*PX,null,PDFC.line,1*PX);p.rrect(x+14*PX,p.y+(h-18*PX)/2,18*PX,18*PX,5*PX,null,PDFC.ink,1.5*PX);p.font(700,14.5*PX);const qw=it.qty?p.width(it.qty):0;if(it.qty)p.mid(it.qty,x+colW-14*PX,p.y+h/2,{align:'right'});p.font(600,14.5*PX);const lines=p.lines(it.name,colW-28*PX-30*PX-(qw?qw+10*PX:0));p.text(lines,x+14*PX+30*PX,p.y+(h-lines.length*14.5*PX*1.5)/2);});p.y+=h+8*PX;}});
+  m.shop.extras.forEach(ex=>{p.ensure(60*PX);p.y+=16*PX;p.font(700,14.5*PX);p.text(ex.title,ML,p.y);p.y+=14.5*PX*1.5+4*PX;p.font(500,13*PX,PDFC.muted);ex.lines.forEach(l=>{const ls=p.lines('• '+l,CW);p.ensure(ls.length*13*PX*1.5);p.text(ls,ML,p.y);p.y+=ls.length*13*PX*1.5;});});
+  p.y+=16*PX;p.font(500,12*PX,PDFC.muted);const nl=p.lines(m.shop.note,CW);p.ensure(nl.length*12*PX*1.5,30*PX);p.text(nl,ML,p.y);}
+function pdfDrawRecipe(doc,m){const p=pdfPainter(doc),ML=p.ML,CW=p.CW;p.header(m.header,m.sub);
+  p.font(700,12*PX,PDFC.red);p.tracked(m.eyebrow.toUpperCase(),ML,p.y+6*PX+12*PX*(0.75+0.33),1*PX);p.y+=6*PX+12*PX*1.5+4*PX;
+  p.font(700,32*PX);const tl=p.lines(m.title,CW);doc.setLineHeightFactor(1.15);p.text(tl,ML,p.y);doc.setLineHeightFactor(1.5);p.y+=tl.length*32*PX*1.15+6*PX;p.rule();
+  p.y-=8*PX;let px=ML;m.pills.forEach(pl=>{p.font(600,13*PX);const w=p.width(pl.text)+24*PX;if(px+w>ML+CW){px=ML;p.y+=28*PX+8*PX;}px+=p.pill(pl.text,px,p.y,pl.hi)+8*PX;});p.y+=28*PX+22*PX-22*PX;
+  p.h4('Ingredientes');p.font(700,15*PX);let qw=0;m.ingredients.forEach(i=>qw=Math.max(qw,p.width(i.qty)));p.font(500,15*PX);let nw=0;m.ingredients.forEach(i=>nw=Math.max(nw,p.width(i.name)));
+  const cardW=Math.min(CW,Math.max(340*PX,32*PX+nw+32*PX+qw)),rows=m.ingredients.map(i=>{p.font(500,15*PX);const ls=p.lines(i.name,cardW-32*PX-qw-32*PX);return {lines:ls,qty:i.qty,h:ls.length*15*PX*1.5+20*PX};});
+  const cardH=rows.reduce((a,r)=>a+r.h,0)+4*PX;if(cardH<=p.remaining()||cardH>p.H*0.8){}else p.newPage();
+  let top=p.y,yy=top+2*PX;rows.forEach((r,k)=>{if(yy+r.h>p.H-46*PX){p.rrect(ML,top,cardW,yy-top,16*PX,null,PDFC.line,1*PX);p.newPage();top=p.y;yy=top+2*PX;}p.font(500,15*PX);p.text(r.lines,ML+16*PX,yy+10*PX);p.font(700,15*PX);p.text(r.qty,ML+cardW-16*PX,yy+10*PX,{align:'right'});yy+=r.h;if(k<rows.length-1)p.hline(ML+16*PX,ML+cardW-16*PX,yy,PDFC.sep);});p.rrect(ML,top,cardW,yy-top+2*PX,16*PX,null,PDFC.line,1*PX);p.y=yy+2*PX;
+  p.h4('Preparación');if(m.intro){p.font(500,15*PX);const il=p.lines(m.intro,CW);p.ensure(il.length*15*PX*1.5);p.text(il,ML,p.y);p.y+=il.length*15*PX*1.5+6*PX;}
+  m.steps.forEach((s,k)=>{p.font(500,15*PX);const ls=p.lines(s,CW-38*PX),h=ls.length*15*PX*1.5+12*PX;p.ensure(h);p.y+=6*PX;p.rrect(ML,p.y-1*PX,26*PX,26*PX,13*PX,PDFC.cream);p.font(700,15*PX);p.mid(String(k+1),ML+13*PX,p.y-1*PX+13*PX,{align:'center'});p.font(500,15*PX);p.text(ls,ML+38*PX,p.y);p.y+=ls.length*15*PX*1.5+6*PX;});
+  m.notes.forEach(nt=>{p.font(500,15*PX);const t=(nt.title?nt.title+' ':'')+nt.body,ls=p.lines(t,CW);p.ensure(ls.length*15*PX*1.5+8*PX);p.y+=8*PX;if(nt.title){p.font(700,15*PX);p.text(nt.title,ML,p.y);const tw=p.width(nt.title)+4*PX;p.font(500,15*PX);const bl=p.lines(nt.body,CW-tw);if(bl.length)p.text(bl[0],ML+tw,p.y);if(bl.length>1){const rest=p.lines(bl.slice(1).join(' '),CW);p.text(rest,ML,p.y+15*PX*1.5);p.y+=rest.length*15*PX*1.5;}p.y+=15*PX*1.5;}else{p.text(ls,ML,p.y);p.y+=ls.length*15*PX*1.5;}});
+  if(m.nutrition.length){p.ensure(60*PX+60*PX);p.h4('Valor nutricional por '+m.nutritionUnit);const n=m.nutrition.length,gap=8*PX,tw=(CW-gap*(n-1))/n,th=60*PX;m.nutrition.forEach((c,k)=>{const x=ML+k*(tw+gap);p.rrect(x,p.y,tw,th,14*PX,PDFC.white,PDFC.line,1*PX);p.font(700,20*PX);p.mid(c.value,x+tw/2,p.y+23*PX,{align:'center'});p.font(700,10.5*PX,PDFC.muted);p.tracked(c.label.toUpperCase(),x+tw/2,p.y+44*PX+0.33*10.5*PX,0.8*PX,'center');});p.y+=th;}
+  if(m.note){p.font(500,13*PX);const ls=p.lines(m.note,CW-30*PX),h=ls.length*13*PX*1.5+22*PX;p.ensure(h+18*PX);p.y+=18*PX;p.rrect(ML,p.y,CW,h,14*PX,PDFC.cream);p.text(ls,ML+15*PX,p.y+11*PX);p.y+=h;}
+  p.y+=20*PX;p.ensure(12*PX*1.5,30*PX);p.font(500,12*PX,PDFC.muted);p.text(m.foot,ML,p.y);}
+/* --- entrega: «Compartir» (Archivos, WhatsApp, correo…) si el móvil lo permite; si no, «Descargar» --- */
+function showPdfResult(blob,filename,title,status){if(pdfObjectUrl)URL.revokeObjectURL(pdfObjectUrl);pdfObjectUrl=URL.createObjectURL(blob);pdfFile=new File([blob],filename,{type:'application/pdf'});const download=$('#pdfDownload'),open=$('#pdfOpen'),share=$('#pdfShare');$('#pdfTit').textContent=title;download.href=pdfObjectUrl;download.download=filename;open.href=pdfObjectUrl;download.hidden=false;open.hidden=false;share.hidden=!(navigator.canShare&&navigator.canShare({files:[pdfFile]}));share.classList.toggle('main',!share.hidden);download.classList.toggle('main',share.hidden);$('#pdfHint').textContent=share.hidden?'En iPhone, puedes abrirlo y usar Compartir → Guardar en Archivos.':'Con «Compartir» puedes guardarlo en Archivos o enviarlo por WhatsApp, correo…';$('#pdfHint').hidden=false;$('#pdfStatus').textContent=status;}
+async function sharePdf(){if(!pdfFile)return;try{await navigator.share({files:[pdfFile],title:pdfFile.name});}catch(e){if(e&&e.name==='AbortError')return;aviso('No se ha podido compartir. Usa «Descargar».');}}
+function openPdfDialog(title){$('#pdfTit').textContent=title;$('#pdfStatus').textContent='Preparando tu PDF…';$('#pdfDownload').hidden=true;$('#pdfOpen').hidden=true;$('#pdfShare').hidden=true;$('#pdfHint').hidden=true;if(!$('#pdfDlg').open)$('#pdfDlg').showModal();}
+async function prepareWeekPdf(){const L=SEM.lunes;openPdfDialog('Menú y compra en PDF');try{await loadPdfKit();}catch(e){$('#pdfStatus').textContent='No se ha podido crear el PDF. Inténtalo con conexión.';return;}
+  try{const m=pdfWeekModel(L),doc=newPdfDoc();pdfDrawWeek(doc,m);showPdfResult(doc.output('blob'),m.filename,'Menú y compra en PDF','Tu PDF está listo. Incluye el menú y la compra pendiente.');}catch(e){$('#pdfStatus').textContent='No se ha podido crear el PDF. '+(e.message||e);}}
+async function prepareRecipePdf(){const D=window.RECDET;if(!D)return;openPdfDialog('Receta en PDF');try{await loadPdfKit();}catch(e){$('#pdfStatus').textContent='No se ha podido crear el PDF. Inténtalo con conexión.';return;}
+  try{const m=pdfRecipeModel(D),doc=newPdfDoc();pdfDrawRecipe(doc,m);showPdfResult(doc.output('blob'),m.filename,'Receta en PDF','Tu PDF está listo: '+m.header.toLowerCase()+'.');}catch(e){$('#pdfStatus').textContent='No se ha podido crear el PDF. '+(e.message||e);}}
+function init017c(){
+  $('#pdfShare').onclick=sharePdf;
+  document.addEventListener('click',ev=>{if(ev.target.closest('[data-recpdf]'))prepareRecipePdf();});
+}
+
 async function abrirSemana() {
   if (!SEM.lunes) { const hoy = hoyIso(); SEM.lunes = mondayOf(hoy); SEM.dia = (parseIso(hoy).getDay() + 6) % 7; }
   if (!SEM.cargada) {
@@ -2751,7 +2865,7 @@ async function abrirSemana() {
   pintarSemana(); pintarEstado();
 }
 
-  initSemana(); init013(); initCompra(); init014b(); init014c(); init015(); init016(); init017a(); init017b();
+  initSemana(); init013(); initCompra(); init014b(); init014c(); init015(); init016(); init017a(); init017b(); init017c();
   sb.auth.onAuthStateChange((_ev, session) => { if ((session && session.user.id) !== (SESION && SESION.user.id)) { SEM.cargada = false; data = null; } show(session); });
   sb.auth.getSession().then(({ data }) => show(data.session));
   setMode('login');
