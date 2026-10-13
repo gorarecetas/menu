@@ -74,7 +74,7 @@
   .rm{display:flex;align-items:center;flex-wrap:wrap;gap:2px 8px;margin-top:2px}
   .fq{display:inline-block;color:#fff;font-weight:700;font-size:10.5px;letter-spacing:.04em;padding:2px 8px;border-radius:99px;text-transform:uppercase}
   .fq.diaria{background:#00b65b} .fq.frecuente{background:#ff7a1a} .fq.ocasional{background:#e5192d} .fq.otra{background:var(--ink)}
-  .ic{display:inline-flex;align-items:center;gap:3px;color:var(--muted);font-size:12.5px} .ic svg{display:block;flex:none}
+  .pic{display:inline-flex;align-items:center;gap:3px;color:var(--muted);font-size:12.5px} .pic svg{display:block;flex:none}
   .empty{padding:14px;color:var(--muted);font-size:14px}
   .back{background:none;border:0;padding:6px 0;font:500 14px var(--font);color:var(--muted);cursor:pointer}
   .dchips{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 10px}
@@ -86,6 +86,10 @@
   .note{font-size:12px;color:var(--muted);margin-top:4px}
   .ing{display:flex;justify-content:space-between;gap:10px;font-size:14px;padding:3px 0;border-bottom:1px dashed #ebe3d6} .ing:last-child{border-bottom:0}
   .ing span{color:var(--muted);white-space:nowrap} .ing small{display:block;color:var(--muted);font-size:12px}
+  .ing.c3{display:grid;grid-template-columns:1fr auto auto;gap:0 10px;align-items:baseline} .ing.c3 .kk{min-width:44px;text-align:right;font-weight:700;color:var(--ink)} .ing.c3 .kk.mi{color:#a3101f;font-weight:600;font-size:12px} .ing.c3 small{grid-column:1/-1}
+  .src{font-size:12px;color:var(--muted);margin:6px 0 0}
+  .cmp{display:flex;justify-content:space-between;gap:8px;margin-top:8px;padding:7px 10px;border-radius:10px;background:var(--azul-fondo,#eaf2fc);color:var(--azul-texto,#1d4377);font-size:12.5px} .cmp b{font-weight:700}
+  .warn{margin-top:8px;padding:7px 10px;border-radius:10px;background:#fde8ea;color:#a3101f;font-size:12.5px}
   .verrec{display:inline-block;margin-top:2px;padding:0;border:0;background:none;font:600 12.5px var(--font);color:var(--red);cursor:pointer}
   .gusto{font-size:13px;color:var(--muted);margin-top:6px}
   .pasos{margin:0;padding-left:20px;font-size:14px} .pasos li{margin-bottom:5px}
@@ -202,7 +206,7 @@
     <div id="rdet"></div>
   </section>
 
-  <p class="ver">Versión de prueba 0.12 · semana</p>
+  <p class="ver">Versión de prueba 0.12 b · semana y recetas calculadas</p>
 </main>
 <nav class="nav" id="nav" hidden><button type="button" data-nav="semana" id="navSemana"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Semana</button><button type="button" data-nav="compra"><svg viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h3l2.6 12.4a2 2 0 0 0 2 1.6h8.2a2 2 0 0 0 2-1.6L21 7H6"/></svg>Compra</button><button type="button" data-nav="recetas" id="navRecetas"><svg viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5M8 7h7"/></svg>Recetas</button><button type="button" data-nav="alimentos"><svg viewBox="0 0 24 24"><path d="M12 7c-2-3-7-2-7 3 0 6 4 11 7 11s7-5 7-11c0-5-5-6-7-3z"/><path d="M12 7c0-2 1-4 3-4"/></svg>Alimentos</button></nav>
 <dialog class="sheet" id="picker" aria-labelledby="pkTit"><div class="shh"><h2 id="pkTit">Añadir</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb">
@@ -262,8 +266,8 @@
   const ICO_NEVERA = '<svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="19" rx="2.5"/><path d="M6 9h12M9.5 5v1.5M9.5 12v3.5"/></svg>';
   const ICO_CONGELA = '<svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M9.5 4.5 12 7l2.5-2.5M9.5 19.5 12 17l2.5 2.5"/><path transform="rotate(60 12 12)" d="M12 2v20M9.5 4.5 12 7l2.5-2.5M9.5 19.5 12 17l2.5 2.5"/><path transform="rotate(120 12 12)" d="M12 2v20M9.5 4.5 12 7l2.5-2.5M9.5 19.5 12 17l2.5 2.5"/></svg>';
   const frec = f => { const k = String(f || '').trim().toUpperCase(); if (!k) return ''; const c = { DIARIA:'diaria', FRECUENTE:'frecuente', OCASIONAL:'ocasional' }[k] || 'otra'; return `<span class="fq ${c}" title="Frecuencia">${h(k)}</span>`; };
-  const nevera = (d, largo) => d ? `<span class="ic" title="Días en la nevera" aria-label="Nevera: ${d} días">${ICO_NEVERA}${d} ${largo ? 'días' : 'd'}</span>` : '';
-  const congela = (c, largo) => c ? `<span class="ic" title="Se puede congelar" aria-label="Se puede congelar">${ICO_CONGELA}${largo ? 'Se congela' : ''}</span>` : '';
+  const nevera = (d, largo) => d ? `<span class="pic" title="Días en la nevera" aria-label="Nevera: ${d} días">${ICO_NEVERA}${d} ${largo ? 'días' : 'd'}</span>` : '';
+  const congela = (c, largo) => c ? `<span class="pic" title="Se puede congelar" aria-label="Se puede congelar">${ICO_CONGELA}${largo ? 'Se congela' : ''}</span>` : '';
   const h = t => String(t == null ? '' : t).replace(/[&<>"]/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]));
   const norm = t => String(t || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
   const FRAC = { 0.125:'⅛', 0.25:'¼', 0.333:'⅓', 0.5:'½', 0.667:'⅔', 0.75:'¾' };
@@ -284,6 +288,7 @@
     && (sin === 'cons' || !F.cons.size || [...F.cons].every(c => c === 'congela' ? r.congelable : r.dias_nevera > 0));
 
   async function cargarRecetas() {
+    if (!SEM.cargada) await cargarDatos();
     if (REC) return;
     const [r, i] = await Promise.all([
       sb.from('recetas').select('id, nombre, categoria, frecuencia, raciones_lote, kcal_pdf, proteina_pdf, grasa_pdf, hidratos_pdf, dias_nevera, congelable'),
@@ -291,6 +296,7 @@
     ]);
     if (r.error) throw r.error;
     REC = (r.data || []).sort((a, b) => a.nombre.localeCompare(b.nombre, 'es'));
+    REC.forEach(x => { const v = valoresReceta(x.id); if (v) { x.kcal_pdf_orig = x.kcal_pdf; x.kcal_pdf = v.kcal; x.proteina_pdf = v.protein; x.grasa_pdf = v.fat; x.hidratos_pdf = v.carbs; } });
     (i.data || []).forEach(x => { ING_TXT[x.receta_id] = (ING_TXT[x.receta_id] || '') + ' ' + norm(x.nombre); });
   }
 
@@ -343,6 +349,35 @@
     return `<p class="ptext">${h(t)}</p>`;
   }
 
+  /* 0.12 b · de dónde salen los números de la ficha */
+  function faltaTxt(m) {
+    let x;
+    if ((x = /^(.*) \(sin ficha\)$/.exec(m))) return 'la ficha de <b>' + h(x[1]) + '</b>';
+    if ((x = /^(.*) \(base casera sin valores\)$/.exec(m))) return 'los valores de la base <b>' + h(x[1]) + '</b>';
+    if ((x = /^(.*) \((.*), sin peso\)$/.exec(m))) return 'el peso de ' + h(x[2]) + ' de <b>' + h(x[1]) + '</b>';
+    if ((x = /^(.*) \(ficha sin kcal\)$/.exec(m))) return 'las kcal de la ficha de <b>' + h(x[1]) + '</b>';
+    return h(m);
+  }
+  function origenHtml(v, id) {
+    if (!v) return '<div class="note">Por ración · dato orientativo del PDF.</div>';
+    if (v.ok) {
+      const p = Number(v.pdf.kcal), d = Math.round(v.kcal - p);
+      return '<p class="src">Por ración · calculado con las fichas de los ingredientes.</p>' + (Number.isFinite(p) && p > 0 && d !== 0 ? `<div class="cmp"><span>El PDF decía <b>${num(Math.round(p))} kcal</b></span><span><b>${d > 0 ? '+' : '−'}${num(Math.abs(d))} kcal (${d > 0 ? '+' : '−'}${num(Math.round(Math.abs(d) / p * 100))} %)</b></span></div>` : '');
+    }
+    const c = v.c || { missing: [], rows: [] }, fijo = PDF_FIJO[id];
+    const que = fijo ? h(fijo) : 'Aún no se puede calcular: falta ' + c.missing.map(faltaTxt).join(', ') + '.';
+    const ya = c.rows && c.rows.length ? ` Sin eso ya salen ${num(c.kcal)} kcal.` : '';
+    return '<p class="src">Por ración · dato del PDF (orientativo).</p><div class="warn">' + que + (fijo ? ` Con los ingredientes apuntados salen ${num(c.kcal)} kcal.` : ya) + '</div>';
+  }
+  function ingHtml(i, v, r) {
+    const fila = v && v.c ? v.c.rows.find(x => x.name === i.nombre) : null, falta = v && v.c ? v.c.missing.find(m => m.startsWith(i.nombre + ' (')) : null;
+    const base = i.receta_base_id && REC.some(x => x.id === i.receta_base_id);
+    const corte = fila ? fila.sub.lastIndexOf(' · ') : -1, ficha = fila ? (corte > 0 ? fila.sub.slice(0, corte) : fila.sub) : '', gr = fila && corte > 0 ? fila.sub.slice(corte + 3) : '';
+    const sub = base ? `Tu receta base · <button class="verrec" type="button" data-base="${h(i.receta_base_id)}">Ver receta ›</button>` : fila && ficha !== 'Base casera' ? h(ficha) + (Number(r.raciones_lote) > 1 && gr ? ' · ' + h(gr) + ' por ración' : '') : falta && !/sin ficha/.test(falta) ? h(falta.slice(i.nombre.length + 2, -1)) : '';
+    const kk = fila ? `<span class="kk">${num(Math.round(fila.kcal))}</span>` : falta ? '<span class="kk mi">sin ficha</span>' : '<span class="kk"></span>';
+    return `<div class="ing c3"><div>${h(i.nombre)}${i.nota && !base ? `<small>${h(i.nota)}</small>` : ''}</div><span>${i.cantidad == null ? '' : num(i.cantidad) + ' ' + h(i.unidad || '')}</span>${kk}${sub ? `<small>${sub}</small>` : ''}</div>`;
+  }
+
   async function pintarReceta(id) {
     const r = REC.find(x => x.id === id);
     if (!r) { $('#rdet').innerHTML = '<p class="msg err">No encuentro esa receta.</p>'; return; }
@@ -361,15 +396,17 @@
     const chips = [r.categoria ? `<span>${h(r.categoria)}</span>` : '', `<span>${raciones(r.raciones_lote)}</span>`,
       r.dias_nevera ? `<span>${nevera(r.dias_nevera, true)}</span>` : '', r.congelable ? `<span>${congela(true, true)}</span>` : ''].filter(Boolean);
     const cons = (d.data && d.data.conservacion || '').trim();
+    const v = valoresReceta(id);
     $('#rdet').innerHTML = `<h2 class="pt">${h(r.nombre)}</h2>
       <div class="dchips">${frec(r.frecuencia)}${chips.join('')}</div>
       <div class="box"><div class="kc"><div><b>${r.kcal_pdf == null ? '—' : num(Math.round(r.kcal_pdf))}</b><span>kcal</span></div>
         <div><b>${r.proteina_pdf == null ? '—' : num(r.proteina_pdf)}</b><span>g proteína</span></div>
         <div><b>${r.hidratos_pdf == null ? '—' : num(r.hidratos_pdf)}</b><span>g hidratos</span></div>
         <div><b>${r.grasa_pdf == null ? '—' : num(r.grasa_pdf)}</b><span>g grasa</span></div></div>
-        <div class="note">Por ración · dato orientativo del PDF. Cuando cada ingrediente esté unido a su ficha, se calculará con los datos reales.</div></div>
-      <div class="box"><h3>Ingredientes</h3>${conCant.map(i => `<div class="ing"><div>${h(i.nombre)}${i.nota ? `<small>${h(i.nota)}</small>` : ''}${i.receta_base_id && REC.some(x => x.id === i.receta_base_id) ? `<br><button class="verrec" type="button" data-base="${h(i.receta_base_id)}">Ver receta ›</button>` : ''}</div><span>${i.cantidad == null ? '' : num(i.cantidad) + ' ' + h(i.unidad || '')}</span></div>`).join('') || '<p class="note">Sin ingredientes apuntados.</p>'}
-        ${gusto.length ? `<div class="gusto">Al gusto: ${h(gusto.join(', '))}</div>` : ''}</div>
+        ${origenHtml(v, id)}</div>
+      <div class="box"><h3>Ingredientes</h3>${conCant.map(i => ingHtml(i, v, r)).join('') || '<p class="note">Sin ingredientes apuntados.</p>'}
+        ${gusto.length ? `<div class="gusto">Al gusto: ${h(gusto.join(', '))}</div>` : ''}
+        ${v && v.c && v.c.rows.length ? `<p class="src">kcal de cada ingrediente en una ración, con su ficha debajo.</p>` : ''}</div>
       ${d.data && d.data.pasos ? `<div class="box"><h3>Pasos</h3>${pasosHtml(d.data.pasos)}</div>` : ''}
       ${cons ? `<div class="box"><h3>Conservación</h3><p class="ptext">${h(cons)}</p></div>` : ''}`;
     window.scrollTo(0, 0);
@@ -427,6 +464,32 @@
   };
 
 /* Núcleo de cálculo copiado tal cual de la app 5.28 b (Index.html): medidas, kcal, lotes. */
+/* 0.12 b · recalcular recetas con las fichas (recalcRecipe y dependencias, copiadas tal cual de la 5.28 b) */
+function aisleOf(i){const f=familyProducts(i).find(p=>p.group);return f?f.group:'';}
+function aisleProducts(i){const g=aisleOf(i),s=shopName(i);return g?data.products.filter(p=>p.group===g&&shopName(p)!==s).sort(byFoodName):[];}
+function familyGeneric(i){return familyProducts(i).find(p=>!brandOf(p))||null;}
+function recalcGrams(i,p){if(n(i.amount)===null||!(Number(i.portions)>0))return null;return toGrams(i,p,Number(i.amount)/Number(i.portions),i.unit);}
+function recalcDefault(i){const ps=familyProducts(i).slice().sort((a,b)=>(brandOf(a)?1:0)-(brandOf(b)?1:0)||byFoodName(a,b));return cookBase(i)||ps[0]||null;}
+function recalcNoWeight(i,p){return category(p)==='Especias y hierbas'||/^sal\b/.test(clean(i.name).trim());}
+function recalcRawGrams(b){let w=0;for(const i of data.ingredients.filter(x=>x.id===b.id)){if(n(i.amount)===null)continue;const a=Number(i.amount)/Number(i.portions||1);if(noShop(i)){if(['g','ml'].includes(clean(i.unit).trim()))w+=a;continue;}const p=recalcDefault(i);if(!p)return null;const g=recalcGrams(i,p);if(g===null){if(recalcNoWeight(i,p))continue;return null;}w+=g;}return w>0?w:null;}
+function recalcRecipe(r,pick,qty){const KEYS=['kcal','protein','fat','carbs'],sum={kcal:0,protein:0,fat:0,carbs:0},out={rows:[],skipped:[],missing:[],brands:[],lines:[],approx:false};
+      data.ingredients.filter(i=>i.id===r.id).forEach(i=>{const qq=qty&&qty[i.name];/* v5.19 · cantidad por ración y medida nuevas de la ventana de la receta */const a0=n(i.amount)===null?null:Number(i.amount)/Number(i.portions||1),a=qq?qq.q:a0,u=qq?qq.u:i.unit,qChanged=!!qq&&(a!==a0||(a!==null&&normMeasure(u)!==normMeasure(i.unit)));if(qChanged)out.lines.push({i:i.name,amount:a===null?null:Math.round(a*Number(i.portions||1)*1e6)/1e6,unit:a===null?'al gusto':normMeasure(u)});if(a===null){if(pick&&pick[i.name]&&!noShop(i)){const pp=familyProducts(i).concat(aisleProducts(i)).find(p=>p.id===pick[i.name]),gen=familyGeneric(i);if(pp)out.brands.push({i:i.name,p:gen&&gen.id===pp.id?'':pp.id});}return;}
+        if(noShop(i)){if(tapWaterName(i.name))return;const b=ingredientBase(r,i.name),w=b?recalcRawGrams(b):null;if(!b||n(b.kcal)===null||!w||!['g','ml'].includes(clean(i.unit).trim())){out.missing.push(i.name+' (base casera sin valores)');return;}KEYS.forEach(k=>sum[k]+=a*(n(b[k])||0)/w);out.rows.push({name:i.name,sub:'Base casera · '+fmt.format(a)+' g, por peso en crudo',kcal:a*n(b.kcal)/w});out.approx=true;return;}
+        const ps=familyProducts(i).concat(aisleProducts(i)),chosen=pick&&pick[i.name]?ps.find(p=>p.id===pick[i.name]):null,p=chosen||recalcDefault(i);
+        if(!p){out.missing.push(i.name+' (sin ficha)');return;}
+        const g=toGrams(i,p,a,u),g0=qChanged&&a0!==null?toGrams(i,p,a0,i.unit):null;
+        if(g===null){if(recalcNoWeight(i,p)&&!qChanged)out.skipped.push(i.name);else out.missing.push(i.name+' ('+fmt.format(a)+' '+u+', sin peso)');return;}
+        if(n(p.kcal)===null){out.missing.push(i.name+' (ficha sin kcal)');return;}
+        KEYS.forEach(k=>sum[k]+=g*(n(p[k])||0)/100);out.rows.push({name:i.name,sub:p.name+' · '+fmt.format(Math.round(g*10)/10)+' g'+(qChanged?' (antes '+(a0===null?'al gusto':fmt.format(Math.round(a0*100)/100)+' '+i.unit+(g0===null?'':', '+fmt.format(Math.round(g0*10)/10)+' g'))+')':''),kcal:g*n(p.kcal)/100});
+        if(chosen){const gen=familyGeneric(i);out.brands.push({i:i.name,p:gen&&gen.id===p.id?'':p.id});}});
+      /* v5.19 · solo las líneas cambiadas: producto nuevo, o cantidad nueva (que conserva el producto fijado que ya tuviera) */
+      out.lines=out.lines.map(l=>{const b=out.brands.find(b=>b.i===l.i),i=data.ingredients.find(x=>x.id===r.id&&x.name===l.i);return {...l,p:b?b.p:((i&&i.brand)||'')};}).concat(out.brands.filter(b=>!out.lines.some(l=>l.i===b.i)));
+      out.kcal=Math.round(sum.kcal);out.protein=Math.round(sum.protein*10)/10;out.fat=Math.round(sum.fat*10)/10;out.carbs=Math.round(sum.carbs*10)/10;return out;}
+function tapWaterName(name){const x=clean(name).trim();if(/^(caldo|agua de coco|agua con gas|agua de azahar|agua mineral|agua embotellada|agua tonica|agua destilada)\b/.test(x))return false;return /^agua\b/.test(x);}
+function noShop(o){return String((o&&o.shop)||'').trim()===NO_SHOP;}
+function normName(s){return String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ').trim().replace(/^base de /,'');}
+function ingredientBase(r,name){const a=normName(name);if(!a)return null;return data.recipes.find(b=>b.id!==r.id&&(b.usedInRecipeIds||[]).includes(r.id)&&(()=>{const c=normName(b.name);return a===c||a.startsWith(c+' ')||c.startsWith(a+' ');})())||null;}
+
 const DAYS=['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'], MEALS=['Desayuno','Comida','Merienda','Cena','Snacks'],MAIN_MEALS=MEALS.slice(0,4),SNACK='Snacks';
 const kc=x=>String(Math.round(x)).replace(/\B(?=(\d{3})+(?!\d))/g,'.');
 const fmt=new Intl.NumberFormat('es-ES',{maximumFractionDigits:2});
@@ -533,6 +596,20 @@ function aReceta(r) {
   return { id: r.id, name: r.nombre, category: r.categoria || '', frequency: r.frecuencia || '', kcal: r.kcal_pdf, protein: r.proteina_pdf, fat: r.grasa_pdf, carbs: r.hidratos_pdf,
     portions: Number(r.raciones_lote) || 1, quantitySingular: d.S || 'ración', quantityPlural: d.T || 'raciones', quantityPerPortion: Number(String(d.U || '1').replace(',', '.')) || 1 };
 }
+/* 0.12 b · la receta cuenta lo calculado con las fichas si está completa; si no, lo del PDF (Rocío, 13/10/2026) */
+const PDF_FIJO = { 'P1-01': 'Pendiente de revisar con el PDF: parece que falta algún ingrediente.' }; // Ratatouille: Rocío mira el PDF
+let CALC = {};
+function calcularRecetas() {
+  CALC = {};
+  data.recipes.forEach(r => { if (!r.pdf) r.pdf = { kcal: r.kcal, protein: r.protein, fat: r.fat, carbs: r.carbs }; r.usedInRecipeIds = []; });
+  data.ingredients.forEach(i => { const b = i.baseRecipe && recipe(i.baseRecipe); if (b && !b.usedInRecipeIds.includes(i.id)) b.usedInRecipeIds.push(i.id); });
+  for (let pasada = 0; pasada < 4; pasada++) for (const r of data.recipes) {
+    const c = recalcRecipe(r), tiene = data.ingredients.some(i => i.id === r.id), ok = tiene && !c.missing.length && !PDF_FIJO[r.id];
+    CALC[r.id] = { c, ok };
+    Object.assign(r, ok ? { kcal: c.kcal, protein: c.protein, fat: c.fat, carbs: c.carbs } : r.pdf);
+  }
+}
+function valoresReceta(id) { const r = data && recipe(id), x = CALC[id]; return r ? { kcal: r.kcal, protein: r.protein, fat: r.fat, carbs: r.carbs, ok: !!(x && x.ok), pdf: r.pdf || {}, c: x && x.c } : null; }
 function aIngrediente(i, recetas) {
   const r = recetas.find(x => x.id === i.receta_id);
   return { id: i.receta_id, name: i.nombre, amount: i.al_gusto ? null : i.cantidad, unit: i.unidad || '', portions: r ? r.portions : 1, brand: i.marca || '',
@@ -584,6 +661,7 @@ async function cargarDatos() {
   data = { products: ali.map(aProducto), recipes, ingredients: ing.map(i => aIngrediente(i, recipes)), measures,
     settings: { aoveSpray: eqv.aove_pulv, aoveTsp: eqv.aove_cdta, aoveTbsp: eqv.aove_cda, aoveMl: eqv.aove_ml, cartDefaults: p.carrito_por_franja || {}, goalKcal: p.objetivo_kcal, goalProtein: p.objetivo_proteina, people: p.personas || 2 },
     entries: lin.map(aLinea), lots: lot.map(aLote) };
+  calcularRecetas();
   reenviarPendientes();
   SEM.cargada = true;
 }
