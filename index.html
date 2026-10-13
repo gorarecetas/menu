@@ -3043,7 +3043,7 @@ async function abrirEditarReceta(id) {
   }
   RE = { id: id || null, owner: r ? r.owner : (esAdmin() ? null : SESION.user.id), nombre: r ? r.nombre : '', categoria: r ? (r.categoria || '') : '', frecuencia: r ? String(r.frecuencia || '').toUpperCase() : '', raciones: r ? Number(r.raciones_lote) || 1 : 2,
     nevera: r ? Number(r.dias_nevera) || 0 : 0, congela: r ? !!r.congelable : false, pasos: r ? (r.pasos || '') : '', cons: r ? (r.conservacion || '') : '', fuente: r ? r.fuente : null, origen: r ? r.origen : null,
-    ings: ings.map(i => ({ id: i.id, nombre: i.nombre, cantidad: i.cantidad, unidad: i.al_gusto ? 'al gusto' : (i.unidad || ''), alimento: i.alimento_id || '', compra: i.nombre_compra || '', marca: i.marca || '', base: i.receta_base_id || '', noCompra: !!i.no_se_compra, nota: i.nota || '', gpu: i.g_por_unidad, texto: i.texto_original, origen: i.origen })),
+    ings: ings.map(i => ({ id: i.id, nombre0: i.nombre, nombre: i.nombre, cantidad: i.cantidad, unidad: i.al_gusto ? 'al gusto' : (i.unidad || ''), alimento: i.alimento_id || '', compra: i.nombre_compra || '', marca: i.marca || '', base: i.receta_base_id || '', noCompra: !!i.no_se_compra, nota: i.nota || '', gpu: i.g_por_unidad, texto: i.texto_original, origen: i.origen })),
     abierto: null, q: '' };
   if (!RE.ings.length) { RE.ings.push(nuevoIng()); RE.abierto = 0; }
   $('#reTit').textContent = id ? 'Editar receta' : 'Nueva receta';
@@ -3110,6 +3110,7 @@ async function guardarReceta() {
   if (e1 || e2 || e3) { data.recipes = antesR; data.ingredients = antesI; calcularRecetas(); aviso('No se ha podido guardar la receta: ' + es(e1 || e2 || e3)); return; }
   tmpR.kcal = rowR.kcal_pdf; tmpR.pdf = { kcal: rowR.kcal_pdf, protein: rowR.proteina_pdf, fat: rowR.grasa_pdf, carbs: rowR.hidratos_pdf }; calcularRecetas();
   if (REC) { const viejo = REC.find(x => x.id === id), nuevo = Object.assign({}, rowR, { kcal_pdf_orig: rowR.kcal_pdf }); if (viejo) Object.assign(viejo, nuevo); else REC.push(nuevo); REC.sort((a, b) => a.nombre.localeCompare(b.nombre, 'es')); ING_TXT[id] = rowsI.map(i => ' ' + norm(i.nombre)).join(''); }
+  for (const x of ings) { const viejo = x.nombre0, nuevo = x.nombre.trim(), mio = viejo && MISP[id + '¦' + viejo]; if (mio && viejo !== nuevo) { await guardarMiProducto(id, nuevo, mio); await guardarMiProducto(id, viejo, ''); } }
   $('#reDlg').close(); RE = null; pintarTodo(); pintarGlobito();
   aviso(R.id ? 'Receta guardada.' : 'Receta nueva: ' + nom + '.');
   if (location.hash === '#receta/' + encodeURIComponent(id)) ruta(); else { pila = [location.hash.replace(/^#/, '') || 'recetas']; location.hash = 'receta/' + encodeURIComponent(id); }
