@@ -1,5 +1,5 @@
-// Mi Menú · trabajador sin conexión (v0.8 de prueba)
-const VERSION = 'mimenu-v0.8';
+// Mi Menú · trabajador sin conexión (v0.9 de prueba)
+const VERSION = 'mimenu-v0.9';
 const CORE = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png', './apple-touch-icon.png', './ojo-cerrado.png', './ojo-abierto.png'];
 
 self.addEventListener('install', e => {

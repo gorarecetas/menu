@@ -71,7 +71,7 @@
   .dchips>.fq{font-size:12px;padding:5px 12px;border:0}
   .box{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:10px 12px;margin-bottom:10px}
   .box h3{margin:0 0 6px;font-size:15px}
-  .kc{display:flex;gap:18px;align-items:baseline} .kc b{font-size:22px} .kc span{font-size:13px;color:var(--muted)}
+  .kc{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;text-align:center} .kc b{display:block;font-size:20px;line-height:1.2} .kc span{font-size:12px;color:var(--muted)}
   .note{font-size:12px;color:var(--muted);margin-top:4px}
   .ing{display:flex;justify-content:space-between;gap:10px;font-size:14px;padding:3px 0;border-bottom:1px dashed #ebe3d6} .ing:last-child{border-bottom:0}
   .ing span{color:var(--muted);white-space:nowrap} .ing small{display:block;color:var(--muted);font-size:12px}
@@ -132,7 +132,7 @@
     <div id="rdet"></div>
   </section>
 
-  <p class="ver">Versión de prueba 0.8 · recetario para consultar</p>
+  <p class="ver">Versión de prueba 0.9 · recetario para consultar</p>
 </main>
 <script>
   const SUPABASE_URL = 'https://cawmvpfjaehennkknmoy.supabase.co';
@@ -206,7 +206,7 @@
   async function cargarRecetas() {
     if (REC) return;
     const [r, i] = await Promise.all([
-      sb.from('recetas').select('id, nombre, categoria, frecuencia, raciones_lote, kcal_pdf, proteina_pdf, dias_nevera, congelable'),
+      sb.from('recetas').select('id, nombre, categoria, frecuencia, raciones_lote, kcal_pdf, proteina_pdf, grasa_pdf, hidratos_pdf, dias_nevera, congelable'),
       sb.from('ingredientes_receta').select('receta_id, nombre').limit(5000)
     ]);
     if (r.error) throw r.error;
@@ -253,8 +253,10 @@
     const cons = (d.data && d.data.conservacion || '').trim();
     $('#rdet').innerHTML = `<h2 class="pt">${h(r.nombre)}</h2>
       <div class="dchips">${frec(r.frecuencia)}${chips.join('')}</div>
-      <div class="box"><div class="kc"><div><b>${r.kcal_pdf == null ? '—' : num(Math.round(r.kcal_pdf))}</b> <span>kcal</span></div>
-        <div><b>${r.proteina_pdf == null ? '—' : num(r.proteina_pdf)}</b> <span>g proteína</span></div></div>
+      <div class="box"><div class="kc"><div><b>${r.kcal_pdf == null ? '—' : num(Math.round(r.kcal_pdf))}</b><span>kcal</span></div>
+        <div><b>${r.proteina_pdf == null ? '—' : num(r.proteina_pdf)}</b><span>g proteína</span></div>
+        <div><b>${r.hidratos_pdf == null ? '—' : num(r.hidratos_pdf)}</b><span>g hidratos</span></div>
+        <div><b>${r.grasa_pdf == null ? '—' : num(r.grasa_pdf)}</b><span>g grasa</span></div></div>
         <div class="note">Por ración · dato orientativo del PDF. Cuando cada ingrediente esté unido a su ficha, se calculará con los datos reales.</div></div>
       <div class="box"><h3>Ingredientes</h3>${conCant.map(i => `<div class="ing"><div>${h(i.nombre)}${i.nota ? `<small>${h(i.nota)}</small>` : ''}</div><span>${num(i.cantidad)} ${h(i.unidad || '')}</span></div>`).join('') || '<p class="note">Sin ingredientes apuntados.</p>'}
         ${gusto.length ? `<div class="gusto">Al gusto: ${h(gusto.join(', '))}</div>` : ''}</div>
