@@ -351,6 +351,33 @@
   #lpop button{display:flex;align-items:center;gap:8px;width:100%;min-height:44px;padding:0 12px;border:0;border-radius:10px;background:none;font:600 15px var(--font);color:var(--ink);text-align:left;cursor:pointer}
   #lpop button.on{background:var(--cream)} #lpop button i{width:14px;font-style:normal}
 
+  /* ---------- 0.16 · Ajustes, días libres y resumen ---------- */
+  #ajDlg .shf{justify-content:space-between}
+  .aj-cta{display:flex;flex-direction:column;gap:2px;background:var(--white);border:1px solid var(--line);border-radius:14px;padding:10px 12px} .aj-cta small{color:var(--muted);font-size:13px;overflow-wrap:anywhere}
+  .aj-h{margin:6px 2px 0;font-size:13px;line-height:1.4;color:var(--muted)}
+  .aj-st{display:flex;align-items:center;gap:0;width:max-content;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+  .aj-st button{width:52px;height:48px;border:0;background:#fff;font:600 22px var(--font);color:var(--ink);cursor:pointer} .aj-st output{min-width:52px;text-align:center;font:700 18px var(--font);border-left:1px solid var(--line);border-right:1px solid var(--line);line-height:48px}
+  .aj-d7{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+  .aj-sem{display:inline-flex;align-items:center;gap:2px;color:var(--ink)} .aj-sem button{min-width:44px;min-height:44px;border:0;background:none;font:700 18px var(--font);color:var(--ink);cursor:pointer}
+  #ajLibTit{display:flex;align-items:center;justify-content:space-between;margin-bottom:2px}
+  .mp-ops button span small{display:block;font-size:12.5px;color:var(--muted)}
+  .day.libre:not(.on){background:var(--cream)} .day.libre small{font-weight:700}
+  .libre-av{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--cream);border-radius:12px;padding:8px 8px 8px 12px;margin-bottom:10px;font-size:14px;line-height:1.35}
+  .libre-av .btn{min-height:44px;padding:0 14px;flex:none}
+  .ast{color:var(--muted);font-weight:700}
+  .rs-nav{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px} .rs-nav b{font-size:15px;text-align:center}
+  .rs-nav .ar{width:48px;height:48px;border:1px solid var(--line);border-radius:12px;background:#fff;font:700 20px var(--font);color:var(--ink);cursor:pointer}
+  .rs-lead{margin:8px 2px 4px;font-size:15px;line-height:1.45}
+  .rs-c{display:grid;gap:6px} .rs-c.c3{grid-template-columns:repeat(3,1fr)} .rs-c.c2{grid-template-columns:repeat(2,1fr)} .rs-c.c1{grid-template-columns:1fr}
+  .rs-c div{background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px 6px;text-align:center} .rs-c b{display:block;font-size:17px} .rs-c b.bad{color:var(--red)} .rs-c span{font-size:12px;color:var(--muted)}
+  .rs-nota{margin:10px 2px 0;font-size:13px;line-height:1.45;color:var(--muted)}
+  .rs-d{background:#fff;border:1px solid var(--line);border-radius:14px;margin-bottom:8px;overflow:hidden} .rs-d.hoy{border-color:var(--ink)} .rs-d.libre{background:#fdf9ec}
+  .rs-dh{display:flex;align-items:center;gap:8px;width:100%;min-height:52px;padding:6px 6px 6px 12px;border:0;background:none;font:inherit;color:var(--ink);text-align:left;cursor:pointer}
+  .rs-dn{flex:1;font-weight:700;font-size:15px} .rs-lib{display:inline-block;margin-left:8px;padding:1px 7px;border-radius:6px;background:var(--cream);font:700 11px var(--font);text-transform:uppercase;letter-spacing:.04em}
+  .rs-dk{text-align:right;font-size:14px} .rs-dk b{display:block} .rs-dk small{color:var(--muted);font-size:12px}
+  .rs-dh .go{width:24px;text-align:center;color:var(--muted);font-weight:700}
+  .rs-m{padding:0 12px 8px} .rs-m h4{margin:4px 0 2px;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em} .rs-m p{margin:0 0 3px;font-size:14px;line-height:1.35} .rs-m p small{color:var(--muted)}
+
 </style>
 </head>
 <body>
@@ -383,7 +410,7 @@
 
   <section id="semana" hidden>
     <div class="wkbar"><button class="ar" type="button" id="wkPrev" aria-label="Semana anterior">‹</button><button class="mid" type="button" id="wkPick" aria-label="Elegir semana"><b><span id="wkRango"></span> ▾</b><small id="wkSub"></small></button><input type="date" id="wkDate" tabindex="-1" aria-hidden="true"><button class="ar" type="button" id="wkNext" aria-label="Semana siguiente">›</button><button class="ar" type="button" id="wkMenu" aria-label="Más opciones de la semana" aria-haspopup="menu">⋯</button>
-      <div class="wkpop" id="wkPop" role="menu" hidden><button type="button" data-pronto="resumen">Resumen de la semana <small>0.16</small></button><button type="button" data-pronto="pdf">Guardar PDF <small>0.17</small></button><hr><button type="button" data-pronto="guardarSem">Guardar esta semana <small>0.17</small></button><button type="button" data-pronto="guardarSem">Cargar una semana guardada <small>0.17</small></button></div></div>
+      <div class="wkpop" id="wkPop" role="menu" hidden><button type="button" data-wk16="resumen">Resumen de la semana</button><button type="button" data-wk16="libre" id="wkLibre">Marcar este día como libre</button><button type="button" data-pronto="pdf">Guardar PDF <small>0.17</small></button><hr><button type="button" data-pronto="guardarSem">Guardar esta semana <small>0.17</small></button><button type="button" data-pronto="guardarSem">Cargar una semana guardada <small>0.17</small></button></div></div>
     <div class="days" id="dias"></div>
     <div class="dh"><h2 id="diaTit"></h2><button type="button" id="leyenda">¿Qué es esto?</button></div>
     <div class="sum" id="resumen"></div>
@@ -423,7 +450,7 @@
     <button class="cp-act" type="button" id="cpAct" hidden></button>
   </section>
 
-  <p class="ver">Versión de prueba 0.15 · alimentos</p>
+  <p class="ver">Versión de prueba 0.16 · ajustes y resumen</p>
 </main>
 <nav class="nav" id="nav" hidden><button type="button" data-nav="semana" id="navSemana"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Semana</button><button type="button" data-nav="compra" id="navCompra"><i class="nbd" id="navNum" hidden></i><svg viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h3l2.6 12.4a2 2 0 0 0 2 1.6h8.2a2 2 0 0 0 2-1.6L21 7H6"/></svg>Compra</button><button type="button" data-nav="recetas" id="navRecetas"><svg viewBox="0 0 24 24"><path d="M12 6.5C10 5 7 4.5 3.5 5v14c3.5-.5 6.5 0 8.5 1.5 2-1.5 5-2 8.5-1.5V5C17 4.5 14 5 12 6.5zM12 6.5v14"/><path d="M6.5 9.5h2.5M6.5 12.5h2.5M15 9.5h2.5M15 12.5h2.5"/></svg>Recetas</button><button type="button" data-nav="alimentos" id="navAlimentos"><svg viewBox="0 0 24 24"><path d="M12 8.2c-1.3-.9-2.8-1.2-4.2-.9C5.3 7.8 4 10 4 12.8 4 17 7 21 9.6 21c1 0 1.5-.5 2.4-.5s1.4.5 2.4.5C17 21 20 17 20 12.8c0-2.8-1.3-5-3.8-5.5-1.4-.3-2.9 0-4.2.9z"/><path d="M12 8.2V5.5M12 5.5c.3-1.6 1.7-2.6 3.4-2.6-.2 1.7-1.6 2.8-3.4 2.6z"/></svg>Alimentos</button></nav>
 <dialog class="sheet" id="picker" aria-labelledby="pkTit"><div class="shh"><h2 id="pkTit">Añadir</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb">
@@ -433,7 +460,7 @@
   <div id="pkLibre" hidden><label for="libreNom">Qué has comido</label><input id="libreNom" type="text" maxlength="60" autocomplete="off" autocapitalize="sentences"><label for="libreK">Kcal aproximadas (si lo sabes)</label><input id="libreK" type="text" inputmode="decimal" autocomplete="off" placeholder="?"><div class="row"><button class="btn main" type="button" id="libreAdd">Añadir comida libre</button></div></div>
 </div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="pkAdd" disabled>Añadir</button></div></dialog>
 <dialog class="sheet" id="copia" aria-labelledby="cpTit"><div class="shh"><h2 id="cpTit">Copiar a otros días</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb"><p class="note" style="font-size:14px">Elige días con esta franja vacía. Se copian los mismos alimentos y cantidades. Las recetas solo se copian si a su lote le quedan raciones.</p><div id="cpDias"></div></div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="cpGo">Copiar</button></div></dialog>
-<dialog class="sheet" id="ajDlg" aria-labelledby="ajTit"><div class="shh"><h2 id="ajTit">Ajustes</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb"><p style="margin:0;font-weight:700" id="ajNombre"></p><p class="sub" id="ajCorreo"></p><p class="note" style="font-size:14px">Objetivos: <span id="ajObj"></span>.</p><p class="note" style="font-size:14px">Personas, días libres, objetivos y carrito por franja se podrán cambiar aquí en la 0.16.</p></div><div class="shf"><button class="btn" type="button" id="salir">Cerrar sesión</button><button class="btn main" type="button" data-cerrar>Cerrar</button></div></dialog>
+<dialog class="sheet" id="ajDlg" aria-labelledby="ajTit"><div class="shh"><h2 id="ajTit">Ajustes</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="ajBody"></div><div class="shf"><button class="btn" type="button" id="salir">Cerrar sesión</button><button class="btn main" type="button" id="ajGo">Guardar</button></div></dialog><dialog class="sheet" id="rsDlg" aria-labelledby="rsTit"><div class="shh"><h2 id="rsTit">Resumen de la semana</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="rsBody"></div></dialog>
 <dialog class="sheet" id="prepDlg" aria-labelledby="prTit"><div class="shh"><h2 id="prTit">Preparar o aprovechar</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="prBody"></div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="prGo">Añadir al menú</button></div></dialog>
 <dialog class="sheet" id="loteDlg" aria-labelledby="loTit"><div class="shh"><h2 id="loTit">Preparación</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="loBody"></div></dialog>
 <dialog class="sheet" id="congDlg" aria-labelledby="cgTit"><div class="shh"><h2 id="cgTit">Al congelador</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="cgBody"></div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="cgGo">Congelar</button></div></dialog>
@@ -898,7 +925,7 @@ async function cargarDatos() {
   const p = per.data || {}, eqv = p.equivalencias || {};
   SEM.perfil = p;
   data = { products: ali.map(aProducto), recipes, ingredients: ing.map(i => aIngrediente(i, recipes)), measures,
-    settings: { aoveSpray: eqv.aove_pulv, aoveTsp: eqv.aove_cdta, aoveTbsp: eqv.aove_cda, aoveMl: eqv.aove_ml, cartDefaults: p.carrito_por_franja || {}, goalKcal: p.objetivo_kcal, goalProtein: p.objetivo_proteina, people: p.personas || 2 },
+    settings: { aoveSpray: eqv.aove_pulv, aoveTsp: eqv.aove_cdta, aoveTbsp: eqv.aove_cda, aoveMl: eqv.aove_ml, cartDefaults: p.carrito_por_franja || {}, goalKcal: p.objetivo_kcal, goalProtein: p.objetivo_proteina, people: p.personas || 2, freeDays: new Set(Array.isArray(p.dias_libres) ? p.dias_libres : []) },
     entries: lin.map(aLinea), lots: lot.map(l => Object.assign(aLote(l), { _row: l })), freezer: cng, freezerMoves: mov, compraRows: cmp };
   calcularRecetas();
   reenviarPendientes();
@@ -998,17 +1025,18 @@ function pintarSemana() {
   $('#wkSub').textContent = (SEM.lunes === mondayOf(hoyIso()) ? 'Esta semana' : 'Semana del ' + parseIso(SEM.lunes).getDate() + ' de ' + MESES[parseIso(SEM.lunes).getMonth()]) + ' · ' + nl + (nl === 1 ? ' línea' : ' líneas');
   $('#dias').innerHTML = [0, 1, 2, 3, 4, 5, 6].map(i => {
     const f = addDays(SEM.lunes, i), td = totDia(f), dots = MAIN_MEALS.map(m => `<i class="${dayEntries(f, m).some(e => e.itemId) ? 'on' : ''}"></i>`).join('');
-    return `<button class="day${i === SEM.dia ? ' on' : ''}${f === hoyIso() ? ' hoy' : ''}" data-dia="${i}" aria-label="${DAYS[i]} ${parseIso(f).getDate()}: ${td.lineas ? kc(td.kcal) + ' kcal' : 'nada apuntado'}">${DMIN[i]}<small>${td.lineas ? kc(td.kcal) + (td.parcial ? '*' : '') : '—'}</small><span class="dots">${dots}</span></button>`;
+    return `<button class="day${i === SEM.dia ? ' on' : ''}${f === hoyIso() ? ' hoy' : ''}${esLibre(f) ? ' libre' : ''}" data-dia="${i}" aria-label="${DAYS[i]} ${parseIso(f).getDate()}: ${td.lineas ? kc(td.kcal) + ' kcal' : 'nada apuntado'}">${DMIN[i]}<small>${esLibre(f) ? 'libre' : td.lineas ? kc(td.kcal) + (td.parcial ? '*' : '') : '—'}</small><span class="dots">${dots}</span></button>`;
   }).join('');
   $('#diaTit').textContent = fechaLarga(fecha);
   const pk = gk ? Math.min(100, t.kcal / gk * 100) : 0, pp = gp ? Math.min(100, t.protein / gp * 100) : 0;
-  const kcalTxt = !gk ? 'kcal' : t.kcal <= gk ? 'kcal · quedan ' + kc(gk - t.kcal) : 'kcal · te pasas ' + kc(t.kcal - gk);
+  const kcalTxt = !gk ? 'kcal' : Math.abs(gk - t.kcal) < 0.5 ? 'kcal · objetivo justo' : t.kcal < gk ? 'kcal · quedan ' + kc(gk - t.kcal) : 'kcal · te pasas ' + kc(t.kcal - gk);
   const protOk = gp && t.protein >= gp;
-  $('#resumen').innerHTML = `<div class="t"><span>${kcalTxt}${t.parcial ? ' · <span class="parc">parcial*</span>' : ''}</span><span><b>${kc(t.kcal)}</b>${gk ? ' de ' + kc(gk) : ''}</span></div><div class="barra"><i class="${gk && t.kcal > gk * 1.1 ? 'over' : ''}" style="width:${pk}%"></i></div>
-    <div class="t"><span>Proteína · ${protOk ? 'objetivo cumplido' : gp ? 'faltan ' + num1(gp - t.protein) + ' g' : ''}</span><span><b>${num1(t.protein)}</b>${gp ? ' de ' + kc(gp) + ' g' : ' g'}</span></div><div class="barra"><i class="${protOk ? 'ok' : 'prot'}" style="width:${pp}%"></i></div>
+  $('#resumen').innerHTML = `<div class="t"><span>${kcalTxt}${t.parcial ? ' · <span class="parc">parcial*</span>' : ''}</span><span><b>${kc(t.kcal)}</b>${gk ? ' de ' + kc(gk) : ''}</span></div><div class="barra"><i class="${gk && t.kcal > gk + 0.5 ? 'over' : ''}" style="width:${pk}%"></i></div>
+    <div class="t"><span>Proteína · ${protOk ? 'objetivo cumplido' : gp ? 'faltan ' + num1(gp - t.protein) + ' g' : ''}</span><span><b>${num1(t.protein)}</b>${gp ? ' de ' + num1(gp) + ' g' : ' g'}</span></div><div class="barra"><i class="${protOk ? 'ok' : 'prot'}" style="width:${pp}%"></i></div>
     <div class="macros"><span><b>${num1(t.fat)}</b> g grasa</span><span><b>${num1(t.carbs)}</b> g hidratos</span></div>`;
   $('#franjas').innerHTML = FR.map(m => franjaHTML(fecha, m)).join('');
   $('#otrosDias').innerHTML = otrosDiasHTML();
+  pintarLibre16(fecha);
 }
 
 function franjaHTML(fecha, meal) {
@@ -1191,7 +1219,7 @@ function aviso(txt, accion, fn) {
   if (accion) $('#toastAcc').onclick = () => { t.hidden = true; fn(); };
   clearTimeout(tAviso); tAviso = setTimeout(() => { t.hidden = true; }, accion ? 6000 : 3200);
 }
-const PRONTO = { resumen: 'El resumen de la semana llega en la 0.16.', pdf: 'Guardar PDF llega en la 0.17.', guardarSem: 'Guardar y cargar semanas llega en la 0.17.', ajustes: 'Los ajustes completos llegan en la 0.16.' };
+const PRONTO = { pdf: 'Guardar PDF llega en la 0.17.', guardarSem: 'Guardar y cargar semanas llega en la 0.17.' };
 
 /* --- Eventos de la Semana --- */
 function initSemana() {
@@ -1201,6 +1229,7 @@ function initSemana() {
     if (t.id === 'wkPrev' || t.id === 'wkNext') { SEM.lunes = addDays(SEM.lunes, t.id === 'wkPrev' ? -7 : 7); SEM.dia = SEM.lunes === mondayOf(hoyIso()) ? (parseIso(hoyIso()).getDay() + 6) % 7 : 0; pintarSemana(); return; }
     if (t.id === 'wkPick') { const i = $('#wkDate'); i.value = diaSel(); try { i.showPicker(); } catch (_) { i.click(); } return; }
     if (t.id === 'wkMenu') { $('#wkPop').hidden = !$('#wkPop').hidden; return; }
+    if (t.dataset.wk16) { $('#wkPop').hidden = true; if (t.dataset.wk16 === 'resumen') abrirResumen(); else alternarLibre(diaSel()); return; }
     if (t.dataset.pronto) { $('#wkPop').hidden = true; aviso(PRONTO[t.dataset.pronto]); return; }
     if (t.id === 'leyenda') { aviso('Recetas en raciones; productos en g, ml o ud. Solo se suman tus consumos. * = kcal parciales: faltan cantidades o etiquetas.'); return; }
     if (t.dataset.plegar) { const k = t.dataset.plegar; plegadas.has(k) ? plegadas.delete(k) : plegadas.add(k); guardarPlegadas(); pintarSemana(); return; }
@@ -1229,7 +1258,7 @@ function initSemana() {
   $('#cpGo').onclick = hacerCopia;
   document.querySelectorAll('[data-cerrar]').forEach(b => b.onclick = () => b.closest('dialog').close());
   document.querySelectorAll('[data-nav]').forEach(b => b.onclick = () => { const v = b.dataset.nav; if (PRONTO[v]) { aviso(PRONTO[v]); return; } pila = []; location.hash = v; });
-  $('#ajustes').onclick = () => $('#ajDlg').showModal();
+  $('#ajustes').onclick = abrirAjustes;
   $('#salir').onclick = async () => { await guardarYa(); await sb.auth.signOut(); $('#ajDlg').close(); data = null; SEM.cargada = false; REC = null; ING_TXT = {}; location.hash = ''; };
 }
 
@@ -2031,8 +2060,6 @@ async function abrirCompra() {
   if (!SEM.cargada) {
     $('#cpCuerpo').innerHTML = '<div class="empty">Cargando la compra…</div>';
     try { await cargarDatos(); } catch (err) { $('#cpCuerpo').innerHTML = `<div class="empty">${h(es(err))}</div>`; return; }
-    const p = SEM.perfil || {}; $('#ajNombre').textContent = (p.nombre || '') + (p.es_admin ? ' · administradora' : ''); $('#ajCorreo').textContent = SESION.user.email;
-    $('#ajObj').textContent = (p.objetivo_kcal ? kc(p.objetivo_kcal) + ' kcal' : 'sin objetivo de kcal') + ' · ' + (p.objetivo_proteina ? kc(p.objetivo_proteina) + ' g de proteína' : 'sin objetivo de proteína');
   }
   pintarCompra(); pintarEstado();
 }
@@ -2336,18 +2363,151 @@ function init015() {
   $('#aeGo').onclick = guardarAlimento;
 }
 
+
+/* ---------- 0.16 · Ajustes, días libres y resumen de la semana (como «Ajustes» y «Vista semanal» de la hoja 5.28 b) ---------- */
+const esLibre = f => !!(data && data.settings.freeDays && data.settings.freeDays.has(f));
+function aplicarPerfil(p) {
+  const eqv = p.equivalencias || {}, s = data.settings;
+  Object.assign(s, { aoveSpray: eqv.aove_pulv, aoveTsp: eqv.aove_cdta, aoveTbsp: eqv.aove_cda, aoveMl: eqv.aove_ml, cartDefaults: p.carrito_por_franja || {}, goalKcal: p.objetivo_kcal, goalProtein: p.objetivo_proteina, people: p.personas || 2, freeDays: new Set(Array.isArray(p.dias_libres) ? p.dias_libres : []) });
+}
+async function guardarPerfil(campos) {
+  const { error } = await sb.from('perfiles').update(campos).eq('id', SESION.user.id);
+  if (error) return error;
+  Object.assign(SEM.perfil, campos); aplicarPerfil(SEM.perfil); return null;
+}
+function repintar16() { pintarTodo(); pintarGlobito(); if (!$('#compra').hidden) pintarCompra(); if (!$('#alimentos').hidden) pintarAlimentos(); if ($('#rsDlg').open) pintarResumen(); }
+
+/* --- Días libres --- */
+async function alternarLibre(f) {
+  const s = new Set(data.settings.freeDays), quitar = s.has(f); quitar ? s.delete(f) : s.add(f);
+  const lista = [...s].sort(), err = await guardarPerfil({ dias_libres: lista });
+  if (err) { aviso('No se ha podido guardar el día libre. Vuelve a intentarlo con conexión.'); return; }
+  repintar16(); aviso(quitar ? 'Ya no es día libre.' : DIA_CORTO(f).replace(/^./, c => c.toUpperCase()) + ': día libre. No cuenta en el resumen.');
+}
+function pintarLibre16(fecha) {
+  const b = $('#wkLibre'); if (b) b.textContent = esLibre(fecha) ? 'Quitar día libre' : 'Marcar este día como libre';
+  if (esLibre(fecha)) $('#resumen').insertAdjacentHTML('afterbegin', '<div class="libre-av"><span><b>Día libre.</b> No cuenta en el resumen de la semana.</span><button type="button" class="btn" data-wk16="libre">Quitar</button></div>');
+}
+
+/* --- Ajustes --- */
+let AJ = null;
+const numTxt = v => v == null || v === '' ? '' : String(v).replace('.', ',');
+function abrirAjustes() {
+  const p = SEM.perfil || {}, listo = !!(data && SEM.cargada);
+  AJ = listo ? { personas: Number(p.personas) || 2, libres: new Set(data.settings.freeDays), carro: Object.assign({}, p.carrito_por_franja || {}), lunes: SEM.lunes || mondayOf(hoyIso()) } : null;
+  const cab = `<div class="aj-cta"><b>${h(p.nombre || '')}${p.es_admin ? ' · administradora' : ''}</b><small>${h(SESION && SESION.user ? SESION.user.email : '')}</small></div>`;
+  if (!AJ) { $('#ajBody').innerHTML = cab + '<p class="aj-h">Cargando tus ajustes…</p>'; $('#ajGo').hidden = true; $('#ajDlg').showModal(); return; }
+  const eqv = p.equivalencias || {};
+  $('#ajBody').innerHTML = cab + `
+    <p class="cp-lbl">Objetivos del día</p>
+    <div class="cp-two"><label class="cp-q" for="ajK">Kcal<input class="cp-inp" id="ajK" type="text" inputmode="numeric" autocomplete="off" value="${h(numTxt(p.objetivo_kcal))}"></label><label class="cp-q" for="ajP">Proteína (g)<input class="cp-inp" id="ajP" type="text" inputmode="decimal" autocomplete="off" value="${h(numTxt(p.objetivo_proteina))}"></label></div>
+    <p class="aj-h">Si dejas la proteína vacía, no sale su barra.</p>
+    <p class="cp-lbl">Personas</p>
+    <div class="aj-st"><button type="button" data-ajper="-1" aria-label="Una persona menos">−</button><output id="ajPer" aria-live="polite">${AJ.personas}</output><button type="button" data-ajper="1" aria-label="Una persona más">+</button></div>
+    <p class="aj-h">Raciones con las que empieza una receta en comida o cena: una para ti y el resto para los demás.</p>
+    <p class="cp-lbl" id="ajLibTit"></p><div class="aj-d7" id="ajLib" role="group" aria-labelledby="ajLibTit"></div>
+    <p class="aj-h">Los días libres no cuentan en el resumen de la semana.</p>
+    <p class="cp-lbl">A la compra por defecto</p>
+    <div class="mp-ops" id="ajCarro">${MEALS.map(m => `<button type="button" role="checkbox" class="ckb${AJ.carro[m] ? ' on' : ''}" aria-checked="${!!AJ.carro[m]}" data-ajcarro="${m}"><i></i><span>${m}<small>${AJ.carro[m] ? 'a la compra' : 'no va a la compra'}</small></span></button>`).join('')}</div>
+    <p class="aj-h">Lo que apuntes nuevo en esa franja sale ya con el carrito puesto.</p>
+    <details class="al-fu" id="ajEq"><summary>Equivalencias del aceite (AOVE)</summary>
+      <div class="cp-two" style="margin-bottom:12px">${[['ajEs', 'g por pulverización', eqv.aove_pulv], ['ajEt', 'g por cucharadita', eqv.aove_cdta], ['ajEc', 'g por cucharada', eqv.aove_cda], ['ajEm', 'g por ml', eqv.aove_ml]].map(([i, t, v]) => `<label class="cp-q" for="${i}">${t}<input class="cp-inp" id="${i}" type="text" inputmode="decimal" autocomplete="off" value="${h(numTxt(v))}"></label>`).join('')}</div></details>
+    <p class="aj-h" style="margin-top:14px">${h($('.ver') ? $('.ver').textContent : '')}</p>`;
+  pintarAjLibres(); $('#ajGo').hidden = false; $('#ajDlg').showModal();
+}
+function pintarAjLibres() {
+  $('#ajLibTit').innerHTML = `Días libres · <span class="aj-sem"><button type="button" data-ajsem="-1" aria-label="Semana anterior">‹</button>${h(rangoSemana(AJ.lunes))}<button type="button" data-ajsem="1" aria-label="Semana siguiente">›</button></span>`;
+  $('#ajLib').innerHTML = [0, 1, 2, 3, 4, 5, 6].map(i => { const d = addDays(AJ.lunes, i), on = AJ.libres.has(d); return `<button type="button" class="d7${on ? ' on' : ''}" aria-pressed="${on}" data-ajlib="${d}">${DMIN[i].charAt(0)}<small>${parseIso(d).getDate()}</small></button>`; }).join('');
+}
+async function guardarAjustes() {
+  const k = parseNum($('#ajK').value), pr = parseNum($('#ajP').value);
+  if (!(k > 0 && k <= 10000)) { aviso('Escribe el objetivo de kcal (un número mayor que 0).'); return; }
+  if (Number.isNaN(pr) || (pr !== null && pr > 1000)) { aviso('Revisa el objetivo de proteína.'); return; }
+  const eq = {}; for (const [i, key] of [['#ajEs', 'aove_pulv'], ['#ajEt', 'aove_cdta'], ['#ajEc', 'aove_cda'], ['#ajEm', 'aove_ml']]) { const v = parseNum($(i).value); if (!(v > 0 && v <= 100)) { $('#ajEq').open = true; aviso('Revisa las equivalencias del aceite: tienen que ser números mayores que 0.'); return; } eq[key] = v; }
+  const carro = {}; MEALS.forEach(m => { if (AJ.carro[m]) carro[m] = true; });
+  const campos = { objetivo_kcal: Math.round(k), objetivo_proteina: pr === null ? null : Math.round(pr * 10) / 10, personas: AJ.personas, carrito_por_franja: carro, equivalencias: eq, dias_libres: [...AJ.libres].sort() };
+  $('#ajGo').disabled = true; const err = await guardarPerfil(campos); $('#ajGo').disabled = false;
+  if (err) { aviso('No se han podido guardar los ajustes: ' + es(err)); return; }
+  $('#ajDlg').close(); repintar16(); aviso('Ajustes guardados.');
+}
+
+/* --- Resumen de la semana --- */
+let RS = null;
+function statsDia(f) {
+  const rows = dayEntries(f).filter(e => e.itemId), s = { rows: rows.length, kcal: 0, protein: 0, kMiss: false, pMiss: false, unknown: rows.some(e => isFree(e.itemId) && blank(e.own)) };
+  rows.forEach(e => { const k = calc(e, 'kcal'), p = calc(e, 'protein'); if (k === null) s.kMiss = true; else s.kcal += k; if (p === null) s.pMiss = true; else s.protein += p; });
+  return s;
+}
+function cantidadLinea(e) {
+  if (isFree(e.itemId)) return blank(e.own) ? 'comida libre · kcal sin indicar' : 'comida libre';
+  if (blank(e.own)) return 'cantidad sin indicar';
+  if (isPrep(e.itemId)) return fmt.format(Number(e.own)) + ' ' + (prepData(e).m === 'r' ? 'rac.' : 'g');
+  if (!isProduct(e.itemId)) return recipeAmount(e.itemId, e.own);
+  const m = lineMeasure(e, product(e.itemId)), q = Number(e.own) / m.factor;
+  return fmt.format(Math.round(q * 100) / 100) + ' ' + (m.unit === 'pulverizaciones' && q === 1 ? 'pulverización' : unitWord(q, m.unit));
+}
+function resumenHTML(lunes) {
+  const hoy = hoyIso(), gk = Number(data.settings.goalKcal) || 0, gp = Number(data.settings.goalProtein) || 0, A = '<span class="ast">*</span>';
+  const dias = [0, 1, 2, 3, 4, 5, 6].map(i => { const f = addDays(lunes, i); return Object.assign(statsDia(f), { f, i, libre: esLibre(f), futuro: f > hoy }); });
+  const cuentan = dias.filter(d => !d.libre && d.rows), medidos = cuentan.filter(d => !d.futuro), futuros = cuentan.length - medidos.length, libres = dias.filter(d => d.libre).length;
+  const total = cuentan.reduce((a, d) => a + d.kcal, 0), suma = medidos.reduce((a, d) => a + d.kcal, 0), pSuma = medidos.reduce((a, d) => a + d.protein, 0);
+  const parcial = cuentan.some(d => d.kMiss), mParcial = medidos.some(d => d.kMiss || d.unknown), pParcial = medidos.some(d => d.pMiss);
+  const kc1 = [], pc = [];
+  if (gk) kc1.push([kc(gk) + ' kcal', 'Objetivo']);
+  kc1.push([medidos.length ? kc(suma / medidos.length) + ' kcal' + (mParcial ? A : '') : '—', 'Media diaria']);
+  if (gk) { const enc = medidos.filter(d => d.kcal > gk + 0.5).length; kc1.push([enc + (mParcial ? A : ''), enc === 1 ? 'Día por encima' : 'Días por encima']); }
+  if (gp) pc.push([fmt.format(gp) + ' g', 'Objetivo']);
+  pc.push([medidos.length ? fmt.format(Math.round(pSuma / medidos.length)) + ' g' + (pParcial ? A : '') : '—', 'Media diaria']);
+  if (gp) { const deb = medidos.filter(d => d.protein < gp - 0.05).length; pc.push([deb + (pParcial ? A : ''), deb === 1 ? 'Día por debajo' : 'Días por debajo', deb > 0]); }
+  const celdas = l => `<div class="rs-c c${l.length}">${l.map(c => `<div><b${c[2] ? ' class="bad"' : ''}>${c[0]}</b><span>${c[1]}</span></div>`).join('')}</div>`;
+  const notas = [];
+  if (parcial || mParcial || pParcial) notas.push(A + ' Valores parciales: faltan cantidades o etiquetas.');
+  notas.push('Cuentan los días con algo apuntado hasta hoy.' + (futuros ? ` Los que están por venir (${futuros}) no entran en la media hasta que lleguen.` : ''));
+  if (medidos.some(d => d.unknown)) notas.push('Una comida libre sin kcal cuenta como 0.');
+  if (libres) notas.push(libres === 1 ? 'Hay 1 día libre, que no cuenta.' : `Hay ${libres} días libres, que no cuentan.`);
+  const diaHTML = d => {
+    const rows = dayEntries(d.f).filter(e => e.itemId), estado = d.libre ? '<span class="rs-lib">Día libre</span>' : '';
+    const cifra = rows.length ? `<b>${kc(d.kcal)} kcal${d.kMiss ? A : ''}</b><small>${fmt.format(Math.round(d.protein))} g proteína${d.pMiss ? A : ''}</small>` : '<small>Vacío</small>';
+    const comidas = MEALS.map(m => { const ls = rows.filter(e => e.meal === m); if (!ls.length) return ''; return `<div class="rs-m"><h4>${m}</h4>${ls.map(e => { const k = calc(e, 'kcal'); return `<p>${h(item(e.itemId)?.name || 'Alimento')} <small>· ${h(cantidadLinea(e))}${k === null ? (isFree(e.itemId) ? '' : ' · kcal —') : ' · ' + kc(k) + ' kcal'}</small></p>`; }).join('')}</div>`; }).join('');
+    return `<article class="rs-d${d.libre ? ' libre' : ''}${d.f === hoy ? ' hoy' : ''}"><button type="button" class="rs-dh" data-rsdia="${d.i}"><span class="rs-dn">${DAYS[d.i]} ${parseIso(d.f).getDate()}${estado}</span><span class="rs-dk">${cifra}</span><span class="go" aria-hidden="true">›</span></button>${comidas}</article>`;
+  };
+  return `<div class="rs-nav"><button type="button" class="ar" data-rsw="-1" aria-label="Semana anterior">‹</button><b>${h(rangoSemana(lunes))}${lunes === mondayOf(hoy) ? ' · esta semana' : ''}</b><button type="button" class="ar" data-rsw="1" aria-label="Semana siguiente">›</button></div>
+    <p class="rs-lead"><b>${medidos.length} de 7</b> días con algo apuntado${libres ? ' · ' + libres + (libres === 1 ? ' libre' : ' libres') : ''} · <b>${kc(total)} kcal${parcial ? A : ''}</b> en la semana</p>
+    <p class="cp-lbl">Calorías</p>${celdas(kc1)}<p class="cp-lbl">Proteína</p>${celdas(pc)}
+    <p class="rs-nota">${notas.join(' ')}</p>
+    <p class="cp-lbl">Día a día</p>${dias.map(diaHTML).join('')}
+    <p class="rs-nota">Las kcal son de tus consumos. Toca un día para abrirlo.</p>`;
+}
+function pintarResumen() { $('#rsBody').innerHTML = resumenHTML(RS.lunes); }
+function abrirResumen() { RS = { lunes: SEM.lunes }; pintarResumen(); $('#rsDlg').showModal(); $('#rsBody').scrollTop = 0; }
+
+function init016() {
+  $('#ajustes').onclick = abrirAjustes;
+  $('#ajGo').onclick = guardarAjustes;
+  $('#ajBody').addEventListener('click', ev => {
+    const t = ev.target.closest('button'); if (!t || !AJ) return;
+    if (t.dataset.ajper) { AJ.personas = Math.max(1, Math.min(20, AJ.personas + Number(t.dataset.ajper))); $('#ajPer').textContent = AJ.personas; return; }
+    if (t.dataset.ajsem) { AJ.lunes = addDays(AJ.lunes, 7 * Number(t.dataset.ajsem)); pintarAjLibres(); return; }
+    if (t.dataset.ajlib) { const d = t.dataset.ajlib; AJ.libres.has(d) ? AJ.libres.delete(d) : AJ.libres.add(d); pintarAjLibres(); return; }
+    if (t.dataset.ajcarro) { const m = t.dataset.ajcarro, on = !AJ.carro[m]; AJ.carro[m] = on; t.classList.toggle('on', on); t.setAttribute('aria-checked', on); t.querySelector('small').textContent = on ? 'a la compra' : 'no va a la compra'; }
+  });
+  $('#rsBody').addEventListener('click', ev => {
+    const t = ev.target.closest('button'); if (!t || !RS) return;
+    if (t.dataset.rsw) { RS.lunes = addDays(RS.lunes, 7 * Number(t.dataset.rsw)); pintarResumen(); $('#rsBody').scrollTop = 0; return; }
+    if (t.dataset.rsdia) { SEM.lunes = RS.lunes; SEM.dia = Number(t.dataset.rsdia); $('#rsDlg').close(); if ($('#semana').hidden) location.hash = 'semana'; else pintarSemana(); window.scrollTo(0, 0); }
+  });
+}
+
 async function abrirSemana() {
   if (!SEM.lunes) { const hoy = hoyIso(); SEM.lunes = mondayOf(hoy); SEM.dia = (parseIso(hoy).getDay() + 6) % 7; }
   if (!SEM.cargada) {
     $('#franjas').innerHTML = '<div class="empty">Cargando tu semana…</div>';
     try { await cargarDatos(); } catch (err) { $('#franjas').innerHTML = `<div class="empty">${h(es(err))}</div>`; return; }
-    const p = SEM.perfil || {}; $('#ajNombre').textContent = (p.nombre || '') + (p.es_admin ? ' · administradora' : ''); $('#ajCorreo').textContent = SESION.user.email;
-    $('#ajObj').textContent = (p.objetivo_kcal ? kc(p.objetivo_kcal) + ' kcal' : 'sin objetivo de kcal') + ' · ' + (p.objetivo_proteina ? kc(p.objetivo_proteina) + ' g de proteína' : 'sin objetivo de proteína');
   }
   pintarSemana(); pintarEstado();
 }
 
-  initSemana(); init013(); initCompra(); init014b(); init014c(); init015();
+  initSemana(); init013(); initCompra(); init014b(); init014c(); init015(); init016();
   sb.auth.onAuthStateChange((_ev, session) => { if ((session && session.user.id) !== (SESION && SESION.user.id)) { SEM.cargada = false; data = null; } show(session); });
   sb.auth.getSession().then(({ data }) => show(data.session));
   setMode('login');
