@@ -190,6 +190,69 @@
   .anadirsem{display:flex;width:100%;justify-content:center;min-height:48px;margin:0 0 12px}
   .pesog{display:flex;align-items:center;gap:8px;margin:6px 0 12px} .pesog input{flex:1;min-width:0;height:52px;padding:0 14px;border:1px solid var(--line);border-radius:12px;background:var(--white);font:600 20px var(--font);color:var(--ink)} .pesog span{font:600 16px var(--font);color:var(--muted)}
 
+  /* ---------- 0.14 · Compra ---------- */
+  .cp-top{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin:12px 2px 8px} .cp-top h2{margin:0;font-size:20px} .cp-top span{color:var(--muted);font-size:13px;text-align:right}
+  .cp-acts{display:flex;gap:8px;margin-bottom:4px} .cp-acts .btn{min-height:44px;flex:1;padding:8px 10px}
+  .cp-dias{display:grid;grid-template-columns:repeat(8,1fr);gap:4px;margin:4px 0 6px}
+  .cp-dias .day{min-height:56px;padding:6px 0 4px}
+  .cp-dias .day i{display:block;width:6px;height:6px;margin-top:3px;border-radius:50%;background:transparent}
+  .cp-dias .day i.si{background:#b9ad9d} .cp-dias .day.on i.si{background:#fff}
+  .cp-dias .day.todo{font-size:13px}
+  #cpQ{height:44px}
+  .cp-pend{display:flex;justify-content:space-between;align-items:center;margin:6px 2px 2px;font-size:14px;color:var(--muted)}
+  .cp-pend button{min-height:44px;padding:0 4px;border:0;background:none;font:600 14px var(--font);color:var(--ink);text-decoration:underline;cursor:pointer}
+  .cp-cat{margin:14px 4px 6px;font:700 12px var(--font);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  .cp-list{background:var(--white);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+  .cp-row{display:flex;align-items:center;gap:6px;min-height:56px;padding:4px 0 4px 2px;border-top:1px solid #ebe3d6} .cp-list>.cp-row:first-child{border-top:0}
+  .cp-ckw{display:flex;align-items:center;justify-content:center;width:44px;min-height:44px;flex:none;cursor:pointer}
+  .cp-ck{appearance:none;-webkit-appearance:none;width:26px;height:26px;margin:0;flex:none;border:1.8px solid #9a8f82;border-radius:7px;background:#fff;cursor:pointer;display:grid;place-content:center}
+  .cp-ck:checked{background:var(--ink);border-color:var(--ink)}
+  .cp-ck:checked::after{content:'';width:12px;height:7px;border:2.5px solid #fff;border-top:0;border-right:0;transform:translateY(-2px) rotate(-45deg)}
+  .cp-ck.is-partial{background:linear-gradient(135deg,var(--ink) 50%,#fff 50%);border-color:var(--ink)} .cp-ck.is-partial::after{display:none}
+  .cp-ck:disabled{opacity:.55}
+  .cp-ck:focus-visible{outline:3px solid var(--azul-foco);outline-offset:2px}
+  .cp-n{flex:1;min-width:0;padding:4px 0} .cp-n b{display:block;font-size:15px;line-height:1.3} .cp-n small{display:block;font-size:12.5px;color:var(--muted);line-height:1.35}
+  .cp-n small.az{color:var(--azul-texto)}
+  .cp-n .lk{border:0;background:none;padding:0;font:600 12.5px var(--font);color:var(--ink);text-decoration:underline;cursor:pointer;min-height:24px}
+  .cp-a{text-align:right;font-weight:700;font-size:15px;white-space:nowrap;max-width:42%;white-space:normal} .cp-a small{display:block;font-weight:500;font-size:11.5px;color:var(--muted)}
+  .cp-more{width:44px;height:44px;flex:none;border:0;background:none;font:700 18px var(--font);color:var(--muted);cursor:pointer;border-radius:12px}
+  .cp-sub{display:flex;align-items:center;gap:4px;min-height:44px;padding:0 10px 0 36px;font-size:13.5px} .cp-sub .cp-ck{width:22px;height:22px}
+  .cp-sub span{flex:1;min-width:0}
+  .cp-week{padding:0 12px 8px 52px;font-size:12.5px;color:var(--azul-texto)}
+  .cp-row.done .cp-n b{color:var(--muted)}
+  .cp-dec{background:var(--azul-fondo);border:1px solid var(--azul-borde);border-radius:16px;padding:12px;color:var(--azul-texto);margin-top:10px}
+  .cp-dec b{display:block;font-size:15px;color:var(--ink)} .cp-dec p{margin:4px 0 10px;font-size:13px;line-height:1.4}
+  .cp-dec .r{display:flex;gap:8px} .cp-dec .btn{flex:1;min-height:48px;background:#fff;flex-direction:column;line-height:1.2} .cp-dec .btn small{font-weight:500;font-size:12.5px}
+  .cp-fold{display:flex;align-items:center;gap:10px;width:100%;min-height:52px;margin-top:8px;padding:8px 12px;border:1px solid var(--line);border-radius:14px;background:var(--white);font:700 15px var(--font);color:var(--ink);text-align:left;cursor:pointer}
+  .cp-fold span.c{margin-left:auto;color:var(--muted);font-weight:600;font-size:13px;white-space:nowrap}
+  .cp-fold.av{border-color:#e9b7b0;background:var(--peach);color:#8a1c12}
+  .cp-fold[aria-expanded="true"]{border-radius:14px 14px 0 0}
+  .cp-in{background:var(--white);border:1px solid var(--line);border-top:0;border-radius:0 0 14px 14px;padding:4px 12px 12px;font-size:14px;line-height:1.45}
+  .cp-in p{margin:8px 0;color:var(--muted)} .cp-in ul{margin:6px 0;padding-left:18px} .cp-in li{margin:4px 0}
+  .cp-in .cp-list{border:0;border-radius:0}
+  .cp-sug{display:flex;align-items:center;gap:6px;min-height:48px;border-top:1px solid #ebe3d6} .cp-sug:first-of-type{border-top:0}
+  .cp-sug span{flex:1;min-width:0} .cp-sug small{display:block;color:var(--muted);font-size:12.5px}
+  .cp-sug .btn{min-height:40px;padding:6px 12px;font-size:14px}
+  .cp-act{position:fixed;left:16px;right:16px;bottom:calc(env(safe-area-inset-bottom) + 76px);z-index:21;max-width:520px;margin:0 auto;min-height:52px;border:0;border-radius:16px;background:var(--ink);color:#fff;font:700 16px var(--font);box-shadow:0 6px 18px rgba(0,0,0,.2);cursor:pointer}
+  .cp-act:disabled{opacity:.6}
+  body.cpact #toast{bottom:calc(env(safe-area-inset-bottom) + 136px)}
+  .cp-pie{height:72px}
+  /* Ficha y Añadir */
+  .cp-lbl{display:block;font:600 13px var(--font);color:var(--muted);margin:12px 0 6px} .cp-lbl:first-child{margin-top:0}
+  .cp-org{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:2px 12px}
+  .cp-o{padding:10px 0;border-top:1px solid #ebe3d6} .cp-o:first-child{border-top:0}
+  .cp-o .t{display:flex;justify-content:space-between;gap:10px;align-items:baseline} .cp-o .t b{font-size:14.5px;line-height:1.3} .cp-o .t span{color:var(--muted);font-size:13px;text-align:right;white-space:nowrap}
+  .cp-o small{display:block;color:var(--muted);font-size:12.5px;line-height:1.35;margin-top:2px}
+  .cp-o .cp-two{margin-top:8px}
+  .cp-two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .cp-q{display:flex;flex-direction:column;gap:4px;font:600 12.5px var(--font);color:var(--muted);min-width:0}
+  .cp-inp{width:100%;min-width:0;height:48px;border:1px solid var(--line);border-radius:12px;padding:0 10px;font:500 16px var(--font);background:#fff;color:var(--ink)}
+  .cp-inp:focus{outline:2px solid var(--azul-foco);outline-offset:1px}
+  .cp-x{display:flex;align-items:center;gap:10px;min-height:44px;margin-top:4px;font:600 14px var(--font);cursor:pointer}
+  .cp-x input{width:22px;height:22px;margin:0;accent-color:#151311}
+  .cp-casa{display:flex;align-items:center;gap:8px} .cp-casa input{flex:1} .cp-casa span{font:600 16px var(--font);color:var(--muted);min-width:40px}
+  .cp-nota{font-size:13px;color:var(--muted);line-height:1.4;margin:10px 0 0}
+
 </style>
 </head>
 <body>
@@ -242,9 +305,19 @@
     <div id="rdet"></div>
   </section>
 
-  <p class="ver">Versión de prueba 0.13 · cocinar, lotes y congelador</p>
+  <section id="compra" hidden>
+    <div class="cp-top"><h2>Compra</h2><span id="cpRango"></span></div>
+    <div class="cp-acts"><button class="btn" type="button" id="cpCopiar">Copiar lista</button><button class="btn" type="button" id="cpAnadirBtn">+ Añadir producto</button></div>
+    <input class="search" id="cpQ" type="search" placeholder="Buscar ingrediente" autocomplete="off" enterkeyhint="search">
+    <div class="cp-dias" id="cpDias" role="group" aria-label="Días de la compra"></div>
+    <div id="cpCuerpo"></div>
+    <div class="cp-pie"></div>
+    <button class="cp-act" type="button" id="cpAct" hidden></button>
+  </section>
+
+  <p class="ver">Versión de prueba 0.14 · compra</p>
 </main>
-<nav class="nav" id="nav" hidden><button type="button" data-nav="semana" id="navSemana"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Semana</button><button type="button" data-nav="compra"><svg viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h3l2.6 12.4a2 2 0 0 0 2 1.6h8.2a2 2 0 0 0 2-1.6L21 7H6"/></svg>Compra</button><button type="button" data-nav="recetas" id="navRecetas"><svg viewBox="0 0 24 24"><path d="M12 6.5C10 5 7 4.5 3.5 5v14c3.5-.5 6.5 0 8.5 1.5 2-1.5 5-2 8.5-1.5V5C17 4.5 14 5 12 6.5zM12 6.5v14"/><path d="M6.5 9.5h2.5M6.5 12.5h2.5M15 9.5h2.5M15 12.5h2.5"/></svg>Recetas</button><button type="button" data-nav="alimentos"><svg viewBox="0 0 24 24"><path d="M12 8.2c-1.3-.9-2.8-1.2-4.2-.9C5.3 7.8 4 10 4 12.8 4 17 7 21 9.6 21c1 0 1.5-.5 2.4-.5s1.4.5 2.4.5C17 21 20 17 20 12.8c0-2.8-1.3-5-3.8-5.5-1.4-.3-2.9 0-4.2.9z"/><path d="M12 8.2V5.5M12 5.5c.3-1.6 1.7-2.6 3.4-2.6-.2 1.7-1.6 2.8-3.4 2.6z"/></svg>Alimentos</button></nav>
+<nav class="nav" id="nav" hidden><button type="button" data-nav="semana" id="navSemana"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Semana</button><button type="button" data-nav="compra" id="navCompra"><svg viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h3l2.6 12.4a2 2 0 0 0 2 1.6h8.2a2 2 0 0 0 2-1.6L21 7H6"/></svg>Compra</button><button type="button" data-nav="recetas" id="navRecetas"><svg viewBox="0 0 24 24"><path d="M12 6.5C10 5 7 4.5 3.5 5v14c3.5-.5 6.5 0 8.5 1.5 2-1.5 5-2 8.5-1.5V5C17 4.5 14 5 12 6.5zM12 6.5v14"/><path d="M6.5 9.5h2.5M6.5 12.5h2.5M15 9.5h2.5M15 12.5h2.5"/></svg>Recetas</button><button type="button" data-nav="alimentos"><svg viewBox="0 0 24 24"><path d="M12 8.2c-1.3-.9-2.8-1.2-4.2-.9C5.3 7.8 4 10 4 12.8 4 17 7 21 9.6 21c1 0 1.5-.5 2.4-.5s1.4.5 2.4.5C17 21 20 17 20 12.8c0-2.8-1.3-5-3.8-5.5-1.4-.3-2.9 0-4.2.9z"/><path d="M12 8.2V5.5M12 5.5c.3-1.6 1.7-2.6 3.4-2.6-.2 1.7-1.6 2.8-3.4 2.6z"/></svg>Alimentos</button></nav>
 <dialog class="sheet" id="picker" aria-labelledby="pkTit"><div class="shh"><h2 id="pkTit">Añadir</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb">
   <div class="tabs"><button type="button" data-pktipo="alimentos" class="on">Alimentos</button><button type="button" data-pktipo="recetas">Recetas</button><button type="button" data-pktipo="congelador">Congelador</button><button type="button" data-pktipo="libre">Comida libre</button></div>
   <div id="pkAli"><input class="search" id="pkQ" type="search" placeholder="Buscar alimento" autocomplete="off" enterkeyhint="search"><div id="pkLista"></div></div>
@@ -258,6 +331,8 @@
 <dialog class="sheet" id="congDlg" aria-labelledby="cgTit"><div class="shh"><h2 id="cgTit">Al congelador</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="cgBody"></div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="cgGo">Congelar</button></div></dialog>
 <dialog class="mini" id="pesoDlg" aria-labelledby="peTit"><div class="shh"><h2 id="peTit">Peso de 1 ud</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb"><label class="q2" for="peG"><span id="peLab">Pesa 1 ud en la báscula</span></label><div class="pesog"><input id="peG" type="text" inputmode="decimal" autocomplete="off" placeholder="g"><span>g</span></div><div class="info" id="peInfo"></div><div class="row2"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="peGo">Guardar</button></div></div></dialog>
 <dialog class="sheet" id="semDlg" aria-labelledby="asTit"><div class="shh"><h2 id="asTit">Añadir a la semana</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb"><p class="sub2"><b id="asRec"></b></p><div class="wkm"><button type="button" class="ar" data-assem="-1" aria-label="Semana anterior">‹</button><b id="asRango"></b><button type="button" class="ar" data-assem="1" aria-label="Semana siguiente">›</button></div><h3 class="q3">Día</h3><div class="d7s" id="asDias"></div><h3 class="q3">Franja</h3><div class="f4s" id="asFr"></div><p class="nota2" id="asCuando"></p></div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="asGo">Continuar</button></div></dialog>
+<dialog class="sheet" id="cpFicha" aria-labelledby="cfTit"><div class="shh"><h2 id="cfTit">Compra</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="cfBody"></div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="cfGo">Guardar</button></div></dialog>
+<dialog class="sheet" id="cpAnadir" aria-labelledby="caTit"><div class="shh"><h2 id="caTit">Añadir a la compra</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb"><label class="cp-lbl" for="caNom">Producto</label><input class="cp-inp" id="caNom" list="caLista" autocomplete="off" autocapitalize="sentences" maxlength="200"><datalist id="caLista"></datalist><div class="cp-two" style="margin-top:12px"><label class="cp-q" for="caCant">Cantidad (si quieres)<input class="cp-inp" id="caCant" type="text" inputmode="decimal" autocomplete="off"></label><label class="cp-q" for="caUni">Unidad<select class="cp-inp" id="caUni"></select></label></div><p class="cp-nota" id="caNota"></p></div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="caGo">Añadir</button></div></dialog>
 <div id="toast" role="status" hidden></div>
 <script>
   const SUPABASE_URL = 'https://cawmvpfjaehennkknmoy.supabase.co';
@@ -292,7 +367,7 @@
     const dentro = !!session;
     document.body.classList.toggle('dentro', dentro);
     $('#auth').hidden = dentro; $('#top').hidden = !dentro; $('#nav').hidden = !dentro;
-    if (!dentro) { ['#semana', '#recetas', '#receta'].forEach(x => $(x).hidden = true); return; }
+    if (!dentro) { ['#semana', '#recetas', '#receta', '#compra'].forEach(x => $(x).hidden = true); document.body.classList.remove('cpact'); return; }
     ruta();
   }
 
@@ -459,15 +534,17 @@
   let SESION = null;
   async function ruta() {
     const hsh = location.hash.replace(/^#/, '');
-    const enRec = hsh === 'recetas' || hsh.startsWith('receta/');
+    const enRec = hsh === 'recetas' || hsh.startsWith('receta/'), enCmp = hsh === 'compra';
     document.body.classList.toggle('rec', !!SESION && enRec);
     $('#recetas').hidden = !(SESION && hsh === 'recetas');
     $('#receta').hidden = !(SESION && hsh.startsWith('receta/'));
-    $('#semana').hidden = !(SESION && !enRec);
-    $('#navSemana').classList.toggle('on', !enRec); $('#navRecetas').classList.toggle('on', enRec);
+    $('#semana').hidden = !(SESION && !enRec && !enCmp);
+    $('#compra').hidden = !(SESION && enCmp); if (!enCmp) document.body.classList.remove('cpact');
+    $('#navSemana').classList.toggle('on', !enRec && !enCmp); $('#navRecetas').classList.toggle('on', enRec); $('#navCompra').classList.toggle('on', enCmp);
     if (pila.length && hsh === pila[pila.length - 1]) pila.pop(); // se ha vuelto atrás (botón ‹ o gesto del móvil)
     if (!enRec) pila = [];
     if (!SESION) return;
+    if (enCmp) { window.scrollTo(0, 0); abrirCompra(); return; }
     if (!enRec) { abrirSemana(); return; }
     try { await cargarRecetas(); } catch (e) { $('#rlist').innerHTML = `<div class="empty">${h(es(e))}</div>`; return; }
     if (hsh === 'recetas') pintarLista(); else pintarReceta(decodeURIComponent(hsh.slice(7)));
@@ -688,7 +765,7 @@ async function todo(q) { const out = []; for (let from = 0; ; from += 1000) { co
 
 async function cargarDatos() {
   const uid = SESION.user.id;
-  const [ali, rec, ing, med, per, lin, lot, cng, mov] = await Promise.all([
+  const [ali, rec, ing, med, per, lin, lot, cng, mov, cmp] = await Promise.all([
     todo(() => sb.from('alimentos').select('id,nombre,kcal,proteina,grasa,hidratos,sal,categoria,unidad,g_por_unidad,cantidad_habitual,nombre_compra,grupo,casero')),
     todo(() => sb.from('recetas').select('id,nombre,categoria,frecuencia,raciones_lote,kcal_pdf,proteina_pdf,grasa_pdf,hidratos_pdf,dias_nevera,congelable,origen')),
     todo(() => sb.from('ingredientes_receta').select('receta_id,orden,nombre,alimento_id,receta_base_id,cantidad,unidad,al_gusto,no_se_compra,nombre_compra,marca,g_por_unidad').order('orden')),
@@ -697,7 +774,8 @@ async function cargarDatos() {
     todo(() => sb.from('lineas').select('*').eq('owner', uid)),
     todo(() => sb.from('lotes').select('*').eq('owner', uid)),
     todo(() => sb.from('congelador').select('*').eq('owner', uid)),
-    todo(() => sb.from('congelador_movimientos').select('*').eq('owner', uid))
+    todo(() => sb.from('congelador_movimientos').select('*').eq('owner', uid)),
+    todo(() => sb.from('compra').select('id,semana,clave,tipo,cantidad,unidad,nombre,origen').eq('owner', uid))
   ]);
   if (per.error) throw per.error;
   const recipes = rec.map(aReceta), measures = {};
@@ -706,15 +784,16 @@ async function cargarDatos() {
   SEM.perfil = p;
   data = { products: ali.map(aProducto), recipes, ingredients: ing.map(i => aIngrediente(i, recipes)), measures,
     settings: { aoveSpray: eqv.aove_pulv, aoveTsp: eqv.aove_cdta, aoveTbsp: eqv.aove_cda, aoveMl: eqv.aove_ml, cartDefaults: p.carrito_por_franja || {}, goalKcal: p.objetivo_kcal, goalProtein: p.objetivo_proteina, people: p.personas || 2 },
-    entries: lin.map(aLinea), lots: lot.map(l => Object.assign(aLote(l), { _row: l })), freezer: cng, freezerMoves: mov };
+    entries: lin.map(aLinea), lots: lot.map(l => Object.assign(aLote(l), { _row: l })), freezer: cng, freezerMoves: mov, compraRows: cmp };
   calcularRecetas();
   reenviarPendientes();
+  prepararCompra();
   SEM.cargada = true;
 }
 
 /* --- Guardado por detrás (0.13: líneas, lotes y congelador) --- */
 const PEND_KEY = () => 'mimenu-pendiente-' + (SESION && SESION.user.id);
-const nuevaCola = () => ({ up: { lotes: new Map(), congelador: new Map(), congelador_movimientos: new Map() }, del: { lotes: new Set(), congelador: new Set(), congelador_movimientos: new Set() } });
+const nuevaCola = () => ({ up: { lotes: new Map(), congelador: new Map(), congelador_movimientos: new Map(), compra: new Map() }, del: { lotes: new Set(), congelador: new Set(), congelador_movimientos: new Set(), compra: new Set() } });
 let porGuardar = new Map(), porBorrar = new Set(), COLA = nuevaCola(), tGuardar = null, guardando = false, fallo = false;
 function marcar(e) { porGuardar.set(e.lineId, e); porBorrar.delete(e.lineId); diario(); programar(); }
 function marcarBorrado(id) { porGuardar.delete(id); porBorrar.add(id); diario(); programar(); }
@@ -733,7 +812,7 @@ function reenviarPendientes() {
   (p.up || []).forEach(r => { const e = aLinea(r), i = data.entries.findIndex(x => x.lineId === e.lineId); if (i >= 0) data.entries[i] = e; else data.entries.push(e); porGuardar.set(e.lineId, e); });
   (p.del || []).forEach(id => { data.entries = data.entries.filter(x => x.lineId !== id); porBorrar.add(id); });
   (p.lots || []).forEach(x => { const l = data.lots.find(y => y.lotId === x.id); if (l) { l.includeShopping = x.a_la_compra; COLA.up.lotes.set(l.lotId, l); } }); // diario de la 0.12
-  for (const [t, lista] of [['congelador', data.freezer], ['congelador_movimientos', data.freezerMoves]]) {
+  for (const [t, lista] of [['congelador', data.freezer], ['congelador_movimientos', data.freezerMoves], ['compra', data.compraRows]]) {
     (tup[t] || []).forEach(r => { const i = lista.findIndex(x => x.id === r.id); if (i >= 0) lista[i] = r; else lista.push(r); COLA.up[t].set(r.id, r); });
     (tdel[t] || []).forEach(id => { const i = lista.findIndex(x => x.id === id); if (i >= 0) lista.splice(i, 1); COLA.del[t].add(id); });
   }
@@ -757,6 +836,8 @@ async function guardarYa() {
     if (del.length) await paso(sb.from('lineas').delete().in('id', del));
     if (cola.del.congelador.size) await paso(sb.from('congelador').delete().in('id', [...cola.del.congelador]));
     if (cola.del.lotes.size) await paso(sb.from('lotes').delete().in('id', [...cola.del.lotes]));
+    if (cola.up.compra.size) await paso(sb.from('compra').upsert(filas('compra')));
+    if (cola.del.compra.size) await paso(sb.from('compra').delete().in('id', [...cola.del.compra]));
     fallo = false;
   } catch (err) {
     up.forEach(e => { if (!porGuardar.has(e.lineId) && !porBorrar.has(e.lineId)) porGuardar.set(e.lineId, e); });
@@ -987,7 +1068,7 @@ function aviso(txt, accion, fn) {
   if (accion) $('#toastAcc').onclick = () => { t.hidden = true; fn(); };
   clearTimeout(tAviso); tAviso = setTimeout(() => { t.hidden = true; }, accion ? 6000 : 3200);
 }
-const PRONTO = { compra: 'La compra llega en la 0.14.', alimentos: 'Alimentos llega en la 0.15.', resumen: 'El resumen de la semana llega en la 0.16.', pdf: 'Guardar PDF llega en la 0.17.', guardarSem: 'Guardar y cargar semanas llega en la 0.17.', ajustes: 'Los ajustes completos llegan en la 0.16.' };
+const PRONTO = { alimentos: 'Alimentos llega en la 0.15.', resumen: 'El resumen de la semana llega en la 0.16.', pdf: 'Guardar PDF llega en la 0.17.', guardarSem: 'Guardar y cargar semanas llega en la 0.17.', ajustes: 'Los ajustes completos llegan en la 0.16.' };
 
 /* --- Eventos de la Semana --- */
 function initSemana() {
@@ -1370,6 +1451,486 @@ function init013() {
   $('#pkRQ').addEventListener('input', pintarSelectorRecetas);
 }
 
+
+/* ---------- 0.14 · Compra (maquetas aprobadas por Rocío el 13/10/2026) ----------
+   El cálculo es el de la app de la hoja (5.28 b), copiado tal cual: compra_nucleo.
+   Las marcas, «Tengo en casa», los añadidos y los ajustes esperan a «Actualizar compra», como en la hoja (5.23 b). */
+function esc(t) { return String(t == null ? '' : t).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+const shopDays=new Set(),DAYAB=['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'];
+const shopDayList=()=>shopDays.size?[...shopDays].sort((a,b)=>a-b):[0,1,2,3,4,5,6],shopScope=()=>shopDayList().join(',');
+const purchaseQueue=new Map(),manualShopQueue=new Map(),homeQueue=new Map();
+function isoDate(d){return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
+function shiftDate(date,offset){const d=new Date(date+'T12:00:00');d.setDate(d.getDate()+offset);return isoDate(d);}
+function shortDate(iso){return new Intl.DateTimeFormat('es-ES',{day:'numeric',month:'short'}).format(new Date(iso+'T12:00:00'));}
+function dayName(iso){return DAYS[(new Date(iso+'T12:00:00').getDay()+6)%7];}
+const AST='<span class="ast">*</span>';
+function lotBroth(lot){const w=lotMeta(lot,BROTH_MARK);return w&&typeof w==='object'&&!Array.isArray(w)?w:{};}
+function adjustable(lot){return data.ingredients.filter(i=>i.id===lot.recipeId&&!noShop(i)).map(i=>{const ps=familyProducts(i).slice().sort((a,b)=>(brandOf(a)?1:0)-(brandOf(b)?1:0)||byFoodName(a,b));if(!ps.length)return {i,ps:[],gs:[],base:null,g:n(i.amount)===null?0:null,noFicha:true};const base=cookBase(i)||ps[0],g=lotGrams(i,lot,base);return {i,ps,gs:aisleProducts(i),base,g};});}
+function brothOrWaterName(name){return /\bcaldo\b.*\bo\b.*\bagua\b/.test(clean(name));}
+function pantryName(name){
+      const x=clean(name).trim(),fresh=/\bfresc(?:o|a|os|as)\b/.test(x);
+      if(isAoveName(name)||tapWaterName(name)||/^mantequilla\b/.test(x))return true;
+      if(/^eneldo\b/.test(x))return fresh;
+      if(/\bcurry\b|\bcurcuma\b|\bcayena\b|\bpimenton picante\b|\bhierbas provenzales\b/.test(x))return true;
+      if(fresh&&/^(oregano|albahaca|romero|tomillo|perejil)\b/.test(x))return false;
+      return /^(sal\b|pimienta\b|oregano\b|albahaca\b|romero\b|tomillo\b|perejil\b|comino\b|pimenton\b|canela\b|ajo en polvo\b|laurel\b)/.test(x);
+    }
+function aoveGrams(amount,unit){
+      const u=clean(unit).trim().replace(/[.]/g,'').replace(/\s+/g,' '),compact=u.replace(/\s/g,'');
+      if(['g','gr','gramo','gramos'].includes(compact))return amount;
+      if(['kg','kilo','kilos','kilogramo','kilogramos'].includes(compact))return amount*1000;
+      if(['ml','mililitro','mililitros','cc'].includes(compact))return amount*eq('aoveMl');
+      if(['l','litro','litros'].includes(compact))return amount*eq('aoveMl')*1000;
+      if(/^(cucharadita|cucharaditas|cdita|cditas|cdta|cdtas|tsp|teaspoon|teaspoons|cucharita|cucharitas)(de(te|cafe))?$/.test(compact))return amount*eq('aoveTsp');
+      if(/^(cucharada|cucharadas|cda|cdas|tbsp|tablespoon|tablespoons)(sopera|soperas)?$/.test(compact))return amount*eq('aoveTbsp');
+      if(/^(pulverizacion|pulverizaciones|pulsacion|pulsaciones|fluflu|spray|sprays)$/.test(compact))return amount*eq('aoveSpray');
+      return null;
+    }
+function purchaseSources(model) {
+  const sources = new Map();
+  const add = (origin, itemId, date, name, unit, amount, included, unmeasured=false, legacyName=name, brand='') => {
+    if (!(amount > 0)) return;
+    const key = name + '♦' + (unit || ''), identity = JSON.stringify([origin,itemId,key]);
+    const row = sources.get(identity) || {key, origin, itemId, date, amount:0, included, unmeasured, legacy:[]};
+    const old = legacyName + '♦' + (unit || ''); if (old !== key && !row.legacy.includes(old)) row.legacy.push(old);
+    if(brand&&!row.brand)row.brand=brand;row.amount += amount; sources.set(identity,row);
+  };
+  const byRecipe = new Map(); model.ingredients.forEach(i => { if (i.amount != null && i.portions > 0 && !noShop(i)) { if (!byRecipe.has(i.id)) byRecipe.set(i.id, []); byRecipe.get(i.id).push(i); } }); /* v5.18 · una sola pasada por los ingredientes */
+  model.lots.forEach(l => (byRecipe.get(l.recipeId) || []).forEach(i => {if(brothOrWaterName(i.name)&&lotBroth(l)[i.name]!=='caldo')return;/* v5.22 · «caldo o agua» solo cuenta si se elige caldo */const b=lotBuy(l,i,model.products);add('lote:'+l.lotId,l.recipeId,l.date,b.name||shopName(i),b.unit,b.amount,l.includeShopping!==false,false,i.name,b.brand);}));
+  model.lots.forEach(l => {const w=lotBroth(l);if(!Object.values(w).includes('caldo'))return;model.ingredients.filter(i=>i.id===l.recipeId&&w[i.name]==='caldo'&&!noShop(i)&&!(i.amount != null && i.portions > 0)).forEach(i=>{const b=lotBuy(l,i,model.products);add('lote:'+l.lotId,l.recipeId,l.date,b.name||shopName(i),i.unit,1,l.includeShopping!==false,true,i.name,b.brand);});}); /* v5.22 · caldo elegido y la receta no da cantidad: entra en la compra sin medida */
+  model.entries.filter(e => /^PR-\d+$/.test(e.itemId)).forEach(e => {const p=model.products.find(p => p.id===e.itemId);if(p){const qty=(Number(e.own)||0)+(Number(e.others)||0),unmeasured=qty===0&&(e.own==null||e.own==='');/* Sin medida: amount=1 cuenta una línea, no un gramo. */add('linea:'+e.lineId,e.itemId,e.date,shopName(p),'g',unmeasured?1:qty,e.includeShopping!==false,unmeasured,p.name);}});
+  model.entries.filter(e => isPrep(e.itemId)).forEach(e => {const d=prepData(e);if(!d)return;d.ing.forEach(x=>{const p=model.products.find(p=>p.id===x.p);if(p&&x.g>0)add('linea:'+e.lineId,x.p,e.date,shopName(p),'g',x.g,e.includeShopping!==false,false,p.name);});}); /* v5.25 · ingredientes de una preparación */
+  return [...sources.values()];
+}
+function reconcilePurchases(records, model, given) {
+  const list = given || purchaseSources(model), sources = new Map(list.map(x=>[JSON.stringify([x.origin,x.itemId,x.key]),x])), legacy = new Map(), loose = new Map(), result = new Map(), origins = new Set(list.map(x=>x.origin));list.forEach(x=>{const k=JSON.stringify([x.origin,x.key.slice(0,x.key.indexOf('♦'))]);if(!loose.has(k))loose.set(k,x);}); /* v5.4 · lo comprado, comprado está. */
+  list.forEach(x=>(x.legacy||[]).forEach(k=>legacy.set(JSON.stringify([x.origin,x.itemId,k]),x))); // Marcas guardadas con el nombre antiguo.
+  records.forEach(r=>{if(String(r.origin||'').startsWith('casa:')){/* v5.22 · «Tengo en casa»: fila de la semana, se conserva tal cual */if(r.amount>0)result.set(JSON.stringify([r.origin,'',r.key]),{key:r.key,amount:r.amount,origin:r.origin,date:r.date,itemId:'',included:true,boughtWithoutQuantity:false});return;}const source=sources.get(JSON.stringify([r.origin,r.itemId,r.key]))||legacy.get(JSON.stringify([r.origin,r.itemId,r.key]))||loose.get(JSON.stringify([r.origin,String(r.key).slice(0,String(r.key).indexOf('♦'))]));if(!(r.amount>0))return;if(!source){/* v5.19 · la preparación sigue existiendo pero ningún ingrediente se llama así ahora (otro corte elegido): la marca se conserva tal cual, sin mostrarse, por si vuelve a coincidir */if(origins.has(r.origin)){const k=JSON.stringify([r.origin,r.itemId,r.key]);if(!result.has(k))result.set(k,{key:r.key,amount:r.amount,origin:r.origin,date:r.date,itemId:r.itemId,included:r.included!==false,boughtWithoutQuantity:r.boughtWithoutQuantity===true});}return;}const identity=JSON.stringify([source.origin,source.itemId,source.key]);const boughtWithoutQuantity=(r.boughtWithoutQuantity===true||result.get(identity)?.boughtWithoutQuantity===true)&&(source.origin.startsWith('linea:')||source.unmeasured===true);const amount=boughtWithoutQuantity?source.amount:source.unmeasured?0:source.amount;if(amount>0)result.set(identity,{key:source.key,amount,origin:r.origin,date:source.date,itemId:source.itemId,included:source.included,boughtWithoutQuantity});});
+  return [...result.values()];
+}
+function applyPurchaseChanges(model, records, changes, activeWeek) {
+  if(!Array.isArray(changes))throw new Error('Las marcas de compra recibidas no son válidas.');
+  const sources=new Map(purchaseSources(model).map(x=>[JSON.stringify([x.origin,x.itemId,x.key]),x])), result=new Map(reconcilePurchases(records,model).map(x=>[JSON.stringify([x.origin,x.itemId,x.key]),x]));
+  const end=new Date(activeWeek+'T12:00:00Z');end.setUTCDate(end.getUTCDate()+7);const last=end.toISOString().slice(0,10);
+  changes.forEach(change=>{
+    if(!change||typeof change.key!=='string'||!change.key.includes('♦')||change.key.length>300||typeof change.checked!=='boolean'||!Array.isArray(change.allocations))throw new Error('Una marca de compra no es válida.');
+    change.allocations.forEach(a=>{if(!a||typeof a.origin!=='string'||typeof a.itemId!=='string'||typeof a.amount!=='number'||!Number.isFinite(a.amount)||a.amount<=0)throw new Error('Una cantidad de compra no es válida.');});
+  });
+  // Las cantidades seleccionadas se capturan al marcar: una receta añadida después sigue pendiente.
+  changes.slice().sort((a,b)=>Number(a.checked)-Number(b.checked)).forEach(change=>change.allocations.forEach(a=>{
+    const name=change.key.slice(0,change.key.indexOf('♦')),source=sources.get(JSON.stringify([a.origin,a.itemId,change.key]))||[...sources.values()].find(s=>s.origin===a.origin&&s.itemId===a.itemId&&(s.key.slice(0,s.key.indexOf('♦'))===name||(s.legacy||[]).some(k=>k.slice(0,k.indexOf('♦'))===name)))/* v5.19 · la marca se hizo con otra unidad o nombre (receta o Compra cambiadas en el mismo guardado): vale entera, «lo comprado, comprado está» */,identity=source?JSON.stringify([source.origin,source.itemId,source.key]):'';
+    if(!source||!source.included||source.date<activeWeek||source.date>=last)return;
+    const previous=result.get(identity);if(a.unmeasured===true&&(source.origin.startsWith('linea:')||source.unmeasured===true)){if(change.checked)result.set(identity,{key:source.key,origin:source.origin,itemId:source.itemId,date:source.date,included:source.included,amount:source.amount,boughtWithoutQuantity:true});else result.delete(identity);return;}const old=previous?.amount||0,delta=source.key!==change.key?source.amount:Math.min(a.amount,source.amount),amount=change.checked?Math.min(source.amount,old+delta):Math.max(0,old-delta);
+    if(amount>1e-8)result.set(identity,{key:source.key,origin:source.origin,itemId:source.itemId,date:source.date,included:source.included,amount});else result.delete(identity);
+  }));
+  return [...result.values()];
+}
+function manualShopRows(){const rows=new Map((data.manualShopping||[]).filter(r=>r.week===data.activeWeek).map(r=>[r.id,{...r,amount:r.amount==null||r.amount===''?null:r.amount,unit:r.unit||''}]));for(const c of manualShopQueue.values())if(c.week===data.activeWeek){if(c.remove)rows.delete(c.id);else rows.set(c.id,c);}return [...rows.values()];}
+function manualShopChanges(){return [...manualShopQueue.values()].filter(r=>r.week===data.activeWeek);}
+function purchaseChangeCount(){return new Set(queuedPurchases().filter(c=>!c.key.startsWith('manual:')).map(c=>JSON.stringify([c.key.slice(0,c.key.indexOf('♦')),c.section,c.part||'']))).size+homeChanges().length+new Set([...manualShopChanges().map(r=>r.id),...queuedPurchases().filter(c=>c.key.startsWith('manual:')).map(c=>c.key.slice(7))]).size;}
+function shopSuggestions(result){const rows=result.pantry.map(i=>({...i,source:'pantry:'+i.key}));rows.push(...result.pantryUnknown.map(name=>({name,amount:null,unit:'',source:'pantry-unknown:'+clean(name)})));rows.push(...result.unknown.filter(x=>x.ingredientName).map(x=>({name:x.ingredientName,amount:null,unit:'',source:'review:'+clean(x.ingredientName)})));return rows;}
+function menuShopSource(source){if(!source?.startsWith('menu:'))return null;try{return JSON.parse(source.slice(5));}catch(e){return null;}}
+function shopNames(){return [...new Set([...data.ingredients.filter(i=>!noShop(i)).map(shopName),...data.products.map(shopName)].map(x=>String(x||'').trim()).filter(Boolean))].sort(compareEs);}
+function purchaseQueueId(key,section,scope=shopScope(),part=''){return JSON.stringify([data.activeWeek,key,section,key.startsWith('manual:')?'manual':scope,part]);}
+function queuedPurchases(){return [...purchaseQueue.values()].filter(x=>x.week===data.activeWeek);}
+function purchaseAllocations(key,done){return shopping().allocations.filter(x=>x.key===key).map(x=>({origin:x.origin,itemId:x.itemId,amount:done?x.bought:x.pending,unmeasured:x.unmeasured||(done&&x.boughtWithoutQuantity===true)})).filter(x=>x.amount>1e-8);}
+function shopMarksPending(){return queuedPurchases().some(c=>c.section==='pending'&&c.checked);}
+function shopping(filtered=true,days=null){
+      const map=new Map(),pantry=new Map(),unknown=new Map(),pantryUnknown=new Map(),conditional=new Map(),shopDates=new Set((days||(filtered?shopDayList():[0,1,2,3,4,5,6])).map(i=>shiftDate(data.activeWeek,i))),inDays=d=>shopDates.has(String(d).slice(0,10));
+      const add=(name,unit,amount)=>{if(!(amount>0))return;const shownName=tapWaterName(name)?'Agua del grifo':name,key=shownName+'♦'+(unit||''),target=pantryName(name)?pantry:map;target.set(key,{key,name:shownName,unit:unit||'',amount:(target.get(key)?.amount||0)+amount});};
+      const addAove=grams=>{if(!(grams>0))return;const key='AOVE♦g',target=pantry;target.set(key,{key,name:'AOVE',unit:'g',amount:(target.get(key)?.amount||0)+grams});};
+      const brothChosen=[],brothPending=[],brothWater=[],review=(i,r)=>{const nm=shopName(i);
+        if(brothOrWaterName(i.name)){conditional.set(r.id+'|'+i.name,{recipe:r.name,raw:i.raw||i.name,note:'Si usas agua del grifo, no tienes que comprar nada. Si eliges caldo, añádelo a la compra.'});return;}
+        if(tapWaterName(i.name))return;
+        if(isAoveName(nm)){unknown.set(r.id+'|AOVE|'+i.unit,{name:'AOVE',ingredientName:'AOVE',raw:i.raw||i.name,note:n(i.amount)===null?'Indica una cantidad de aceite.':'Revisa la unidad del aceite.'});return;}
+        if(pantryName(nm)){pantryUnknown.set(clean(nm),nm);return;}
+        unknown.set(r.id+'|'+i.name+'|'+i.unit,{name:r.name,ingredientName:nm,raw:i.raw||i.name,note:i.note||''});
+      };
+      /* v5.18 · la compra solo mira la semana activa (antes recorría todo el historial varias veces) */
+      const wEnd=shiftDate(data.activeWeek,7),inWeek=d=>String(d).slice(0,10)>=data.activeWeek&&String(d).slice(0,10)<wEnd,wk={activeWeek:data.activeWeek,lots:data.lots.filter(l=>inWeek(l.date)),entries:data.entries.filter(e=>inWeek(e.date)),ingredients:data.ingredients,products:data.products},ingBy=new Map();data.ingredients.forEach(i=>{if(!ingBy.has(i.id))ingBy.set(i.id,[]);ingBy.get(i.id).push(i);});
+      wk.lots.filter(l=>l.includeShopping!==false&&inDays(l.date)).forEach(l=>{const r=recipe(l.recipeId);if(!r)return;if(blank(l.prepared)){unknown.set(l.lotId,{name:r.name,raw:'Indica cuántas raciones preparas',note:''});return;}
+        (ingBy.get(l.recipeId)||[]).filter(i=>!noShop(i)).forEach(i=>{const nm=shopName(i);if(brothOrWaterName(i.name)){/* v5.22 · «Caldo o agua»: se decide por preparación */const ch=lotBroth(l)[i.name],known=n(i.amount)!==null&&Number(i.portions)>0;if(ch==='agua'){brothWater.push({lotId:l.lotId,ing:i.name,recipe:r.name,amount:known?Number(i.amount)/Number(i.portions)*Number(l.prepared):null,unit:i.unit||'',raw:i.raw||''});return;}if(ch==='caldo'){const b=lotBuy(l,i,data.products);brothChosen.push({lotId:l.lotId,ing:i.name,key:(b.name||nm)+'♦'+(i.unit||''),recipe:r.name});if(known)add(b.name||nm,b.unit,b.amount);return;}brothPending.push({lotId:l.lotId,ing:i.name,recipe:r.name,date:l.date,meal:l.meal,amount:known?Number(i.amount)/Number(i.portions)*Number(l.prepared):null,unit:i.unit||'',raw:i.raw||''});review(i,r);return;}if(tapWaterName(i.name)){if(n(i.amount)!==null&&Number(i.portions)>0){const amount=Number(i.amount)/Number(i.portions)*Number(l.prepared);add(i.name,i.unit,amount);}return;}if(n(i.amount)===null||!(Number(i.portions)>0)){review(i,r);return;}const amount=Number(i.amount)/Number(i.portions)*Number(l.prepared);if(isAoveName(nm)){const grams=aoveGrams(amount,i.unit);if(grams===null){review(i,r);return;}addAove(grams);}else{const b=lotBuy(l,i,data.products);add(b.name||nm,b.unit,b.amount);/* v5.7 · la tarjeta lleva el nombre del corte elegido */}});
+      });
+      wk.entries.filter(e=>inDays(e.date)&&isProduct(e.itemId)&&e.includeShopping!==false).forEach(e=>{const p=product(e.itemId);if(!p)return;const qty=(n(e.own)||0)+(n(e.others)||0);if(isAoveName(shopName(p)))addAove(qty);else add(shopName(p),'g',qty);});
+      /* v5.25 · una preparación pide sus ingredientes enteros (lo usado en total), como productos */
+      wk.entries.filter(e=>inDays(e.date)&&isPrep(e.itemId)&&e.includeShopping!==false).forEach(e=>{prepData(e).ing.forEach(x=>{const p=product(x.p);if(!p||!(x.g>0))return;if(isAoveName(shopName(p)))addAove(x.g);else add(shopName(p),'g',x.g);});});
+      const wkSources=purchaseSources(wk),sources=wkSources.filter(x=>x.included&&inDays(x.date)),credits=new Map(reconcilePurchases(data.purchaseRecords||[],wk,wkSources).map(x=>[JSON.stringify([x.origin,x.itemId,x.key]),x.amount]));
+      sources.filter(s=>s.unmeasured).forEach(s=>{if(!map.has(s.key))map.set(s.key,{key:s.key,name:s.key.split('♦')[0],unit:'g',amount:0});});map.forEach(i=>{const group=sources.filter(x=>x.key===i.key);i.pendingUnknown=group.filter(x=>x.unmeasured&&!(credits.get(JSON.stringify([x.origin,x.itemId,x.key]))>0)).length;i.boughtUnknown=group.filter(x=>x.unmeasured&&credits.get(JSON.stringify([x.origin,x.itemId,x.key]))>0).length;i.boughtAmount=group.filter(x=>!x.unmeasured).reduce((sum,x)=>sum+(credits.get(JSON.stringify([x.origin,x.itemId,x.key]))||0),0)+i.boughtUnknown;i.pendingAmount=Math.max(0,i.amount-(i.boughtAmount-i.boughtUnknown))+i.pendingUnknown;if(i.pendingAmount<1e-8)i.pendingAmount=0;});
+      const allocations=sources.map(s=>({...s,boughtWithoutQuantity:(data.purchaseRecords||[]).some(r=>r.origin===s.origin&&r.itemId===s.itemId&&r.key===s.key&&r.boughtWithoutQuantity),bought:credits.get(JSON.stringify([s.origin,s.itemId,s.key]))||0,pending:Math.max(0,s.amount-(credits.get(JSON.stringify([s.origin,s.itemId,s.key]))||0))}));
+      manualShopRows().forEach(r=>{const spec=menuShopSource(r.source);let ratio=1;if(spec){let covered=0,total=0;for(const a of spec.allocations){total+=a.amount;const slot=allocations.find(x=>x.key===(a.key||spec.key)&&x.origin===a.origin&&x.itemId===a.itemId),field=spec.done?'bought':'pending';if(!slot)continue;const take=a.unmeasured?slot[field]:Math.min(slot[field],a.amount);slot[field]-=take;covered+=a.unmeasured?(take>0?a.amount:0):take;const original=map.get(a.key||spec.key);if(original&&slot.unmeasured)original[spec.done?'boughtUnknown':'pendingUnknown']=Math.max(0,original[spec.done?'boughtUnknown':'pendingUnknown']-1);if(original)original[spec.done?'boughtAmount':'pendingAmount']=Math.max(0,original[spec.done?'boughtAmount':'pendingAmount']-take);}ratio=total>0?covered/total:0;if(ratio<1e-8)return;}const amount=r.amount==null||r.amount===''?null:r.amount*ratio;map.set('manual:'+r.id,{key:'manual:'+r.id,manualId:r.id,adjusted:!!spec,ratio,name:r.name,unit:r.unit,amount,unmeasured:amount===null,boughtAmount:r.bought?(amount??1):0,pendingAmount:r.bought?0:(amount??1)});});
+
+      const sort=items=>[...items.values()].sort((a,b)=>a.name.localeCompare(b.name,'es'));return {allocations,items:sort(map).filter(i=>i.pendingAmount>0||i.boughtAmount>0),pantry:sort(pantry),unknown:[...unknown.values()],pantryUnknown:[...pantryUnknown.values()].sort(),conditional:[...conditional.values()],brothChosen,brothPending,brothWater};
+    }
+function shoppingAmountText(i,done=false){const amount=done?i.boughtAmount:i.pendingAmount,count=done?i.boughtUnknown:i.pendingUnknown;if(i.manualId)return i.unmeasured?'Cantidad por definir':fmt.format(i.amount)+' '+esc(i.unit);const measured=Math.max(0,amount-(count||0));const shown=shoppingQuantity(i,measured);return (measured>0?fmt.format(shown.amount)+' '+esc(shown.unit==='onza'?unitWord(shown.amount,'onza'):shown.unit):'')+(count?(measured>0?' + cantidad por definir':'Cantidad por definir'):'');}
+function shoppingQuantity(i,amount){if(i.unit!=='g')return {unit:i.unit,amount};const ps=data.products.filter(p=>shopName(p)===i.name);if(!ps.length)return {unit:i.unit,amount};const m=productMeasure(ps[0]);if(ps.some(p=>{const x=productMeasure(p);return x.unit!==m.unit||x.factor!==m.factor;}))return {unit:i.unit,amount};return {unit:m.unit,amount:amount/m.factor};}
+let weekInfo=null;
+const DAYMIN=['lun','mar','mié','jue','vie','sáb','dom'];
+function shopCardName(e){return e.manual?e.manual.name:e.card.name;}
+function computeWeekInfo(){if(!shopDays.size){weekInfo=null;return;}const skip=e=>e.covered||(e.manual&&e.manual.manualId);const perDay=[0,1,2,3,4,5,6].map(i=>new Set(shopCardEntries(shopping(true,[i]),false).filter(e=>!skip(e)).map(shopCardName)));const week=new Map();shopCardEntries(shopping(true,[0,1,2,3,4,5,6]),false).filter(e=>!skip(e)).forEach(e=>week.set(shopCardName(e),e));weekInfo={perDay,week};}
+function shopRangeLabel(){return !shopDays.size?'Toda la semana':shopDayList().map(i=>DAYAB[i]).join(', ');}
+function shopListText(){const r=shopping(),items=shopLines(r).map(i=>{const t=i.text.replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').replace(/&#39;/g,"'");return {category:i.category,line:'- '+i.name+(/por definir/i.test(t)&&!/\d/.test(t)?'':' · '+t)};}),groups=new Map();items.forEach(i=>{if(!groups.has(i.category))groups.set(i.category,[]);groups.get(i.category).push(i.line);});/* v5.20 · agrupada por categoría, «Otros» al final */const lines=[...groups.entries()].sort((a,b)=>compareCategory(a[0],b[0])).flatMap(([c,l])=>[c.toUpperCase()].concat(l));return 'Lista de la compra · '+(!shopDays.size?shortDate(shiftDate(data.activeWeek,0))+' – '+shortDate(shiftDate(data.activeWeek,6)):shopDayList().map(i=>shortDate(shiftDate(data.activeWeek,i))).join(', '))+'\n'+(lines.length?lines.join('\n'):'(sin pendientes)');}
+function allocLabel(a){const p=a.origin.startsWith('linea:')?product(a.itemId):a.brand?product(a.brand):null,brand=brandOf(p);if(!brand)return '';return clean(p.name.replace(/\s*\([^()]*\)\s*$/,''))===clean(allocName(a))?brand:p.name;}
+function allocName(a){return a.key.slice(0,a.key.indexOf('♦'));}
+function shopCards(result,done){
+      const field=done?'bought':'pending',cards=new Map();
+      result.items.filter(i=>!i.manualId&&(done?i.boughtAmount:i.pendingAmount)>0).forEach(i=>{const c=cards.get(i.name)||{name:i.name,items:[],parts:new Map(),branded:false};c.items.push(i);cards.set(i.name,c);});
+      result.allocations.forEach(a=>{const c=cards.get(allocName(a));if(!c)return;const label=allocLabel(a);if(label)c.branded=true;if(!(a[field]>1e-8)||!c.items.some(i=>i.key===a.key))return;const p=c.parts.get(label)||{label,allocs:[]};p.allocs.push(a);c.parts.set(label,p);});
+      cards.forEach(c=>{c.parts=[...c.parts.values()].sort((a,b)=>(a.label===''?1:0)-(b.label===''?1:0)||a.label.localeCompare(b.label,'es'));});
+      return [...cards.values()];
+    }
+function sameMeasure(q){const u=clean(q.unit).replace(/\.$/,'');if(u==='cda'||u==='cdas')return {unit:'cdta',amount:q.amount*3};if(u==='cdtas')return {unit:'cdta',amount:q.amount};if(u==='diente')return {unit:'dientes',amount:q.amount};if(u==='hoja')return {unit:'hojas',amount:q.amount};return q;}
+function manualMeasure(name,i){const u=i.unit||'',a=Number(i.amount);if(u==='kg')return shoppingQuantity({name,unit:'g'},a*1000);if(u==='g')return shoppingQuantity({name,unit:'g'},a);if(u==='l')return {unit:'ml',amount:a*1000};if(u==='cdta.')return {unit:'cdta',amount:a};if(u==='cda.')return {unit:'cda',amount:a};if(u==='pulv.')return {unit:'pulverizaciones',amount:a};return {unit:u,amount:a};}
+function allocAmountText(name,allocs,field,extras=[]){const units=new Map();let unknown=0,estimated=false;allocs.forEach(a=>{if(a.unmeasured){unknown++;return;}const unit=a.key.slice(a.key.indexOf('♦')+1),q=sameMeasure(shoppingQuantity({name,unit},a[field]));if(q.unit==='ud')estimated=true;units.set(q.unit,(units.get(q.unit)||0)+q.amount);});extras.forEach(i=>{if(i.amount==null||i.amount===''){unknown++;return;}const q=sameMeasure(manualMeasure(name,i));units.set(q.unit,(units.get(q.unit)||0)+q.amount);});const ord=[...units].sort((a,b)=>(a[0]==='ud'?0:1)-(b[0]==='ud'?0:1));units.clear();ord.forEach(([k,v])=>units.set(k,v));const t=[...units].filter(x=>x[1]>1e-8).map(x=>fmt.format(x[1])+' '+esc(x[0]==='onza'?unitWord(x[1],'onza'):x[0])).join(' + ');return {text:t+(unknown?(t?' + cantidad por definir':'Cantidad por definir'):''),shown:t?t+(unknown?AST:''):'',missing:unknown,estimated,units:[...units].filter(x=>x[1]>1e-8)};}
+function homeQueueId(key){return JSON.stringify([data.activeWeek,key]);}
+function homeChanges(){return [...homeQueue.values()].filter(h=>h.week===data.activeWeek);}
+function homeSaved(key){const r=(data.purchaseRecords||[]).find(x=>x.origin==='casa:'+data.activeWeek&&x.key===key);return r?Number(r.amount)||0:0;}
+function homeAmount(key){const q=homeQueue.get(homeQueueId(key));return q?q.amount:homeSaved(key);}
+function applyHomeChanges(records,homes,week){if(!homes.length)return records;const origin='casa:'+week,out=records.slice();homes.forEach(h=>{for(let k=out.length-1;k>=0;k--)if(out[k].origin===origin&&out[k].key===h.key)out.splice(k,1);if(h.amount>1e-8)out.push({key:h.key,amount:h.amount,origin,date:week,itemId:'',included:true,boughtWithoutQuantity:false});});return out;}
+function homeApply(e){const a=e.manual?allocAmountText(e.name,[],'pending',[e.manual]):e.amount;if(!a||!a.units||a.units.length!==1)return e;const unit=a.units[0][0],total=a.units[0][1],key=e.name+'♦'+unit,home=homeAmount(key);e.homeKey=key;e.homeUnit=unit;e.total=total;e.home=home;if(home>0){e.net=Math.max(0,total-home);e.covered=e.net<=1e-8&&!a.missing;}return e;}
+function homeQty(x,unit){return fmt.format(Math.round(x*100)/100)+' '+esc(unit);}
+function shopCardEntries(result,done){const pending=shopCardEntriesRaw(result,false).map(homeApply);if(!done)return pending.filter(e=>!e.covered);return shopCardEntriesRaw(result,true).concat(pending.filter(e=>e.covered)).sort((a,b)=>a.name.localeCompare(b.name,'es'));}
+function shopCardEntriesRaw(result,done){
+      const field=done?'bought':'pending',out=[];
+      shopCards(result,done).forEach(c=>{const all=c.parts.flatMap(p=>p.allocs);if(done&&c.parts.length)c.parts.forEach(p=>out.push({card:c,parts:[p],extras:[],name:c.name,amount:allocAmountText(c.name,p.allocs,field)}));else out.push({card:c,parts:c.parts,extras:[],name:c.name,amount:all.length?allocAmountText(c.name,all,field):(t=>({text:t,shown:/\d/.test(t)?t:'',missing:0,estimated:false}))(c.items.map(i=>shoppingAmountText(i,done)).filter(Boolean).join(' + '))});});
+      result.items.filter(i=>i.manualId&&(done?i.boughtAmount:i.pendingAmount)>0).forEach(i=>{const e=done?null:out.find(x=>x.card&&clean(x.name)===clean(i.name));if(e){e.extras.push(i);e.amount=allocAmountText(e.name,e.parts.flatMap(p=>p.allocs),field,e.extras);}else out.push({manual:i,name:i.name});});
+      return out.sort((a,b)=>a.name.localeCompare(b.name,'es'));
+    }
+const SHOP_UNITS=['','g','kg','ml','l','ud','cdta.','cda.','pulv.','dientes','hojas','pizca','filetes','ramitas','tallos','granos'];
+function shopUnit(u){const x=clean(u).replace(/\.$/,'');return x==='cda'||x==='cdas'?'cda.':x==='cdta'||x==='cdtas'?'cdta.':x==='pulverizaciones'||x==='pulv'?'pulv.':x==='diente'?'dientes':x==='hoja'?'hojas':x==='pizcas'?'pizca':SHOP_UNITS.includes(u)?u:'';}
+function lotBuy(l,i,products){const pick=String(lotBuyMark(l)[i.name]||'').trim(),chosen=pick?products.find(x=>x.id===pick):null,f=chosen&&sameAisle(chosen,i,products)?chosen:(i.brand?products.find(x=>x.id===i.brand):null),ok=!!(f&&sameAisle(f,i,products));return {unit:i.unit,amount:Number(i.amount)/Number(i.portions)*Number(l.prepared),brand:ok?f.id:'',name:ok?shopName(f):shopName(i)};}
+function removedShopRows(){return manualShopRows().filter(r=>r.amount===0&&menuShopSource(r.source));}
+function shopEditModel(name){const result=shopping(),lines=[],recs=[];
+      result.allocations.forEach(a=>{if(allocName(a)!==name||!(a.pending>1e-8))return;if(a.origin.startsWith('linea:')){const e=data.entries.find(x=>x.lineId===a.origin.slice(6));if(e&&!lines.some(l=>l.e===e))lines.push({e});}else{const lot=data.lots.find(l=>'lote:'+l.lotId===a.origin)||null;recs.push({id:a.origin+'¦'+a.key,key:a.key,a,lot,adj:lot?adjustable(lot).filter(r=>(lotBuy(lot,r.i,data.products).name||shopName(r.i))===name):[]});}});
+      lines.sort((a,b)=>a.e.date.localeCompare(b.e.date)||(a.e.order||0)-(b.e.order||0));
+      recs.sort((a,b)=>String(a.lot?a.lot.date:'').localeCompare(String(b.lot?b.lot.date:'')));
+      return {lines,recs,extras:result.items.filter(i=>i.manualId&&i.pendingAmount>0&&clean(i.name)===clean(name)),removed:removedShopRows().filter(r=>clean(r.name)===clean(name))};}
+function shopCount(result,done){return shopCardEntries(result,done).length+(done?0:(result.brothPending||[]).length);}
+function brothAmountText(b){if(b.amount!==null)return fmt.format(Math.round(b.amount*10)/10)+' '+esc(b.unit);const m=/(\d+(?:[.,]\d+)?(?:\s*[–-]\s*\d+(?:[.,]\d+)?)?)\s*(ml|l|g|kg)\b/i.exec(b.raw||'');return m?esc(m[1].replace(/\s+/g,'')+' '+m[2]):'';}
+function shopLines(result){return shopCardEntries(result,false).map(e=>({name:e.name,category:shopCategory(e),text:e.home>0&&e.net!==undefined?homeQty(e.net,e.homeUnit)+(e.amount&&e.amount.missing?' (falta una cantidad)':''):e.manual?shoppingAmountText(e.manual):e.amount.shown?e.amount.shown.replace(AST,'')+(e.amount.missing?' (falta una cantidad)':''):'Cantidad por definir'}));}
+function allocQueued(a,section){const done=section==='done',id=JSON.stringify([a.origin,a.itemId]);for(const c of purchaseQueue.values()){if(c.week!==data.activeWeek||c.key!==a.key||c.section!==section||c.checked!==!done)continue;if((c.allocations||[]).some(x=>JSON.stringify([x.origin,x.itemId])===id))return true;}return false;}
+function partQueued(part,section){return part.allocs.length>0&&part.allocs.every(a=>allocQueued(a,section));}
+function shopCategory(e){if(e.manual||!e.card)return 'Otros';const ps=data.products.filter(p=>shopName(p)===e.name);if(!ps.length)return 'Otros';const cats=new Set(ps.map(category));if(cats.size===1)return [...cats][0];const chosen=e.card.parts.flatMap(p=>p.allocs).map(a=>a.brand&&product(a.brand)).find(p=>p&&shopName(p)===e.name);if(chosen)return category(chosen);const count=new Map();ps.forEach(p=>count.set(category(p),(count.get(category(p))||0)+1));return [...count.entries()].sort((a,b)=>b[1]-a[1]||compareCategory(a[0],b[0]))[0][0];}
+function compareCategory(a,b){const oa=a==='Otros'?1:0,ob=b==='Otros'?1:0;return oa-ob||compareEs(a,b);}
+function shopGroups(rows){const groups=new Map();rows.forEach(e=>{const c=shopCategory(e);if(!groups.has(c))groups.set(c,[]);groups.get(c).push(e);});return [...groups.entries()].sort((a,b)=>compareCategory(a[0],b[0])).map(([category,list])=>({category,rows:list.slice().sort((a,b)=>compareEs(a.name,b.name))}));}
+const UNIT_PLURALS=[['onza','onzas'],['diente','dientes'],['pizca','pizcas'],['hoja','hojas'],['ramita','ramitas'],['tallo','tallos'],['filete','filetes'],['grano','granos'],['pulverización','pulverizaciones'],['cabeza','cabezas'],['rebanada','rebanadas'],['loncha','lonchas'],['rodaja','rodajas'],['rama','ramas'],['lata','latas'],['bote','botes'],['sobre','sobres'],['vaso','vasos'],['taza','tazas'],['cucharada','cucharadas'],['cucharadita','cucharaditas']];
+function unitWord(q,unit){const u=String(unit||'').trim(),k=clean(u).replace(/\.$/,''),one=Math.abs(Number(q)-1)<1e-9;for(const [s,p] of UNIT_PLURALS){if(k===clean(s)||k===clean(p))return one?s:p;}return u;}
+
+const CP = { q: '', abiertos: new Set(), ficha: null, ocupado: false };
+const CP_KEY = () => 'mimenu-compra-' + (SESION && SESION.user.id);
+const sinAst = s => String(s || '').split(AST).join('');
+const r2 = x => x == null ? null : Math.round(x * 100) / 100;
+const MS_UNITS = ['', 'g', 'kg', 'ml', 'l', 'ud', 'cdta.', 'cda.', 'pulv.', 'dientes', 'hojas', 'pizca', 'filetes', 'ramitas', 'tallos', 'granos'];
+
+/* «Caldo o agua»: la elección va en la fila del lote (caldo) y se guarda sola, como el menú */
+function setLotBroth(lot, w) { lot._row = lot._row || nuevaFilaLote(lot.lotId); lot._row.caldo = Object.assign({}, w); rehacerNota(lot); marcarLote(lot); }
+
+/* --- Supabase ⇄ modelo de la hoja --- */
+function aMarca(f) { const o = f.origen || {}; return { key: f.clave, amount: Number(f.cantidad) || 0, origin: o.origen || '', date: String(o.fecha || f.semana).slice(0, 10), itemId: o.item || '', included: o.incluir !== false, boughtWithoutQuantity: o.sin_cantidad === true }; }
+function aManual(f) { const o = f.origen || {}; return { id: f.clave, week: String(f.semana).slice(0, 10), name: f.nombre || '', amount: f.cantidad == null ? null : Number(f.cantidad), unit: f.unidad || '', bought: o.comprado === true, source: o.origen || '' }; }
+const idMarca = r => JSON.stringify([r.origin, r.itemId || '', r.key]);
+function filaMarca(rec, old) {
+  const i = rec.key.indexOf('♦'), casa = String(rec.origin).startsWith('casa:'), fecha = String(rec.date).slice(0, 10);
+  return { id: old ? old.id : uuid(), owner: SESION.user.id, semana: casa ? rec.origin.slice(5) : mondayOf(fecha), clave: rec.key, tipo: casa ? 'en_casa' : 'comprado', cantidad: Number(rec.amount), unidad: rec.key.slice(i + 1) || null, nombre: rec.key.slice(0, i),
+    origen: casa ? { origen: rec.origin, fecha, incluir: true, sin_cantidad: false } : { origen: rec.origin, item: rec.itemId || null, fecha, incluir: rec.included !== false, sin_cantidad: rec.boughtWithoutQuantity === true } };
+}
+function filaManual(m, old) { return { id: old ? old.id : uuid(), owner: SESION.user.id, semana: m.week, clave: m.id, tipo: 'manual', cantidad: m.amount == null ? null : Number(m.amount), unidad: m.unit || null, nombre: m.name, origen: { id: m.id, comprado: m.bought === true, origen: m.source || '' } }; }
+const ordenado = v => v && typeof v === 'object' && !Array.isArray(v) ? Object.keys(v).sort().reduce((o, k) => (o[k] = ordenado(v[k]), o), {}) : v;
+function igualFila(a, b) { const num = x => x == null ? null : Number(x); return num(a.cantidad) === num(b.cantidad) && String(a.semana).slice(0, 10) === b.semana && (a.unidad || null) === (b.unidad || null) && (a.nombre || '') === (b.nombre || '') && a.tipo === b.tipo && JSON.stringify(ordenado(a.origen || {})) === JSON.stringify(ordenado(b.origen || {})); }
+function prepararCompra() {
+  const filas = data.compraRows || (data.compraRows = []);
+  data.purchaseRecords = filas.filter(f => f.tipo === 'comprado' || f.tipo === 'en_casa').map(aMarca);
+  data.manualShopping = filas.filter(f => f.tipo === 'manual').map(aManual);
+  purchaseQueue.clear(); manualShopQueue.clear(); homeQueue.clear();
+  try { const j = JSON.parse(localStorage.getItem(CP_KEY()) || 'null'); if (j) { (j.p || []).forEach(([k, v]) => purchaseQueue.set(k, v)); (j.m || []).forEach(([k, v]) => manualShopQueue.set(k, v)); (j.h || []).forEach(([k, v]) => homeQueue.set(k, v)); } } catch (_) {}
+}
+function guardarMarcas() { try { if (!purchaseQueue.size && !manualShopQueue.size && !homeQueue.size) localStorage.removeItem(CP_KEY()); else localStorage.setItem(CP_KEY(), JSON.stringify({ p: [...purchaseQueue], m: [...manualShopQueue], h: [...homeQueue] })); } catch (_) {} }
+/* Lo que el servidor de la hoja hacía al actualizar (purchasesFor_ y applyManualShop_) */
+function marcasDeSemana(model, previous, changes, week) {
+  const end = shiftDate(week, 7), inW = d => String(d).slice(0, 10) >= week && String(d).slice(0, 10) < end;
+  const wk = { activeWeek: model.activeWeek, entries: model.entries.filter(e => inW(e.date)), lots: model.lots.filter(l => inW(l.date)), products: model.products, ingredients: model.ingredients };
+  const ids = new Set(purchaseSources(wk).map(x => x.origin)), homes = changes.filter(c => c && c.home === true), marks = changes.filter(c => !(c && c.home === true));
+  return applyHomeChanges(previous.filter(r => !ids.has(r.origin)).concat(applyPurchaseChanges(wk, previous.filter(r => ids.has(r.origin)), marks, week)), homes, week);
+}
+function aplicarManual(rows, changes, week) {
+  const result = new Map(rows.map(r => [r.id, r]));
+  changes.forEach(c => {
+    if (!c || typeof c.id !== 'string' || !/^MS-[\w-]{1,100}$/.test(c.id)) throw new Error('Un producto añadido no es válido.');
+    const old = result.get(c.id); if (old && old.week !== week) throw new Error('Ese producto pertenece a otra semana.');
+    if (c.remove === true) { result.delete(c.id); return; }
+    const name = typeof c.name === 'string' ? c.name.trim() : '', unit = typeof c.unit === 'string' ? c.unit : '', amount = c.amount, source = typeof c.source === 'string' ? c.source : '';
+    if (!name || name.length > 200 || !MS_UNITS.includes(unit) || (amount !== null && (typeof amount !== 'number' || !Number.isFinite(amount) || amount < 0 || (amount === 0 && !source.startsWith('menu:')) || amount > 1e6))) throw new Error('Revisa el nombre, la cantidad y la unidad de ' + (name || 'un producto') + '.');
+    result.set(c.id, { id: c.id, week, name, amount, unit, bought: c.bought === true, source });
+  });
+  return [...result.values()];
+}
+function escribirCompra(recs, man) {
+  const filas = data.compraRows || [], viejas = new Map(), viejasM = new Map(), sobran = [], nuevas = [];
+  filas.forEach(f => { if (f.tipo === 'comprado' || f.tipo === 'en_casa') { const k = idMarca(aMarca(f)); if (viejas.has(k)) sobran.push(f); else viejas.set(k, f); } else if (f.tipo === 'manual') { if (viejasM.has(f.clave)) sobran.push(f); else viejasM.set(f.clave, f); } });
+  recs.forEach(rec => { const k = idMarca(rec), old = viejas.get(k); viejas.delete(k); const f = filaMarca(rec, old); nuevas.push(f); if (!old || !igualFila(old, f)) guardarFila('compra', f); });
+  man.forEach(m => { const old = viejasM.get(m.id); viejasM.delete(m.id); const f = filaManual(m, old); nuevas.push(f); if (!old || !igualFila(old, f)) guardarFila('compra', f); });
+  [...viejas.values(), ...viejasM.values(), ...sobran].forEach(f => borrarFila('compra', f.id));
+  data.compraRows = nuevas.concat(filas.filter(f => f.tipo === 'quitado'));
+}
+function actualizarCompra() {
+  if (CP.ocupado) return;
+  const week = data.activeWeek, selected = queuedPurchases(), manual = manualShopChanges().map(r => ({ ...r })), homes = homeChanges().map(h => ({ home: true, key: h.key, amount: h.amount }));
+  for (const c of selected.filter(c => c.key.startsWith('manual:'))) { const row = manualShopRows().find(r => r.id === c.key.slice(7)); if (row) { const old = manual.findIndex(r => r.id === row.id); if (old >= 0) manual.splice(old, 1); manual.push({ ...row, bought: c.checked }); } }
+  const model = { activeWeek: week, entries: data.entries, lots: data.lots, products: data.products, ingredients: data.ingredients };
+  let recs, man;
+  try { recs = marcasDeSemana(model, reconcilePurchases(data.purchaseRecords || [], model), selected.filter(c => !c.key.startsWith('manual:')).concat(homes), week); man = manual.length ? aplicarManual(data.manualShopping || [], manual, week) : (data.manualShopping || []); }
+  catch (err) { aviso('No se ha podido actualizar la compra: ' + (err.message || err)); return; }
+  CP.ocupado = true;
+  escribirCompra(recs, man);
+  data.purchaseRecords = recs; data.manualShopping = man;
+  for (const q of [purchaseQueue, manualShopQueue, homeQueue]) for (const [k, v] of [...q]) if (v.week === week) q.delete(k);
+  guardarMarcas(); CP.ocupado = false; pintarCompra(); aviso('Compra actualizada.');
+}
+
+/* --- Marcar (copiado de la hoja: casillas de tarjeta, de marca y sueltas) --- */
+function marcarCompra(t) {
+  if ('buyCard' in t.dataset) {
+    const name = t.dataset.buyCard, section = t.dataset.buySection, done = section === 'done', field = done ? 'bought' : 'pending', result = shopping(), card = shopCards(result, done).find(c => c.name === name);
+    if (card) {
+      const active = t.classList.contains('is-partial') ? true : t.checked !== done;
+      card.parts.filter(p => !('buyPart' in t.dataset) || p.label === t.dataset.buyPart).forEach(p => {
+        [...new Set(p.allocs.map(a => a.key))].forEach(key => {
+          const queueId = purchaseQueueId(key, section, undefined, p.label);
+          if (!active) { purchaseQueue.delete(queueId); const ids = new Set(p.allocs.filter(a => a.key === key).map(a => JSON.stringify([a.origin, a.itemId]))); for (const [id, c] of purchaseQueue) { if (c.week !== data.activeWeek || c.key !== key || c.section !== section) continue; c.allocations = (c.allocations || []).filter(a => !ids.has(JSON.stringify([a.origin, a.itemId]))); if (!c.allocations.length) purchaseQueue.delete(id); } return; }
+          const allocations = p.allocs.filter(a => a.key === key).map(a => ({ origin: a.origin, itemId: a.itemId, amount: a[field], unmeasured: a.unmeasured || (done && a.boughtWithoutQuantity === true) })), identities = new Set(allocations.map(a => JSON.stringify([a.origin, a.itemId])));
+          for (const [id, c] of purchaseQueue) { if (id === queueId || c.week !== data.activeWeek || c.key !== key || c.checked !== !done) continue; c.allocations = c.allocations.filter(a => !identities.has(JSON.stringify([a.origin, a.itemId]))); if (!c.allocations.length) purchaseQueue.delete(id); }
+          purchaseQueue.set(queueId, { week: data.activeWeek, key, section, scope: shopScope(), part: p.label, checked: !done, allocations });
+        });
+      });
+      if (!done && !('buyPart' in t.dataset)) { const entry = shopCardEntries(result, false).find(x => x.card && x.name === name); (entry ? entry.extras : []).forEach(i => { const id = purchaseQueueId(i.key, section); if (active) purchaseQueue.set(id, { week: data.activeWeek, key: i.key, section, scope: shopScope(), checked: true, allocations: [] }); else purchaseQueue.delete(id); }); }
+    }
+  } else if (t.dataset.buy) {
+    const key = t.dataset.buy, section = t.dataset.buySection, done = section === 'done', queueId = purchaseQueueId(key, section);
+    if (t.checked === done) purchaseQueue.delete(queueId);
+    else { const allocations = key.startsWith('manual:') ? [] : purchaseAllocations(key, done); for (const [id, c] of purchaseQueue) { if (id === queueId || c.week !== data.activeWeek || c.key !== key || c.checked !== !done) continue; const identities = new Set(allocations.map(a => JSON.stringify([a.origin, a.itemId]))); c.allocations = c.allocations.filter(a => !identities.has(JSON.stringify([a.origin, a.itemId]))); if (!c.allocations.length && !key.startsWith('manual:')) purchaseQueue.delete(id); } purchaseQueue.set(queueId, { week: data.activeWeek, key, section, scope: shopScope(), checked: !done, allocations }); }
+  }
+  guardarMarcas();
+}
+function marcarTodo() {
+  if (shopMarksPending()) { for (const [id, c] of [...purchaseQueue]) if (c.week === data.activeWeek && c.section === 'pending') purchaseQueue.delete(id); guardarMarcas(); pintarCompra(); return; }
+  const seen = new Set();
+  for (let k = 0; k < 600; k++) {
+    const box = [...document.querySelectorAll('#cpCuerpo .cp-main input.cp-ck[data-buy-section="pending"]')].find(b => !b.disabled && !('buyPart' in b.dataset) && (!b.checked || b.classList.contains('is-partial')) && !seen.has(b.dataset.buyCard || b.dataset.buy));
+    if (!box) break; seen.add(box.dataset.buyCard || box.dataset.buy); box.checked = true; marcarCompra(box); pintarCompra();
+  }
+  pintarCompra();
+}
+function stageSuggestion(source, checked) {
+  const i = shopSuggestions(shopping()).find(r => r.source === source); if (!i) return;
+  if (!checked) { for (const r of manualShopChanges()) if (r.source === source) manualShopQueue.delete(r.id); }
+  else if (!manualShopRows().some(r => r.source === source)) { const id = 'MS-' + uuid(); const unit = shopUnit(i.unit || ''); manualShopQueue.set(id, { id, week: data.activeWeek, name: i.name, amount: unit || !i.unit ? i.amount : null, unit, bought: false, source }); }
+  guardarMarcas();
+}
+
+/* --- Pintar --- */
+const ckHtml = (attrs, checked, partial, name, done) => `<label class="cp-ckw"><input type="checkbox" class="cp-ck${partial ? ' is-partial' : ''}" ${attrs} aria-label="${done ? 'Desmarcar' : 'Marcar comprado'} ${esc(name)}${partial ? ' (comprado en parte)' : ''}"${checked ? ' checked' : ''}></label>`;
+const masHtml = (attr, name) => `<button type="button" class="cp-more" ${attr} aria-label="Ver y cambiar ${esc(name)}">⋯</button>`;
+function cantHtml(e, shown) { return e.home > 0 && e.net !== undefined ? `${homeQty(e.net, e.homeUnit)}<small>${homeQty(e.total, e.homeUnit)} − ${homeQty(e.home, e.homeUnit)} en casa</small>` : sinAst(shown); }
+const casaHtml = e => e.home > 0 ? `<small class="az">En casa: ${homeQty(e.home, e.homeUnit)}</small>` : '';
+function semanaHtml(e) {
+  if (!weekInfo || !shopDays.size || e.covered || (e.manual && e.manual.manualId)) return '';
+  const name = shopCardName(e), days = [0, 1, 2, 3, 4, 5, 6].filter(i => weekInfo.perDay[i].has(name)); if (!days.some(i => !shopDays.has(i))) return '';
+  const w = weekInfo.week.get(name); if (!w) return ''; const shown = sinAst(w.manual ? shoppingAmountText(w.manual, false) : (w.amount && w.amount.shown)); if (!shown || /por definir/i.test(shown)) return '';
+  const names = days.map(i => DAYMIN[i]), list = names.length > 1 ? names.slice(0, -1).join(', ') + ' y ' + names[names.length - 1] : names[0];
+  return `<div class="cp-week">En toda la semana: ${shown} (${list})</div>`;
+}
+function caldoNota(e, result) {
+  if (!e.card) return ''; const seen = new Set();
+  return (result.brothChosen || []).filter(b => e.parts.some(p => p.allocs.some(a => a.origin === 'lote:' + b.lotId && a.key === b.key)) && !seen.has(b.lotId + '|' + b.ing) && seen.add(b.lotId + '|' + b.ing))
+    .map(b => `<small>${esc(b.recipe)} · caldo en lugar de agua · <button type="button" class="lk" data-broth-lot="${esc(b.lotId)}" data-broth-ing="${esc(b.ing)}" data-broth-val="" aria-label="Cambiar la elección de caldo de ${esc(b.recipe)}">cambiar</button></small>`).join('');
+}
+function filaHtml(e, done, result) {
+  const section = done ? 'done' : 'pending', field = done ? 'bought' : 'pending';
+  if (e.covered) return `<div class="cp-row done"><span class="cp-ckw"><input type="checkbox" class="cp-ck" checked disabled aria-label="${esc(e.name)} · en casa"></span><div class="cp-n"><b>${esc(e.name)}</b><small class="az">En casa</small></div><div class="cp-a">${homeQty(e.total, e.homeUnit)}</div>${masHtml(`data-ficha="${esc(e.name)}"`, e.name)}</div>`;
+  if (e.manual) {
+    const i = e.manual, checked = purchaseQueue.has(purchaseQueueId(i.key, section)) ? !done : done, txt = shoppingAmountText(i, done), sinCant = /por definir/i.test(txt) && !/\d/.test(txt);
+    const notas = [i.adjusted ? 'Compra ajustada' : 'Añadido a mano', sinCant ? 'Sin cantidad' : ''].filter(Boolean).join(' · ');
+    return `<div class="cp-row${done ? ' done' : ''}">${ckHtml(`data-buy="${esc(i.key)}" data-buy-section="${section}"`, checked, false, i.name, done)}<div class="cp-n"><b>${esc(i.name)}</b><small>${esc(notas)}</small>${done ? '' : casaHtml(e)}</div><div class="cp-a">${sinCant ? '' : done ? sinAst(txt) : cantHtml(e, txt)}</div>${done ? '' : masHtml(`data-fman="${esc(i.manualId)}"`, i.name)}</div>`;
+  }
+  const c = e.card, name = c.name, queued = e.parts.map(p => partQueued(p, section)), extraQ = e.extras.map(i => purchaseQueue.has(purchaseQueueId(i.key, section))), every = [...queued, ...extraQ], all = every.length > 0 && every.every(Boolean),
+    partial = !all && (every.some(Boolean) || e.parts.some(p => p.allocs.some(a => allocQueued(a, section)))), loose = !e.parts.length, checked = loose ? (purchaseQueue.has(purchaseQueueId(c.items[0].key, section)) ? !done : done) : (done ? !all : all),
+    noAmount = !e.amount.shown, single = e.parts.length === 1 ? (e.parts[0].label ? (name.includes(e.parts[0].label) ? '' : e.parts[0].label) : (c.branded ? 'Sin marca' : '')) : '',
+    notas = [single, noAmount ? 'Sin cantidad' : e.amount.missing ? (e.amount.missing > 1 ? 'Faltan cantidades' : 'Falta una cantidad') : '', !noAmount && e.amount.estimated ? 'Unidades estimadas' : ''].filter(Boolean).join(' · '),
+    target = loose ? `data-buy="${esc(c.items[0].key)}"` : `data-buy-card="${esc(name)}"${done ? ` data-buy-part="${esc(e.parts[0].label)}"` : ''}`;
+  const subs = !done && e.parts.length + e.extras.length > 1 ? e.parts.map((p, k) => `<div class="cp-sub">${ckHtml(`data-buy-card="${esc(name)}" data-buy-part="${esc(p.label)}" data-buy-section="${section}"`, queued[k], false, name + ' · ' + (p.label || 'sin marca'), false)}<span><b>${esc(p.label || 'Sin marca')}</b> · ${sinAst(allocAmountText(name, p.allocs, field).shown) || 'sin cantidad'}</span></div>`).join('')
+    + e.extras.map((i, k) => `<div class="cp-sub">${ckHtml(`data-buy="${esc(i.key)}" data-buy-section="${section}"`, extraQ[k], false, name + ' · ' + (i.adjusted ? 'compra ajustada' : 'añadido a mano'), false)}<span><b>${i.adjusted ? 'Compra ajustada' : 'Añadido a mano'}</b> · ${i.amount == null || i.amount === '' ? 'sin cantidad' : fmt.format(i.amount) + ' ' + esc(i.unit)}</span></div>`).join('') : '';
+  return `<div class="cp-row${done ? ' done' : ''}">${ckHtml(target + ` data-buy-section="${section}"`, checked, partial, name, done)}<div class="cp-n"><b>${esc(name)}</b>${notas ? `<small>${esc(notas)}</small>` : ''}${done ? '' : casaHtml(e) + caldoNota(e, result)}</div><div class="cp-a">${noAmount ? '' : done ? sinAst(e.amount.shown) : cantHtml(e, e.amount.shown)}</div>${done ? '' : masHtml(`data-ficha="${esc(name)}"`, name)}</div>${subs}${done ? '' : semanaHtml(e)}`;
+}
+function decideHtml(b) {
+  const amt = brothAmountText(b), d = `data-broth-lot="${esc(b.lotId)}" data-broth-ing="${esc(b.ing)}"`;
+  return `<div class="cp-dec"><b>${esc(b.ing)} · ${esc(b.recipe)}</b><p>${esc(dayName(b.date) + ', ' + String(b.meal || '').toLowerCase())}. Si usas agua del grifo no hay que comprar nada.</p><div class="r"><button type="button" class="btn" ${d} data-broth-val="agua">Uso agua<small>no se compra</small></button><button type="button" class="btn" ${d} data-broth-val="caldo">Uso caldo<small>${amt || 'a la compra'}</small></button></div></div>`;
+}
+const plegable = (k, titulo, cuenta, dentro, av) => `<button type="button" class="cp-fold${av ? ' av' : ''}" data-fold="${k}" aria-expanded="${CP.abiertos.has(k)}">${titulo}<span class="c">${cuenta === '' ? '' : cuenta + ' '}${CP.abiertos.has(k) ? '⌃' : '⌄'}</span></button>${CP.abiertos.has(k) ? `<div class="cp-in">${dentro()}</div>` : ''}`;
+function sugHtml(i) {
+  const added = manualShopRows().some(r => r.source === i.source), queued = manualShopChanges().some(r => r.source === i.source && !r.remove);
+  return `<div class="cp-sug"><span><b>${esc(i.name)}</b><small>${i.amount == null ? 'Cantidad opcional' : fmt.format(r2(i.amount)) + ' ' + esc(i.unit)}</small></span><button type="button" class="btn" data-sug="${esc(i.source)}" data-sug-on="${added ? '0' : '1'}"${added && !queued ? ' disabled' : ''}>${added ? (queued ? 'Quitar' : 'En la compra') : 'Añadir'}</button></div>`;
+}
+function pintarCompra() {
+  if (!data || $('#compra').hidden) return;
+  data.activeWeek = SEM.lunes;
+  const result = shopping(), q = clean(CP.q.trim());
+  computeWeekInfo();
+  const pend = shopCardEntries(result, false), hechos = shopCardEntries(result, true), caldo = result.brothPending || [];
+  const nPend = pend.length + caldo.length, fin = addDays(SEM.lunes, 6), d1 = parseIso(SEM.lunes), d2 = parseIso(fin);
+  $('#cpRango').textContent = (d1.getMonth() === d2.getMonth() ? d1.getDate() : d1.getDate() + ' ' + MES3[d1.getMonth()]) + ' – ' + d2.getDate() + ' ' + MES3[d2.getMonth()] + ' · ' + nPend + (nPend === 1 ? ' pendiente' : ' pendientes');
+  const hay = [0, 1, 2, 3, 4, 5, 6].map(i => shopping(true, [i]).items.some(x => x.pendingAmount > 0 && !(x.key.startsWith('manual:') && !x.adjusted)));
+  $('#cpDias').innerHTML = DMIN.map((d, i) => `<button type="button" class="day${shopDays.has(i) ? ' on' : ''}" data-cpdia="${i}" aria-pressed="${shopDays.has(i)}" aria-label="${DAYS[i]} ${parseIso(addDays(SEM.lunes, i)).getDate()}${hay[i] ? '' : ' · sin compra pendiente'}">${d[0] === 'M' && i === 2 ? 'X' : d[0]}<small>${parseIso(addDays(SEM.lunes, i)).getDate()}</small><i class="${hay[i] ? 'si' : ''}"></i></button>`).join('')
+    + `<button type="button" class="day todo${shopDays.size ? '' : ' on'}" data-cpdia="todo" aria-pressed="${!shopDays.size}">Todo<small>sem.</small></button>`;
+  const filtra = e => !q || clean(e.name).includes(q);
+  const filas = pend.filter(filtra), caldos = caldo.filter(b => !q || clean(b.ing).includes(q) || clean(b.recipe).includes(q));
+  let html = `<div class="cp-pend"><span>Pendientes (${nPend})${shopDays.size ? ' · ' + esc(shopRangeLabel()) : ''}</span>${pend.length ? `<button type="button" id="cpTodo">${shopMarksPending() ? 'Desmarcar todo' : 'Marcar todo'}</button>` : ''}</div><div class="cp-main">`;
+  html += caldos.map(decideHtml).join('');
+  if (!filas.length && !caldos.length) html += `<div class="empty">${q ? 'Nada pendiente con «' + esc(CP.q.trim()) + '».' : 'No hay nada pendiente de comprar en esta vista.'}</div>`;
+  html += shopGroups(filas).map(g => `<div class="cp-cat">${esc(g.category)}</div><div class="cp-list">${g.rows.map(e => filaHtml(e, false, result)).join('')}</div>`).join('') + '</div>';
+  const hf = hechos.filter(filtra);
+  html += plegable('comprados', 'Comprados', hechos.length, () => `<p>Desmarca para devolver esa cantidad a pendientes.</p>${hf.length ? `<div class="cp-list">${hf.map(e => filaHtml(e, true, result)).join('')}</div>` : '<p>No hay compras marcadas.</p>'}`);
+  const quit = removedShopRows(), agua = result.brothWater || [];
+  if (quit.length + agua.length) html += plegable('quitados', 'Quitados de la compra', quit.length + agua.length, () => '<p>Ingredientes de recetas que has quitado de la compra de esta semana.</p>'
+    + agua.map(b => `<div class="cp-sug"><span><b>${esc(b.ing)}</b><small>${esc(b.recipe)} · con agua</small></span><button type="button" class="btn" data-broth-lot="${esc(b.lotId)}" data-broth-ing="${esc(b.ing)}" data-broth-val="">Volver a decidir</button></div>`).join('')
+    + quit.map(r => `<div class="cp-sug"><span><b>${esc(r.name)}</b></span><button type="button" class="btn" data-quitar-manual="${esc(r.id)}">Restaurar</button></div>`).join(''));
+  const sug = shopSuggestions(result), desp = sug.filter(i => i.source.startsWith('pantry')), rev = sug.filter(i => i.source.startsWith('review:')).filter((i, k, a) => a.findIndex(x => x.source === i.source) === k);
+  if (desp.length) html += plegable('despensa', 'Despensa habitual · reponer si falta', desp.length, () => '<p>Añade lo que te falte.</p>' + desp.map(sugHtml).join(''));
+  if (result.unknown.length) html += plegable('revisar', 'Revisar cantidades', result.unknown.length, () => '<p>Estas recetas no dan una cantidad que se pueda comprar. Puedes añadir el ingrediente sin cantidad y completarla después.</p>' + rev.map(sugHtml).join('') + `<ul>${result.unknown.map(x => `<li><b>${esc(x.name)}</b>: ${esc(x.raw)}</li>`).join('')}</ul>`, true);
+  html += plegable('equiv', 'Equivalencias y cantidades', '', () => `<p>La compra suma lo que preparas para todas las personas; las kcal cuentan solo lo tuyo.</p><p>Las recetas cuentan el día en que se preparan. Lo añadido a mano sale siempre, elijas los días que elijas.</p><p><b>AOVE:</b> 1 pulverización = ${fmt.format(eq('aoveSpray'))} g · 1 cdta. ≈ ${fmt.format(eq('aoveTsp'))} g · 1 cda. ≈ ${fmt.format(eq('aoveTbsp'))} g · 1 ml ≈ ${fmt.format(eq('aoveMl'))} g.</p><p>Los productos del menú sin cantidad ya están en la compra. Pon su cantidad en Semana cuando los comas para que cuenten las kcal; si ya estaban marcados como comprados, siguen comprados.</p>`);
+  $('#cpCuerpo').innerHTML = html;
+  const n = purchaseChangeCount(), b = $('#cpAct');
+  b.hidden = !n; b.textContent = 'Actualizar compra · ' + n; document.body.classList.toggle('cpact', !!n);
+}
+
+/* --- Ficha de un producto («⋯») --- */
+function abrirFicha(name, manualId) {
+  const result = shopping(), pend = shopCardEntries(result, false);
+  const e = manualId ? pend.find(x => x.manual && x.manual.manualId === manualId) : (pend.find(x => x.card && x.name === name) || shopCardEntries(result, true).find(x => x.covered && x.name === name));
+  if (!e) return;
+  name = e.name;
+  const m = manualId ? { lines: [], recs: [], extras: [e.manual], removed: [] } : shopEditModel(name);
+  CP.ficha = { name, manualId, e, m };
+  const fam = data.products.filter(p => shopName(p) === name).sort(byFoodName), opt = (p, cur) => `<option value="${esc(p.id)}"${p.id === cur ? ' selected' : ''}>${esc(p.name)}</option>`,
+    numIn = (attr, v, lab) => `<label class="cp-q">${lab}<input class="cp-inp" type="text" inputmode="decimal" ${attr} placeholder="Sin cantidad" value="${v == null ? '' : String(v).replace('.', ',')}" autocomplete="off"></label>`,
+    units = u => `<label class="cp-q">Unidad<select class="cp-inp" data-se-u>${MS_UNITS.map(x => `<option value="${esc(x)}"${x === u ? ' selected' : ''}>${x ? esc(x) : 'Sin unidad'}</option>`).join('')}</select></label>`,
+    quitar = t => `<label class="cp-x"><input type="checkbox" data-se-del>${t}</label>`;
+  let html = '';
+  const filas = m.lines.map(({ e: l }) => {
+    const others = n(l.others) || 0, list = fam.some(p => p.id === l.itemId) ? fam : [product(l.itemId)].concat(fam).filter(Boolean), p = product(l.itemId);
+    return `<div class="cp-o" data-se-line="${esc(l.lineId)}"><div class="t"><b>${esc(p ? p.name : name)}</b><span>${esc(DIA_CORTO(l.date))} · ${esc(l.meal)}</span></div><small>Puesto en el menú: el cambio se aplica también al menú y a las kcal.${others > 0 ? ' Lo de otras personas (' + fmt.format(others) + ' g) no se toca.' : ''}</small><div class="cp-two"><label class="cp-q">Producto<select class="cp-inp" data-se-p>${list.map(x => opt(x, l.itemId)).join('')}</select></label>${numIn('data-se-g', n(l.own), 'Gramos (tu parte)')}</div>${quitar('Quitar del menú y de la compra')}</div>`;
+  }).concat(m.recs.map(r => {
+    const q = shoppingQuantity({ name, unit: r.key.slice(r.key.indexOf('♦') + 1) }, r.a.pending), a = r2(q.amount), u = shopUnit(q.unit), one = r.adj.length === 1 && (r.adj[0].ps.length + r.adj[0].gs.length) > 1 ? r.adj[0] : null,
+      old = one ? lotBuyMark(r.lot)[one.i.name] : null, cur = one ? (old && one.ps.concat(one.gs).some(p => p.id === old) ? old : one.base.id) : '', rec = r.lot ? recipe(r.lot.recipeId) : null;
+    return `<div class="cp-o" data-se-rec="${esc(r.id)}" data-se-old="${a == null ? '' : a}|${esc(u)}"><div class="t"><b>${esc(rec ? rec.name : 'Receta')}</b><span>${r.lot ? esc(DIA_CORTO(r.lot.date)) + ' · ' + esc(r.lot.meal) : ''}</span></div><small>La cantidad solo cambia la compra.${one ? ' El producto cambia también las kcal de esa preparación.' : ''}</small>${one ? `<label class="cp-q" style="margin-top:8px">Producto<select class="cp-inp" data-se-p data-se-cur="${esc(cur)}">${one.ps.concat(one.gs).map(p => opt(p, cur)).join('')}</select></label>` : ''}<div class="cp-two">${numIn('data-se-a', a, 'Cantidad a comprar')}${units(u)}</div>${quitar('Quitar de la compra')}</div>`;
+  })).concat(m.extras.map(i => {
+    const a = r2(i.amount), u = shopUnit(i.unit || '') || (MS_UNITS.includes(i.unit) ? i.unit : '');
+    return `<div class="cp-o" data-se-extra="${esc(i.manualId)}" data-se-old="${a == null ? '' : a}|${esc(u)}"><div class="t"><b>${i.adjusted ? 'Compra ajustada' : 'Añadido a mano'}</b><span></span></div><small>${i.adjusted ? 'Sustituye a la cantidad que calcula el menú.' : 'Solo está en la compra de esta semana.'}</small><div class="cp-two">${numIn('data-se-a', a, 'Cantidad')}${units(u)}</div>${quitar(i.adjusted ? 'Volver a la cantidad del menú' : 'Quitar de la compra')}</div>`;
+  })).concat(m.removed.map(r => `<div class="cp-o" data-se-removed="${esc(r.id)}"><div class="t"><b>Quitado de la compra</b><span></span></div><small>Parte de una receta que quitaste esta semana.</small>${quitar('Volver a ponerlo en la compra')}</div>`));
+  if (filas.length) html += `<p class="cp-lbl">De dónde sale</p><div class="cp-org">${filas.join('')}</div>`;
+  if (e.homeKey) html += `<label class="cp-lbl" for="cfCasa">Tengo en casa</label><div class="cp-casa"><input class="cp-inp" id="cfCasa" type="text" inputmode="decimal" autocomplete="off" placeholder="0" value="${e.home > 0 ? String(r2(e.home)).replace('.', ',') : ''}"><span>${esc(e.homeUnit)}</span></div>`;
+  html += '<p class="cp-nota">Los cambios de la compra se guardan al pulsar «Actualizar compra». El menú y las kcal solo cambian si tocas un producto puesto en el menú o el producto de una receta.</p>';
+  const tot = e.covered ? homeQty(e.total, e.homeUnit) : e.manual ? (/\d/.test(shoppingAmountText(e.manual)) ? shoppingAmountText(e.manual) : '') : e.home > 0 && e.net !== undefined ? homeQty(e.net, e.homeUnit) : sinAst(e.amount && e.amount.shown);
+  $('#cfTit').textContent = name + (tot ? ' · ' + tot.replace(/<[^>]*>/g, '').replace(/&amp;/g, '&') : '');
+  $('#cfBody').innerHTML = html; $('#cpFicha').showModal();
+}
+function guardarFicha() {
+  const F = CP.ficha; if (!F) return; const { name, m, e } = F, rows = [...document.querySelectorAll('#cfBody .cp-o')], num = el => parseNum(el.value);
+  if (rows.some(el => { if (el.querySelector('[data-se-del]') && el.querySelector('[data-se-del]').checked) return false; const i = el.querySelector('[data-se-g],[data-se-a]'); if (!i) return false; const v = num(i); return v !== null && (!Number.isFinite(v) || v > 1e6 || (v === 0 && !el.dataset.seLine)); })) { aviso('Revisa las cantidades.'); return; }
+  const ci = $('#cfCasa'); let casa = null; if (ci) { const v = parseNum(ci.value); if (Number.isNaN(v) || v > 1e6) { aviso('Escribe una cantidad válida en casa, o déjala vacía.'); return; } casa = v || 0; }
+  let menu = 0, shop = 0; const drop = id => { for (const [k, c] of purchaseQueue) if (c.key === 'manual:' + id) purchaseQueue.delete(k); };
+  rows.forEach(el => {
+    const delEl = el.querySelector('[data-se-del]'), del = !!(delEl && delEl.checked);
+    if (el.dataset.seLine) {
+      const l = data.entries.find(x => x.lineId === el.dataset.seLine); if (!l) return;
+      if (del) { data.entries = data.entries.filter(x => x !== l); marcarBorrado(l.lineId); menu++; return; }
+      const p = el.querySelector('[data-se-p]').value, g = num(el.querySelector('[data-se-g]')); let ch = false;
+      if (p !== l.itemId && product(p)) { l.itemId = p; ch = true; } if (g !== n(l.own)) { l.own = g; ch = true; } if (ch) { marcar(l); menu++; } return;
+    }
+    if (el.dataset.seRec) {
+      const r = m.recs.find(x => x.id === el.dataset.seRec); if (!r) return; const sel = el.querySelector('[data-se-p]');
+      if (!del && sel && sel.value !== sel.dataset.seCur && r.lot && r.adj.length === 1) {
+        const x = r.adj[0], row = r.lot._row || (r.lot._row = nuevaFilaLote(r.lot.lotId)), buy = Object.assign({}, row.compra_producto || {});
+        if (x.base && sel.value === x.base.id) delete buy[x.i.name]; else buy[x.i.name] = sel.value;
+        row.compra_producto = buy; rehacerNota(r.lot); marcarLote(r.lot); menu++;
+        const a2 = num(el.querySelector('[data-se-a]')), u2 = el.querySelector('[data-se-u]').value;
+        if ((a2 == null ? '' : a2) + '|' + u2 !== el.dataset.seOld) { const b = lotBuy(r.lot, x.i, data.products); if (b.amount > 0) { const id = 'MS-' + uuid(); manualShopQueue.set(id, { id, week: data.activeWeek, name: b.name || name, amount: a2, unit: u2, bought: false, source: 'menu:' + JSON.stringify({ key: (b.name || name) + '♦' + (b.unit || ''), done: false, allocations: [{ origin: r.a.origin, itemId: r.a.itemId, amount: b.amount }] }) }); shop++; } }
+        return;
+      }
+      const a = num(el.querySelector('[data-se-a]')), u = el.querySelector('[data-se-u]').value; if (!del && (a == null ? '' : a) + '|' + u === el.dataset.seOld) return;
+      const id = 'MS-' + uuid(); manualShopQueue.set(id, { id, week: data.activeWeek, name, amount: del ? 0 : a, unit: del ? '' : u, bought: false, source: 'menu:' + JSON.stringify({ key: r.key, done: false, allocations: [{ origin: r.a.origin, itemId: r.a.itemId, amount: r.a.pending }] }) });
+      for (const [k, c] of purchaseQueue) if (c.week === data.activeWeek && c.key === r.key && c.section === 'pending') purchaseQueue.delete(k);
+      shop++; return;
+    }
+    if (el.dataset.seExtra) {
+      const id = el.dataset.seExtra, row = manualShopRows().find(x => x.id === id), it = m.extras.find(x => x.manualId === id); if (!row || !it) return;
+      if (del) { manualShopQueue.set(id, { id, week: data.activeWeek, remove: true }); drop(id); shop++; return; }
+      const a = num(el.querySelector('[data-se-a]')), u = el.querySelector('[data-se-u]').value; if ((a == null ? '' : a) + '|' + u === el.dataset.seOld) return;
+      manualShopQueue.set(id, { id, week: data.activeWeek, name: row.name, amount: a !== null && it.adjusted && it.ratio > 0 ? a / it.ratio : a, unit: u, bought: row.bought || false, source: row.source || '' }); shop++; return;
+    }
+    if (el.dataset.seRemoved && del) { manualShopQueue.set(el.dataset.seRemoved, { id: el.dataset.seRemoved, week: data.activeWeek, remove: true }); shop++; }
+  });
+  if (e.homeKey && casa !== null && Math.abs(casa - homeAmount(e.homeKey)) > 1e-9) { const id = homeQueueId(e.homeKey); if (Math.abs(casa - homeSaved(e.homeKey)) < 1e-9) homeQueue.delete(id); else homeQueue.set(id, { week: data.activeWeek, key: e.homeKey, amount: casa }); shop++; }
+  $('#cpFicha').close(); CP.ficha = null; if (!menu && !shop) return;
+  guardarMarcas(); pintarCompra();
+  aviso(menu && shop ? 'El menú se guarda solo. La compra, al pulsar «Actualizar compra».' : menu ? 'Menú cambiado. Se guarda solo.' : 'Pulsa «Actualizar compra» para guardarlo.');
+}
+
+/* --- Añadir producto y copiar la lista --- */
+function abrirAnadir() {
+  $('#caLista').innerHTML = shopNames().map(x => `<option value="${esc(x)}"></option>`).join('');
+  $('#caUni').innerHTML = MS_UNITS.map(x => `<option value="${esc(x)}">${x ? esc(x) : 'Sin unidad'}</option>`).join('');
+  $('#caNom').value = ''; $('#caCant').value = ''; $('#caUni').value = '';
+  const d1 = parseIso(SEM.lunes), d2 = parseIso(addDays(SEM.lunes, 6));
+  $('#caNota').textContent = `Se apunta solo en la compra de la semana del ${d1.getDate()} de ${MESES[d1.getMonth()]} al ${d2.getDate()} de ${MESES[d2.getMonth()]}. No cambia el menú ni las kcal.`;
+  $('#cpAnadir').showModal();
+}
+function anadirManual() {
+  const name = $('#caNom').value.trim(), amount = parseNum($('#caCant').value), unit = $('#caUni').value;
+  if (!name) { aviso('Escribe qué quieres comprar.'); return; }
+  if (Number.isNaN(amount) || amount === 0 || (amount !== null && amount > 1e6)) { aviso('Revisa la cantidad (o déjala vacía).'); return; }
+  const id = 'MS-' + uuid(); manualShopQueue.set(id, { id, week: data.activeWeek, name, amount, unit: amount === null ? '' : unit, bought: false, source: '' });
+  guardarMarcas(); $('#cpAnadir').close(); pintarCompra(); aviso('Añadido. Pulsa «Actualizar compra» para guardarlo.');
+}
+async function copiarLista() {
+  const text = shopListText(), k = (text.match(/\n- /g) || []).length;
+  if (navigator.share && matchMedia('(pointer:coarse)').matches) { try { await navigator.share({ text }); return; } catch (err) { if (err && err.name === 'AbortError') return; } }
+  let ok = false; try { await navigator.clipboard.writeText(text); ok = true; } catch (_) {}
+  if (!ok) { const ta = document.createElement('textarea'); ta.value = text; ta.setAttribute('readonly', ''); ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0'; document.body.appendChild(ta); ta.select(); ta.setSelectionRange(0, text.length); try { ok = document.execCommand('copy'); } catch (_) {} ta.remove(); }
+  aviso(ok ? 'Lista copiada (' + k + ' productos). Pégala donde quieras.' : 'No se ha podido copiar la lista.');
+}
+
+async function abrirCompra() {
+  if (!SEM.lunes) { const hoy = hoyIso(); SEM.lunes = mondayOf(hoy); SEM.dia = (parseIso(hoy).getDay() + 6) % 7; }
+  if (!SEM.cargada) {
+    $('#cpCuerpo').innerHTML = '<div class="empty">Cargando la compra…</div>';
+    try { await cargarDatos(); } catch (err) { $('#cpCuerpo').innerHTML = `<div class="empty">${h(es(err))}</div>`; return; }
+    const p = SEM.perfil || {}; $('#ajNombre').textContent = (p.nombre || '') + (p.es_admin ? ' · administradora' : ''); $('#ajCorreo').textContent = SESION.user.email;
+    $('#ajObj').textContent = (p.objetivo_kcal ? kc(p.objetivo_kcal) + ' kcal' : 'sin objetivo de kcal') + ' · ' + (p.objetivo_proteina ? kc(p.objetivo_proteina) + ' g de proteína' : 'sin objetivo de proteína');
+  }
+  pintarCompra(); pintarEstado();
+}
+function initCompra() {
+  const sec = $('#compra');
+  sec.addEventListener('change', ev => { const t = ev.target; if (t.matches('input.cp-ck') && !t.disabled) { marcarCompra(t); pintarCompra(); } });
+  sec.addEventListener('click', ev => {
+    const t = ev.target.closest('button'); if (!t) return;
+    if (t.dataset.cpdia) { const v = t.dataset.cpdia; if (v === 'todo') shopDays.clear(); else { const i = Number(v); shopDays.has(i) ? shopDays.delete(i) : shopDays.add(i); if (shopDays.size === 7) shopDays.clear(); } pintarCompra(); return; }
+    if (t.dataset.fold) { CP.abiertos.has(t.dataset.fold) ? CP.abiertos.delete(t.dataset.fold) : CP.abiertos.add(t.dataset.fold); pintarCompra(); return; }
+    if (t.dataset.brothLot !== undefined) { const lot = data.lots.find(l => l.lotId === t.dataset.brothLot); if (lot) { const w = { ...lotBroth(lot) }; if (t.dataset.brothVal) w[t.dataset.brothIng] = t.dataset.brothVal; else delete w[t.dataset.brothIng]; setLotBroth(lot, w); pintarCompra(); aviso(t.dataset.brothVal === 'caldo' ? 'Caldo añadido a la compra.' : t.dataset.brothVal === 'agua' ? 'Con agua: no se compra nada.' : 'Vuelve a «decide antes de comprar».'); } return; }
+    if (t.dataset.ficha) { abrirFicha(t.dataset.ficha); return; }
+    if (t.dataset.fman) { abrirFicha('', t.dataset.fman); return; }
+    if (t.dataset.sug) { stageSuggestion(t.dataset.sug, t.dataset.sugOn === '1'); pintarCompra(); return; }
+    if (t.dataset.quitarManual) { const id = t.dataset.quitarManual; manualShopQueue.set(id, { id, week: data.activeWeek, remove: true }); for (const [k, c] of purchaseQueue) if (c.key === 'manual:' + id) purchaseQueue.delete(k); guardarMarcas(); pintarCompra(); return; }
+    if (t.id === 'cpTodo') { marcarTodo(); return; }
+    if (t.id === 'cpAct') { actualizarCompra(); return; }
+    if (t.id === 'cpCopiar') { copiarLista(); return; }
+    if (t.id === 'cpAnadirBtn') { abrirAnadir(); return; }
+  });
+  $('#cpQ').addEventListener('input', () => { CP.q = $('#cpQ').value; pintarCompra(); });
+  $('#cfGo').onclick = guardarFicha;
+  $('#caGo').onclick = anadirManual;
+  $('#cpFicha').addEventListener('close', () => { CP.ficha = null; });
+}
+
 async function abrirSemana() {
   if (!SEM.lunes) { const hoy = hoyIso(); SEM.lunes = mondayOf(hoy); SEM.dia = (parseIso(hoy).getDay() + 6) % 7; }
   if (!SEM.cargada) {
@@ -1381,7 +1942,7 @@ async function abrirSemana() {
   pintarSemana(); pintarEstado();
 }
 
-  initSemana(); init013();
+  initSemana(); init013(); initCompra();
   sb.auth.onAuthStateChange((_ev, session) => { if ((session && session.user.id) !== (SESION && SESION.user.id)) { SEM.cargada = false; data = null; } show(session); });
   sb.auth.getSession().then(({ data }) => show(data.session));
   setMode('login');
