@@ -51,10 +51,21 @@
   body.rec .head img{width:34px;height:34px} body.rec .brand{font-size:20px;padding:2px 10px;border-radius:10px} body.rec .sub{display:none}
   .pt{margin:12px 0 0;font-size:20px}
   .search{width:100%;height:42px;margin:8px 0;padding:0 12px;border:1px solid var(--line);border-radius:12px;background:var(--white);font:500 16px var(--font);color:var(--ink)}
-  .fchips{display:flex;gap:6px;overflow-x:auto;white-space:nowrap;padding-bottom:4px;margin-bottom:8px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-  .fchips::-webkit-scrollbar{display:none}
-  .fchip{flex:none;padding:5px 10px;border:1px solid var(--line);border-radius:999px;font:600 13px var(--font);background:var(--white);color:var(--ink);cursor:pointer}
-  .fchip.on{background:var(--ink);color:var(--white);border-color:var(--ink)} .fchip i{font-style:normal;opacity:.6;margin-left:3px}
+  .fwrap{position:relative}
+  .dd{display:flex;gap:6px;margin:2px 0 4px;overflow-x:auto;white-space:nowrap;scrollbar-width:none} .dd::-webkit-scrollbar{display:none}
+  .pill{flex:none;display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border:1px solid var(--line);border-radius:99px;font:500 13px var(--font);background:transparent;color:var(--ink);cursor:pointer}
+  .pill.on{border-color:var(--ink);background:var(--white);font-weight:700}
+  .pill:after,.ord:after{content:'';width:5px;height:5px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translate(-1px,-1px);margin-left:4px}
+  .bar{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;color:var(--muted);margin:4px 2px 6px}
+  .ord{display:inline-flex;align-items:center;background:none;border:0;padding:4px 0;font:500 12.5px var(--font);color:var(--muted);cursor:pointer} .ord b{color:var(--ink);font-weight:700;margin-left:3px}
+  .pop{position:absolute;z-index:5;min-width:200px;max-width:calc(100vw - 32px);background:var(--white);border:1px solid var(--line);border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.14);padding:4px 0}
+  .opt{display:flex;align-items:center;gap:10px;width:100%;padding:9px 14px;border:0;background:none;font:500 14px var(--font);color:var(--ink);text-align:left;cursor:pointer}
+  .opt i{font-style:normal;margin-left:auto;color:var(--muted);font-size:12.5px;padding-left:12px}
+  .cb{flex:none;width:18px;height:18px;border:1.5px solid #9a8f82;border-radius:5px;display:flex;align-items:center;justify-content:center}
+  .cb.on{background:var(--ink);border-color:var(--ink)} .cb.on:after{content:'';width:5px;height:9px;border-right:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(45deg) translate(-1px,-1px)}
+  .cb.rd{border-radius:50%} .cb.rd.on{background:none} .cb.rd.on:after{width:9px;height:9px;border:0;border-radius:50%;background:var(--ink);transform:none}
+  .dot{flex:none;width:9px;height:9px;border-radius:50%}
+  .popfoot{border-top:1px solid #ebe3d6;padding:6px 14px 4px;text-align:right} .popfoot button{background:none;border:0;font:500 13px var(--font);color:var(--muted);text-decoration:underline;cursor:pointer}
   .list{background:var(--white);border:1px solid var(--line);border-radius:16px;overflow:hidden}
   .rrow{display:flex;justify-content:space-between;gap:8px;align-items:center;width:100%;padding:9px 12px;border:0;border-bottom:1px solid #ebe3d6;background:none;text-align:left;font:inherit;color:inherit;cursor:pointer}
   .rrow:last-child{border-bottom:0}
@@ -123,7 +134,7 @@
     <button class="back" type="button" data-go="">‹ Inicio</button>
     <h2 class="pt">Recetas</h2>
     <input class="search" id="q" type="search" placeholder="Buscar receta o ingrediente" autocomplete="off" enterkeyhint="search">
-    <div class="fchips" id="cats"></div>
+    <div class="fwrap" id="fwrap"><div class="dd" id="dd"></div><div class="bar"><span id="cnt"></span><button class="ord" type="button" data-pop="orden">Ordenar:<b id="ordTxt">A-Z</b></button></div><div class="pop" id="pop" hidden></div></div>
     <div class="list" id="rlist"><div class="empty">Cargando recetas…</div></div>
   </section>
 
@@ -132,7 +143,7 @@
     <div id="rdet"></div>
   </section>
 
-  <p class="ver">Versión de prueba 0.9 · recetario para consultar</p>
+  <p class="ver">Versión de prueba 0.10 · recetario con filtros</p>
 </main>
 <script>
   const SUPABASE_URL = 'https://cawmvpfjaehennkknmoy.supabase.co';
@@ -201,7 +212,14 @@
     return Number(n).toLocaleString('es-ES', { maximumFractionDigits: 2 });
   }
   const raciones = r => num(r) + (Number(r) === 1 ? ' ración' : ' raciones');
-  let REC = null, ING_TXT = {}, cat = '', desdeLista = '';
+  let REC = null, ING_TXT = {}, desdeLista = '', popAbierto = '';
+  const F = { cat: new Set(), frec: new Set(), cons: new Set(), orden: 'az' };
+  const ORDENES = { az: 'A-Z', kcal_asc: 'menos kcal', kcal_desc: 'más kcal', prot_desc: 'más proteína' };
+  const FRECS = [['DIARIA', 'Diaria', '#00b65b'], ['FRECUENTE', 'Frecuente', '#ff7a1a'], ['OCASIONAL', 'Ocasional', '#e5192d']];
+  const CONS = [['congela', 'Se congela'], ['nevera', 'Dura en la nevera']];
+  const pasa = (r, sin) => (sin === 'cat' || !F.cat.size || F.cat.has(r.categoria || 'Otras'))
+    && (sin === 'frec' || !F.frec.size || F.frec.has(String(r.frecuencia || '').toUpperCase()))
+    && (sin === 'cons' || !F.cons.size || [...F.cons].every(c => c === 'congela' ? r.congelable : r.dias_nevera > 0));
 
   async function cargarRecetas() {
     if (REC) return;
@@ -214,13 +232,40 @@
     (i.data || []).forEach(x => { ING_TXT[x.receta_id] = (ING_TXT[x.receta_id] || '') + ' ' + norm(x.nombre); });
   }
 
+  function pintarFiltros() {
+    const n = (k, f) => REC.filter(r => pasa(r, k) && f(r)).length;
+    const lbl = (t, set) => `<button class="pill${set.size ? ' on' : ''}" type="button" data-pop="${t[0]}">${t[1]}${set.size ? ' · ' + set.size : ''}</button>`;
+    $('#dd').innerHTML = lbl(['cat', 'Categoría'], F.cat) + lbl(['frec', 'Frecuencia'], F.frec) + lbl(['cons', 'Conservación'], F.cons);
+    $('#ordTxt').textContent = ORDENES[F.orden];
+    const pop = $('#pop');
+    if (!popAbierto) { pop.hidden = true; return; }
+    let html = '';
+    if (popAbierto === 'cat') {
+      const cats = {}; REC.forEach(r => { const c = r.categoria || 'Otras'; cats[c] = 1; });
+      html = Object.keys(cats).sort((a, b) => a.localeCompare(b, 'es')).map(c => `<button class="opt" type="button" data-set="cat" data-v="${h(c)}"><span class="cb${F.cat.has(c) ? ' on' : ''}"></span>${h(c)}<i>${n('cat', r => (r.categoria || 'Otras') === c)}</i></button>`).join('');
+    } else if (popAbierto === 'frec') {
+      html = FRECS.map(([v, t, col]) => `<button class="opt" type="button" data-set="frec" data-v="${v}"><span class="cb${F.frec.has(v) ? ' on' : ''}"></span>${t}<span class="dot" style="background:${col}"></span><i>${n('frec', r => String(r.frecuencia || '').toUpperCase() === v)}</i></button>`).join('');
+    } else if (popAbierto === 'cons') {
+      html = CONS.map(([v, t]) => `<button class="opt" type="button" data-set="cons" data-v="${v}"><span class="cb${F.cons.has(v) ? ' on' : ''}"></span>${t}<i>${n('cons', r => v === 'congela' ? r.congelable : r.dias_nevera > 0)}</i></button>`).join('');
+    } else if (popAbierto === 'orden') {
+      html = Object.entries(ORDENES).map(([v, t]) => `<button class="opt" type="button" data-orden="${v}"><span class="cb rd${F.orden === v ? ' on' : ''}"></span>${t.charAt(0).toUpperCase() + t.slice(1)}${v === 'az' ? '' : ' primero'}</button>`).join('');
+    }
+    if (popAbierto !== 'orden' && F[popAbierto].size) html += '<div class="popfoot"><button type="button" data-limpiar="' + popAbierto + '">Quitar</button></div>';
+    pop.innerHTML = html; pop.hidden = false;
+    const btn = $('#fwrap').querySelector(`[data-pop="${popAbierto}"]`), wr = $('#fwrap').getBoundingClientRect(), br = btn.getBoundingClientRect();
+    pop.style.top = (br.bottom - wr.top + 6) + 'px';
+    if (popAbierto === 'orden') { pop.style.left = ''; pop.style.right = '0px'; } else { pop.style.right = ''; pop.style.left = Math.max(0, Math.min(br.left - wr.left, wr.width - pop.offsetWidth)) + 'px'; }
+  }
+
   function pintarLista() {
-    const cats = {}; REC.forEach(r => { const c = r.categoria || 'Otras'; cats[c] = (cats[c] || 0) + 1; });
-    const orden = Object.keys(cats).sort((a, b) => cats[b] - cats[a]);
-    $('#cats').innerHTML = `<button class="fchip${cat ? '' : ' on'}" data-cat="">Todas<i>${REC.length}</i></button>` +
-      orden.map(c => `<button class="fchip${cat === c ? ' on' : ''}" data-cat="${h(c)}">${h(c)}<i>${cats[c]}</i></button>`).join('');
+    pintarFiltros();
     const q = norm($('#q').value.trim());
-    const vis = REC.filter(r => (!cat || (r.categoria || 'Otras') === cat) && (!q || norm(r.nombre).includes(q) || (ING_TXT[r.id] || '').includes(q)));
+    const kc = (r, d) => r.kcal_pdf == null ? (d ? -1 : 1e9) : r.kcal_pdf;
+    const vis = REC.filter(r => pasa(r) && (!q || norm(r.nombre).includes(q) || (ING_TXT[r.id] || '').includes(q)));
+    if (F.orden === 'kcal_asc') vis.sort((a, b) => kc(a, 0) - kc(b, 0));
+    else if (F.orden === 'kcal_desc') vis.sort((a, b) => kc(b, 1) - kc(a, 1));
+    else if (F.orden === 'prot_desc') vis.sort((a, b) => (b.proteina_pdf ?? -1) - (a.proteina_pdf ?? -1));
+    $('#cnt').textContent = `${vis.length} de ${REC.length} recetas`;
     $('#rlist').innerHTML = vis.length ? vis.map(r => `<button class="rrow" data-id="${h(r.id)}"><div>
         <div class="rn">${h(r.nombre)}</div>
         <div class="rm">${frec(r.frecuencia)}<span>${raciones(r.raciones_lote)}</span>${nevera(r.dias_nevera)}${congela(r.congelable)}</div>
@@ -278,7 +323,15 @@
     if (hsh === 'recetas') pintarLista(); else pintarReceta(decodeURIComponent(hsh.slice(7)));
   }
   window.addEventListener('hashchange', ruta);
-  $('#cats').onclick = e => { const b = e.target.closest('[data-cat]'); if (!b) return; cat = b.dataset.cat; pintarLista(); };
+  $('#fwrap').onclick = e => {
+    e.stopPropagation();
+    const p = e.target.closest('[data-pop]'), o = e.target.closest('[data-set]'), od = e.target.closest('[data-orden]'), l = e.target.closest('[data-limpiar]');
+    if (p) { popAbierto = popAbierto === p.dataset.pop ? '' : p.dataset.pop; pintarFiltros(); return; }
+    if (o) { const set = F[o.dataset.set], v = o.dataset.v; set.has(v) ? set.delete(v) : set.add(v); pintarLista(); return; }
+    if (od) { F.orden = od.dataset.orden; popAbierto = ''; pintarLista(); return; }
+    if (l) { F[l.dataset.limpiar].clear(); popAbierto = ''; pintarLista(); }
+  };
+  document.addEventListener('click', e => { if (popAbierto && !e.target.closest('#fwrap')) { popAbierto = ''; pintarFiltros(); } });
   $('#q').oninput = () => pintarLista();
   $('#rlist').onclick = e => { const b = e.target.closest('[data-id]'); if (b) { desdeLista = 'receta/' + encodeURIComponent(b.dataset.id); location.hash = 'receta/' + encodeURIComponent(b.dataset.id); } };
   document.querySelectorAll('[data-go]').forEach(b => b.onclick = () => {
