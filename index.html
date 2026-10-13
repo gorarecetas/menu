@@ -373,7 +373,9 @@
     const fila = v && v.c ? v.c.rows.find(x => x.name === i.nombre) : null, falta = v && v.c ? v.c.missing.find(m => m.startsWith(i.nombre + ' (')) : null;
     const base = i.receta_base_id && REC.some(x => x.id === i.receta_base_id);
     const corte = fila ? fila.sub.lastIndexOf(' · ') : -1, ficha = fila ? (corte > 0 ? fila.sub.slice(0, corte) : fila.sub) : '', gr = fila && corte > 0 ? fila.sub.slice(corte + 3) : '';
-    const sub = base ? `Tu receta base · <button class="verrec" type="button" data-base="${h(i.receta_base_id)}">Ver receta ›</button>` : fila && ficha !== 'Base casera' ? h(ficha) + (Number(r.raciones_lote) > 1 && gr ? ' · ' + h(gr) + ' por ración' : '') : falta && !/sin ficha/.test(falta) ? h(falta.slice(i.nombre.length + 2, -1)) : '';
+    /* Rocío (13/10): la ficha de referencia no se enseña; solo la marca cuando la receta usa una concreta */
+    const marca = fila && ficha !== 'Base casera' && !/referencia/i.test(ficha) ? h(ficha) : '', porRacion = fila && Number(r.raciones_lote) > 1 && gr ? h(gr) + ' por ración' : '';
+    const sub = base ? `Tu receta base · <button class="verrec" type="button" data-base="${h(i.receta_base_id)}">Ver receta ›</button>` : fila ? [marca, porRacion].filter(Boolean).join(' · ') : falta && !/sin ficha/.test(falta) ? h(falta.slice(i.nombre.length + 2, -1)) : '';
     const kk = fila ? `<span class="kk">${num(Math.round(fila.kcal))}</span>` : falta ? '<span class="kk mi">sin ficha</span>' : '<span class="kk"></span>';
     return `<div class="ing c3"><div>${h(i.nombre)}${i.nota && !base ? `<small>${h(i.nota)}</small>` : ''}</div><span>${i.cantidad == null ? '' : num(i.cantidad) + ' ' + h(i.unidad || '')}</span>${kk}${sub ? `<small>${sub}</small>` : ''}</div>`;
   }
@@ -406,7 +408,7 @@
         ${origenHtml(v, id)}</div>
       <div class="box"><h3>Ingredientes</h3>${conCant.map(i => ingHtml(i, v, r)).join('') || '<p class="note">Sin ingredientes apuntados.</p>'}
         ${gusto.length ? `<div class="gusto">Al gusto: ${h(gusto.join(', '))}</div>` : ''}
-        ${v && v.c && v.c.rows.length ? `<p class="src">kcal de cada ingrediente en una ración, con su ficha debajo.</p>` : ''}</div>
+        ${v && v.c && v.c.rows.length ? `<p class="src">kcal de cada ingrediente en una ración.</p>` : ''}</div>
       ${d.data && d.data.pasos ? `<div class="box"><h3>Pasos</h3>${pasosHtml(d.data.pasos)}</div>` : ''}
       ${cons ? `<div class="box"><h3>Conservación</h3><p class="ptext">${h(cons)}</p></div>` : ''}`;
     window.scrollTo(0, 0);
