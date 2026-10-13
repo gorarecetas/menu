@@ -42,6 +42,10 @@
   .stat span{color:var(--muted);font-size:13px}
   .chip{display:inline-block;margin-left:6px;padding:2px 8px;border-radius:999px;background:var(--cream);font:700 12px var(--font);text-transform:uppercase;letter-spacing:.04em}
   .ver{margin-top:18px;text-align:center;color:var(--muted);font-size:12px}
+  .pw{position:relative}
+  .pw input{padding-right:56px}
+  .eye{position:absolute;right:4px;top:4px;width:50px;height:36px;border:0;background:none;padding:0;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .eye img{width:42px;height:28px;display:block}
   [hidden]{display:none!important}
 </style>
 </head>
@@ -62,7 +66,10 @@
       <label for="email">Correo</label>
       <input id="email" type="email" inputmode="email" autocomplete="username" autocapitalize="off" spellcheck="false" required>
       <label for="pass">Contraseña</label>
-      <input id="pass" type="password" autocomplete="current-password" minlength="8" required>
+      <div class="pw">
+        <input id="pass" type="password" autocomplete="current-password" minlength="8" required>
+        <button class="eye" type="button" id="eye" aria-label="Mostrar contraseña"><img src="ojo-cerrado.png" alt=""></button>
+      </div>
       <div class="row"><button class="btn main" type="submit" id="authGo">Entrar</button></div>
     </form>
     <button class="link" type="button" id="authSwitch">¿No tienes cuenta? Crear una</button>
@@ -80,7 +87,7 @@
     <div class="row"><button class="btn" type="button" id="logout">Salir</button></div>
   </section>
 
-  <p class="ver">Versión de prueba 0.3 · entrada con correo y contraseña</p>
+  <p class="ver">Versión de prueba 0.4 · entrada con correo y contraseña</p>
 </main>
 <script>
   const SUPABASE_URL = 'https://cawmvpfjaehennkknmoy.supabase.co';
@@ -125,6 +132,12 @@
     msg($('#homeMsg'), 'Conectada a tu base de datos.', 'ok');
   }
 
+  $('#eye').onclick = () => {
+    const ver = $('#pass').type === 'password';
+    $('#pass').type = ver ? 'text' : 'password';
+    $('#eye img').src = ver ? 'ojo-abierto.png' : 'ojo-cerrado.png';
+    $('#eye').setAttribute('aria-label', ver ? 'Ocultar contraseña' : 'Mostrar contraseña');
+  };
   $('#authSwitch').onclick = () => setMode(mode === 'login' ? 'signup' : 'login');
   $('#authForm').onsubmit = async ev => {
     ev.preventDefault();
