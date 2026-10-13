@@ -46,6 +46,35 @@
   .pw input{padding-right:48px}
   .eye{position:absolute;right:4px;top:4px;width:42px;height:36px;border:0;background:none;padding:0;cursor:pointer;display:flex;align-items:center;justify-content:center}
   .eye img{width:30px;height:20px;display:block}
+
+  /* Recetario */
+  body.rec .head img{width:34px;height:34px} body.rec .brand{font-size:20px;padding:2px 10px;border-radius:10px} body.rec .sub{display:none}
+  .pt{margin:12px 0 0;font-size:20px}
+  .search{width:100%;height:42px;margin:8px 0;padding:0 12px;border:1px solid var(--line);border-radius:12px;background:var(--white);font:500 16px var(--font);color:var(--ink)}
+  .fchips{display:flex;gap:6px;overflow-x:auto;white-space:nowrap;padding-bottom:4px;margin-bottom:8px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .fchips::-webkit-scrollbar{display:none}
+  .fchip{flex:none;padding:5px 10px;border:1px solid var(--line);border-radius:999px;font:600 13px var(--font);background:var(--white);color:var(--ink);cursor:pointer}
+  .fchip.on{background:var(--ink);color:var(--white);border-color:var(--ink)} .fchip i{font-style:normal;opacity:.6;margin-left:3px}
+  .list{background:var(--white);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+  .rrow{display:flex;justify-content:space-between;gap:8px;align-items:center;width:100%;padding:9px 12px;border:0;border-bottom:1px solid #ebe3d6;background:none;text-align:left;font:inherit;color:inherit;cursor:pointer}
+  .rrow:last-child{border-bottom:0}
+  .rn{font-weight:700;font-size:15px;line-height:1.3} .rm{font-size:12.5px;color:var(--muted)}
+  .rk{text-align:right;white-space:nowrap;font-size:11.5px;color:var(--muted)} .rk b{display:block;font-size:15px;color:var(--ink)}
+  .tag{display:inline-block;font-size:11px;font-weight:700;padding:1px 6px;border-radius:6px;background:#e6f0fb;color:#2c5c8f;margin-left:4px}
+  .tag.nv{background:#eef5e8;color:#3d6b28}
+  .empty{padding:14px;color:var(--muted);font-size:14px}
+  .back{background:none;border:0;padding:6px 0;font:500 14px var(--font);color:var(--muted);cursor:pointer}
+  .dchips{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 10px}
+  .dchips span{padding:4px 10px;border:1px solid var(--line);border-radius:999px;font-size:13px;background:var(--white)}
+  .box{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:10px 12px;margin-bottom:10px}
+  .box h3{margin:0 0 6px;font-size:15px}
+  .kc{display:flex;gap:18px;align-items:baseline} .kc b{font-size:22px} .kc span{font-size:13px;color:var(--muted)}
+  .note{font-size:12px;color:var(--muted);margin-top:4px}
+  .ing{display:flex;justify-content:space-between;gap:10px;font-size:14px;padding:3px 0;border-bottom:1px dashed #ebe3d6} .ing:last-child{border-bottom:0}
+  .ing span{color:var(--muted);white-space:nowrap} .ing small{display:block;color:var(--muted);font-size:12px}
+  .gusto{font-size:13px;color:var(--muted);margin-top:6px}
+  .pasos{margin:0;padding-left:20px;font-size:14px} .pasos li{margin-bottom:5px}
+  .ptext{font-size:14px;white-space:pre-line;margin:0}
   [hidden]{display:none!important}
 </style>
 </head>
@@ -84,10 +113,23 @@
       <div class="stat"><b id="nRec">—</b><span>recetas</span></div>
     </div>
     <p class="msg" id="homeMsg"></p>
-    <div class="row"><button class="btn" type="button" id="logout">Salir</button></div>
+    <div class="row"><button class="btn main" type="button" id="goRec">Recetas</button><button class="btn" type="button" id="logout">Salir</button></div>
   </section>
 
-  <p class="ver">Versión de prueba 0.6 · entrada con correo y contraseña</p>
+  <section id="recetas" hidden>
+    <button class="back" type="button" data-go="">‹ Inicio</button>
+    <h2 class="pt">Recetas</h2>
+    <input class="search" id="q" type="search" placeholder="Buscar receta o ingrediente" autocomplete="off" enterkeyhint="search">
+    <div class="fchips" id="cats"></div>
+    <div class="list" id="rlist"><div class="empty">Cargando recetas…</div></div>
+  </section>
+
+  <section id="receta" hidden>
+    <button class="back" type="button" data-go="recetas">‹ Recetas</button>
+    <div id="rdet"></div>
+  </section>
+
+  <p class="ver">Versión de prueba 0.7 · recetario para consultar</p>
 </main>
 <script>
   const SUPABASE_URL = 'https://cawmvpfjaehennkknmoy.supabase.co';
@@ -118,8 +160,9 @@
   };
 
   async function show(session) {
-    if (!session) { $('#home').hidden = true; $('#auth').hidden = false; return; }
-    $('#auth').hidden = true; $('#home').hidden = false;
+    SESION = session;
+    if (!session) { $('#home').hidden = true; $('#auth').hidden = false; ruta(); return; }
+    $('#auth').hidden = true; $('#home').hidden = false; ruta();
     $('#email2').textContent = session.user.email;
     const { data: perfil } = await sb.from('perfiles').select('nombre, es_admin').eq('id', session.user.id).maybeSingle();
     $('#who').innerHTML = (perfil && perfil.nombre ? ', ' + perfil.nombre.replace(/[<>&]/g, '') : '') + (perfil && perfil.es_admin ? '<span class="chip">Administradora</span>' : '');
@@ -138,6 +181,103 @@
     $('#eye img').src = ver ? 'ojo-abierto.png' : 'ojo-cerrado.png';
     $('#eye').setAttribute('aria-label', ver ? 'Ocultar contraseña' : 'Mostrar contraseña');
   };
+
+  // ---------- Recetario ----------
+  const CAT_CORTA = { 'Platos principales':'Platos', 'Bases y fondos':'Bases', 'Ensaladas y bowls':'Ensaladas', 'Guarniciones y entrantes':'Guarniciones', 'Postres y snacks':'Postres', 'Cremas y sopas':'Cremas', 'Panes y masas':'Panes' };
+  const h = t => String(t == null ? '' : t).replace(/[&<>"]/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]));
+  const norm = t => String(t || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+  const FRAC = { 0.125:'⅛', 0.25:'¼', 0.333:'⅓', 0.5:'½', 0.667:'⅔', 0.75:'¾' };
+  function num(n) {
+    if (n == null) return '';
+    const ent = Math.floor(n), dec = Math.round((n - ent) * 1000) / 1000;
+    if (dec && FRAC[dec] && n < 10) return (ent ? ent : '') + FRAC[dec];
+    return Number(n).toLocaleString('es-ES', { maximumFractionDigits: 2 });
+  }
+  const raciones = r => num(r) + (Number(r) === 1 ? ' ración' : ' raciones');
+  let REC = null, ING_TXT = {}, cat = '', desdeLista = '';
+
+  async function cargarRecetas() {
+    if (REC) return;
+    const [r, i] = await Promise.all([
+      sb.from('recetas').select('id, nombre, categoria, frecuencia, raciones_lote, kcal_pdf, proteina_pdf, dias_nevera, congelable'),
+      sb.from('ingredientes_receta').select('receta_id, nombre').limit(5000)
+    ]);
+    if (r.error) throw r.error;
+    REC = (r.data || []).sort((a, b) => a.nombre.localeCompare(b.nombre, 'es'));
+    (i.data || []).forEach(x => { ING_TXT[x.receta_id] = (ING_TXT[x.receta_id] || '') + ' ' + norm(x.nombre); });
+  }
+
+  function pintarLista() {
+    const cats = {}; REC.forEach(r => { const c = r.categoria || 'Otras'; cats[c] = (cats[c] || 0) + 1; });
+    const orden = Object.keys(cats).sort((a, b) => cats[b] - cats[a]);
+    $('#cats').innerHTML = `<button class="fchip${cat ? '' : ' on'}" data-cat="">Todas<i>${REC.length}</i></button>` +
+      orden.map(c => `<button class="fchip${cat === c ? ' on' : ''}" data-cat="${h(c)}">${h(CAT_CORTA[c] || c)}<i>${cats[c]}</i></button>`).join('');
+    const q = norm($('#q').value.trim());
+    const vis = REC.filter(r => (!cat || (r.categoria || 'Otras') === cat) && (!q || norm(r.nombre).includes(q) || (ING_TXT[r.id] || '').includes(q)));
+    $('#rlist').innerHTML = vis.length ? vis.map(r => `<button class="rrow" data-id="${h(r.id)}"><div>
+        <div class="rn">${h(r.nombre)}</div>
+        <div class="rm">${h(r.categoria || '')} · ${raciones(r.raciones_lote)}${r.congelable ? '<span class="tag">Congela</span>' : ''}${r.dias_nevera ? `<span class="tag nv">Nevera ${r.dias_nevera} d</span>` : ''}</div>
+      </div><div class="rk"><b>${r.kcal_pdf == null ? '—' : num(Math.round(r.kcal_pdf))}</b>kcal/ración</div></button>`).join('')
+      : '<div class="empty">No hay recetas con esa búsqueda.</div>';
+  }
+
+  function pasosHtml(t) {
+    t = String(t || '').trim(); if (!t) return '';
+    const plano = t.replace(/\s*\n\s*/g, ' ').replace(/\s{2,}/g, ' ');
+    const partes = plano.split(/(?:^|\s)\d{1,2}\s*[.)]\s*/).map(x => x.trim()).filter(Boolean);
+    if (partes.length > 1 && /^\s*1\s*[.)]/.test(plano)) return '<ol class="pasos">' + partes.map(x => `<li>${h(x)}</li>`).join('') + '</ol>';
+    return `<p class="ptext">${h(t)}</p>`;
+  }
+
+  async function pintarReceta(id) {
+    const r = REC.find(x => x.id === id);
+    if (!r) { $('#rdet').innerHTML = '<p class="msg err">No encuentro esa receta.</p>'; return; }
+    $('#rdet').innerHTML = `<h2 class="pt">${h(r.nombre)}</h2><p class="note">Cargando…</p>`;
+    const [d, ing] = await Promise.all([
+      sb.from('recetas').select('pasos, conservacion').eq('id', id).maybeSingle(),
+      sb.from('ingredientes_receta').select('orden, nombre, cantidad, unidad, al_gusto, nota').eq('receta_id', id).order('orden')
+    ]);
+    if (d.error || ing.error) { $('#rdet').innerHTML = `<p class="msg err">${h(es(d.error || ing.error))}</p>`; return; }
+    const lista = ing.data || [];
+    const conCant = lista.filter(i => i.cantidad != null && !i.al_gusto);
+    const gusto = lista.filter(i => !(i.cantidad != null && !i.al_gusto)).map(i => i.nombre.replace(/\s+al gusto\b/i, '').trim()).map(t => /^.[A-ZÁÉÍÓÚÑ]/.test(t) ? t : t.charAt(0).toLowerCase() + t.slice(1));
+    const chips = [r.categoria, raciones(r.raciones_lote), r.frecuencia ? r.frecuencia.charAt(0) + r.frecuencia.slice(1).toLowerCase() : '',
+      r.congelable ? 'Se congela' : '', r.dias_nevera ? `Nevera ${r.dias_nevera} días` : ''].filter(Boolean);
+    const cons = (d.data && d.data.conservacion || '').trim();
+    $('#rdet').innerHTML = `<h2 class="pt">${h(r.nombre)}</h2>
+      <div class="dchips">${chips.map(c => `<span>${h(c)}</span>`).join('')}</div>
+      <div class="box"><div class="kc"><div><b>${r.kcal_pdf == null ? '—' : num(Math.round(r.kcal_pdf))}</b> <span>kcal</span></div>
+        <div><b>${r.proteina_pdf == null ? '—' : num(r.proteina_pdf)}</b> <span>g proteína</span></div></div>
+        <div class="note">Por ración · dato orientativo del PDF. Cuando cada ingrediente esté unido a su ficha, se calculará con los datos reales.</div></div>
+      <div class="box"><h3>Ingredientes</h3>${conCant.map(i => `<div class="ing"><div>${h(i.nombre)}${i.nota ? `<small>${h(i.nota)}</small>` : ''}</div><span>${num(i.cantidad)} ${h(i.unidad || '')}</span></div>`).join('') || '<p class="note">Sin ingredientes apuntados.</p>'}
+        ${gusto.length ? `<div class="gusto">Al gusto: ${h(gusto.join(', '))}</div>` : ''}</div>
+      ${d.data && d.data.pasos ? `<div class="box"><h3>Pasos</h3>${pasosHtml(d.data.pasos)}</div>` : ''}
+      ${cons ? `<div class="box"><h3>Conservación</h3><p class="ptext">${h(cons)}</p></div>` : ''}`;
+    window.scrollTo(0, 0);
+  }
+
+  let SESION = null;
+  async function ruta() {
+    const hsh = location.hash.replace(/^#/, '');
+    const enRec = hsh === 'recetas' || hsh.startsWith('receta/');
+    document.body.classList.toggle('rec', !!SESION && enRec);
+    $('#recetas').hidden = !(SESION && hsh === 'recetas');
+    $('#receta').hidden = !(SESION && hsh.startsWith('receta/'));
+    if (SESION) $('#home').hidden = enRec;
+    if (!SESION || !enRec) return;
+    try { await cargarRecetas(); } catch (e) { $('#rlist').innerHTML = `<div class="empty">${h(es(e))}</div>`; return; }
+    if (hsh === 'recetas') pintarLista(); else pintarReceta(decodeURIComponent(hsh.slice(7)));
+  }
+  window.addEventListener('hashchange', ruta);
+  $('#cats').onclick = e => { const b = e.target.closest('[data-cat]'); if (!b) return; cat = b.dataset.cat; pintarLista(); };
+  $('#q').oninput = () => pintarLista();
+  $('#rlist').onclick = e => { const b = e.target.closest('[data-id]'); if (b) { desdeLista = 'receta/' + encodeURIComponent(b.dataset.id); location.hash = 'receta/' + encodeURIComponent(b.dataset.id); } };
+  document.querySelectorAll('[data-go]').forEach(b => b.onclick = () => {
+    const destino = b.dataset.go;
+    if (destino === 'recetas' && desdeLista && location.hash === '#' + desdeLista) { desdeLista = ''; history.back(); } else location.hash = destino;
+  });
+  $('#goRec').onclick = () => { location.hash = 'recetas'; };
+
   $('#authSwitch').onclick = () => setMode(mode === 'login' ? 'signup' : 'login');
   $('#authForm').onsubmit = async ev => {
     ev.preventDefault();
@@ -155,7 +295,7 @@
     } catch (e) { msg($('#authMsg'), es(e), 'err'); }
     finally { $('#authGo').disabled = false; }
   };
-  $('#logout').onclick = async () => { await sb.auth.signOut(); };
+  $('#logout').onclick = async () => { await sb.auth.signOut(); REC = null; ING_TXT = {}; if (location.hash) location.hash = ''; };
 
   sb.auth.onAuthStateChange((_ev, session) => { show(session); });
   sb.auth.getSession().then(({ data }) => show(data.session));
