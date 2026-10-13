@@ -303,6 +303,12 @@
   .cp-seg button{min-height:44px;border:0;background:#fff;font:600 14px var(--font);color:var(--ink);cursor:pointer}
   .cp-seg button.on{background:var(--ink);color:#fff}
 
+  /* 0.14 d · nombres largos en los ingredientes */
+  .ing.c3{grid-template-columns:minmax(0,1fr) auto auto}
+  .ing.c3 > div:first-child{min-width:0;overflow-wrap:anywhere}
+  .ing .tu{white-space:nowrap}
+  .ing .mio, .ing .gen{white-space:normal}
+
 </style>
 </head>
 <body>
@@ -365,7 +371,7 @@
     <button class="cp-act" type="button" id="cpAct" hidden></button>
   </section>
 
-  <p class="ver">Versión de prueba 0.14 c · tu producto en las recetas</p>
+  <p class="ver">Versión de prueba 0.14 d · tu producto en las recetas</p>
 </main>
 <nav class="nav" id="nav" hidden><button type="button" data-nav="semana" id="navSemana"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Semana</button><button type="button" data-nav="compra" id="navCompra"><i class="nbd" id="navNum" hidden></i><svg viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h3l2.6 12.4a2 2 0 0 0 2 1.6h8.2a2 2 0 0 0 2-1.6L21 7H6"/></svg>Compra</button><button type="button" data-nav="recetas" id="navRecetas"><svg viewBox="0 0 24 24"><path d="M12 6.5C10 5 7 4.5 3.5 5v14c3.5-.5 6.5 0 8.5 1.5 2-1.5 5-2 8.5-1.5V5C17 4.5 14 5 12 6.5zM12 6.5v14"/><path d="M6.5 9.5h2.5M6.5 12.5h2.5M15 9.5h2.5M15 12.5h2.5"/></svg>Recetas</button><button type="button" data-nav="alimentos"><svg viewBox="0 0 24 24"><path d="M12 8.2c-1.3-.9-2.8-1.2-4.2-.9C5.3 7.8 4 10 4 12.8 4 17 7 21 9.6 21c1 0 1.5-.5 2.4-.5s1.4.5 2.4.5C17 21 20 17 20 12.8c0-2.8-1.3-5-3.8-5.5-1.4-.3-2.9 0-4.2.9z"/><path d="M12 8.2V5.5M12 5.5c.3-1.6 1.7-2.6 3.4-2.6-.2 1.7-1.6 2.8-3.4 2.6z"/></svg>Alimentos</button></nav>
 <dialog class="sheet" id="picker" aria-labelledby="pkTit"><div class="shh"><h2 id="pkTit">Añadir</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb">
@@ -2080,16 +2086,19 @@ let MP = null;
 function abrirMiProducto(rid, nombre) {
   const ops = opcionesMiProducto(rid, nombre); if (ops.length < 2) return;
   const ref = refMiProducto(rid, nombre), cur = MISP[rid + '¦' + nombre] || '', r = recipe(rid);
-  MP = { rid, nombre, val: cur };
+  const lotes = data.lots.filter(l => l.recipeId === rid && l.date >= hoyIso()).sort((a, b) => a.date.localeCompare(b.date) || FR.indexOf(a.meal) - FR.indexOf(b.meal)).slice(0, 4);
+  MP = { rid, nombre, val: cur, donde: 'siempre' };
   $('#mpTit').textContent = nombre;
   $('#mpBody').innerHTML = `<p class="sub2">${h(r ? r.name : '')} · ¿cuál usas tú?</p><div class="mp-ops" role="radiogroup">`
     + [ref].concat(ops.filter(p => !ref || p.id !== ref.id)).filter(Boolean).map(p => { const v = ref && p.id === ref.id ? '' : p.id; return `<button type="button" role="radio" aria-checked="${v === cur}" class="${v === cur ? 'on' : ''}" data-mpv="${h(v)}"><i></i><span>${h(p.name)}${v === '' ? '<small>El de la receta</small>' : ''}</span></button>`; }).join('')
-    + '</div><div class="info" style="margin-top:12px">Solo lo ves tú. Cambia tus kcal de esta receta y lo que sale en tu compra.</div>';
+    + '</div>' + (lotes.length ? '<p class="cp-lbl">¿Dónde?</p><div class="mp-ops" id="mpDonde" role="radiogroup"><button type="button" role="radio" aria-checked="true" class="on" data-mpw="siempre"><i></i><span>Siempre en esta receta</span></button>' + lotes.map(l => `<button type="button" role="radio" aria-checked="false" data-mpw="lote:${h(l.lotId)}"><i></i><span>Solo en la preparación del ${h(DIA_CORTO(l.date))}<small>${h(l.meal)}</small></span></button>`).join('') + '</div>' : '')
+    + '<div class="info" style="margin-top:12px" id="mpInfo">Solo lo ves tú. Cambia tus kcal de esta receta y lo que sale en tu compra.</div>';
   $('#mpDlg').showModal();
 }
 function init014c() {
-  $('#mpBody').addEventListener('click', ev => { const b = ev.target.closest('[data-mpv]'); if (!b || !MP) return; MP.val = b.dataset.mpv; $('#mpBody').querySelectorAll('[data-mpv]').forEach(x => { const on = x === b; x.classList.toggle('on', on); x.setAttribute('aria-checked', on); }); });
-  $('#mpGo').onclick = async () => { if (!MP) return; const { rid, nombre, val } = MP; $('#mpDlg').close(); const ok = await guardarMiProducto(rid, nombre, val); if (ok) { if (location.hash === '#receta/' + encodeURIComponent(rid)) pintarReceta(rid); pintarTodo(); pintarGlobito(); aviso(val ? 'Guardado: usas ' + (product(val) || {}).name + '.' : 'Vuelves al de la receta.'); } };
+  $('#mpBody').addEventListener('click', ev => { const w = ev.target.closest('[data-mpw]'); if (w && MP) { MP.donde = w.dataset.mpw; $('#mpDonde').querySelectorAll('[data-mpw]').forEach(x => { const on = x === w; x.classList.toggle('on', on); x.setAttribute('aria-checked', on); }); $('#mpInfo').textContent = MP.donde === 'siempre' ? 'Solo lo ves tú. Cambia tus kcal de esta receta y lo que sale en tu compra.' : 'Solo cambia esa preparación: lo que compras para ella. La receta sigue como estaba.'; return; } const b = ev.target.closest('[data-mpv]'); if (!b || !MP) return; MP.val = b.dataset.mpv; $('#mpBody').querySelectorAll('[data-mpv]').forEach(x => { const on = x === b; x.classList.toggle('on', on); x.setAttribute('aria-checked', on); }); });
+  $('#mpGo').onclick = async () => { if (!MP) return; const { rid, nombre, val, donde } = MP; $('#mpDlg').close();
+    if (donde && donde.startsWith('lote:')) { const l = data.lots.find(x => x.lotId === donde.slice(5)); if (!l) return; const row = l._row || (l._row = nuevaFilaLote(l.lotId)), buy = Object.assign({}, row.compra_producto || {}), di = data.ingredients.find(x => x.id === rid && x.name === nombre), ref = refMiProducto(rid, nombre), quiero = val || (ref && ref.id) || '', normal = di ? (cookBase(di) || {}).id : ''; if (!quiero || quiero === normal) delete buy[nombre]; else buy[nombre] = quiero; row.compra_producto = buy; rehacerNota(l); marcarLote(l); pintarTodo(); pintarGlobito(); aviso('Solo en la preparación del ' + DIA_CORTO(l.date) + ': ' + ((product(quiero) || {}).name || nombre) + '.'); return; } const ok = await guardarMiProducto(rid, nombre, val); if (ok) { if (location.hash === '#receta/' + encodeURIComponent(rid)) pintarReceta(rid); pintarTodo(); pintarGlobito(); aviso(val ? 'Guardado: usas ' + (product(val) || {}).name + '.' : 'Vuelves al de la receta.'); } };
   $('#rdet').addEventListener('keydown', ev => { if ((ev.key === 'Enter' || ev.key === ' ') && ev.target.dataset && ev.target.dataset.miprod) { ev.preventDefault(); ev.target.click(); } });
   $('#cfBody').addEventListener('click', ev => { const b = ev.target.closest('[data-se-modo]'); if (!b) return; b.parentElement.querySelectorAll('[data-se-modo]').forEach(x => x.classList.toggle('on', x === b)); });
 }
