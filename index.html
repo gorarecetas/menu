@@ -394,6 +394,13 @@
   .rec-acc{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;margin:0 0 12px} .rec-acc .anadirsem{margin:0} .rec-acc .btn{min-height:48px}
   .pdf-acc{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px} .pdf-acc .btn{flex:1;min-height:48px;justify-content:center;text-decoration:none;display:inline-flex;align-items:center}
 
+  /* ---------- 0.17 e · repartir en raciones ---------- */
+  .rp-por{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:10px 0}
+  .rp-part{background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px;margin-bottom:10px}
+  .rp-ph{display:flex;align-items:center;gap:8px;margin-bottom:6px} .rp-name{font-weight:700}
+  .rp-out{display:flex;justify-content:space-between;gap:8px;margin-top:8px;font-size:14px;color:var(--muted)} .rp-out b{color:var(--ink);font-size:17px}
+  .btn.rp{justify-content:center;white-space:normal;text-align:center}
+
 </style>
 </head>
 <body>
@@ -466,7 +473,7 @@
     <button class="cp-act" type="button" id="cpAct" hidden></button>
   </section>
 
-  <p class="ver">Versión de prueba 0.17 d · producto casero</p>
+  <p class="ver">Versión de prueba 0.17 e · báscula</p>
 </main>
 <nav class="nav" id="nav" hidden><button type="button" data-nav="semana" id="navSemana"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Semana</button><button type="button" data-nav="compra" id="navCompra"><i class="nbd" id="navNum" hidden></i><svg viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h3l2.6 12.4a2 2 0 0 0 2 1.6h8.2a2 2 0 0 0 2-1.6L21 7H6"/></svg>Compra</button><button type="button" data-nav="recetas" id="navRecetas"><svg viewBox="0 0 24 24"><path d="M12 6.5C10 5 7 4.5 3.5 5v14c3.5-.5 6.5 0 8.5 1.5 2-1.5 5-2 8.5-1.5V5C17 4.5 14 5 12 6.5zM12 6.5v14"/><path d="M6.5 9.5h2.5M6.5 12.5h2.5M15 9.5h2.5M15 12.5h2.5"/></svg>Recetas</button><button type="button" data-nav="alimentos" id="navAlimentos"><svg viewBox="0 0 24 24"><path d="M12 8.2c-1.3-.9-2.8-1.2-4.2-.9C5.3 7.8 4 10 4 12.8 4 17 7 21 9.6 21c1 0 1.5-.5 2.4-.5s1.4.5 2.4.5C17 21 20 17 20 12.8c0-2.8-1.3-5-3.8-5.5-1.4-.3-2.9 0-4.2.9z"/><path d="M12 8.2V5.5M12 5.5c.3-1.6 1.7-2.6 3.4-2.6-.2 1.7-1.6 2.8-3.4 2.6z"/></svg>Alimentos</button></nav>
 <dialog class="sheet" id="picker" aria-labelledby="pkTit"><div class="shh"><h2 id="pkTit">Añadir</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb">
@@ -484,7 +491,7 @@
 <dialog class="sheet" id="semDlg" aria-labelledby="asTit"><div class="shh"><h2 id="asTit">Añadir a la semana</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb"><p class="sub2"><b id="asRec"></b></p><div class="wkm"><button type="button" class="ar" data-assem="-1" aria-label="Semana anterior">‹</button><b id="asRango"></b><button type="button" class="ar" data-assem="1" aria-label="Semana siguiente">›</button></div><h3 class="q3">Día</h3><div class="d7s" id="asDias"></div><h3 class="q3">Franja</h3><div class="f4s" id="asFr"></div><p class="nota2" id="asCuando"></p></div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="asGo">Continuar</button></div></dialog>
 <dialog class="sheet" id="cpFicha" aria-labelledby="cfTit"><div class="shh"><h2 id="cfTit">Compra</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="cfBody"></div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="cfGo">Guardar</button></div></dialog>
 <dialog class="sheet" id="cpAnadir" aria-labelledby="caTit"><div class="shh"><h2 id="caTit">Añadir a la compra</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb"><label class="cp-lbl" for="caNom">Producto</label><input class="cp-inp" id="caNom" type="search" enterkeyhint="done" autocomplete="off" autocorrect="off" autocapitalize="sentences" spellcheck="false" maxlength="200"><div class="cp-sugs" id="caLista" role="listbox" hidden></div><div class="cp-two" style="margin-top:12px"><label class="cp-q" for="caCant">Cantidad (si quieres)<input class="cp-inp" id="caCant" type="text" inputmode="decimal" autocomplete="off"></label><label class="cp-q" for="caUni">Unidad<select class="cp-inp" id="caUni"></select></label></div><p class="cp-nota" id="caNota"></p></div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="caGo">Añadir</button></div></dialog>
-<dialog class="sheet" id="mpDlg" aria-labelledby="mpTit"><div class="shh"><h2 id="mpTit">Tu producto</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="mpBody"></div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="mpGo">Guardar</button></div></dialog><dialog class="sheet" id="alDlg" aria-labelledby="alTit"><div class="shh"><h2 id="alTit">Alimento</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="alBody"></div><div class="shf"><button class="btn" type="button" id="alEditar">Editar</button><button class="btn main" type="button" id="alSemana">Añadir a la semana</button></div></dialog><dialog class="sheet" id="aeDlg" aria-labelledby="aeTit"><div class="shh"><h2 id="aeTit">Nueva ficha</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="aeBody"></div><div class="shf"><button class="btn main" type="button" id="aeGo">Guardar</button></div></dialog><dialog class="sheet" id="prpDlg" aria-labelledby="prpTit"><div class="shh"><h2 id="prpTit">Preparación</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="prpBody"></div><div class="shf"><p id="prpInfo" role="status"></p><button class="btn main" type="button" id="prpGo" disabled>Guardado</button></div></dialog><dialog class="sheet" id="swDlg" aria-labelledby="swTit"><div class="shh"><h2 id="swTit">Semanas guardadas</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="swBody"></div><div class="shf" style="justify-content:space-between"><button class="btn rojo" type="button" id="swBorrar" hidden>Borrar</button><span></span><button class="btn main" type="button" id="swGo">Guardar</button></div></dialog><dialog class="sheet" id="pdfDlg" aria-labelledby="pdfTit"><div class="shh"><h2 id="pdfTit">PDF</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb"><p id="pdfStatus" role="status" aria-live="polite" style="margin:0;font-size:15px"></p><div class="pdf-acc"><a id="pdfOpen" class="btn" target="_blank" rel="noopener" hidden>Abrir</a><button type="button" class="btn" id="pdfShare" hidden>Compartir</button><a id="pdfDownload" class="btn" download hidden>Descargar</a></div><p class="aj-h" id="pdfHint" hidden></p></div></dialog><dialog class="sheet" id="csDlg" aria-labelledby="csTit"><div class="shh"><h2 id="csTit">Guardar como producto casero</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="csBody"></div><div class="shf"><button class="btn main" type="button" id="csGo">Guardar ficha</button></div></dialog><div id="toast" role="status" hidden></div>
+<dialog class="sheet" id="mpDlg" aria-labelledby="mpTit"><div class="shh"><h2 id="mpTit">Tu producto</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="mpBody"></div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="mpGo">Guardar</button></div></dialog><dialog class="sheet" id="alDlg" aria-labelledby="alTit"><div class="shh"><h2 id="alTit">Alimento</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="alBody"></div><div class="shf"><button class="btn" type="button" id="alEditar">Editar</button><button class="btn main" type="button" id="alSemana">Añadir a la semana</button></div></dialog><dialog class="sheet" id="aeDlg" aria-labelledby="aeTit"><div class="shh"><h2 id="aeTit">Nueva ficha</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="aeBody"></div><div class="shf"><button class="btn main" type="button" id="aeGo">Guardar</button></div></dialog><dialog class="sheet" id="prpDlg" aria-labelledby="prpTit"><div class="shh"><h2 id="prpTit">Preparación</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="prpBody"></div><div class="shf"><p id="prpInfo" role="status"></p><button class="btn main" type="button" id="prpGo" disabled>Guardado</button></div></dialog><dialog class="sheet" id="swDlg" aria-labelledby="swTit"><div class="shh"><h2 id="swTit">Semanas guardadas</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="swBody"></div><div class="shf" style="justify-content:space-between"><button class="btn rojo" type="button" id="swBorrar" hidden>Borrar</button><span></span><button class="btn main" type="button" id="swGo">Guardar</button></div></dialog><dialog class="sheet" id="pdfDlg" aria-labelledby="pdfTit"><div class="shh"><h2 id="pdfTit">PDF</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb"><p id="pdfStatus" role="status" aria-live="polite" style="margin:0;font-size:15px"></p><div class="pdf-acc"><a id="pdfOpen" class="btn" target="_blank" rel="noopener" hidden>Abrir</a><button type="button" class="btn" id="pdfShare" hidden>Compartir</button><a id="pdfDownload" class="btn" download hidden>Descargar</a></div><p class="aj-h" id="pdfHint" hidden></p></div></dialog><dialog class="sheet" id="csDlg" aria-labelledby="csTit"><div class="shh"><h2 id="csTit">Guardar como producto casero</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="csBody"></div><div class="shf"><button class="btn main" type="button" id="csGo">Guardar ficha</button></div></dialog><dialog class="sheet" id="rpDlg" aria-labelledby="rpTit"><div class="shh"><h2 id="rpTit">Repartir en raciones</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="rpBody"></div><div class="shf" style="justify-content:space-between"><button class="btn" type="button" id="rpVaciar">Vaciar</button><button class="btn main" type="button" id="rpGo">Listo</button></div></dialog><div id="toast" role="status" hidden></div>
 <script>
   const SUPABASE_URL = 'https://cawmvpfjaehennkknmoy.supabase.co';
   const SUPABASE_KEY = 'sb_publishable_vQDbCf2dlzKlFgpbMj7u2A_1wDlteT3'; // clave pública: la protección la ponen las reglas de cada tabla
@@ -2541,7 +2548,7 @@ function abrirPreparacion(lotId) {
   });
   PRP = { lotId, rid: l.recipeId, open: null, d };
   $('#prpTit').textContent = recipe(l.recipeId)?.name || 'Preparación';
-  pintarPrp(); $('#prpDlg').showModal(); $('#prpBody').scrollTop = 0;
+  pintarPrp(); $('#prpDlg').showModal(); $('#prpBody').scrollTop = 0; wakeOn();
 }
 /* Mismo criterio que cookRead de la hoja, sobre el borrador en vez de leer la pantalla */
 function leerPrp() {
@@ -2616,7 +2623,7 @@ function pintarPrp() {
   $('#prpBody').innerHTML = `<div class="info"><b>Ingredientes para preparar ${h(racionTxt(id, l.prepared))}</b><br>Preparación del ${h(DIA_CORTO(l.date))}, ${h(l.meal.toLowerCase())}. Incluye todo el lote, también lo de otros días.</div>
     <div class="box prp-box"><h3>${lotAdjust(l).length || Object.keys(lotBuyMark(l)).length ? 'Ingredientes de esta preparación' : 'Ingredientes'}</h3>${todos.map(filaHTML).join('') || '<p class="note">Sin ingredientes apuntados.</p>'}
     ${hay ? '<p class="src">Toca un ingrediente para cambiar el producto o la cantidad que has usado.</p>' : ''}</div>
-    <button type="button" class="btn ancho" data-prpver>Ver la receta completa ›</button><div class="box"><button type="button" class="btn ancho" data-casero="lot" style="margin-bottom:6px">Guardar como producto casero</button><p class="aj-h" style="margin:0">Para algo que vas comiendo a ratos y no repartes: queda como ficha en «Alimentos».</p></div>`;
+    <button type="button" class="btn ancho rp" data-reparto>${weighSummary(l) ? 'Repartir en raciones · ' + h(weighSummary(l)) : 'Repartir en raciones (báscula)'}</button><button type="button" class="btn ancho" data-prpver>Ver la receta completa ›</button><div class="box"><button type="button" class="btn ancho" data-casero="lot" style="margin-bottom:6px">Guardar como producto casero</button><p class="aj-h" style="margin:0">Para algo que vas comiendo a ratos y no repartes: queda como ficha en «Alimentos».</p></div>`;
   $('#prpInfo').innerHTML = (st.bad ? '<span>Revisa las cantidades: alguna no es un número.</span>' : (always ? '<span>Cambia tu producto en la receta.</span>' : cambio ? '<span>La receta no cambia.</span>' : '')) + (kr === null || st.bad ? '' : `<b>Esta preparación: ${kc(kr)} kcal por ración</b>`);
   $('#prpGo').disabled = st.bad || !cambio; $('#prpGo').textContent = cambio ? 'Guardar' : 'Guardado';
 }
@@ -2910,6 +2917,52 @@ function init017d() {
   document.addEventListener('click', ev => { const b = ev.target.closest('[data-casero]'); if (!b) return; if (b.dataset.casero === 'lot' && PRP) { const id = PRP.lotId; abrirCasero('lot', id); } else if (b.dataset.casero === 'recipe' && window.RECDET) abrirCasero('recipe', window.RECDET.r.id); });
 }
 
+
+/* ---------- 0.17 e · «Repartir en raciones» (báscula) como la hoja 5.28 b: se pesa lo cocinado y se guarda con la preparación (⟦peso⟧) ----------
+   Con eso, en Semana «Yo» se puede apuntar en gramos y la línea dice cuánto pesa una ración. Pantalla encendida mientras cocinas. */
+let RP = null, wakeLock = null;
+const rpNum = v => { const s = String(v ?? '').replace(',', '.').trim(); if (!s) return null; const x = Number(s); return Number.isFinite(x) && x >= 0 ? x : null; };
+function abrirReparto(lotId) {
+  const lot = data.lots.find(l => l.lotId === lotId); if (!lot) return;
+  const g = lotWeigh(lot);
+  RP = g ? { lotId, portions: Math.max(1, Math.round(Number(g.n) || Number(lot.prepared) || 1)), parts: g.p.map((p, k) => ({ name: String(p.n || ('Parte ' + (k + 1))), total: p.t == null ? '' : String(p.t).replace('.', ','), tare: p.r == null || p.r === 0 ? '' : String(p.r).replace('.', ',') })) }
+    : { lotId, portions: Math.max(1, Math.round(Number(lot.prepared) || 1)), parts: [{ name: 'Parte 1', total: '', tare: '' }] };
+  pintarReparto(); $('#rpDlg').showModal(); wakeOn();
+}
+function rpSalida(p) { const tot = rpNum(p.total), tare = rpNum(p.tare), food = tot === null ? null : Math.max(0, tot - (tare || 0)); return `<span>Comida: ${food === null ? '—' : fmt.format(Math.round(food)) + ' g'}</span><span>1 ración = <b>${food === null ? '—' : fmt.format(Math.round(food / RP.portions)) + ' g'}</b></span>`; }
+function pintarReparto() {
+  $('#rpBody').innerHTML = `<p class="aj-h" style="margin-top:0">Pesa lo ya cocinado. Se guarda con esta preparación y en Semana podrás apuntar tu ración en gramos.</p>
+    <div class="rp-por"><span>Raciones</span><div class="aj-st"><button type="button" data-rpstep="-1" aria-label="Menos raciones"${RP.portions <= 1 ? ' disabled' : ''}>−</button><output id="rpN">${RP.portions}</output><button type="button" data-rpstep="1" aria-label="Más raciones">+</button></div></div>
+    ${RP.parts.map((p, k) => `<div class="rp-part" data-rppart="${k}"><div class="rp-ph"><input class="cp-inp rp-name" data-rpf="name" value="${h(p.name)}" maxlength="40" autocomplete="off" aria-label="Nombre de la parte"><button type="button" class="ib" data-rpdel="${k}" aria-label="Quitar ${h(p.name)}">×</button></div>
+      <div class="cp-two"><label class="cp-q">Peso total (g)<input class="cp-inp" data-rpf="total" type="text" inputmode="decimal" autocomplete="off" value="${h(p.total)}"></label><label class="cp-q">Recipiente (g) · opcional<input class="cp-inp" data-rpf="tare" type="text" inputmode="decimal" autocomplete="off" placeholder="—" value="${h(p.tare)}"></label></div>
+      <div class="rp-out" data-rpout="${k}">${rpSalida(p)}</div></div>`).join('')}
+    <button type="button" class="btn ancho" data-rpadd>+ Añadir parte</button>`;
+}
+function guardarReparto() {
+  const s = RP; if (!s) return; const lot = data.lots.find(l => l.lotId === s.lotId); if (!lot) return;
+  const parts = s.parts.filter(p => rpNum(p.total) > 0).map(p => ({ n: String(p.name || '').trim().slice(0, 40), t: rpNum(p.total), r: rpNum(p.tare) || 0 }));
+  const next = parts.length ? { n: s.portions, p: parts } : null, prev = lotWeigh(lot);
+  if (JSON.stringify(next) === JSON.stringify(prev)) return false;
+  const row = lot._row || (lot._row = nuevaFilaLote(lot.lotId)); row.pesos = next; rehacerNota(lot); marcarLote(lot); return true;
+}
+async function wakeOn() { if (wakeLock || !('wakeLock' in navigator)) return; try { const l = await navigator.wakeLock.request('screen'); wakeLock = l; l.addEventListener('release', () => { if (wakeLock === l) wakeLock = null; }); } catch (e) { wakeLock = null; } }
+function wakeOff() { const l = wakeLock; wakeLock = null; if (l) { try { l.release(); } catch (e) { } } }
+function init017e() {
+  $('#rpBody').addEventListener('input', ev => { const f = ev.target.closest('[data-rpf]'); if (!f || !RP) return; const k = Number(f.closest('[data-rppart]').dataset.rppart), p = RP.parts[k]; if (!p) return; p[f.dataset.rpf] = f.value; const o = $(`#rpBody [data-rpout="${k}"]`); if (o) o.innerHTML = rpSalida(p); });
+  $('#rpBody').addEventListener('click', ev => {
+    const t = ev.target.closest('button'); if (!t || !RP) return;
+    if (t.dataset.rpstep) { RP.portions = Math.max(1, RP.portions + Number(t.dataset.rpstep)); pintarReparto(); return; }
+    if (t.dataset.rpdel !== undefined) { RP.parts.splice(Number(t.dataset.rpdel), 1); if (!RP.parts.length) RP.parts.push({ name: 'Parte 1', total: '', tare: '' }); pintarReparto(); return; }
+    if (t.dataset.rpadd !== undefined) { RP.parts.push({ name: 'Parte ' + (RP.parts.length + 1), total: '', tare: '' }); pintarReparto(); const ins = document.querySelectorAll('#rpBody [data-rpf="total"]'); if (ins.length) ins[ins.length - 1].focus(); }
+  });
+  $('#rpVaciar').onclick = () => { if (!RP) return; RP.parts = [{ name: 'Parte 1', total: '', tare: '' }]; pintarReparto(); };
+  $('#rpGo').onclick = () => $('#rpDlg').close();
+  $('#rpDlg').addEventListener('close', () => { const cambio = guardarReparto(); RP = null; if (!$('#prpDlg').open) wakeOff(); if (cambio) { pintarTodo(); if ($('#prpDlg').open) pintarPrp(); aviso('Pesos guardados con la preparación.'); } });
+  $('#prpDlg').addEventListener('close', () => { if (!$('#rpDlg').open) wakeOff(); });
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && ($('#prpDlg').open || $('#rpDlg').open)) wakeOn(); });
+  document.addEventListener('click', ev => { if (ev.target.closest('[data-reparto]') && PRP) abrirReparto(PRP.lotId); });
+}
+
 async function abrirSemana() {
   if (!SEM.lunes) { const hoy = hoyIso(); SEM.lunes = mondayOf(hoy); SEM.dia = (parseIso(hoy).getDay() + 6) % 7; }
   if (!SEM.cargada) {
@@ -2919,7 +2972,7 @@ async function abrirSemana() {
   pintarSemana(); pintarEstado();
 }
 
-  initSemana(); init013(); initCompra(); init014b(); init014c(); init015(); init016(); init017a(); init017b(); init017c(); init017d();
+  initSemana(); init013(); initCompra(); init014b(); init014c(); init015(); init016(); init017a(); init017b(); init017c(); init017d(); init017e();
   sb.auth.onAuthStateChange((_ev, session) => { if ((session && session.user.id) !== (SESION && SESION.user.id)) { SEM.cargada = false; data = null; } show(session); });
   sb.auth.getSession().then(({ data }) => show(data.session));
   setMode('login');
