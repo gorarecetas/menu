@@ -401,6 +401,24 @@
   .rp-out{display:flex;justify-content:space-between;gap:8px;margin-top:8px;font-size:14px;color:var(--muted)} .rp-out b{color:var(--ink);font-size:17px}
   .btn.rp{justify-content:center;white-space:normal;text-align:center}
 
+  /* ---------- 0.19 · crear y editar recetas ---------- */
+  .rec-acc{grid-template-columns:minmax(0,1fr) auto auto}
+  .rec-top{display:flex;align-items:center;justify-content:space-between;gap:10px} .rec-top .btn{min-height:44px}
+  .re-chips{display:flex;flex-wrap:wrap;gap:6px}
+  .re-chip{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 14px;border:1px solid var(--line);border-radius:999px;background:#fff;font:600 14px var(--font);color:var(--ink);cursor:pointer}
+  .re-chip i{width:10px;height:10px;border-radius:50%} .re-chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+  .re-3{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .re-ings{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .re-ing{display:grid;grid-template-columns:minmax(0,1fr) auto 18px;gap:8px;align-items:center;min-height:56px;padding:6px 10px 6px 12px;border-top:1px solid #ebe3d6;cursor:pointer}
+  .re-ings > .re-ing:first-child{border-top:0} .re-ing .t{min-width:0} .re-ing b{display:block;font-size:15px;overflow-wrap:anywhere} .re-ing small{display:block;font-size:12.5px;color:var(--muted)} .re-ing small.mi{color:var(--red)}
+  .re-ing .q{font-size:14px;color:var(--muted);white-space:nowrap} .re-ing .go{color:var(--muted);font-weight:700;text-align:right}
+  .re-panel{background:#faf6ee;border-top:1px solid #ebe3d6;padding:10px 12px 12px}
+  .re-sel{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px 8px 8px 12px} .re-sel span{flex:1;min-width:0} .re-sel b{display:block;font-size:14px} .re-sel small{display:block;font-size:12px;color:var(--muted)} .re-sel .btn{min-height:44px;flex:none}
+  .re-us{display:flex;flex-wrap:wrap;gap:4px} .re-us button{min-height:44px;min-width:44px;padding:0 10px;border:1px solid var(--line);border-radius:10px;background:#fff;font:600 14px var(--font);color:var(--ink);cursor:pointer} .re-us button.on{background:var(--ink);border-color:var(--ink);color:#fff}
+  .re-panel .prp-q{grid-template-columns:96px minmax(0,1fr);align-items:start}
+  .re-acc{display:flex;gap:8px;margin-top:12px} .re-acc .btn{min-height:44px} .re-acc .rojo{flex:1}
+  .re-ta{height:180px;padding:10px;resize:vertical;line-height:1.45}
+
 </style>
 </head>
 <body>
@@ -442,7 +460,7 @@
   </section>
 
   <section id="recetas" hidden>
-    <h2 class="pt">Recetas</h2>
+    <div class="rec-top"><h2 class="pt">Recetas</h2><button type="button" class="btn" data-renueva style="margin-top:12px">+ Nueva receta</button></div>
     <input class="search" id="q" type="search" placeholder="Buscar receta o ingrediente" autocomplete="off" enterkeyhint="search">
     <div class="fwrap" id="fwrap"><div class="dd" id="dd"></div><div class="bar"><span id="cnt"></span><button class="ord" type="button" data-pop="orden">Ordenar:<b id="ordTxt">A-Z</b></button></div><div class="pop" id="pop" hidden></div></div>
     <div class="list" id="rlist"><div class="empty">Cargando recetas…</div></div>
@@ -473,7 +491,7 @@
     <button class="cp-act" type="button" id="cpAct" hidden></button>
   </section>
 
-  <p class="ver">Versión de prueba 0.18 · compra</p>
+  <p class="ver">Versión de prueba 0.19 · recetas nuevas</p>
 </main>
 <nav class="nav" id="nav" hidden><button type="button" data-nav="semana" id="navSemana"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Semana</button><button type="button" data-nav="compra" id="navCompra"><i class="nbd" id="navNum" hidden></i><svg viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h3l2.6 12.4a2 2 0 0 0 2 1.6h8.2a2 2 0 0 0 2-1.6L21 7H6"/></svg>Compra</button><button type="button" data-nav="recetas" id="navRecetas"><svg viewBox="0 0 24 24"><path d="M12 6.5C10 5 7 4.5 3.5 5v14c3.5-.5 6.5 0 8.5 1.5 2-1.5 5-2 8.5-1.5V5C17 4.5 14 5 12 6.5zM12 6.5v14"/><path d="M6.5 9.5h2.5M6.5 12.5h2.5M15 9.5h2.5M15 12.5h2.5"/></svg>Recetas</button><button type="button" data-nav="alimentos" id="navAlimentos"><svg viewBox="0 0 24 24"><path d="M12 8.2c-1.3-.9-2.8-1.2-4.2-.9C5.3 7.8 4 10 4 12.8 4 17 7 21 9.6 21c1 0 1.5-.5 2.4-.5s1.4.5 2.4.5C17 21 20 17 20 12.8c0-2.8-1.3-5-3.8-5.5-1.4-.3-2.9 0-4.2.9z"/><path d="M12 8.2V5.5M12 5.5c.3-1.6 1.7-2.6 3.4-2.6-.2 1.7-1.6 2.8-3.4 2.6z"/></svg>Alimentos</button></nav>
 <dialog class="sheet" id="picker" aria-labelledby="pkTit"><div class="shh"><h2 id="pkTit">Añadir</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb">
@@ -491,7 +509,7 @@
 <dialog class="sheet" id="semDlg" aria-labelledby="asTit"><div class="shh"><h2 id="asTit">Añadir a la semana</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb"><p class="sub2"><b id="asRec"></b></p><div class="wkm"><button type="button" class="ar" data-assem="-1" aria-label="Semana anterior">‹</button><b id="asRango"></b><button type="button" class="ar" data-assem="1" aria-label="Semana siguiente">›</button></div><h3 class="q3">Día</h3><div class="d7s" id="asDias"></div><h3 class="q3">Franja</h3><div class="f4s" id="asFr"></div><p class="nota2" id="asCuando"></p></div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="asGo">Continuar</button></div></dialog>
 <dialog class="sheet" id="cpFicha" aria-labelledby="cfTit"><div class="shh"><h2 id="cfTit">Compra</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="cfBody"></div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="cfGo">Guardar</button></div></dialog>
 <dialog class="sheet" id="cpAnadir" aria-labelledby="caTit"><div class="shh"><h2 id="caTit">Añadir a la compra</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb"><label class="cp-lbl" for="caNom">Producto</label><input class="cp-inp" id="caNom" type="search" enterkeyhint="done" autocomplete="off" autocorrect="off" autocapitalize="sentences" spellcheck="false" maxlength="200"><div class="cp-sugs" id="caLista" role="listbox" hidden></div><div class="cp-two" style="margin-top:12px"><label class="cp-q" for="caCant">Cantidad (si quieres)<input class="cp-inp" id="caCant" type="text" inputmode="decimal" autocomplete="off"></label><label class="cp-q" for="caUni">Unidad<select class="cp-inp" id="caUni"></select></label></div><p class="cp-nota" id="caNota"></p></div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="caGo">Añadir</button></div></dialog>
-<dialog class="sheet" id="mpDlg" aria-labelledby="mpTit"><div class="shh"><h2 id="mpTit">Tu producto</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="mpBody"></div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="mpGo">Guardar</button></div></dialog><dialog class="sheet" id="alDlg" aria-labelledby="alTit"><div class="shh"><h2 id="alTit">Alimento</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="alBody"></div><div class="shf"><button class="btn" type="button" id="alEditar">Editar</button><button class="btn main" type="button" id="alSemana">Añadir a la semana</button></div></dialog><dialog class="sheet" id="aeDlg" aria-labelledby="aeTit"><div class="shh"><h2 id="aeTit">Nueva ficha</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="aeBody"></div><div class="shf"><button class="btn main" type="button" id="aeGo">Guardar</button></div></dialog><dialog class="sheet" id="prpDlg" aria-labelledby="prpTit"><div class="shh"><h2 id="prpTit">Preparación</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="prpBody"></div><div class="shf"><p id="prpInfo" role="status"></p><button class="btn main" type="button" id="prpGo" disabled>Guardado</button></div></dialog><dialog class="sheet" id="swDlg" aria-labelledby="swTit"><div class="shh"><h2 id="swTit">Semanas guardadas</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="swBody"></div><div class="shf" style="justify-content:space-between"><button class="btn rojo" type="button" id="swBorrar" hidden>Borrar</button><span></span><button class="btn main" type="button" id="swGo">Guardar</button></div></dialog><dialog class="sheet" id="pdfDlg" aria-labelledby="pdfTit"><div class="shh"><h2 id="pdfTit">PDF</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb"><p id="pdfStatus" role="status" aria-live="polite" style="margin:0;font-size:15px"></p><div class="pdf-acc"><a id="pdfOpen" class="btn" target="_blank" rel="noopener" hidden>Abrir</a><button type="button" class="btn" id="pdfShare" hidden>Compartir</button><a id="pdfDownload" class="btn" download hidden>Descargar</a></div><p class="aj-h" id="pdfHint" hidden></p></div></dialog><dialog class="sheet" id="csDlg" aria-labelledby="csTit"><div class="shh"><h2 id="csTit">Guardar como producto casero</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="csBody"></div><div class="shf"><button class="btn main" type="button" id="csGo">Guardar ficha</button></div></dialog><dialog class="sheet" id="rpDlg" aria-labelledby="rpTit"><div class="shh"><h2 id="rpTit">Repartir en raciones</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="rpBody"></div><div class="shf" style="justify-content:space-between"><button class="btn" type="button" id="rpVaciar">Vaciar</button><button class="btn main" type="button" id="rpGo">Listo</button></div></dialog><dialog class="sheet" id="cbDlg" aria-labelledby="cbTit"><div class="shh"><h2 id="cbTit">Comprado</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="cbBody"></div><div class="shf"><button class="btn main" type="button" id="cbGo">Guardar</button></div></dialog><div id="toast" role="status" hidden></div>
+<dialog class="sheet" id="mpDlg" aria-labelledby="mpTit"><div class="shh"><h2 id="mpTit">Tu producto</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="mpBody"></div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="mpGo">Guardar</button></div></dialog><dialog class="sheet" id="alDlg" aria-labelledby="alTit"><div class="shh"><h2 id="alTit">Alimento</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="alBody"></div><div class="shf"><button class="btn" type="button" id="alEditar">Editar</button><button class="btn main" type="button" id="alSemana">Añadir a la semana</button></div></dialog><dialog class="sheet" id="aeDlg" aria-labelledby="aeTit"><div class="shh"><h2 id="aeTit">Nueva ficha</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="aeBody"></div><div class="shf"><button class="btn main" type="button" id="aeGo">Guardar</button></div></dialog><dialog class="sheet" id="prpDlg" aria-labelledby="prpTit"><div class="shh"><h2 id="prpTit">Preparación</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="prpBody"></div><div class="shf"><p id="prpInfo" role="status"></p><button class="btn main" type="button" id="prpGo" disabled>Guardado</button></div></dialog><dialog class="sheet" id="swDlg" aria-labelledby="swTit"><div class="shh"><h2 id="swTit">Semanas guardadas</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="swBody"></div><div class="shf" style="justify-content:space-between"><button class="btn rojo" type="button" id="swBorrar" hidden>Borrar</button><span></span><button class="btn main" type="button" id="swGo">Guardar</button></div></dialog><dialog class="sheet" id="pdfDlg" aria-labelledby="pdfTit"><div class="shh"><h2 id="pdfTit">PDF</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb"><p id="pdfStatus" role="status" aria-live="polite" style="margin:0;font-size:15px"></p><div class="pdf-acc"><a id="pdfOpen" class="btn" target="_blank" rel="noopener" hidden>Abrir</a><button type="button" class="btn" id="pdfShare" hidden>Compartir</button><a id="pdfDownload" class="btn" download hidden>Descargar</a></div><p class="aj-h" id="pdfHint" hidden></p></div></dialog><dialog class="sheet" id="csDlg" aria-labelledby="csTit"><div class="shh"><h2 id="csTit">Guardar como producto casero</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="csBody"></div><div class="shf"><button class="btn main" type="button" id="csGo">Guardar ficha</button></div></dialog><dialog class="sheet" id="rpDlg" aria-labelledby="rpTit"><div class="shh"><h2 id="rpTit">Repartir en raciones</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="rpBody"></div><div class="shf" style="justify-content:space-between"><button class="btn" type="button" id="rpVaciar">Vaciar</button><button class="btn main" type="button" id="rpGo">Listo</button></div></dialog><dialog class="sheet" id="cbDlg" aria-labelledby="cbTit"><div class="shh"><h2 id="cbTit">Comprado</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="cbBody"></div><div class="shf"><button class="btn main" type="button" id="cbGo">Guardar</button></div></dialog><dialog class="sheet" id="reDlg" aria-labelledby="reTit"><div class="shh"><h2 id="reTit">Receta</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="reBody"></div><div class="shf"><button class="btn main" type="button" id="reGo">Guardar</button></div></dialog><div id="toast" role="status" hidden></div>
 <script>
   const SUPABASE_URL = 'https://cawmvpfjaehennkknmoy.supabase.co';
   const SUPABASE_KEY = 'sb_publishable_vQDbCf2dlzKlFgpbMj7u2A_1wDlteT3'; // clave pública: la protección la ponen las reglas de cada tabla
@@ -565,7 +583,7 @@
     if (!SEM.cargada) await cargarDatos();
     if (REC) return;
     const [r, i] = await Promise.all([
-      sb.from('recetas').select('id, nombre, categoria, frecuencia, raciones_lote, kcal_pdf, proteina_pdf, grasa_pdf, hidratos_pdf, dias_nevera, congelable'),
+      sb.from('recetas').select('id, owner, nombre, categoria, frecuencia, raciones_lote, kcal_pdf, proteina_pdf, grasa_pdf, hidratos_pdf, dias_nevera, congelable'),
       sb.from('ingredientes_receta').select('receta_id, nombre').limit(5000)
     ]);
     if (r.error) throw r.error;
@@ -678,7 +696,7 @@
     window.RECDET = { r, pasos: d.data && d.data.pasos, lista };
     $('#rdet').innerHTML = `<h2 class="pt">${h(r.nombre)}</h2>
       <div class="dchips">${frec(r.frecuencia)}${chips.join('')}</div>
-      <div class="rec-acc"><button type="button" class="btn main anadirsem" data-anadirsem="${h(r.id)}">Añadir a la semana</button><button type="button" class="btn" data-recpdf aria-label="Receta en PDF">PDF</button></div>
+      <div class="rec-acc"><button type="button" class="btn main anadirsem" data-anadirsem="${h(r.id)}">Añadir a la semana</button><button type="button" class="btn" data-recpdf aria-label="Receta en PDF">PDF</button>${puedoEditarReceta(r) ? `<button type="button" class="btn" data-reedit="${h(r.id)}">Editar</button>` : ''}</div>
       <div class="box"><div class="kc"><div><b>${r.kcal_pdf == null ? '—' : num(Math.round(r.kcal_pdf))}</b><span>kcal</span></div>
         <div><b>${r.proteina_pdf == null ? '—' : num(r.proteina_pdf)}</b><span>g proteína</span></div>
         <div><b>${r.hidratos_pdf == null ? '—' : num(r.hidratos_pdf)}</b><span>g hidratos</span></div>
@@ -3005,6 +3023,130 @@ function init018() {
   $('#cfBody').addEventListener('change', ev => { if (ev.target.id !== 'cfTodo') return; const v = ev.target.value; if (!v) return; document.querySelectorAll('#cfBody [data-se-p]').forEach(s => { if ([...s.options].some(o => o.value === v) && s.value !== v) { s.value = v; s.dispatchEvent(new Event('change', { bubbles: true })); } }); });
 }
 
+
+/* ---------- 0.19 · Recetas: «+ Nueva receta» y «Editar receta» (hasta ahora se apuntaban en la pestaña «Recetario» de la hoja) ----------
+   La administradora crea y edita las recetas comunes (PW-01, PW-02…); el resto, recetas suyas (RU-xxxxxxxx) que solo ven ellas.
+   Cada ingrediente se une a una ficha de Alimentos (alimento_id y nombre en la compra), que es lo que usan kcal y compra. */
+let RE = null;
+const RE_UNI = ['g', 'ml', 'ud', 'cda', 'cdta', 'diente', 'hoja', 'pizca', 'rama'];
+const RE_FREC = [['DIARIA', 'Diaria', '#00b65b'], ['FRECUENTE', 'Frecuente', '#ff7a1a'], ['OCASIONAL', 'Ocasional', '#e5192d']];
+const puedoEditarReceta = r => !!r && (r.owner ? r.owner === SESION.user.id : esAdmin());
+function siguientePW() { const ns = data.recipes.map(r => /^PW-(\d+)$/.exec(r.id)).filter(Boolean).map(m => Number(m[1])); return 'PW-' + String(Math.max(0, ...ns) + 1).padStart(2, '0'); }
+async function abrirEditarReceta(id) {
+  if (!SEM.cargada) { try { await cargarDatos(); } catch (err) { aviso(es(err)); return; } }
+  let r = null, ings = [];
+  if (id) {
+    const [a, b] = await Promise.all([sb.from('recetas').select('*').eq('id', id).maybeSingle(), sb.from('ingredientes_receta').select('*').eq('receta_id', id).order('orden')]);
+    if (a.error || b.error || !a.data) { aviso('No se ha podido abrir la receta: ' + es(a.error || b.error || 'no está')); return; }
+    r = a.data; ings = b.data || [];
+    if (!puedoEditarReceta(r)) { aviso('Esta receta es común: solo la puede cambiar la administradora.'); return; }
+  }
+  RE = { id: id || null, owner: r ? r.owner : (esAdmin() ? null : SESION.user.id), nombre: r ? r.nombre : '', categoria: r ? (r.categoria || '') : '', frecuencia: r ? String(r.frecuencia || '').toUpperCase() : '', raciones: r ? Number(r.raciones_lote) || 1 : 2,
+    nevera: r ? Number(r.dias_nevera) || 0 : 0, congela: r ? !!r.congelable : false, pasos: r ? (r.pasos || '') : '', cons: r ? (r.conservacion || '') : '', fuente: r ? r.fuente : null, origen: r ? r.origen : null,
+    ings: ings.map(i => ({ id: i.id, nombre: i.nombre, cantidad: i.cantidad, unidad: i.al_gusto ? 'al gusto' : (i.unidad || ''), alimento: i.alimento_id || '', compra: i.nombre_compra || '', marca: i.marca || '', base: i.receta_base_id || '', noCompra: !!i.no_se_compra, nota: i.nota || '', gpu: i.g_por_unidad, texto: i.texto_original, origen: i.origen })),
+    abierto: null, q: '' };
+  if (!RE.ings.length) { RE.ings.push(nuevoIng()); RE.abierto = 0; }
+  $('#reTit').textContent = id ? 'Editar receta' : 'Nueva receta';
+  pintarEditorReceta(); $('#reDlg').showModal(); $('#reBody').scrollTop = 0;
+}
+const nuevoIng = () => ({ id: null, nombre: '', cantidad: null, unidad: 'g', alimento: '', compra: '', marca: '', base: '', noCompra: false, nota: '' });
+function textoIng(x) { const p = x.alimento ? product(x.alimento) : null, cant = x.unidad === 'al gusto' ? 'al gusto' : x.cantidad == null || x.cantidad === '' ? 'sin cantidad' : fmt.format(Number(x.cantidad)) + ' ' + x.unidad; return { cant, ficha: x.noCompra ? 'No se compra' : p ? p.name : 'Sin ficha: no cuenta en kcal ni en la compra' }; }
+function pintarEditorReceta() {
+  const R = RE, cats = [...new Set(data.recipes.map(r => r.category).concat(REC ? REC.map(r => r.categoria) : []).filter(Boolean))].sort(compareEs);
+  const chip = (attr, on, t, col) => `<button type="button" class="re-chip${on ? ' on' : ''}" ${attr} aria-pressed="${on}">${col ? `<i style="background:${col}"></i>` : ''}${h(t)}</button>`;
+  const ingHTML = (x, k) => {
+    const t = textoIng(x), ab = R.abierto === k;
+    const cab = `<div class="re-ing${ab ? ' ab' : ''}" data-reabre="${k}" role="button" tabindex="0" aria-expanded="${ab}"><span class="t"><b>${h(x.nombre || 'Ingrediente sin nombre')}</b><small class="${x.alimento || x.noCompra ? '' : 'mi'}">${h(t.ficha)}</small></span><span class="q">${h(t.cant)}</span><span class="go" aria-hidden="true">${ab ? '⌃' : '›'}</span></div>`;
+    if (!ab) return cab;
+    const qn = clean(R.q.trim()), lista = qn ? data.products.filter(p => clean(p.name).includes(qn) || clean(shopName(p)).includes(qn)).sort((a, b) => (brandOf(a) ? 1 : 0) - (brandOf(b) ? 1 : 0) || byFoodName(a, b)).slice(0, 8) : [];
+    const p = x.alimento ? product(x.alimento) : null;
+    return cab + `<div class="re-panel" data-reing="${k}">
+      <label class="cp-lbl" for="reIq">Ficha de Alimentos</label>
+      ${p ? `<div class="re-sel"><span><b>${h(p.name)}</b><small>${h(category(p))} · ${h(valoresTxt(p))}</small></span><button type="button" class="btn" data-requita>Cambiar</button></div>`
+        : `<input class="cp-inp" id="reIq" type="search" autocomplete="off" placeholder="Busca el producto (pollo, arroz…)" value="${h(R.q)}">${lista.length ? `<div class="mp-ops" style="margin-top:6px">${lista.map(q => `<button type="button" data-reprod="${h(q.id)}"><span>${h(q.name)}<small>${h(category(q))}</small></span></button>`).join('')}</div>` : qn ? '<p class="aj-h">No hay fichas con ese nombre. Puedes crearla en Alimentos.</p>' : ''}`}
+      <label class="cp-lbl" for="reIn">Nombre en la receta</label><input class="cp-inp" id="reIn" data-ref="nombre" maxlength="120" autocomplete="off" value="${h(x.nombre)}" placeholder="Por ejemplo: Pechuga de pollo">
+      <p class="cp-lbl">Cantidad para ${h(fmt.format(R.raciones))} ${R.raciones === 1 ? 'ración' : 'raciones'}</p>
+      <div class="prp-q"><input class="cp-inp" data-ref="cantidad" type="text" inputmode="decimal" autocomplete="off" value="${x.cantidad == null ? '' : h(String(x.cantidad).replace('.', ','))}" placeholder="—"${x.unidad === 'al gusto' ? ' disabled' : ''} aria-label="Cantidad"><div class="re-us">${RE_UNI.concat(p && !RE_UNI.includes(p.unit) && ['onza'].includes(p.unit) ? [p.unit] : []).concat(['al gusto']).map(u => `<button type="button" data-reuni="${h(u)}" class="${x.unidad === u ? 'on' : ''}" aria-pressed="${x.unidad === u}">${h(u)}</button>`).join('')}</div></div>
+      <label class="cp-x"><input type="checkbox" data-ref="noCompra"${x.noCompra ? ' checked' : ''}>No se compra (agua del grifo…)</label>
+      <label class="cp-lbl" for="reInota">Nota (opcional)</label><input class="cp-inp" id="reInota" data-ref="nota" maxlength="200" autocomplete="off" value="${h(x.nota)}" placeholder="Por ejemplo: en dados">
+      <div class="re-acc"><button type="button" class="btn rojo" data-rebor="${k}">Quitar ingrediente</button>${k > 0 ? `<button type="button" class="btn" data-resube="${k}" aria-label="Subir">↑</button>` : ''}${k < R.ings.length - 1 ? `<button type="button" class="btn" data-rebaja="${k}" aria-label="Bajar">↓</button>` : ''}</div>
+    </div>`;
+  };
+  $('#reBody').innerHTML = `<label class="cp-lbl" for="reNom" style="margin-top:0">Nombre</label><input class="cp-inp" id="reNom" maxlength="140" autocomplete="off" value="${h(R.nombre)}" placeholder="Por ejemplo: Crema de calabaza">
+    <p class="cp-lbl">Categoría</p><div class="re-chips">${cats.map(c => chip(`data-recat="${h(c)}"`, R.categoria === c, c)).join('')}</div>
+    <p class="cp-lbl">Frecuencia</p><div class="re-chips">${RE_FREC.map(([v, t, col]) => chip(`data-refrec="${v}"`, R.frecuencia === v, t, col)).join('')}</div>
+    <div class="re-3"><div><p class="cp-lbl">Raciones</p><div class="aj-st"><button type="button" data-rest="raciones:-1" aria-label="Menos raciones">−</button><output>${R.raciones}</output><button type="button" data-rest="raciones:1" aria-label="Más raciones">+</button></div></div>
+      <div><p class="cp-lbl">Días en la nevera</p><div class="aj-st"><button type="button" data-rest="nevera:-1" aria-label="Menos días">−</button><output>${R.nevera || '—'}</output><button type="button" data-rest="nevera:1" aria-label="Más días">+</button></div></div></div>
+    <div class="re-chips" style="margin-top:10px">${chip('data-recong', R.congela, 'Se puede congelar')}</div>
+    <p class="cp-lbl">Ingredientes (${R.ings.length})</p><div class="re-ings">${R.ings.map(ingHTML).join('')}</div>
+    <button type="button" class="btn ancho" data-readd style="margin-top:8px">+ Añadir ingrediente</button>
+    <label class="cp-lbl" for="rePasos">Pasos</label><textarea class="cp-inp re-ta" id="rePasos" maxlength="8000" placeholder="1. Corta…&#10;2. Sofríe…">${h(R.pasos)}</textarea>
+    <label class="cp-lbl" for="reCons">Conservación (opcional)</label><textarea class="cp-inp al-ta" id="reCons" maxlength="1000">${h(R.cons)}</textarea>
+    <p class="aj-h">${R.owner ? 'Esta receta solo la ves tú.' : 'Receta común: la ven todas las personas. Lo que cambies aquí cambia para todas.'} Las kcal se calculan con las fichas de los ingredientes.</p>`;
+}
+function leerCamposReceta() { const R = RE; if (!R) return; const g = s => $(s); if (g('#reNom')) R.nombre = g('#reNom').value; if (g('#rePasos')) R.pasos = g('#rePasos').value; if (g('#reCons')) R.cons = g('#reCons').value; }
+async function guardarReceta() {
+  leerCamposReceta(); const R = RE; if (!R) return;
+  const nom = R.nombre.trim().replace(/\s+/g, ' ');
+  if (!nom || /^[=+@]/.test(nom)) { aviso('Escribe el nombre de la receta.'); return; }
+  const ings = R.ings.filter(x => x.nombre.trim() || x.alimento);
+  if (!ings.length) { aviso('Añade al menos un ingrediente.'); return; }
+  for (const x of ings) { if (!x.nombre.trim()) { aviso('Hay un ingrediente sin nombre.'); return; } if (x.unidad !== 'al gusto' && x.cantidad != null && x.cantidad !== '' && !(Number(x.cantidad) >= 0)) { aviso('Revisa la cantidad de ' + x.nombre + '.'); return; } }
+  const nombres = ings.map(x => clean(x.nombre.trim())); if (new Set(nombres).size !== nombres.length) { aviso('Hay dos ingredientes con el mismo nombre: cambia uno.'); return; }
+  const id = R.id || (R.owner ? 'RU-' + uuid().slice(0, 8) : siguientePW());
+  const rowR = { id, owner: R.owner, nombre: nom, categoria: R.categoria || null, frecuencia: R.frecuencia || null, raciones_lote: R.raciones, pasos: R.pasos.trim() || null, conservacion: R.cons.trim() || null, dias_nevera: R.nevera || null, congelable: R.congela, fuente: R.fuente || 'Creada en la web', actualizado: new Date().toISOString() };
+  const rowsI = ings.map((x, k) => ({ id: x.id || uuid(), receta_id: id, orden: k + 1, nombre: x.nombre.trim(), alimento_id: x.alimento || null, receta_base_id: x.base || null, cantidad: x.unidad === 'al gusto' || x.cantidad === '' || x.cantidad == null ? null : Number(x.cantidad), unidad: x.unidad === 'al gusto' ? null : x.unidad, al_gusto: x.unidad === 'al gusto', no_se_compra: !!x.noCompra, nota: x.nota.trim() || null, nombre_compra: x.noCompra ? null : (x.compra || null), marca: x.marca || null, g_por_unidad: x.gpu ?? null, texto_original: x.texto || null, origen: x.origen || { fuente: 'web' } }));
+  // kcal calculadas (para la lista y las demás personas): se calculan antes de guardar
+  const tmpR = aReceta(rowR), tmpI = rowsI.map(i => aIngrediente(i, [tmpR])), antesR = data.recipes, antesI = data.ingredients;
+  data.recipes = antesR.filter(r => r.id !== id).concat([tmpR]); data.ingredients = antesI.filter(i => i.id !== id).concat(tmpI); calcularRecetas();
+  const v = CALC[id]; rowR.kcal_pdf = v && v.ok ? Math.round(v.c.kcal * 10) / 10 : null; rowR.proteina_pdf = v && v.ok ? Math.round(v.c.protein * 10) / 10 : null; rowR.grasa_pdf = v && v.ok ? Math.round(v.c.fat * 10) / 10 : null; rowR.hidratos_pdf = v && v.ok ? Math.round(v.c.carbs * 10) / 10 : null;
+  $('#reGo').disabled = true;
+  const e1 = (await sb.from('recetas').upsert(rowR)).error;
+  const quitar = R.id ? (await sb.from('ingredientes_receta').select('id').eq('receta_id', id)) : { data: [] };
+  const e2 = e1 ? null : (await sb.from('ingredientes_receta').upsert(rowsI)).error;
+  const sobran = (quitar.data || []).map(x => x.id).filter(x => !rowsI.some(r => r.id === x));
+  const e3 = e1 || e2 || !sobran.length ? null : (await sb.from('ingredientes_receta').delete().in('id', sobran)).error;
+  $('#reGo').disabled = false;
+  if (e1 || e2 || e3) { data.recipes = antesR; data.ingredients = antesI; calcularRecetas(); aviso('No se ha podido guardar la receta: ' + es(e1 || e2 || e3)); return; }
+  tmpR.kcal = rowR.kcal_pdf; tmpR.pdf = { kcal: rowR.kcal_pdf, protein: rowR.proteina_pdf, fat: rowR.grasa_pdf, carbs: rowR.hidratos_pdf }; calcularRecetas();
+  if (REC) { const viejo = REC.find(x => x.id === id), nuevo = Object.assign({}, rowR, { kcal_pdf_orig: rowR.kcal_pdf }); if (viejo) Object.assign(viejo, nuevo); else REC.push(nuevo); REC.sort((a, b) => a.nombre.localeCompare(b.nombre, 'es')); ING_TXT[id] = rowsI.map(i => ' ' + norm(i.nombre)).join(''); }
+  $('#reDlg').close(); RE = null; pintarTodo(); pintarGlobito();
+  aviso(R.id ? 'Receta guardada.' : 'Receta nueva: ' + nom + '.');
+  if (location.hash === '#receta/' + encodeURIComponent(id)) ruta(); else { pila = [location.hash.replace(/^#/, '') || 'recetas']; location.hash = 'receta/' + encodeURIComponent(id); }
+}
+function init019() {
+  const B = $('#reBody');
+  B.addEventListener('click', ev => {
+    const t = ev.target.closest('button,[data-reabre]'); if (!t || !RE) return; leerCamposReceta();
+    const k = n => Number(n), R = RE;
+    if (t.dataset.recat !== undefined) { R.categoria = R.categoria === t.dataset.recat ? '' : t.dataset.recat; }
+    else if (t.dataset.refrec) { R.frecuencia = R.frecuencia === t.dataset.refrec ? '' : t.dataset.refrec; }
+    else if (t.dataset.rest) { const [c, d] = t.dataset.rest.split(':'); if (c === 'raciones') R.raciones = Math.max(1, Math.min(30, R.raciones + Number(d))); else R.nevera = Math.max(0, Math.min(15, R.nevera + Number(d))); }
+    else if (t.dataset.recong !== undefined) R.congela = !R.congela;
+    else if (t.dataset.readd !== undefined) { R.ings.push(nuevoIng()); R.abierto = R.ings.length - 1; R.q = ''; }
+    else if (t.dataset.reabre !== undefined) { R.abierto = R.abierto === k(t.dataset.reabre) ? null : k(t.dataset.reabre); R.q = ''; }
+    else if (t.dataset.reprod) { const x = R.ings[R.abierto], p = product(t.dataset.reprod); if (x && p) { x.alimento = p.id; x.compra = shopName(p); x.marca = brandOf(p) ? p.id : ''; if (!x.nombre.trim()) x.nombre = shopName(p); const pu = productMeasure(p).unit; if (!x.cantidad && ['ml', 'ud', 'onza'].includes(pu)) x.unidad = pu; R.q = ''; } }
+    else if (t.dataset.requita !== undefined) { const x = R.ings[R.abierto]; if (x) { x.alimento = ''; x.compra = ''; x.marca = ''; } }
+    else if (t.dataset.reuni) { const x = R.ings[R.abierto]; if (x) { x.unidad = t.dataset.reuni; if (x.unidad === 'al gusto') x.cantidad = null; } }
+    else if (t.dataset.rebor !== undefined) { R.ings.splice(k(t.dataset.rebor), 1); R.abierto = null; }
+    else if (t.dataset.resube !== undefined) { const i = k(t.dataset.resube); [R.ings[i - 1], R.ings[i]] = [R.ings[i], R.ings[i - 1]]; R.abierto = i - 1; }
+    else if (t.dataset.rebaja !== undefined) { const i = k(t.dataset.rebaja); [R.ings[i + 1], R.ings[i]] = [R.ings[i], R.ings[i + 1]]; R.abierto = i + 1; }
+    else return;
+    const y = B.scrollTop; pintarEditorReceta(); B.scrollTop = y;
+    if (t.dataset.readd !== undefined || t.dataset.requita !== undefined) { const q = $('#reIq'); if (q) q.focus(); }
+  });
+  B.addEventListener('keydown', ev => { if ((ev.key === 'Enter' || ev.key === ' ') && ev.target.dataset && ev.target.dataset.reabre !== undefined) { ev.preventDefault(); ev.target.click(); } });
+  B.addEventListener('input', ev => {
+    const t = ev.target; if (!RE) return;
+    if (t.id === 'reIq') { RE.q = t.value; leerCamposReceta(); const pos = t.selectionStart, y = B.scrollTop; pintarEditorReceta(); B.scrollTop = y; const q = $('#reIq'); if (q) { q.focus(); try { q.setSelectionRange(pos, pos); } catch (_) { } } return; }
+    const f = t.dataset && t.dataset.ref, x = RE.ings[RE.abierto]; if (!f || !x) return;
+    if (f === 'noCompra') x.noCompra = t.checked; else if (f === 'cantidad') { const v = parseNum(t.value); x.cantidad = v === null ? null : Number.isNaN(v) ? t.value : v; } else x[f] = t.value;
+    if (f === 'nombre') { const c = B.querySelector(`[data-reabre="${RE.abierto}"] b`); if (c) c.textContent = t.value || 'Ingrediente sin nombre'; }
+  });
+  $('#reGo').onclick = guardarReceta;
+  document.addEventListener('click', ev => { const b = ev.target.closest('[data-reedit],[data-renueva]'); if (!b) return; abrirEditarReceta(b.dataset.reedit || null); });
+}
+
 async function abrirSemana() {
   if (!SEM.lunes) { const hoy = hoyIso(); SEM.lunes = mondayOf(hoy); SEM.dia = (parseIso(hoy).getDay() + 6) % 7; }
   if (!SEM.cargada) {
@@ -3014,7 +3156,7 @@ async function abrirSemana() {
   pintarSemana(); pintarEstado();
 }
 
-  initSemana(); init013(); initCompra(); init014b(); init014c(); init015(); init016(); init017a(); init017b(); init017c(); init017d(); init017e(); init018();
+  initSemana(); init013(); initCompra(); init014b(); init014c(); init015(); init016(); init017a(); init017b(); init017c(); init017d(); init017e(); init018(); init019();
   sb.auth.onAuthStateChange((_ev, session) => { if ((session && session.user.id) !== (SESION && SESION.user.id)) { SEM.cargada = false; data = null; } show(session); });
   sb.auth.getSession().then(({ data }) => show(data.session));
   setMode('login');
