@@ -86,6 +86,7 @@
   .note{font-size:12px;color:var(--muted);margin-top:4px}
   .ing{display:flex;justify-content:space-between;gap:10px;font-size:14px;padding:3px 0;border-bottom:1px dashed #ebe3d6} .ing:last-child{border-bottom:0}
   .ing span{color:var(--muted);white-space:nowrap} .ing small{display:block;color:var(--muted);font-size:12px}
+  .verrec{display:inline-block;margin-top:2px;padding:0;border:0;background:none;font:600 12.5px var(--font);color:var(--red);cursor:pointer}
   .gusto{font-size:13px;color:var(--muted);margin-top:6px}
   .pasos{margin:0;padding-left:20px;font-size:14px} .pasos li{margin-bottom:5px}
   .ptext{font-size:14px;white-space:pre-line;margin:0}
@@ -139,11 +140,11 @@
   </section>
 
   <section id="receta" hidden>
-    <button class="back" type="button" data-go="recetas">‹ Recetas</button>
+    <button class="back" type="button" id="backRec">‹ Recetas</button>
     <div id="rdet"></div>
   </section>
 
-  <p class="ver">Versión de prueba 0.10 · recetario con filtros</p>
+  <p class="ver">Versión de prueba 0.11 · recetario con filtros y recetas base</p>
 </main>
 <script>
   const SUPABASE_URL = 'https://cawmvpfjaehennkknmoy.supabase.co';
@@ -212,7 +213,7 @@
     return Number(n).toLocaleString('es-ES', { maximumFractionDigits: 2 });
   }
   const raciones = r => num(r) + (Number(r) === 1 ? ' ración' : ' raciones');
-  let REC = null, ING_TXT = {}, desdeLista = '', popAbierto = '';
+  let REC = null, ING_TXT = {}, pila = [], popAbierto = '';
   const F = { cat: new Set(), frec: new Set(), cons: new Set(), orden: 'az' };
   const ORDENES = { az: 'A-Z', kcal_asc: 'menos kcal', kcal_desc: 'más kcal', prot_desc: 'más proteína' };
   const FRECS = [['DIARIA', 'Diaria', '#00b65b'], ['FRECUENTE', 'Frecuente', '#ff7a1a'], ['OCASIONAL', 'Ocasional', '#e5192d']];
@@ -284,15 +285,18 @@
   async function pintarReceta(id) {
     const r = REC.find(x => x.id === id);
     if (!r) { $('#rdet').innerHTML = '<p class="msg err">No encuentro esa receta.</p>'; return; }
+    const prev = pila[pila.length - 1] || '', pr = prev.startsWith('receta/') ? REC.find(x => x.id === decodeURIComponent(prev.slice(7))) : null;
+    $('#backRec').textContent = '‹ ' + (pr ? pr.nombre : 'Recetas');
     $('#rdet').innerHTML = `<h2 class="pt">${h(r.nombre)}</h2><p class="note">Cargando…</p>`;
     const [d, ing] = await Promise.all([
       sb.from('recetas').select('pasos, conservacion').eq('id', id).maybeSingle(),
-      sb.from('ingredientes_receta').select('orden, nombre, cantidad, unidad, al_gusto, nota').eq('receta_id', id).order('orden')
+      sb.from('ingredientes_receta').select('orden, nombre, cantidad, unidad, al_gusto, nota, receta_base_id').eq('receta_id', id).order('orden')
     ]);
     if (d.error || ing.error) { $('#rdet').innerHTML = `<p class="msg err">${h(es(d.error || ing.error))}</p>`; return; }
     const lista = ing.data || [];
-    const conCant = lista.filter(i => i.cantidad != null && !i.al_gusto);
-    const gusto = lista.filter(i => !(i.cantidad != null && !i.al_gusto)).map(i => i.nombre.replace(/\s+al gusto\b/i, '').trim()).map(t => /^.[A-ZÁÉÍÓÚÑ]/.test(t) ? t : t.charAt(0).toLowerCase() + t.slice(1));
+    const fija = i => (i.cantidad != null && !i.al_gusto) || i.receta_base_id;
+    const conCant = lista.filter(fija);
+    const gusto = lista.filter(i => !fija(i)).map(i => i.nombre.replace(/\s+al gusto\b/i, '').trim()).map(t => /^.[A-ZÁÉÍÓÚÑ]/.test(t) ? t : t.charAt(0).toLowerCase() + t.slice(1));
     const chips = [r.categoria ? `<span>${h(r.categoria)}</span>` : '', `<span>${raciones(r.raciones_lote)}</span>`,
       r.dias_nevera ? `<span>${nevera(r.dias_nevera, true)}</span>` : '', r.congelable ? `<span>${congela(true, true)}</span>` : ''].filter(Boolean);
     const cons = (d.data && d.data.conservacion || '').trim();
@@ -303,7 +307,7 @@
         <div><b>${r.hidratos_pdf == null ? '—' : num(r.hidratos_pdf)}</b><span>g hidratos</span></div>
         <div><b>${r.grasa_pdf == null ? '—' : num(r.grasa_pdf)}</b><span>g grasa</span></div></div>
         <div class="note">Por ración · dato orientativo del PDF. Cuando cada ingrediente esté unido a su ficha, se calculará con los datos reales.</div></div>
-      <div class="box"><h3>Ingredientes</h3>${conCant.map(i => `<div class="ing"><div>${h(i.nombre)}${i.nota ? `<small>${h(i.nota)}</small>` : ''}</div><span>${num(i.cantidad)} ${h(i.unidad || '')}</span></div>`).join('') || '<p class="note">Sin ingredientes apuntados.</p>'}
+      <div class="box"><h3>Ingredientes</h3>${conCant.map(i => `<div class="ing"><div>${h(i.nombre)}${i.nota ? `<small>${h(i.nota)}</small>` : ''}${i.receta_base_id && REC.some(x => x.id === i.receta_base_id) ? `<br><button class="verrec" type="button" data-base="${h(i.receta_base_id)}">Ver receta ›</button>` : ''}</div><span>${i.cantidad == null ? '' : num(i.cantidad) + ' ' + h(i.unidad || '')}</span></div>`).join('') || '<p class="note">Sin ingredientes apuntados.</p>'}
         ${gusto.length ? `<div class="gusto">Al gusto: ${h(gusto.join(', '))}</div>` : ''}</div>
       ${d.data && d.data.pasos ? `<div class="box"><h3>Pasos</h3>${pasosHtml(d.data.pasos)}</div>` : ''}
       ${cons ? `<div class="box"><h3>Conservación</h3><p class="ptext">${h(cons)}</p></div>` : ''}`;
@@ -318,6 +322,8 @@
     $('#recetas').hidden = !(SESION && hsh === 'recetas');
     $('#receta').hidden = !(SESION && hsh.startsWith('receta/'));
     if (SESION) $('#home').hidden = enRec;
+    if (pila.length && hsh === pila[pila.length - 1]) pila.pop(); // se ha vuelto atrás (botón ‹ o gesto del móvil)
+    if (!enRec) pila = [];
     if (!SESION || !enRec) return;
     try { await cargarRecetas(); } catch (e) { $('#rlist').innerHTML = `<div class="empty">${h(es(e))}</div>`; return; }
     if (hsh === 'recetas') pintarLista(); else pintarReceta(decodeURIComponent(hsh.slice(7)));
@@ -333,11 +339,12 @@
   };
   document.addEventListener('click', e => { if (popAbierto && !e.target.closest('#fwrap')) { popAbierto = ''; pintarFiltros(); } });
   $('#q').oninput = () => pintarLista();
-  $('#rlist').onclick = e => { const b = e.target.closest('[data-id]'); if (b) { desdeLista = 'receta/' + encodeURIComponent(b.dataset.id); location.hash = 'receta/' + encodeURIComponent(b.dataset.id); } };
-  document.querySelectorAll('[data-go]').forEach(b => b.onclick = () => {
-    const destino = b.dataset.go;
-    if (destino === 'recetas' && desdeLista && location.hash === '#' + desdeLista) { desdeLista = ''; history.back(); } else location.hash = destino;
-  });
+  // Pila de «de dónde vengo»: lista → receta → receta base → … y «‹» vuelve paso a paso al mismo sitio
+  const ir = id => { pila.push(location.hash.replace(/^#/, '')); location.hash = 'receta/' + encodeURIComponent(id); };
+  $('#rlist').onclick = e => { const b = e.target.closest('[data-id]'); if (b) ir(b.dataset.id); };
+  $('#rdet').onclick = e => { const b = e.target.closest('[data-base]'); if (b) ir(b.dataset.base); };
+  $('#backRec').onclick = () => { if (pila.length) history.back(); else location.hash = 'recetas'; };
+  document.querySelectorAll('[data-go]').forEach(b => b.onclick = () => { pila = []; location.hash = b.dataset.go; });
   $('#goRec').onclick = () => { location.hash = 'recetas'; };
 
   $('#authSwitch').onclick = () => setMode(mode === 'login' ? 'signup' : 'login');

@@ -1,9 +1,10 @@
-// Mi Menú · trabajador sin conexión (v0.10 de prueba)
-const VERSION = 'mimenu-v0.10';
+// Mi Menú · trabajador sin conexión (v0.11 de prueba)
+const VERSION = 'mimenu-v0.11';
 const CORE = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png', './apple-touch-icon.png', './ojo-cerrado.png', './ojo-abierto.png'];
 
 self.addEventListener('install', e => {
-  e.waitUntil(caches.open(VERSION).then(c => c.addAll(CORE)).then(() => self.skipWaiting()));
+  // cache:'reload' = pedir al servidor, no a la caché del navegador (GitHub guarda las páginas unos 10 minutos)
+  e.waitUntil(caches.open(VERSION).then(c => c.addAll(CORE.map(u => new Request(u, { cache: 'reload' })))).then(() => self.skipWaiting()));
 });
 
 self.addEventListener('activate', e => {
@@ -15,7 +16,8 @@ self.addEventListener('fetch', e => {
   if (e.request.method !== 'GET') return;
   if (new URL(e.request.url).hostname.endsWith('supabase.co')) return; // los datos van siempre a la base de datos, nunca a la caché
   e.respondWith(
-    fetch(e.request).then(res => {
+    // lo de la propia app se pide sin la caché del navegador; lo de fuera (letras, librería) tal cual
+    (new URL(e.request.url).origin === self.location.origin ? fetch(e.request.url, { cache: 'no-cache' }) : fetch(e.request)).then(res => {
       const copy = res.clone();
       caches.open(VERSION).then(c => c.put(e.request, copy)).catch(() => {});
       return res;
