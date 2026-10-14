@@ -440,6 +440,24 @@
   /* la hoja nunca pasa de la pantalla: cabecera y pie fijos, el centro se desplaza */
   dialog.sheet[open]{display:flex;flex-direction:column;overflow:hidden} dialog.sheet .shh, dialog.sheet .shf, dialog.sheet .grab{flex:none} dialog.sheet .shb{flex:1 1 auto;min-height:0;max-height:none}
 
+  /* ---------- 0.24 · marca tocable en la Compra, bases caseras y preparaciones sin comidas ---------- */
+  .cp-n .marca{display:flex;align-items:center;gap:4px;max-width:100%;min-height:44px;margin:-6px 0 -5px;padding:0;border:0;background:none;font:500 13px var(--font);color:var(--ink);text-align:left;cursor:pointer}
+  .cp-n .marca span{border-bottom:1.5px dotted #9a8f82;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+  .cp-n .marca.sin{color:var(--muted)} .cp-n .marca.sin span{border-bottom-color:#c9bfae}
+  .cp-n .marca em{font-style:normal;color:var(--muted);font-size:15px;flex:none}
+  .mc-ir{margin-bottom:12px}
+  .mp-sub{padding-left:22px;background:#fdfbf7;border-top:1px solid #ebe3d6} .mp-ops .mp-sub button{padding-left:12px;min-height:56px}
+  .cp-dec .r4{display:grid;grid-template-columns:1fr 1fr;gap:8px} .cp-dec .btn[disabled]{opacity:.5}
+  .cp-res{display:flex;align-items:center;gap:8px;padding:6px 6px 6px 12px;margin-top:8px;border:1px solid var(--line);border-radius:14px;background:#fff;font-size:13.5px}
+  .cp-res span{flex:1;min-width:0} .cp-res b{display:block;font-size:14.5px} .cp-res small{color:var(--muted);display:block;line-height:1.35}
+  .cp-res .lk{border:0;background:none;padding:0 8px;font:600 13px var(--font);color:var(--ink);text-decoration:underline;min-height:44px;cursor:pointer}
+  .q4{display:flex;align-items:center;gap:10px;margin:6px 0 4px} .q4 button{width:44px;height:44px;border-radius:12px;border:1.5px solid #5d574f;background:#fff;font:600 20px var(--font);color:var(--ink);flex:none}
+  .q4 output{font:700 18px var(--font);min-width:120px;text-align:center} .q4 .cp-inp{width:110px;text-align:center;font-size:16px} .q4 .ud4{color:var(--muted);font-weight:600}
+  .lst{border:1px solid var(--line);border-radius:14px;background:#fff;padding:2px 12px} .lst div{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-top:1px solid #ebe3d6;font-size:14px} .lst div:first-child{border-top:0} .lst span{color:var(--muted);white-space:nowrap}
+  .bal4{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:6px 0 12px} .bal4 div{background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px 2px;text-align:center;font-size:12px;color:var(--muted)} .bal4 b{display:block;font-size:17px;color:var(--ink)}
+  .prpsolos{padding:0 0 6px} .prpsolo{display:block;width:100%;min-height:52px;margin:6px 0 0;padding:10px 12px;border:1.5px dashed #c9bfae;border-radius:14px;background:#fdfbf7;text-align:left;font:500 14px var(--font);color:var(--ink);cursor:pointer}
+  .prpsolo small{display:block;color:var(--muted);font-size:12.5px;margin-top:2px}
+
 </style>
 </head>
 <body>
@@ -512,7 +530,7 @@
     <button class="cp-act" type="button" id="cpAct" hidden></button>
   </section>
 
-  <p class="ver">Versión de prueba 0.23 · ajustes del iPhone</p>
+  <p class="ver">Versión de prueba 0.24 · marca y recetas tuyas en la Compra</p>
 </main>
 <nav class="nav" id="nav" hidden><button type="button" data-nav="semana" id="navSemana"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Semana</button><button type="button" data-nav="compra" id="navCompra"><i class="nbd" id="navNum" hidden></i><svg viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h3l2.6 12.4a2 2 0 0 0 2 1.6h8.2a2 2 0 0 0 2-1.6L21 7H6"/></svg>Compra</button><button type="button" data-nav="recetas" id="navRecetas"><svg viewBox="0 0 24 24"><path d="M12 6.5C10 5 7 4.5 3.5 5v14c3.5-.5 6.5 0 8.5 1.5 2-1.5 5-2 8.5-1.5V5C17 4.5 14 5 12 6.5zM12 6.5v14"/><path d="M6.5 9.5h2.5M6.5 12.5h2.5M15 9.5h2.5M15 12.5h2.5"/></svg>Recetas</button><button type="button" data-nav="alimentos" id="navAlimentos"><svg viewBox="0 0 24 24"><path d="M12 8.2c-1.3-.9-2.8-1.2-4.2-.9C5.3 7.8 4 10 4 12.8 4 17 7 21 9.6 21c1 0 1.5-.5 2.4-.5s1.4.5 2.4.5C17 21 20 17 20 12.8c0-2.8-1.3-5-3.8-5.5-1.4-.3-2.9 0-4.2.9z"/><path d="M12 8.2V5.5M12 5.5c.3-1.6 1.7-2.6 3.4-2.6-.2 1.7-1.6 2.8-3.4 2.6z"/></svg>Alimentos</button></nav>
 <dialog class="sheet" id="picker" aria-labelledby="pkTit"><div class="shh"><h2 id="pkTit">Añadir</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb">
@@ -530,7 +548,7 @@
 <dialog class="sheet" id="semDlg" aria-labelledby="asTit"><div class="shh"><h2 id="asTit">Añadir a la semana</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb"><p class="sub2"><b id="asRec"></b></p><div class="wkm"><button type="button" class="ar" data-assem="-1" aria-label="Semana anterior">‹</button><b id="asRango"></b><button type="button" class="ar" data-assem="1" aria-label="Semana siguiente">›</button></div><h3 class="q3">Día</h3><div class="d7s" id="asDias"></div><h3 class="q3">Franja</h3><div class="f4s" id="asFr"></div><p class="nota2" id="asCuando"></p></div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="asGo">Continuar</button></div></dialog>
 <dialog class="sheet" id="cpFicha" aria-labelledby="cfTit"><div class="shh"><h2 id="cfTit">Compra</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="cfBody"></div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="cfGo">Guardar</button></div></dialog>
 <dialog class="sheet" id="cpAnadir" aria-labelledby="caTit"><div class="shh"><h2 id="caTit">Añadir a la compra</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb"><label class="cp-lbl" for="caNom">Producto</label><input class="cp-inp" id="caNom" type="search" enterkeyhint="done" autocomplete="off" autocorrect="off" autocapitalize="sentences" spellcheck="false" maxlength="200"><div class="cp-sugs" id="caLista" role="listbox" hidden></div><div class="cp-two" style="margin-top:12px"><label class="cp-q" for="caCant">Cantidad (si quieres)<input class="cp-inp" id="caCant" type="text" inputmode="decimal" autocomplete="off"></label><label class="cp-q" for="caUni">Unidad<select class="cp-inp" id="caUni"></select></label></div><p class="cp-nota" id="caNota"></p></div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="caGo">Añadir</button></div></dialog>
-<dialog class="sheet" id="mpDlg" aria-labelledby="mpTit"><div class="shh"><h2 id="mpTit">Tu producto</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="mpBody"></div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="mpGo">Guardar</button></div></dialog><dialog class="sheet" id="alDlg" aria-labelledby="alTit"><div class="shh"><h2 id="alTit">Alimento</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="alBody"></div><div class="shf"><button class="btn" type="button" id="alEditar">Editar</button><button class="btn main" type="button" id="alSemana">Añadir a la semana</button></div></dialog><dialog class="sheet" id="aeDlg" aria-labelledby="aeTit"><div class="shh"><h2 id="aeTit">Nueva ficha</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="aeBody"></div><div class="shf"><button class="btn main" type="button" id="aeGo">Guardar</button></div></dialog><dialog class="sheet" id="prpDlg" aria-labelledby="prpTit"><div class="shh"><h2 id="prpTit">Preparación</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="prpBody"></div><div class="shf"><p id="prpInfo" role="status"></p><button class="btn main" type="button" id="prpGo" disabled>Guardado</button></div></dialog><dialog class="sheet" id="swDlg" aria-labelledby="swTit"><div class="shh"><h2 id="swTit">Semanas guardadas</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="swBody"></div><div class="shf" style="justify-content:space-between"><button class="btn rojo" type="button" id="swBorrar" hidden>Borrar</button><span></span><button class="btn main" type="button" id="swGo">Guardar</button></div></dialog><dialog class="sheet" id="pdfDlg" aria-labelledby="pdfTit"><div class="shh"><h2 id="pdfTit">PDF</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb"><p id="pdfStatus" role="status" aria-live="polite" style="margin:0;font-size:15px"></p><div class="pdf-acc"><a id="pdfOpen" class="btn" target="_blank" rel="noopener" hidden>Abrir</a><button type="button" class="btn" id="pdfShare" hidden>Compartir</button><a id="pdfDownload" class="btn" download hidden>Descargar</a></div><p class="aj-h" id="pdfHint" hidden></p></div></dialog><dialog class="sheet" id="csDlg" aria-labelledby="csTit"><div class="shh"><h2 id="csTit">Guardar como producto casero</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="csBody"></div><div class="shf"><button class="btn main" type="button" id="csGo">Guardar ficha</button></div></dialog><dialog class="sheet" id="rpDlg" aria-labelledby="rpTit"><div class="shh"><h2 id="rpTit">Repartir en raciones</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="rpBody"></div><div class="shf" style="justify-content:space-between"><button class="btn" type="button" id="rpVaciar">Vaciar</button><button class="btn main" type="button" id="rpGo">Listo</button></div></dialog><dialog class="sheet" id="cbDlg" aria-labelledby="cbTit"><div class="shh"><h2 id="cbTit">Comprado</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="cbBody"></div><div class="shf"><button class="btn main" type="button" id="cbGo">Guardar</button></div></dialog><dialog class="sheet" id="reDlg" aria-labelledby="reTit"><div class="shh"><h2 id="reTit">Receta</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="reBody"></div><div class="shf"><button class="btn main" type="button" id="reGo">Guardar</button></div></dialog><div id="toast" role="status" hidden></div>
+<dialog class="sheet" id="mpDlg" aria-labelledby="mpTit"><div class="shh"><h2 id="mpTit">Tu producto</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="mpBody"></div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="mpGo">Guardar</button></div></dialog><dialog class="sheet" id="mcDlg" aria-labelledby="mcTit"><div class="shh"><h2 id="mcTit">Marca</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="mcBody"></div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="mcGo">Guardar</button></div></dialog><dialog class="sheet" id="bsDlg" aria-labelledby="bsTit"><div class="shh"><h2 id="bsTit">Receta tuya</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="bsBody"></div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="bsGo">Guardar</button></div></dialog><dialog class="sheet" id="alDlg" aria-labelledby="alTit"><div class="shh"><h2 id="alTit">Alimento</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="alBody"></div><div class="shf"><button class="btn" type="button" id="alEditar">Editar</button><button class="btn main" type="button" id="alSemana">Añadir a la semana</button></div></dialog><dialog class="sheet" id="aeDlg" aria-labelledby="aeTit"><div class="shh"><h2 id="aeTit">Nueva ficha</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="aeBody"></div><div class="shf"><button class="btn main" type="button" id="aeGo">Guardar</button></div></dialog><dialog class="sheet" id="prpDlg" aria-labelledby="prpTit"><div class="shh"><h2 id="prpTit">Preparación</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="prpBody"></div><div class="shf"><p id="prpInfo" role="status"></p><button class="btn main" type="button" id="prpGo" disabled>Guardado</button></div></dialog><dialog class="sheet" id="swDlg" aria-labelledby="swTit"><div class="shh"><h2 id="swTit">Semanas guardadas</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="swBody"></div><div class="shf" style="justify-content:space-between"><button class="btn rojo" type="button" id="swBorrar" hidden>Borrar</button><span></span><button class="btn main" type="button" id="swGo">Guardar</button></div></dialog><dialog class="sheet" id="pdfDlg" aria-labelledby="pdfTit"><div class="shh"><h2 id="pdfTit">PDF</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb"><p id="pdfStatus" role="status" aria-live="polite" style="margin:0;font-size:15px"></p><div class="pdf-acc"><a id="pdfOpen" class="btn" target="_blank" rel="noopener" hidden>Abrir</a><button type="button" class="btn" id="pdfShare" hidden>Compartir</button><a id="pdfDownload" class="btn" download hidden>Descargar</a></div><p class="aj-h" id="pdfHint" hidden></p></div></dialog><dialog class="sheet" id="csDlg" aria-labelledby="csTit"><div class="shh"><h2 id="csTit">Guardar como producto casero</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="csBody"></div><div class="shf"><button class="btn main" type="button" id="csGo">Guardar ficha</button></div></dialog><dialog class="sheet" id="rpDlg" aria-labelledby="rpTit"><div class="shh"><h2 id="rpTit">Repartir en raciones</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="rpBody"></div><div class="shf" style="justify-content:space-between"><button class="btn" type="button" id="rpVaciar">Vaciar</button><button class="btn main" type="button" id="rpGo">Listo</button></div></dialog><dialog class="sheet" id="cbDlg" aria-labelledby="cbTit"><div class="shh"><h2 id="cbTit">Comprado</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="cbBody"></div><div class="shf"><button class="btn main" type="button" id="cbGo">Guardar</button></div></dialog><dialog class="sheet" id="reDlg" aria-labelledby="reTit"><div class="shh"><h2 id="reTit">Receta</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="reBody"></div><div class="shf"><button class="btn main" type="button" id="reGo">Guardar</button></div></dialog><div id="toast" role="status" hidden></div>
 <script>
   const SUPABASE_URL = 'https://cawmvpfjaehennkknmoy.supabase.co';
   const SUPABASE_KEY = 'sb_publishable_vQDbCf2dlzKlFgpbMj7u2A_1wDlteT3'; // clave pública: la protección la ponen las reglas de cada tabla
@@ -1521,8 +1539,9 @@ function eliminarLote() {
     deCong.forEach(e => { e.lotId = ''; marcar(e); });
     data.lots.forEach(o => { const us = (o._row && o._row.usos) || []; if (us.some(u => u.lot === l.lotId || u.from === l.lotId)) { o._row.usos = us.filter(u => u.lot !== l.lotId && u.from !== l.lotId); rehacerNota(o); if (o !== l) marcarLote(o); } });
     (data.freezer || []).filter(c => c.lote_id === l.lotId).forEach(c => { c.lote_id = null; guardarFila('congelador', c); });
+    const mv24 = (data.freezerMoves || []).filter(m => m.lote_id === l.lotId); data.freezerMoves = (data.freezerMoves || []).filter(m => !mv24.includes(m)); mv24.forEach(m => borrarFila('congelador_movimientos', m.id));
     data.lots = data.lots.filter(x => x !== l); borrarLote(l.lotId);
-    if ($('#loteDlg').open) $('#loteDlg').close(); pintarTodo(); pintarGlobito(); aviso('Preparación eliminada.', 'Deshacer', () => { data.lots.push(l); marcarLote(l); ls.forEach(e => { data.entries.push(e); marcar(e); }); deCong.forEach(e => { e.lotId = l.lotId; marcar(e); }); pintarTodo(); pintarGlobito(); });
+    if ($('#loteDlg').open) $('#loteDlg').close(); pintarTodo(); pintarGlobito(); aviso('Preparación eliminada.', 'Deshacer', () => { data.lots.push(l); marcarLote(l); mv24.forEach(m => { data.freezerMoves.push(m); guardarFila('congelador_movimientos', m); }); ls.forEach(e => { data.entries.push(e); marcar(e); }); deCong.forEach(e => { e.lotId = l.lotId; marcar(e); }); pintarTodo(); pintarGlobito(); });
   });
 }
 function usarEnReceta() {
@@ -1837,7 +1856,7 @@ function shopEditModel(name){const result=shopping(),lines=[],recs=[];
       lines.sort((a,b)=>a.e.date.localeCompare(b.e.date)||(a.e.order||0)-(b.e.order||0));
       recs.sort((a,b)=>String(a.lot?a.lot.date:'').localeCompare(String(b.lot?b.lot.date:'')));
       return {lines,recs,extras:result.items.filter(i=>i.manualId&&i.pendingAmount>0&&clean(i.name)===clean(name)),removed:removedShopRows().filter(r=>clean(r.name)===clean(name))};}
-function shopCount(result,done){return shopCardEntries(result,done).length+(done?0:(result.brothPending||[]).length);}
+function shopCount(result,done){return shopCardEntries(result,done).length+(done?0:(result.brothPending||[]).length+basesPendientes().length);}
 function brothAmountText(b){if(b.amount!==null)return fmt.format(Math.round(b.amount*10)/10)+' '+esc(b.unit);const m=/(\d+(?:[.,]\d+)?(?:\s*[–-]\s*\d+(?:[.,]\d+)?)?)\s*(ml|l|g|kg)\b/i.exec(b.raw||'');return m?esc(m[1].replace(/\s+/g,'')+' '+m[2]):'';}
 function shopLines(result){return shopCardEntries(result,false).map(e=>({name:e.name,category:shopCategory(e),text:e.home>0&&e.net!==undefined?homeQty(e.net,e.homeUnit)+(e.amount&&e.amount.missing?' (falta una cantidad)':''):e.manual?shoppingAmountText(e.manual):e.amount.shown?e.amount.shown.replace(AST,'')+(e.amount.missing?' (falta una cantidad)':''):'Cantidad por definir'}));}
 function allocQueued(a,section){const done=section==='done',id=JSON.stringify([a.origin,a.itemId]);for(const c of purchaseQueue.values()){if(c.week!==data.activeWeek||c.key!==a.key||c.section!==section||c.checked!==!done)continue;if((c.allocations||[]).some(x=>JSON.stringify([x.origin,x.itemId])===id))return true;}return false;}
@@ -1986,11 +2005,11 @@ function filaHtml(e, done, result) {
   const c = e.card, name = c.name, queued = e.parts.map(p => partQueued(p, section)), extraQ = e.extras.map(i => purchaseQueue.has(purchaseQueueId(i.key, section))), every = [...queued, ...extraQ], all = every.length > 0 && every.every(Boolean),
     partial = !all && (every.some(Boolean) || e.parts.some(p => p.allocs.some(a => allocQueued(a, section)))), loose = !e.parts.length, checked = loose ? (purchaseQueue.has(purchaseQueueId(c.items[0].key, section)) ? !done : done) : (done ? !all : all),
     noAmount = !e.amount.shown, single = e.parts.length === 1 ? (e.parts[0].label ? (name.includes(e.parts[0].label) ? '' : e.parts[0].label) : (c.branded ? 'Sin marca' : '')) : '',
-    notas = [single, noAmount ? 'Sin cantidad' : e.amount.missing ? (e.amount.missing > 1 ? 'Faltan cantidades' : 'Falta una cantidad') : '', !noAmount && e.amount.estimated ? 'Unidades estimadas' : ''].filter(Boolean).join(' · '),
+    notas = [marcaElegible(name) ? '' : single, noAmount ? 'Sin cantidad' : e.amount.missing ? (e.amount.missing > 1 ? 'Faltan cantidades' : 'Falta una cantidad') : '', !noAmount && e.amount.estimated ? 'Unidades estimadas' : ''].filter(Boolean).join(' · '),
     target = loose ? `data-buy="${esc(c.items[0].key)}"` : `data-buy-card="${esc(name)}"${done ? ` data-buy-part="${esc(e.parts[0].label)}"` : ''}`;
   const subs = !done && e.parts.length + e.extras.length > 1 ? e.parts.map((p, k) => `<div class="cp-sub">${ckHtml(`data-buy-card="${esc(name)}" data-buy-part="${esc(p.label)}" data-buy-section="${section}"`, queued[k], false, name + ' · ' + (p.label || 'sin marca'), false)}<span><b>${esc(p.label || 'Sin marca')}</b> · ${sinAst(allocAmountText(name, p.allocs, field).shown) || 'sin cantidad'}</span></div>`).join('')
     + e.extras.map((i, k) => `<div class="cp-sub">${ckHtml(`data-buy="${esc(i.key)}" data-buy-section="${section}"`, extraQ[k], false, name + ' · ' + (i.adjusted ? 'compra ajustada' : 'añadido a mano'), false)}<span><b>${i.adjusted ? 'Compra ajustada' : 'Añadido a mano'}</b> · ${i.amount == null || i.amount === '' ? 'sin cantidad' : fmt.format(i.amount) + ' ' + esc(i.unit)}</span></div>`).join('') : '';
-  return `<div class="cp-row${done ? ' done' : ''}${!done && checked && !partial ? ' marc' : ''}">${ckHtml(target + ` data-buy-section="${section}"`, checked, partial, name, done)}<div class="cp-n"><b>${esc(name)}</b>${notas ? `<small>${esc(notas)}</small>` : ''}${done ? '' : casaHtml(e) + caldoNota(e, result)}</div><div class="cp-a">${noAmount ? '' : done ? sinAst(e.amount.shown) : cantHtml(e, e.amount.shown)}</div>${done ? (e.card.parts.length <= 1 ? masHtml(`data-fdone="${esc(name)}"`, name) : '') : masHtml(`data-ficha="${esc(name)}"`, name)}</div>${subs}${done ? '' : semanaHtml(e)}`;
+  return `<div class="cp-row${done ? ' done' : ''}${!done && checked && !partial ? ' marc' : ''}">${ckHtml(target + ` data-buy-section="${section}"`, checked, partial, name, done)}<div class="cp-n"><b>${esc(name)}</b>${done ? '' : marcaBtn(name, single, e)}${notas ? `<small>${esc(notas)}</small>` : ''}${done ? '' : casaHtml(e) + caldoNota(e, result)}</div><div class="cp-a">${noAmount ? '' : done ? sinAst(e.amount.shown) : cantHtml(e, e.amount.shown)}</div>${done ? (e.card.parts.length <= 1 ? masHtml(`data-fdone="${esc(name)}"`, name) : '') : masHtml(`data-ficha="${esc(name)}"`, name)}</div>${subs}${done ? '' : semanaHtml(e)}`;
 }
 function decideHtml(b) {
   const amt = brothAmountText(b), d = `data-broth-lot="${esc(b.lotId)}" data-broth-ing="${esc(b.ing)}"`;
@@ -2008,17 +2027,17 @@ function pintarCompra0() {
   const result = shopping(), q = clean(CP.q.trim());
   computeWeekInfo();
   const pend = shopCardEntries(result, false), hechos = shopCardEntries(result, true), caldo = result.brothPending || [];
-  const nPend = pend.length + caldo.length, fin = addDays(SEM.lunes, 6), d1 = parseIso(SEM.lunes), d2 = parseIso(fin);
+  const nPend = pend.length + caldo.length + basesPendientes().length, fin = addDays(SEM.lunes, 6), d1 = parseIso(SEM.lunes), d2 = parseIso(fin);
   $('#cpRango').textContent = (d1.getMonth() === d2.getMonth() ? d1.getDate() : d1.getDate() + ' ' + MES3[d1.getMonth()]) + ' – ' + d2.getDate() + ' ' + MES3[d2.getMonth()] + ' · ' + nPend + (nPend === 1 ? ' pendiente' : ' pendientes');
   const hay = [0, 1, 2, 3, 4, 5, 6].map(i => shopping(true, [i]).items.some(x => x.pendingAmount > 0 && !(x.key.startsWith('manual:') && !x.adjusted)));
   $('#cpDias').innerHTML = DMIN.map((d, i) => `<button type="button" class="day${shopDays.has(i) ? ' on' : ''}" data-cpdia="${i}" aria-pressed="${shopDays.has(i)}" aria-label="${DAYS[i]} ${parseIso(addDays(SEM.lunes, i)).getDate()}${hay[i] ? '' : ' · sin compra pendiente'}">${d[0] === 'M' && i === 2 ? 'X' : d[0]}<small>${parseIso(addDays(SEM.lunes, i)).getDate()}</small><i class="${hay[i] ? 'si' : ''}"></i></button>`).join('')
     + `<button type="button" class="day todo${shopDays.size ? '' : ' on'}" data-cpdia="todo" aria-pressed="${!shopDays.size}">Todo<small>sem.</small></button>`;
   const filtra = e => !q || clean(e.name).includes(q);
-  const filas = pend.filter(filtra), caldos = caldo.filter(b => !q || clean(b.ing).includes(q) || clean(b.recipe).includes(q));
+  const filas = pend.filter(filtra), caldos = caldo.filter(b => !q || clean(b.ing).includes(q) || clean(b.recipe).includes(q)), bases24 = basesPendientes().filter(b => !q || clean(b.baseName).includes(q) || clean(b.recipe).includes(q));
   const otras = marcasOtrasSemanas();
-  let html = (otras.length ? `<div class="info cp-otra"><span>Tienes cambios sin actualizar en la compra de la semana del ${otras.map(w => h(rangoSemana(w))).join(' y del ')}.</span><button type="button" class="btn" data-irsem="${h(otras[0])}">Ir</button></div>` : '') + `<div class="cp-pend"><span>Pendientes (${nPend})${shopDays.size ? ' · ' + esc(shopRangeLabel()) : ''}</span>${pend.length ? `<button type="button" id="cpTodo">${shopMarksPending() ? 'Desmarcar todo' : 'Marcar todo'}</button>` : ''}</div><div class="cp-main">`;
-  html += (caldos.length ? '<div class="cp-cat">Decide antes de comprar</div>' : '') + caldos.map(decideHtml).join('');
-  if (!filas.length && !caldos.length) html += `<div class="empty">${q ? 'Nada pendiente con «' + esc(CP.q.trim()) + '».' : 'No hay nada pendiente de comprar en esta vista.'}</div>`;
+  let html = (otras.length ? `<div class="info cp-otra"><span>Tienes cambios sin actualizar en la compra de la semana del ${otras.map(w => h(rangoSemana(w))).join(' y del ')}.</span><button type="button" class="btn" data-irsem="${h(otras[0])}">Ir</button></div>` : '') + basesDecididasHtml() + `<div class="cp-pend"><span>Pendientes (${nPend})${shopDays.size ? ' · ' + esc(shopRangeLabel()) : ''}</span>${pend.length ? `<button type="button" id="cpTodo">${shopMarksPending() ? 'Desmarcar todo' : 'Marcar todo'}</button>` : ''}</div><div class="cp-main">`;
+  html += (caldos.length || bases24.length ? '<div class="cp-cat">Decide antes de comprar</div>' : '') + caldos.map(decideHtml).join('') + bases24.map(baseDecHtml).join('');
+  if (!filas.length && !caldos.length && !bases24.length) html += `<div class="empty">${q ? 'Nada pendiente con «' + esc(CP.q.trim()) + '».' : 'No hay nada pendiente de comprar en esta vista.'}</div>`;
   html += shopGroups(filas).map(g => `<div class="cp-cat">${esc(g.category)}</div><div class="cp-list">${g.rows.map(e => filaHtml(e, false, result)).join('')}</div>`).join('') + '</div>';
   const hf = hechos.filter(filtra);
   html += plegable('comprados', 'Comprados', hechos.length, () => `<p>Desmarca para devolver esa cantidad a pendientes.</p>${hf.length ? `<div class="cp-list">${hf.map(e => filaHtml(e, true, result)).join('')}</div>` : '<p>No hay compras marcadas.</p>'}`);
@@ -2049,19 +2068,19 @@ function abrirFicha(name, manualId) {
     numIn = (attr, v, lab) => `<label class="cp-q">${lab}<input class="cp-inp" type="text" inputmode="decimal" ${attr} placeholder="Sin cantidad" value="${v == null ? '' : String(v).replace('.', ',')}" autocomplete="off"></label>`,
     units = u => `<label class="cp-q">Unidad<select class="cp-inp" data-se-u>${MS_UNITS.map(x => `<option value="${esc(x)}"${x === u ? ' selected' : ''}>${x ? esc(x) : 'Sin unidad'}</option>`).join('')}</select></label>`,
     quitar = t => `<label class="cp-x"><input type="checkbox" data-se-del>${t}</label>`;
-  let html = '';
+  let html = manualId ? '' : marcaEnFicha(name);
   const filas = m.lines.map(({ e: l }) => {
     const others = n(l.others) || 0, list = fam.some(p => p.id === l.itemId) ? fam : [product(l.itemId)].concat(fam).filter(Boolean), p = product(l.itemId);
-    return `<div class="cp-o" data-se-line="${esc(l.lineId)}"><div class="t"><b>${esc(p ? p.name : name)}</b><span>${esc(DIA_CORTO(l.date))} · ${esc(l.meal)}</span></div><small>Puesto en el menú: el cambio se aplica también al menú y a las kcal.${others > 0 ? ' Lo de otras personas (' + fmt.format(others) + ' g) no se toca.' : ''}</small><div class="cp-two"><label class="cp-q">Producto<select class="cp-inp" data-se-p>${list.map(x => opt(x, l.itemId)).join('')}</select></label>${numIn('data-se-g', n(l.own), 'Gramos (tu parte)')}</div>${quitar('Quitar del menú y de la compra')}</div>`;
+    return `<div class="cp-o" data-se-line="${esc(l.lineId)}"><div class="t"><b>${esc(p ? p.name : name)}</b><span>${esc(DIA_CORTO(l.date))} · ${esc(l.meal)}</span></div><small>Puesto en el menú: los gramos cambian también el menú y las kcal.${others > 0 ? ' Lo de otras personas (' + fmt.format(others) + ' g) no se toca.' : ''}</small><input type="hidden" data-se-p value="${esc(l.itemId)}"><div class="cp-two">${numIn('data-se-g', n(l.own), 'Gramos (tu parte)')}</div>${quitar('Quitar del menú y de la compra')}</div>`;
   }).concat(m.recs.map(r => {
     const q = shoppingQuantity({ name, unit: r.key.slice(r.key.indexOf('♦') + 1) }, r.a.pending), a = r2(q.amount), u = shopUnit(q.unit), one = r.adj.length === 1 && (r.adj[0].ps.length + r.adj[0].gs.length) > 1 ? r.adj[0] : null,
       old = one ? lotBuyMark(r.lot)[one.i.name] : null, cur = one ? (old && one.ps.concat(one.gs).some(p => p.id === old) ? old : one.base.id) : '', rec = r.lot ? recipe(r.lot.recipeId) : null;
-    return `<div class="cp-o" data-se-rec="${esc(r.id)}" data-se-old="${a == null ? '' : a}|${esc(u)}"><div class="t"><b>${esc(rec ? rec.name : 'Receta')}</b><span>${r.lot ? esc(DIA_CORTO(r.lot.date)) + ' · ' + esc(r.lot.meal) : ''}</span></div><small>La cantidad solo cambia la compra.${one ? ' El producto cambia también las kcal de esa preparación.' : ''}</small>${one ? `<label class="cp-q" style="margin-top:8px">Producto<select class="cp-inp" data-se-p data-se-cur="${esc(cur)}">${one.ps.concat(one.gs).map(p => opt(p, cur)).join('')}</select></label><div class="cp-seg" role="group" aria-label="Cuándo"><button type="button" class="on" data-se-modo="vez">Solo esta vez</button><button type="button" data-se-modo="siempre">Siempre en esta receta</button></div>` : ''}<div class="cp-two">${numIn('data-se-a', a, 'Cantidad a comprar')}${units(u)}</div>${quitar('Quitar de la compra')}</div>`;
+    return `<div class="cp-o" data-se-rec="${esc(r.id)}" data-se-old="${a == null ? '' : a}|${esc(u)}"><div class="t"><b>${esc(rec ? rec.name : 'Receta')}</b><span>${r.lot ? esc(DIA_CORTO(r.lot.date)) + ' · ' + esc(r.lot.meal) : ''}</span></div><small>La cantidad solo cambia la compra.</small><div class="cp-two">${numIn('data-se-a', a, 'Cantidad a comprar')}${units(u)}</div>${quitar('Quitar de la compra')}</div>`;
   })).concat(m.extras.map(i => {
     const a = r2(i.amount), u = shopUnit(i.unit || '') || (MS_UNITS.includes(i.unit) ? i.unit : '');
     return `<div class="cp-o" data-se-extra="${esc(i.manualId)}" data-se-old="${a == null ? '' : a}|${esc(u)}"><div class="t"><b>${i.adjusted ? 'Compra ajustada' : 'Añadido a mano'}</b><span></span></div><small>${i.adjusted ? 'Sustituye a la cantidad que calcula el menú.' : 'Solo está en la compra de esta semana.'}</small><div class="cp-two">${numIn('data-se-a', a, 'Cantidad')}${units(u)}</div>${quitar(i.adjusted ? 'Volver a la cantidad del menú' : 'Quitar de la compra')}</div>`;
   })).concat(m.removed.map(r => `<div class="cp-o" data-se-removed="${esc(r.id)}"><div class="t"><b>Quitado de la compra</b><span></span></div><small>Parte de una receta que quitaste esta semana.</small>${quitar('Volver a ponerlo en la compra')}</div>`));
-  if (filas.length && fam.length > 1) html += `<label class="cp-q" id="cfTodoW" style="margin-top:4px">Poner todo de…<select class="cp-inp" id="cfTodo"><option value="">Elegir producto…</option>${fam.map(p => opt(p, '')).join('')}</select><small style="font-weight:500">Cambia de golpe el producto de todas las filas.</small></label>`;
+  if (false) html += `<label class="cp-q" id="cfTodoW" style="margin-top:4px">Poner todo de…<select class="cp-inp" id="cfTodo"><option value="">Elegir producto…</option>${fam.map(p => opt(p, '')).join('')}</select><small style="font-weight:500">Cambia de golpe el producto de todas las filas.</small></label>`;
   if (filas.length) html += `<p class="cp-lbl">De dónde sale</p><div class="cp-org">${filas.join('')}</div>`;
   if (e.homeKey) html += `<label class="cp-lbl" for="cfCasa">Tengo en casa</label><div class="cp-casa"><input class="cp-inp" id="cfCasa" type="text" inputmode="decimal" autocomplete="off" placeholder="0" value="${e.home > 0 ? String(r2(e.home)).replace('.', ',') : ''}"><span>${esc(e.homeUnit)}</span></div>`;
   html += '<p class="cp-nota">Los cambios de la compra se guardan al pulsar «Actualizar compra». El menú y las kcal solo cambian si tocas un producto puesto en el menú o el producto de una receta.</p>';
@@ -2173,7 +2192,7 @@ function initCompra() {
 function pintarGlobito() {
   const b = $('#navNum'); if (!b) return;
   if (!data || !SEM.cargada || !SEM.lunes) { b.hidden = true; return; }
-  try { data.activeWeek = SEM.lunes; const r = shopping(), k = shopCardEntries(r, false).length + (r.brothPending || []).length; b.hidden = !k; b.textContent = k > 99 ? '99+' : String(k); $('#navCompra').setAttribute('aria-label', 'Compra' + (k ? ' · ' + k + ' pendientes' : '')); } catch (_) { b.hidden = true; }
+  try { data.activeWeek = SEM.lunes; const r = shopping(), k = shopCardEntries(r, false).length + (r.brothPending || []).length + basesPendientes().length; b.hidden = !k; b.textContent = k > 99 ? '99+' : String(k); $('#navCompra').setAttribute('aria-label', 'Compra' + (k ? ' · ' + k + ' pendientes' : '')); } catch (_) { b.hidden = true; }
 }
 let UPOP = null;
 function cerrarMedidas() { const p = $('#upop'); if (p) p.hidden = true; UPOP = null; }
@@ -2500,7 +2519,7 @@ function abrirAjustes() {
   pintarAjLibres(); $('#ajGo').hidden = false; $('#ajDlg').showModal();
 }
 function pintarAjLibres() {
-  $('#ajLibTit').innerHTML = `Días libres · <span class="aj-sem"><button type="button" data-ajsem="-1" aria-label="Semana anterior">‹</button>${h(rangoSemana(AJ.lunes))}<button type="button" data-ajsem="1" aria-label="Semana siguiente">›</button></span>`;
+  $('#ajLibTit').innerHTML = `Días libres <span class="aj-sem"><button type="button" data-ajsem="-1" aria-label="Semana anterior">‹</button>${h(rangoSemana(AJ.lunes))}<button type="button" data-ajsem="1" aria-label="Semana siguiente">›</button></span>`;
   $('#ajLib').innerHTML = [0, 1, 2, 3, 4, 5, 6].map(i => { const d = addDays(AJ.lunes, i), on = AJ.libres.has(d); return `<button type="button" class="d7${on ? ' on' : ''}" aria-pressed="${on}" data-ajlib="${d}">${DMIN[i].charAt(0)}<small>${parseIso(d).getDate()}</small></button>`; }).join('');
 }
 async function guardarAjustes() {
@@ -3279,6 +3298,277 @@ function init023() {
   });
 }
 
+
+/* ---------- 0.24 · Compra: la marca se cambia tocándola (misma ventana que en Recetas) ----------
+   Rocío (14/10): «que funcione igual que en Recetas». Una sola elección cambia todas las preparaciones de
+   esta compra que salen marcadas; «Siempre en estas recetas» la deja como tu producto. «⋯» se queda para
+   cantidades, «Tengo en casa» y quitar. */
+let MC_CACHE = { r: null, m: new Map() }, MC = null;
+function modeloMarca24(name) {
+  const r = shopping(); if (MC_CACHE.r !== r) MC_CACHE = { r, m: new Map() };
+  if (MC_CACHE.m.has(name)) return MC_CACHE.m.get(name);
+  const m = shopEditModel(name);
+  const recs = m.recs.filter(x => x.lot && x.adj.length === 1 && (x.adj[0].ps.length + x.adj[0].gs.length) > 1);
+  const lines = m.lines.map(x => x.e).filter(e => product(e.itemId));
+  let out = null;
+  if (recs.length || lines.length) {
+    const ps = recs.length ? recs[0].adj[0].ps.slice() : [], gs = recs.length ? recs[0].adj[0].gs.slice() : [];
+    data.products.filter(p => shopName(p) === name).sort(byFoodName).forEach(p => { if (!ps.some(q => q.id === p.id) && !gs.some(q => q.id === p.id)) ps.push(p); });
+    lines.forEach(e => { const p = product(e.itemId); if (p && !ps.some(q => q.id === p.id) && !gs.some(q => q.id === p.id)) ps.push(p); });
+    if (ps.length + gs.length > 1) out = { name, recs, lines, ps, gs };
+  }
+  MC_CACHE.m.set(name, out); return out;
+}
+function marcaElegible(name) { try { return !!modeloMarca24(name); } catch (e) { return false; } }
+function marcaBtn(name, single, e) {
+  if (!marcaElegible(name)) return '';
+  const cur = actualMarca24(modeloMarca24(name)), t = single || (cur && product(cur) ? product(cur).name : 'Varias marcas');
+  return `<button type="button" class="marca${cur || single ? '' : ' sin'}" data-marca="${esc(name)}" aria-label="Cambiar la marca de ${esc(name)}"><span>${esc(t)}</span><em aria-hidden="true">›</em></button>`;
+}
+function marcaEnFicha(name) { return marcaElegible(name) ? `<button type="button" class="btn ancho mc-ir" data-marca="${esc(name)}">Cambiar la marca ›</button>` : ''; }
+function actualMarca24(M) {
+  const cs = M.recs.map(r => { const x = r.adj[0], old = lotBuyMark(r.lot)[x.i.name]; return old && x.ps.concat(x.gs).some(p => p.id === old) ? old : (x.base ? x.base.id : ''); }).concat(M.lines.map(e => e.itemId));
+  return cs.length && cs.every(c => c === cs[0]) ? cs[0] : '';
+}
+function abrirMarca(name) {
+  const M = modeloMarca24(name); if (!M) return;
+  const fuentes = M.recs.map(r => ({ k: 'r:' + r.id, t: recipe(r.lot.recipeId)?.name || 'Receta', s: DIA_CORTO(r.lot.date) + ' · ' + r.lot.meal.toLowerCase() }))
+    .concat(M.lines.map(e => ({ k: 'l:' + e.lineId, t: 'Puesto en el menú', s: DIA_CORTO(e.date) + ' · ' + e.meal.toLowerCase() })));
+  MC = { M, val: actualMarca24(M), donde: 'vez', sel: new Set(fuentes.map(f => f.k)), fuentes };
+  $('#mcTit').textContent = name; pintarMarca(); $('#mcDlg').showModal();
+}
+function pintarMarca() {
+  const { M, val, donde, sel, fuentes } = MC, nRec = new Set(M.recs.map(r => r.lot.recipeId)).size;
+  const base = M.recs.length ? M.recs[0].adj[0].base : null, rid = M.recs.length ? M.recs[0].lot.recipeId : '', ing = M.recs.length ? M.recs[0].adj[0].i.name : '';
+  const op = p => { const on = p.id === val, mio = rid && MISP[rid + '¦' + ing] === p.id; return `<button type="button" role="radio" aria-checked="${on}" class="${on ? 'on' : ''}" data-mcv="${h(p.id)}"><i></i><span>${h(p.name)}${mio ? '<small>El tuyo</small>' : base && p.id === base.id ? `<small>${nRec > 1 ? 'El de las recetas' : 'El de la receta'}</small>` : ''}</span></button>`; };
+  const abiertos = M.gs.some(p => p.id === val), aisle = M.recs.length ? String(aisleOf(M.recs[0].adj[0].i) || 'su pasillo').toLowerCase() : 'su pasillo';
+  const ck = f => `<button type="button" role="checkbox" aria-checked="${sel.has(f.k)}" class="ckb${sel.has(f.k) ? ' on' : ''}" data-mcs="${h(f.k)}"><i></i><span>${h(f.t)}<small>${h(f.s)}</small></span></button>`;
+  const vez = donde === 'vez';
+  $('#mcBody').innerHTML = `<p class="sub2">${fuentes.length > 1 ? 'En la compra de esta semana va en ' + fuentes.length + ' sitios' : 'En la compra de esta semana'} · ¿cuál compras?</p>
+    <div class="mp-ops" role="radiogroup">${M.ps.map(op).join('')}</div>
+    ${M.gs.length ? `<details class="al-fu"${abiertos ? ' open' : ''}><summary>Otros de ${h(aisle)} (${M.gs.length})</summary><div class="mp-ops" role="radiogroup" style="margin-bottom:10px">${M.gs.map(op).join('')}</div></details>` : ''}
+    <p class="cp-lbl">¿Dónde?</p><div class="mp-ops">
+      <button type="button" role="radio" aria-checked="${vez}" class="${vez ? 'on' : ''}" data-mcw="vez"><i></i><span>Solo en esta compra<small>${fuentes.length > 1 ? 'Marcados los ' + fuentes.length + ' sitios donde va' : 'Donde va esta semana'}</small></span></button>
+      ${vez && fuentes.length > 1 ? `<div class="mp-sub">${fuentes.map(ck).join('')}</div>` : ''}
+      ${M.recs.length ? `<button type="button" role="radio" aria-checked="${!vez}" class="${!vez ? 'on' : ''}" data-mcw="siempre"><i></i><span>${nRec > 1 ? 'Siempre en estas recetas' : 'Siempre en esta receta'}<small>Pasa a ser tu producto${nRec > 1 ? ' en las ' + nRec + ' recetas' : ''}</small></span></button>` : ''}
+    </div>
+    <div class="info" style="margin-top:12px">${vez ? 'Cambia lo que compras para lo marcado y sus kcal. Las recetas siguen como estaban.' : 'Pasa a ser tu producto en ' + (nRec > 1 ? 'esas recetas' : 'esa receta') + ', para todas las preparaciones. La receta que ven los demás no cambia.'}</div>`;
+}
+async function guardarMarca() {
+  const { M, val, donde, sel } = MC; if (!val || !product(val)) { aviso('Elige un producto.'); return; }
+  const vez = donde === 'vez'; if (vez && !sel.size) { aviso('Marca al menos un sitio.'); return; }
+  let hechos = 0, fuera = 0; const hechas = new Set();
+  for (const r of M.recs) {
+    if (vez && !sel.has('r:' + r.id)) continue;
+    const x = r.adj[0]; if (!x.ps.concat(x.gs).some(p => p.id === val)) { fuera++; continue; }
+    const row = r.lot._row || (r.lot._row = nuevaFilaLote(r.lot.lotId)), buy = Object.assign({}, row.compra_producto || {});
+    if (!vez) { const k = r.lot.recipeId + '¦' + x.i.name; if (!hechas.has(k)) { hechas.add(k); const ref = refMiProducto(r.lot.recipeId, x.i.name); await guardarMiProducto(r.lot.recipeId, x.i.name, ref && val === ref.id ? '' : val); } delete buy[x.i.name]; }
+    else if (x.base && val === x.base.id) delete buy[x.i.name]; else buy[x.i.name] = val;
+    row.compra_producto = buy; rehacerNota(r.lot); marcarLote(r.lot); hechos++;
+  }
+  M.lines.forEach(e => { if (vez && !sel.has('l:' + e.lineId)) return; if (e.itemId !== val) { e.itemId = val; marcar(e); } hechos++; });
+  $('#mcDlg').close(); pintarTodo(); pintarCompra(); pintarGlobito();
+  aviso((hechos ? 'Cambiado a ' + product(val).name + (vez ? '' : ' · siempre') + '.' : 'No se ha cambiado nada.') + (fuera ? ' En ' + fuera + (fuera === 1 ? ' sitio' : ' sitios') + ' no vale ese producto.' : ''));
+}
+
+/* ---------- 0.24 · Recetas tuyas dentro de otra (bases caseras): ¿la tienes, congelada, la haces o la compras? ----------
+   Rocío (14/10): preguntarlo en la Compra («Decide antes de comprar», como caldo o agua). «La hago» prepara
+   lo justo (no la receta entera); «Congelada» saca del congelador y se apunta a qué receta va. */
+function basesSemana24() {
+  const wk = data.activeWeek, dl = new Set((shopDays.size ? [...shopDays] : [0, 1, 2, 3, 4, 5, 6]).map(i => addDays(wk, i))), pend = [], dec = [];
+  data.lots.filter(l => dl.has(l.date) && l.includeShopping !== false && !blank(l.prepared)).sort((a, b) => a.date.localeCompare(b.date) || MEALS.indexOf(a.meal) - MEALS.indexOf(b.meal)).forEach(l => {
+    const r = recipe(l.recipeId); if (!r) return;
+    data.ingredients.filter(i => i.id === l.recipeId && i.baseRecipe && recipe(i.baseRecipe)).forEach(i => {
+      const b = recipe(i.baseRecipe), g = n(i.amount) !== null && ['g', 'ml'].includes(clean(i.unit).trim()) ? Number(i.amount) / Number(i.portions || 1) * Number(l.prepared) : null;
+      const per = recalcRawGrams(b), x = { lot: l, lotId: l.lotId, ing: i.name, base: b.id, baseName: b.name, recipe: r.name, date: l.date, meal: l.meal, g, unit: clean(i.unit).trim() || 'g', per, needR: g && per ? g / per : null };
+      const desde = data.lots.filter(o => o.recipeId === b.id && lotRecipeUses(o).some(u => u.lot === l.lotId));
+      const movs = (data.freezerMoves || []).filter(m => m.lote_id === l.lotId && ((data.freezer || []).find(c => c.id === m.congelador_id) || {}).receta_id === b.id);
+      const v = String(lotBroth(l)[i.name] || '');
+      if (desde.length) dec.push(Object.assign(x, { tipo: 'lote', desde }));
+      else if (movs.length) dec.push(Object.assign(x, { tipo: 'cong', movs }));
+      else if (v === 'tengo') dec.push(Object.assign(x, { tipo: 'tengo' }));
+      else if (v.startsWith('compro:')) dec.push(Object.assign(x, { tipo: 'compro', p: v.slice(7).split('|')[0], ms: v.split('|')[1] || '' }));
+      else if (l.status !== 'Preparado') pend.push(x);
+    });
+  });
+  return { pend, dec };
+}
+function basesPendientes() { try { return data && data.activeWeek ? basesSemana24().pend : []; } catch (e) { return []; } }
+const gTxt24 = x => x.g ? fmt.format(Math.round(x.g)) + ' ' + (x.unit === 'ml' ? 'ml' : 'g') : '';
+function congDeBase24(base) { return (data.freezer || []).filter(c => c.receta_id === base && congQuedan(c) > 1e-9).sort((a, b) => String(a.fecha_congelado).localeCompare(String(b.fecha_congelado))); }
+function lotesDeBase24(x) { return data.lots.filter(o => o.recipeId === x.base && o.lotId !== x.lotId && o.date <= x.date && (available(o) || 0) > 1e-9).sort((a, b) => b.date.localeCompare(a.date)); }
+function baseDecHtml(x) {
+  const d = `data-blot="${esc(x.lotId)}" data-bing="${esc(x.ing)}"`, hayL = lotesDeBase24(x).length, hayC = congDeBase24(x.base).length;
+  return `<div class="cp-dec bdec"><b>${esc(x.baseName)}${x.g ? ' · ' + gTxt24(x) : ''}</b><p>Va dentro de ${esc(x.recipe)} · ${esc(dayName(x.date).toLowerCase())}, ${esc(String(x.meal).toLowerCase())}. Es una receta tuya: no se compra.</p><div class="r r4">
+    <button type="button" class="btn" ${d} data-bdec="tengo">La tengo<small>${hayL ? 'de una preparación' : 'ya hecha'}</small></button>
+    <button type="button" class="btn" ${d} data-bdec="cong"${hayC ? '' : ' disabled'}>Congelada<small>${hayC ? 'sale del congelador' : 'no hay en el congelador'}</small></button>
+    <button type="button" class="btn" ${d} data-bdec="hago">La hago<small>lo justo, a la compra</small></button>
+    <button type="button" class="btn" ${d} data-bdec="compro">La compro<small>eliges el producto</small></button></div></div>`;
+}
+function textoDecidido24(x) {
+  const para = ' · para ' + x.recipe + ' (' + DIA_CORTO(x.date) + ')';
+  if (x.tipo === 'lote') return x.desde.map(o => { const k = lotRecipeUses(o).filter(u => u.lot === x.lotId).reduce((a, u) => a + Number(u.n), 0), sola = !data.entries.some(e => e.lotId === o.lotId) && o.status !== 'Preparado'; return (sola ? 'La preparas el ' : 'De la preparación del ') + DIA_CORTO(o.date) + ' · ' + racionTxt(o.recipeId, k); }).join(' y ') + para;
+  if (x.tipo === 'cong') { const k = x.movs.reduce((a, m) => a + Number(m.raciones || 0), 0); return 'Del congelador · ' + racionTxt(x.base, k) + para; }
+  if (x.tipo === 'tengo') return 'La tienes hecha (sin apuntar)' + para;
+  return 'La compras: ' + ((product(x.p) || {}).name || 'producto') + para;
+}
+function basesDecididasHtml() {
+  let d = []; try { d = basesSemana24().dec; } catch (e) { return ''; } if (!d.length) return '';
+  return '<div class="cp-cat">Decidido</div>' + d.map(x => `<div class="cp-res"><span><b>${esc(x.baseName)}</b><small>${esc(textoDecidido24(x))}</small></span><button type="button" class="lk" data-bcambiar data-blot="${esc(x.lotId)}" data-bing="${esc(x.ing)}">cambiar</button></div>`).join('');
+}
+function buscarBase24(lotId, ing) { const s = basesSemana24(); return s.pend.concat(s.dec).find(x => x.lotId === lotId && x.ing === ing) || null; }
+function cambiarBase24(lotId, ing) {
+  const x = buscarBase24(lotId, ing); if (!x || !x.tipo) return;
+  const deshacer = [];
+  if (x.tipo === 'lote') x.desde.forEach(o => {
+    const us = (o._row.usos || []).slice(); o._row.usos = us.filter(u => !(u.from === o.lotId && u.lot === lotId)); rehacerNota(o); marcarLote(o);
+    const sola = !data.entries.some(e => e.lotId === o.lotId) && !lotRecipeUses(o).length && !(data.freezer || []).some(c => c.lote_id === o.lotId) && o.status !== 'Preparado';
+    if (sola) { data.lots = data.lots.filter(z => z !== o); borrarLote(o.lotId); }
+    deshacer.push(() => { if (sola) data.lots.push(o); o._row.usos = us; rehacerNota(o); marcarLote(o); });
+  });
+  if (x.tipo === 'cong') { const ms = x.movs.slice(); data.freezerMoves = data.freezerMoves.filter(m => !ms.includes(m)); ms.forEach(m => borrarFila('congelador_movimientos', m.id)); deshacer.push(() => ms.forEach(m => { data.freezerMoves.push(m); guardarFila('congelador_movimientos', m); })); }
+  if (x.tipo === 'tengo' || x.tipo === 'compro') {
+    const l = x.lot, row = l._row || (l._row = nuevaFilaLote(l.lotId)), old = Object.assign({}, row.caldo || {}); const c = Object.assign({}, old); delete c[ing]; row.caldo = c; rehacerNota(l); marcarLote(l);
+    if (x.tipo === 'compro' && x.ms && typeof quitarManualFila === 'function' && ((data.manualShopping || []).some(r => r.id === x.ms) || manualShopQueue.has(x.ms))) quitarManualFila(x.ms);
+    deshacer.push(() => { row.caldo = old; rehacerNota(l); marcarLote(l); });
+  }
+  pintarTodo(); pintarCompra(); pintarGlobito();
+  aviso('Vuelve a «Decide antes de comprar».', 'Deshacer', () => { deshacer.forEach(f => f()); pintarTodo(); pintarCompra(); pintarGlobito(); });
+}
+
+let BS = null;
+function abrirBase(lotId, ing, modo) {
+  const x = buscarBase24(lotId, ing); if (!x) return;
+  BS = { x, modo, sel: '', g: x.g ? Math.round(x.g) : null, R: null, dia: '', q: '' };
+  if (modo === 'tengo') { const ls = lotesDeBase24(x); BS.sel = ls.length ? 'lote:' + ls[0].lotId : 'sin'; }
+  if (modo === 'cong') { const cs = congDeBase24(x.base); BS.sel = cs.length ? cs[0].id : ''; }
+  if (modo === 'hago') { const ant = addDays(x.date, -1); BS.R = x.needR ? Math.max(0.5, Math.ceil(x.needR * 2 - 1e-9) / 2) : 1; BS.dia = ant >= data.activeWeek ? ant : x.date; }
+  if (modo === 'compro') BS.q = x.baseName.replace(/\b(base de|casero|casera)\b/gi, ' ').replace(/\s+/g, ' ').trim();
+  $('#bsTit').textContent = { tengo: x.baseName, cong: x.baseName + ' congelada', hago: 'Hacer ' + x.baseName.charAt(0).toLowerCase() + x.baseName.slice(1), compro: 'Comprar en lugar de ' + x.baseName.charAt(0).toLowerCase() + x.baseName.slice(1) }[modo];
+  $('#bsGo').textContent = { tengo: 'Guardar', cong: 'Sacar del congelador', hago: 'Ponerla en el menú', compro: 'Añadir a la compra' }[modo];
+  pintarBase(); $('#bsDlg').showModal();
+}
+function racDeG24(g, per) { return per > 0 && g > 0 ? g / per : null; }
+function pintarBase() {
+  const { x, modo } = BS, op = (v, t, s) => `<button type="button" role="radio" aria-checked="${BS.sel === v}" class="${BS.sel === v ? 'on' : ''}" data-bsv="${h(v)}"><i></i><span>${t}${s ? `<small>${s}</small>` : ''}</span></button>`;
+  const para = `Para ${h(x.recipe)} · ${h(DIA_CORTO(x.date))}, ${h(String(x.meal).toLowerCase())}${x.g ? ' · necesitas ' + h(gTxt24(x)) : ''}`;
+  const cant = (lab, per) => { const r = racDeG24(BS.g, per); return `<p class="cp-lbl">${lab}</p><div class="q4"><button type="button" data-bsg="-10" aria-label="Diez gramos menos">−</button><input class="cp-inp" id="bsG" type="text" inputmode="decimal" autocomplete="off" value="${BS.g == null ? '' : h(String(BS.g).replace('.', ','))}" placeholder="g" aria-label="Gramos"><span class="ud4">g</span><button type="button" data-bsg="10" aria-label="Diez gramos más">+</button></div><p class="aj-h" id="bsR">${r ? '= ' + h(racionTxt(x.base, Math.round(r * 100) / 100)) + '.' : per ? '' : 'No sé cuánto pesa una ración: se apunta una ración.'}</p>`; };
+  let html = '';
+  if (modo === 'tengo') {
+    const ls = lotesDeBase24(x), lot = BS.sel.startsWith('lote:') ? data.lots.find(o => o.lotId === BS.sel.slice(5)) : null;
+    html = `<p class="sub2">${para} · ¿de dónde la sacas?</p><div class="mp-ops" role="radiogroup">${ls.map(o => op('lote:' + o.lotId, 'Preparación del ' + h(DIA_CORTO(o.date)), 'Te quedan ' + h(racionTxt(o.recipeId, available(o))) + ' sin asignar')).join('')}${op('sin', 'La tengo, pero no está apuntada', 'Solo no se compra')}</div>`
+      + (lot ? cant('Cuánto usas', x.per) : '')
+      + `<div class="info" style="margin-top:12px">${lot ? 'Queda enlazada como «Usar en una receta» en esa preparación: no se compra nada y no cuenta dos veces en tus kcal.' : 'No se compra nada. Las kcal salen de la receta, como siempre.'}</div>`;
+  }
+  if (modo === 'cong') {
+    const cs = congDeBase24(x.base), c = cs.find(z => z.id === BS.sel), per = c && Number(c.gramos_racion) > 0 ? Number(c.gramos_racion) : x.per;
+    const ms = c ? movsDe(c.id) : [], com = ms.filter(m => m.motivo !== 'receta').reduce((a, m) => a + Number(m.raciones || 0), 0), rec = ms.filter(m => m.motivo === 'receta').reduce((a, m) => a + Number(m.raciones || 0), 0), ahora = racDeG24(BS.g, per) || (BS.g ? 1 : 0);
+    const r2x = v => fmt.format(Math.round(v * 100) / 100);
+    html = `<p class="sub2">${para}</p><div class="mp-ops" role="radiogroup">${cs.map(z => op(z.id, 'Congelada el ' + h(fechaCorta(z.fecha_congelado)), 'Quedan ' + h(racionTxt(x.base, congQuedan(z))) + (Number(z.gramos_racion) > 0 ? ' de ' + h(fmt.format(Math.round(z.gramos_racion))) + ' g' : ''))).join('')}</div>`
+      + cant('Cuánto sacas', per)
+      + (c ? `<p class="cp-lbl">Ese táper (${h(fechaCorta(c.fecha_congelado))})</p><div class="bal4"><div><b>${r2x(Number(c.raciones))}</b>congeladas</div><div><b>${r2x(com)}</b>en comidas</div><div><b>${r2x(rec + ahora)}</b>en recetas</div><div><b>${r2x(Math.max(0, congQuedan(c) - ahora))}</b>quedan</div></div>` : '')
+      + `<div class="info">Se apunta como salida del congelador «para ${h(x.recipe)} del ${h(DIA_CORTO(x.date))}». No se compra nada y no cuenta dos veces en tus kcal.</div>`;
+  }
+  if (modo === 'hago') {
+    const b = recipe(x.base), tot = x.per ? x.per * Number(b.portions || b.servings || 0) : null, ings = data.ingredients.filter(i => i.id === x.base && !noShop(i));
+    const fila = i => { const a = n(i.amount) === null ? null : Number(i.amount) / Number(i.portions || 1) * BS.R; return `<div>${h(i.name)}<span>${a === null ? h(i.unit || 'al gusto') : h(fmt.format(a < 1 ? Math.round(a * 10) / 10 : Math.round(a))) + ' ' + h(unitWord(a, i.unit) || '')}</span></div>`; };
+    const ant = addDays(x.date, -1), dias = (ant >= data.activeWeek ? [[ant, DIA_CORTO(ant).replace(/^./, c => c.toUpperCase()), 'el día antes de ' + x.recipe]] : []).concat([[x.date, 'El mismo ' + DIA_CORTO(x.date), '']]);
+    const ip = data.ingredients.find(i => i.id === x.base), lote = ip ? Number(ip.portions) : 0;
+    html = `<p class="sub2">${para}.${lote > 0 ? ' La receta entera son ' + h(racionTxt(x.base, lote)) + (x.per ? ' (unos ' + h(fmt.format(Math.round(x.per * lote / 10) * 10)) + ' g en crudo)' : '') + '.' : ''}</p>
+      <p class="cp-lbl">¿Cuánto preparas?</p><div class="q4"><button type="button" data-bsr="-0.5" aria-label="Media ración menos">−</button><output>${h(racionTxt(x.base, BS.R))}</output><button type="button" data-bsr="0.5" aria-label="Media ración más">+</button></div>
+      <p class="aj-h">${x.needR && Math.abs(BS.R - Math.max(0.5, Math.ceil(x.needR * 2 - 1e-9) / 2)) < 1e-9 ? 'Lo justo para esta receta' + (x.per ? ' (≈ ' + h(fmt.format(Math.round(BS.R * x.per))) + ' g)' : '') + '. ' : ''}Si haces más, lo que sobre lo puedes congelar al cocinar.</p>
+      <p class="cp-lbl">Va a la compra</p><div class="lst">${ings.map(fila).join('')}</div>
+      <p class="cp-lbl">¿Cuándo la haces?</p><div class="mp-ops" role="radiogroup">${dias.map(([d, t, s]) => `<button type="button" role="radio" aria-checked="${BS.dia === d}" class="${BS.dia === d ? 'on' : ''}" data-bsd="${h(d)}"><i></i><span>${h(t)}${s ? `<small>${h(s)}</small>` : ''}</span></button>`).join('')}</div>`;
+  }
+  if (modo === 'compro') {
+    const ws = clean(BS.q).split(/\s+/).filter(w => w.length > 2), ps = ws.length ? data.products.filter(p => { const t = clean(p.name + ' ' + (p.shop || '')); return ws.every(w => t.includes(w)); }).sort(byFoodName).slice(0, 30) : [];
+    html = `<p class="sub2">${para}</p><input class="cp-inp" id="bsQ" type="search" autocomplete="off" placeholder="Buscar producto" value="${h(BS.q)}" aria-label="Buscar producto">
+      <div class="mp-ops" role="radiogroup" style="margin-top:10px">${ps.length ? ps.map(p => op(p.id, h(p.name), '')).join('') : '<p class="nota2" style="padding:12px">No hay productos con ese nombre. Prueba con otra palabra.</p>'}</div>`
+      + cant('Cuánto compras', 0).replace(/<p class="aj-h" id="bsR">[^<]*<\/p>/, '')
+      + '<div class="info" style="margin-top:12px">Se añade a la compra de esta semana como «añadido a mano». Las kcal siguen saliendo de la receta.</div>';
+  }
+  $('#bsBody').innerHTML = html;
+}
+function leerBsG() { const i = $('#bsG'); if (!i) return true; const v = parseNum(i.value); if (Number.isNaN(v)) return false; BS.g = v; return true; }
+function guardarBase() {
+  if (!leerBsG()) { aviso('Escribe los gramos con números.'); return; }
+  const { x, modo } = BS, l = data.lots.find(o => o.lotId === x.lotId); if (!l) return;
+  const hecho = t => { $('#bsDlg').close(); pintarTodo(); pintarCompra(); pintarGlobito(); aviso(t); };
+  if (modo === 'tengo') {
+    if (BS.sel === 'sin') { const row = l._row || (l._row = nuevaFilaLote(l.lotId)); row.caldo = Object.assign({}, row.caldo || {}, { [x.ing]: 'tengo' }); rehacerNota(l); marcarLote(l); hecho(x.baseName + ': la tienes hecha.'); return; }
+    const o = data.lots.find(z => 'lote:' + z.lotId === BS.sel); if (!o) { aviso('Elige de dónde la sacas.'); return; }
+    let k = racDeG24(BS.g, x.per); if (k === null) k = 1; k = Math.round(k * 1e6) / 1e6;
+    if (!(k > 0)) { aviso('Indica cuánto usas.'); return; }
+    if (k > (available(o) || 0) + 1e-9) { aviso('En esa preparación no quedan tantas raciones sin asignar.'); return; }
+    const us = (o._row.usos = o._row.usos || []), old = us.find(u => u.from === o.lotId && u.lot === l.lotId);
+    if (old) old.n = Math.round((Number(old.n) + k) * 1e6) / 1e6; else us.push({ from: o.lotId, lot: l.lotId, n: k });
+    rehacerNota(o); marcarLote(o); hecho(x.baseName + ': sale de la preparación del ' + DIA_CORTO(o.date) + '.'); return;
+  }
+  if (modo === 'cong') {
+    const c = (data.freezer || []).find(z => z.id === BS.sel); if (!c) { aviso('Elige de qué táper sale.'); return; }
+    const per = Number(c.gramos_racion) > 0 ? Number(c.gramos_racion) : x.per; let k = racDeG24(BS.g, per); if (k === null) k = BS.g ? 1 : 0; k = Math.round(k * 1e6) / 1e6;
+    if (!(k > 0)) { aviso('Indica cuánto sacas.'); return; }
+    if (k > congQuedan(c) + 1e-9) { aviso('En ese táper no queda tanto.'); return; }
+    const m = { id: uuid(), owner: SESION.user.id, congelador_id: c.id, linea_id: null, lote_id: l.lotId, raciones: k, motivo: 'receta', fecha: l.date };
+    data.freezerMoves.push(m); guardarFila('congelador_movimientos', m); hecho(x.baseName + ': sale del congelador para ' + x.recipe + '.'); return;
+  }
+  if (modo === 'hago') {
+    if (!(BS.R > 0) || !BS.dia) { aviso('Indica cuánto preparas y cuándo.'); return; }
+    const id = uuid(), nuevo = { lotId: id, date: BS.dia, meal: l.meal, recipeId: x.base, prepared: BS.R, status: 'Planificado', includeShopping: true, note: '', _row: nuevaFilaLote(id) };
+    nuevo._row.usos = [{ from: id, lot: l.lotId, n: Math.round(Math.min(BS.R, x.needR || BS.R) * 1e6) / 1e6 }];
+    data.lots.push(nuevo); rehacerNota(nuevo); marcarLote(nuevo);
+    hecho(x.baseName + ': la preparas el ' + DIA_CORTO(BS.dia) + '. Sus ingredientes ya están en la compra.'); return;
+  }
+  if (modo === 'compro') {
+    const p = product(BS.sel); if (!p) { aviso('Elige el producto que compras.'); return; }
+    const ms = 'MS-' + uuid();
+    manualShopQueue.set(ms, { id: ms, week: data.activeWeek, name: shopName(p) || p.name, amount: BS.g > 0 ? BS.g : null, unit: BS.g > 0 ? 'g' : '', bought: false, source: 'base:' + l.lotId + '|' + x.ing });
+    const row = l._row || (l._row = nuevaFilaLote(l.lotId)); row.caldo = Object.assign({}, row.caldo || {}, { [x.ing]: 'compro:' + p.id + '|' + ms }); rehacerNota(l); marcarLote(l);
+    if (typeof guardarMarcas === 'function') guardarMarcas();
+    hecho((shopName(p) || p.name) + ' añadido a la compra. Pulsa «Actualizar compra» para guardarlo.');
+  }
+}
+
+/* En la Semana: una preparación sin comidas propias (p. ej. una base que solo va dentro de otra receta) se ve en su día */
+function prepSoloHtml(fecha, meal) {
+  return data.lots.filter(l => l.date === fecha && l.meal === meal && !data.entries.some(e => e.lotId === l.lotId)).map(l => {
+    const us = lotRecipeUses(l).map(u => data.lots.find(t => t.lotId === u.lot)).filter(Boolean);
+    return `<button type="button" class="prpsolo" data-prpsolo="${h(l.lotId)}"><span>Preparar · <b>${h(recipe(l.recipeId)?.name || 'Receta')}</b> · ${h(racionTxt(l.recipeId, l.prepared))}</span><small>${us.length ? 'Va dentro de ' + h(us.map(t => (recipe(t.recipeId)?.name || 'receta') + ' (' + DIA_CORTO(t.date) + ')').join(', ')) : 'Sin comidas apuntadas'}</small></button>`;
+  }).join('');
+}
+
+function init024() {
+  const f0 = franjaHTML;
+  franjaHTML = function (fecha, meal) { const s = f0(fecha, meal), x = prepSoloHtml(fecha, meal); if (!x) return s; const i = s.lastIndexOf('</section>'); return (s.slice(0, i) + `<div class="prpsolos">${x}</div>` + s.slice(i)).replace('class="fr vac"', 'class="fr"'); };
+  $('#franjas').addEventListener('click', ev => { const b = ev.target.closest('[data-prpsolo]'); if (b) { ev.stopPropagation(); abrirLote(b.dataset.prpsolo); } });
+  $('#cpCuerpo').addEventListener('click', ev => {
+    const m = ev.target.closest('[data-marca]'); if (m) { ev.stopPropagation(); abrirMarca(m.dataset.marca); return; }
+    const d = ev.target.closest('[data-bdec]'); if (d) { ev.stopPropagation(); abrirBase(d.dataset.blot, d.dataset.bing, d.dataset.bdec); return; }
+    const c = ev.target.closest('[data-bcambiar]'); if (c) { ev.stopPropagation(); cambiarBase24(c.dataset.blot, c.dataset.bing); }
+  }, true);
+  $('#cfBody').addEventListener('click', ev => { const m = ev.target.closest('[data-marca]'); if (m) { ev.stopPropagation(); $('#cpFicha').close(); abrirMarca(m.dataset.marca); } });
+  $('#mcBody').addEventListener('click', ev => {
+    if (!MC) return; const v = ev.target.closest('[data-mcv]'), w = ev.target.closest('[data-mcw]'), s = ev.target.closest('[data-mcs]');
+    if (v) { MC.val = v.dataset.mcv; } else if (w) { MC.donde = w.dataset.mcw; } else if (s) { MC.sel.has(s.dataset.mcs) ? MC.sel.delete(s.dataset.mcs) : MC.sel.add(s.dataset.mcs); } else return;
+    const det = $('#mcBody details'), open = det && det.open, top = $('#mcBody').scrollTop; pintarMarca(); const d2 = $('#mcBody details'); if (d2 && open) d2.open = true; $('#mcBody').scrollTop = top;
+  });
+  $('#mcGo').onclick = () => guardarMarca();
+  $('#bsBody').addEventListener('click', ev => {
+    if (!BS) return; const v = ev.target.closest('[data-bsv]'), g = ev.target.closest('[data-bsg]'), r = ev.target.closest('[data-bsr]'), d = ev.target.closest('[data-bsd]');
+    if (!v && !g && !r && !d) return; leerBsG();
+    if (v) BS.sel = v.dataset.bsv;
+    if (g) BS.g = Math.max(0, Math.round(((Number(BS.g) || 0) + Number(g.dataset.bsg)) * 10) / 10);
+    if (r) BS.R = Math.max(0.5, Math.round((BS.R + Number(r.dataset.bsr)) * 2) / 2);
+    if (d) BS.dia = d.dataset.bsd;
+    const top = $('#bsBody').scrollTop; pintarBase(); $('#bsBody').scrollTop = top;
+  });
+  $('#bsBody').addEventListener('input', ev => {
+    if (ev.target.id === 'bsQ') { BS.q = ev.target.value; const pos = ev.target.selectionStart; leerBsG(); pintarBase(); const q = $('#bsQ'); q.focus(); try { q.setSelectionRange(pos, pos); } catch (e) {} }
+    if (ev.target.id === 'bsG') { const v = parseNum(ev.target.value); if (!Number.isNaN(v)) { BS.g = v; const per = BS.modo === 'cong' ? (() => { const c = (data.freezer || []).find(z => z.id === BS.sel); return c && Number(c.gramos_racion) > 0 ? Number(c.gramos_racion) : BS.x.per; })() : BS.x.per, k = racDeG24(v, per), el = $('#bsR'); if (el) el.textContent = k ? '= ' + racionTxt(BS.x.base, Math.round(k * 100) / 100) + '.' : ''; } }
+  });
+  $('#bsGo').onclick = () => guardarBase();
+}
+
 async function abrirSemana() {
   if (!SEM.lunes) { const hoy = hoyIso(); SEM.lunes = mondayOf(hoy); SEM.dia = (parseIso(hoy).getDay() + 6) % 7; }
   if (!SEM.cargada) {
@@ -3288,7 +3578,7 @@ async function abrirSemana() {
   pintarSemana(); pintarEstado();
 }
 
-  initSemana(); init013(); initCompra(); init014b(); init014c(); init015(); init016(); init017a(); init017b(); init017c(); init017d(); init017e(); init018(); init019(); init021(); init022(); init023();
+  initSemana(); init013(); initCompra(); init014b(); init014c(); init015(); init016(); init017a(); init017b(); init017c(); init017d(); init017e(); init018(); init019(); init021(); init022(); init023(); init024();
   sb.auth.onAuthStateChange((_ev, session) => { if ((session && session.user.id) !== (SESION && SESION.user.id)) { SEM.cargada = false; data = null; } show(session); });
   sb.auth.getSession().then(({ data }) => show(data.session));
   setMode('login');
