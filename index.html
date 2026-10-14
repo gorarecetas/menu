@@ -491,7 +491,7 @@
     <button class="cp-act" type="button" id="cpAct" hidden></button>
   </section>
 
-  <p class="ver">Versión de prueba 0.19 · recetas nuevas</p>
+  <p class="ver">Versión de prueba 0.20 · arreglos</p>
 </main>
 <nav class="nav" id="nav" hidden><button type="button" data-nav="semana" id="navSemana"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Semana</button><button type="button" data-nav="compra" id="navCompra"><i class="nbd" id="navNum" hidden></i><svg viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h3l2.6 12.4a2 2 0 0 0 2 1.6h8.2a2 2 0 0 0 2-1.6L21 7H6"/></svg>Compra</button><button type="button" data-nav="recetas" id="navRecetas"><svg viewBox="0 0 24 24"><path d="M12 6.5C10 5 7 4.5 3.5 5v14c3.5-.5 6.5 0 8.5 1.5 2-1.5 5-2 8.5-1.5V5C17 4.5 14 5 12 6.5zM12 6.5v14"/><path d="M6.5 9.5h2.5M6.5 12.5h2.5M15 9.5h2.5M15 12.5h2.5"/></svg>Recetas</button><button type="button" data-nav="alimentos" id="navAlimentos"><svg viewBox="0 0 24 24"><path d="M12 8.2c-1.3-.9-2.8-1.2-4.2-.9C5.3 7.8 4 10 4 12.8 4 17 7 21 9.6 21c1 0 1.5-.5 2.4-.5s1.4.5 2.4.5C17 21 20 17 20 12.8c0-2.8-1.3-5-3.8-5.5-1.4-.3-2.9 0-4.2.9z"/><path d="M12 8.2V5.5M12 5.5c.3-1.6 1.7-2.6 3.4-2.6-.2 1.7-1.6 2.8-3.4 2.6z"/></svg>Alimentos</button></nav>
 <dialog class="sheet" id="picker" aria-labelledby="pkTit"><div class="shh"><h2 id="pkTit">Añadir</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb">
@@ -500,7 +500,7 @@
   <div id="pkRec" hidden><select class="selc" id="pkCat" aria-label="Categoría"></select><input class="search" id="pkRQ" type="search" placeholder="Buscar receta o ingrediente" autocomplete="off" enterkeyhint="search"><div id="pkRLista"></div></div><div id="pkCong" hidden><div id="pkCLista"></div></div>
   <div id="pkLibre" hidden><label for="libreNom">Qué has comido</label><input id="libreNom" type="text" maxlength="60" autocomplete="off" autocapitalize="sentences"><label for="libreK">Kcal aproximadas (si lo sabes)</label><input id="libreK" type="text" inputmode="decimal" autocomplete="off" placeholder="?"><div class="row"><button class="btn main" type="button" id="libreAdd">Añadir comida libre</button></div></div>
 </div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="pkAdd" disabled>Añadir</button></div></dialog>
-<dialog class="sheet" id="copia" aria-labelledby="cpTit"><div class="shh"><h2 id="cpTit">Copiar a otros días</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb"><p class="note" style="font-size:14px">Elige días con esta franja vacía. Se copian los mismos alimentos y cantidades. Las recetas solo se copian si a su lote le quedan raciones.</p><div id="cpDias"></div></div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="cpGo">Copiar</button></div></dialog>
+<dialog class="sheet" id="copia" aria-labelledby="cpTit"><div class="shh"><h2 id="cpTit">Copiar a otros días</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb"><p class="note" style="font-size:14px">Elige días con esta franja vacía. Se copian los mismos alimentos y cantidades. Las recetas solo se copian si a su lote le quedan raciones.</p><div id="cpyDias"></div></div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="cpGo">Copiar</button></div></dialog>
 <dialog class="sheet" id="ajDlg" aria-labelledby="ajTit"><div class="shh"><h2 id="ajTit">Ajustes</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="ajBody"></div><div class="shf"><button class="btn" type="button" id="salir">Cerrar sesión</button><button class="btn main" type="button" id="ajGo">Guardar</button></div></dialog><dialog class="sheet" id="rsDlg" aria-labelledby="rsTit"><div class="shh"><h2 id="rsTit">Resumen de la semana</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="rsBody"></div></dialog>
 <dialog class="sheet" id="prepDlg" aria-labelledby="prTit"><div class="shh"><h2 id="prTit">Preparar o aprovechar</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="prBody"></div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="prGo">Añadir al menú</button></div></dialog>
 <dialog class="sheet" id="loteDlg" aria-labelledby="loTit"><div class="shh"><h2 id="loTit">Preparación</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="loBody"></div></dialog>
@@ -633,7 +633,11 @@
       : '<div class="empty">No hay recetas con esa búsqueda.</div>';
   }
 
-  function pasosHtml(t) {
+  function pasosHtml(t0) {
+    const sp = splitRecipeNotes(t0), notas = sp.notes.map(x => `<p class="ptext">${x.title ? '<b>' + h(x.title) + '</b> ' : ''}${h(x.body)}</p>`).join('');
+    return pasosHtml1(sp.steps) + notas;
+  }
+  function pasosHtml1(t) {
     t = String(t || '').trim(); if (!t) return '';
     const plano = t.replace(/\s*\n\s*/g, ' ').replace(/\s{2,}/g, ' ');
     const partes = plano.split(/(?:^|\s)\d{1,2}\s*[.)]\s*/).map(x => x.trim()).filter(Boolean);
@@ -1123,6 +1127,7 @@ function estadoLote(e) {
 function lineaHTML(e) {
   const it = item(e.itemId), id = h(e.lineId), k = calc(e, 'kcal');
   const kHTML = `<div class="k"><b>${k === null ? '—' : (isFree(e.itemId) ? '≈ ' : '') + kc(k)}</b> kcal</div>`;
+  if (!it) return `<div class="ln"><div class="l1"><div><div class="n">No disponible</div><div class="cat">Este alimento o receta ya no existe. Quítalo y añade otro.</div></div></div><div class="l2"><span class="sp"></span><button class="ic x" data-quitar="${id}" aria-label="Quitar">×</button></div></div>`;
   const quitar = `<button class="ic x" data-quitar="${id}" aria-label="Quitar ${h(it?.name || 'línea')}">×</button>`;
   const enCompra = shoppingIncluded(e);
   const carro = `<button class="ic${enCompra ? ' on' : ''}" data-carro="${id}" aria-pressed="${enCompra}" aria-label="${enCompra ? 'Quitar de la compra' : 'Añadir a la compra'}${!isProduct(e.itemId) && !isPrep(e.itemId) ? ' (todo el lote)' : ''}">${CARRO}</button>`;
@@ -1166,6 +1171,13 @@ function cambiarCantidad(inp) {
   if (e[inp.dataset.cant] === val) return;
   const mv = movDeLinea(e.lineId);
   if (mv) { const c = data.freezer.find(x => x.id === mv.congelador_id), nuevo = (inp.dataset.cant === 'own' ? (val || 0) : (n(e.own) || 0)) + (inp.dataset.cant === 'others' ? (val || 0) : (n(e.others) || 0)); if (c && nuevo > congQuedan(c) + Number(mv.raciones) + 1e-9) { aviso('En el congelador solo quedan ' + racionTxt(c.receta_id, congQuedan(c) + Number(mv.raciones)) + '.'); inp.value = mostrado(e, inp.dataset.cant); return; } mv.raciones = nuevo; guardarFila('congelador_movimientos', mv); }
+  if (!mv && e.lotId && !product(e.itemId) && !isFree(e.itemId) && !isPrep(e.itemId)) {
+    const l = data.lots.find(x => x.lotId === e.lotId);
+    if (l && !blank(l.prepared)) {
+      const otro = inp.dataset.cant === 'own' ? 'others' : 'own', usado = usage(l.lotId) - (n(e.own) || 0) - (n(e.others) || 0) + (val || 0) + (n(e[otro]) || 0), libre = Number(l.prepared) - lotRecipeUsed(l) - congeladoDe(l.lotId);
+      if (usado > libre + 1e-9) { const falta = Math.round((usado - libre) * 1e6) / 1e6; inp.value = mostrado(e, inp.dataset.cant); aviso('Te pasas de lo preparado: faltan ' + racionTxt(l.recipeId, falta) + '.', 'Preparar más', () => { l.prepared = Math.round((Number(l.prepared) + falta) * 1e6) / 1e6; marcarLote(l); e[inp.dataset.cant] = val; marcar(e); pintarSemana(); pintarGlobito(); aviso('Ahora preparas ' + racionTxt(l.recipeId, l.prepared) + '.'); }); return; }
+    }
+  }
   e[inp.dataset.cant] = val; marcar(e); pintarSemana();
 }
 function cambiarMedida(sel) {
@@ -1184,6 +1196,7 @@ function cambiarCarro(id) {
 }
 function quitarLinea(id) {
   const e = ent(id); if (!e) return;
+  { const l = e.lotId && !movDeLinea(id) && data.lots.find(x => x.lotId === e.lotId); if (l && l.date === e.date && l.meal === e.meal) { LOTE = { id: l.lotId }; eliminarLote(); return; } }
   const m = movDeLinea(id); if (m) { data.freezerMoves = data.freezerMoves.filter(x => x !== m); borrarFila('congelador_movimientos', m.id); }
   data.entries = data.entries.filter(x => x.lineId !== id); marcarBorrado(id); pintarTodo();
   aviso('Quitado: ' + (item(e.itemId)?.name || 'línea') + (m ? ' (vuelve al congelador)' : ''), 'Deshacer', () => { data.entries.push(e); marcar(e); if (m) { data.freezerMoves.push(m); guardarFila('congelador_movimientos', m); } pintarTodo(); if ($('#loteDlg').open) pintarLote(); });
@@ -1239,11 +1252,11 @@ let COPIA = null;
 function abrirCopia(meal) {
   const fecha = diaSel(); COPIA = { meal, fecha };
   $('#cpTit').textContent = 'Copiar ' + (meal === 'Comida' || meal === 'Merienda' || meal === 'Cena' ? 'esta ' : 'este ') + meal.toLowerCase() + ' a otros días';
-  $('#cpDias').innerHTML = [0, 1, 2, 3, 4, 5, 6].map(i => { const f = addDays(SEM.lunes, i); if (f === fecha) return ''; const ocup = dayEntries(f, meal).some(e => e.itemId); return `<label class="choice${ocup ? ' dis' : ''}"><input type="checkbox" value="${f}"${ocup ? ' disabled' : ''}> ${h(fechaLarga(f))}${ocup ? ' · ya tiene' : ''}</label>`; }).join('');
+  $('#cpyDias').innerHTML = [0, 1, 2, 3, 4, 5, 6].map(i => { const f = addDays(SEM.lunes, i); if (f === fecha) return ''; const ocup = dayEntries(f, meal).some(e => e.itemId); return `<label class="choice${ocup ? ' dis' : ''}"><input type="checkbox" value="${f}"${ocup ? ' disabled' : ''}> ${h(fechaLarga(f))}${ocup ? ' · ya tiene' : ''}</label>`; }).join('');
   $('#copia').showModal();
 }
 function hacerCopia() {
-  const dias = [...document.querySelectorAll('#cpDias input:checked')].map(x => x.value); if (!dias.length) { aviso('Elige al menos un día.'); return; }
+  const dias = [...document.querySelectorAll('#cpyDias input:checked')].map(x => x.value); if (!dias.length) { aviso('Elige al menos un día.'); return; }
   const orig = dayEntries(COPIA.fecha, COPIA.meal).filter(e => e.itemId); let sinRac = 0, n2 = 0;
   for (const f of dias) for (const e of orig) {
     if (!isProduct(e.itemId) && !isFree(e.itemId) && !isPrep(e.itemId)) { const lot = data.lots.find(l => l.lotId === e.lotId), need = (Number(e.own) || 0) + (Number(e.others) || 0); if (!lot || !(available(lot) >= need - 1e-9)) { sinRac++; continue; } }
@@ -1303,7 +1316,7 @@ function initSemana() {
   document.querySelectorAll('[data-cerrar]').forEach(b => b.onclick = () => b.closest('dialog').close());
   document.querySelectorAll('[data-nav]').forEach(b => b.onclick = () => { const v = b.dataset.nav; if (PRONTO[v]) { aviso(PRONTO[v]); return; } pila = []; location.hash = v; });
   $('#ajustes').onclick = abrirAjustes;
-  $('#salir').onclick = async () => { await guardarYa(); await sb.auth.signOut(); $('#ajDlg').close(); data = null; SEM.cargada = false; REC = null; ING_TXT = {}; location.hash = ''; };
+  $('#salir').onclick = async () => { const b = $('#salir'); b.disabled = true; for (let i = 0; i < 40 && (guardando || pendiente()); i++) { if (!guardando) await guardarYa(); await new Promise(r => setTimeout(r, 250)); } b.disabled = false; if (guardando || pendiente()) { aviso('Hay cambios sin guardar. Espera a tener conexión y vuelve a pulsar «Cerrar sesión».'); return; } clearTimeout(tGuardar); porGuardar = new Map(); porBorrar = new Set(); COLA = nuevaCola(); purchaseQueue.clear(); manualShopQueue.clear(); homeQueue.clear(); MISP = {}; VAL = {}; await sb.auth.signOut(); $('#ajDlg').close(); data = null; SEM.cargada = false; REC = null; ING_TXT = {}; location.hash = ''; };
 }
 
 
@@ -1448,7 +1461,7 @@ function pintarLote() {
     ${base}
     <h3 class="q3 sep">Comidas de esta preparación</h3>${coms + usos + congs || '<p class="nota2">Todavía no hay comidas de esta preparación.</p>'}
     <details class="box2"${q > 1e-9 ? '' : ' open'}><summary>Editar preparación</summary>
-      <div class="g2c"><label class="q2"><span>Fecha</span><input id="leFecha" type="date" value="${h(l.date)}"></label><label class="q2"><span>Franja</span><select class="selc" id="leFr">${MAIN_MEALS.map(m => `<option${m === l.meal ? ' selected' : ''}>${m}</option>`).join('')}</select></label>
+      <div class="g2c"><label class="q2"><span>Fecha</span><input id="leFecha" type="date" value="${h(l.date)}"></label><label class="q2"><span>Franja</span><select class="selc" id="leFr">${MEALS.map(m => `<option${m === l.meal ? ' selected' : ''}>${m}</option>`).join('')}</select></label>
       <label class="q2"><span>Preparar · raciones</span><input id="lePrep" type="text" inputmode="decimal" autocomplete="off" value="${blank(l.prepared) ? '' : h(fmt.format(l.prepared * f))}"></label><label class="q2"><span>Estado</span><select class="selc" id="leEst"><option${l.status !== 'Preparado' ? ' selected' : ''}>Planificado</option><option${l.status === 'Preparado' ? ' selected' : ''}>Preparado</option></select></label></div>
       <label class="chk"><input type="checkbox" id="leCompra"${l.includeShopping !== false ? ' checked' : ''}><span>Ingredientes a la compra</span></label>
       <div class="g2b"><button type="button" class="btn rojo" id="leBorrar">Eliminar preparación</button><button type="button" class="btn main" id="leGo">Guardar cambios</button></div></details>`;
@@ -1487,7 +1500,7 @@ function eliminarLote() {
     data.lots.forEach(o => { const us = (o._row && o._row.usos) || []; if (us.some(u => u.lot === l.lotId || u.from === l.lotId)) { o._row.usos = us.filter(u => u.lot !== l.lotId && u.from !== l.lotId); rehacerNota(o); if (o !== l) marcarLote(o); } });
     (data.freezer || []).filter(c => c.lote_id === l.lotId).forEach(c => { c.lote_id = null; guardarFila('congelador', c); });
     data.lots = data.lots.filter(x => x !== l); borrarLote(l.lotId);
-    $('#loteDlg').close(); pintarTodo(); aviso('Preparación eliminada.');
+    if ($('#loteDlg').open) $('#loteDlg').close(); pintarTodo(); pintarGlobito(); aviso('Preparación eliminada.', 'Deshacer', () => { data.lots.push(l); marcarLote(l); ls.forEach(e => { data.entries.push(e); marcar(e); }); deCong.forEach(e => { e.lotId = l.lotId; marcar(e); }); pintarTodo(); pintarGlobito(); });
   });
 }
 function usarEnReceta() {
@@ -1956,7 +1969,7 @@ function filaHtml(e, done, result) {
     target = loose ? `data-buy="${esc(c.items[0].key)}"` : `data-buy-card="${esc(name)}"${done ? ` data-buy-part="${esc(e.parts[0].label)}"` : ''}`;
   const subs = !done && e.parts.length + e.extras.length > 1 ? e.parts.map((p, k) => `<div class="cp-sub">${ckHtml(`data-buy-card="${esc(name)}" data-buy-part="${esc(p.label)}" data-buy-section="${section}"`, queued[k], false, name + ' · ' + (p.label || 'sin marca'), false)}<span><b>${esc(p.label || 'Sin marca')}</b> · ${sinAst(allocAmountText(name, p.allocs, field).shown) || 'sin cantidad'}</span></div>`).join('')
     + e.extras.map((i, k) => `<div class="cp-sub">${ckHtml(`data-buy="${esc(i.key)}" data-buy-section="${section}"`, extraQ[k], false, name + ' · ' + (i.adjusted ? 'compra ajustada' : 'añadido a mano'), false)}<span><b>${i.adjusted ? 'Compra ajustada' : 'Añadido a mano'}</b> · ${i.amount == null || i.amount === '' ? 'sin cantidad' : fmt.format(i.amount) + ' ' + esc(i.unit)}</span></div>`).join('') : '';
-  return `<div class="cp-row${done ? ' done' : ''}">${ckHtml(target + ` data-buy-section="${section}"`, checked, partial, name, done)}<div class="cp-n"><b>${esc(name)}</b>${notas ? `<small>${esc(notas)}</small>` : ''}${done ? '' : casaHtml(e) + caldoNota(e, result)}</div><div class="cp-a">${noAmount ? '' : done ? sinAst(e.amount.shown) : cantHtml(e, e.amount.shown)}</div>${done ? (e.parts.length <= 1 ? masHtml(`data-fdone="${esc(name)}"`, name) : '') : masHtml(`data-ficha="${esc(name)}"`, name)}</div>${subs}${done ? '' : semanaHtml(e)}`;
+  return `<div class="cp-row${done ? ' done' : ''}">${ckHtml(target + ` data-buy-section="${section}"`, checked, partial, name, done)}<div class="cp-n"><b>${esc(name)}</b>${notas ? `<small>${esc(notas)}</small>` : ''}${done ? '' : casaHtml(e) + caldoNota(e, result)}</div><div class="cp-a">${noAmount ? '' : done ? sinAst(e.amount.shown) : cantHtml(e, e.amount.shown)}</div>${done ? (e.card.parts.length <= 1 ? masHtml(`data-fdone="${esc(name)}"`, name) : '') : masHtml(`data-ficha="${esc(name)}"`, name)}</div>${subs}${done ? '' : semanaHtml(e)}`;
 }
 function decideHtml(b) {
   const amt = brothAmountText(b), d = `data-broth-lot="${esc(b.lotId)}" data-broth-ing="${esc(b.ing)}"`;
@@ -2330,6 +2343,8 @@ function abrirEditarAlimento(id) {
   if (p) sb.from('alimentos').select('fuente').eq('id', p.id).maybeSingle().then(({ data: d }) => { if (AL.ed && AL.ed.id === p.id && d) $('#aeFu').value = d.fuente || ''; });
   $('#aeDlg').showModal();
 }
+/* 0.20 · número libre comprobado en la base de datos (dos móviles a la vez no se pisan) */
+async function idLibre(tabla, id) { for (let k = 0; k < 30; k++) { const { data: d, error } = await sb.from(tabla).select('id').eq('id', id).maybeSingle(); if (error || !d) return id; const m = /^(.*-)(\d+)$/.exec(id); if (!m) return id; id = m[1] + String(Number(m[2]) + 1).padStart(m[2].length, '0'); } return id; }
 function siguientePR() { const ns = data.products.map(p => /^PR-(\d+)$/.exec(p.id)).filter(Boolean).map(m => Number(m[1])); return 'PR-' + (Math.max(0, ...ns) + 1); }
 async function guardarAlimento() {
   const E = AL.ed; if (!E) return;
@@ -2347,7 +2362,7 @@ async function guardarAlimento() {
   if (vals.kcal === null) { aviso('Escribe al menos las kcal.'); return; }
   const hab = lee('#aeHab'); if (Number.isNaN(hab) || (hab !== null && hab > 10000)) { aviso('Revisa la cantidad habitual.'); return; }
   const viejo = E.id ? product(E.id) : null, comun = viejo ? !viejo.owner : esAdmin();
-  const row = Object.assign({ id: E.id || (comun ? siguientePR() : 'PRU-' + uuid().slice(0, 8)), owner: comun ? null : SESION.user.id, nombre: nom, categoria: cat, unidad, g_por_unidad: unidad === 'g' ? null : gpu, cantidad_habitual: hab, nombre_compra: $('#aeCom').value.trim() || null, fuente: $('#aeFu').value.trim() || null, actualizado: new Date().toISOString() }, vals);
+  const row = Object.assign({ id: E.id || (comun ? await idLibre('alimentos', siguientePR()) : 'PRU-' + uuid().slice(0, 8)), owner: comun ? null : SESION.user.id, nombre: nom, categoria: cat, unidad, g_por_unidad: unidad === 'g' ? null : gpu, cantidad_habitual: hab, nombre_compra: $('#aeCom').value.trim() || null, fuente: $('#aeFu').value.trim() || null, actualizado: new Date().toISOString() }, vals);
   $('#aeGo').disabled = true;
   const { error } = await sb.from('alimentos').upsert(row);
   $('#aeGo').disabled = false;
@@ -2687,9 +2702,9 @@ function init017a() {
 let SW = null;
 const offDia = (f, ref) => Math.round((parseIso(f) - parseIso(ref)) / 864e5);
 function grafoSemana(ref) {
-  const fin = addDays(ref, 7), en = x => x.date >= ref && x.date < fin, ids = new Set(data.entries.filter(en).map(e => e.lotId).filter(Boolean));
+  const fin = addDays(ref, 7), en = x => x.date >= ref && x.date < fin, cong = e => !!movDeLinea(e.lineId), ids = new Set(data.entries.filter(e => en(e) && !cong(e)).map(e => e.lotId).filter(Boolean));
   data.lots.filter(en).forEach(l => ids.add(l.lotId));
-  return { lots: data.lots.filter(l => ids.has(l.lotId)), entries: data.entries.filter(e => e.itemId && (en(e) || ids.has(e.lotId))) };
+  return { lots: data.lots.filter(l => ids.has(l.lotId)), entries: data.entries.filter(e => e.itemId && !cong(e) && (en(e) || ids.has(e.lotId))) };
 }
 function abrirGuardarSemana() {
   const g = grafoSemana(SEM.lunes), n = g.entries.filter(e => e.date >= SEM.lunes && e.date < addDays(SEM.lunes, 7)).length;
@@ -2992,7 +3007,7 @@ function abrirComprado(name, manualId) {
   if (!e) return;
   let a = null, u = '', keys = [];
   if (e.manual) { const i = e.manual; a = i.amount == null || i.amount === '' ? null : r2(Number(i.amount) * (i.adjusted && i.ratio > 0 ? i.ratio : 1)); u = shopUnit(i.unit || '') || (MS_UNITS.includes(i.unit) ? i.unit : ''); }
-  else { keys = e.card.items.map(i => i.key); if (keys.length === 1) { const it = e.card.items[0], q = shoppingQuantity(it, it.boughtAmount); a = q.amount == null ? null : r2(q.amount); u = shopUnit(q.unit || '') || ''; } }
+  else { keys = e.card.items.map(i => i.key); if (keys.length === 1) { const it = e.card.items[0], q = shoppingQuantity(it, Math.max(0, (it.boughtAmount || 0) - (it.boughtUnknown || 0))); a = q.amount == null ? null : r2(q.amount); u = shopUnit(q.unit || '') || ''; } }
   CB = { e, name: e.name, manualId: manualId || '', keys, old: (a == null ? '' : a) + '|' + u };
   const quitar = e.manual ? `<label class="cp-x"><input type="checkbox" id="cbDel">${e.manual.adjusted ? 'Volver a la cantidad del menú' : 'Quitar de la compra'}</label>` : '';
   $('#cbTit').textContent = e.name + ' · comprado';
@@ -3042,7 +3057,7 @@ async function abrirEditarReceta(id) {
     if (!puedoEditarReceta(r)) { aviso('Esta receta es común: solo la puede cambiar la administradora.'); return; }
   }
   RE = { id: id || null, owner: r ? r.owner : (esAdmin() ? null : SESION.user.id), nombre: r ? r.nombre : '', categoria: r ? (r.categoria || '') : '', frecuencia: r ? String(r.frecuencia || '').toUpperCase() : '', raciones: r ? Number(r.raciones_lote) || 1 : 2,
-    nevera: r ? Number(r.dias_nevera) || 0 : 0, congela: r ? !!r.congelable : false, pasos: r ? (r.pasos || '') : '', cons: r ? (r.conservacion || '') : '', fuente: r ? r.fuente : null, origen: r ? r.origen : null,
+    nevera: r ? Number(r.dias_nevera) || 0 : 0, congela: r ? !!r.congelable : false, pasos: r ? (r.pasos || '') : '', cons: r ? (r.conservacion || '') : '', fuente: r ? r.fuente : null, origen: r ? r.origen : null, pdf: r ? { kcal_pdf: r.kcal_pdf, proteina_pdf: r.proteina_pdf, grasa_pdf: r.grasa_pdf, hidratos_pdf: r.hidratos_pdf } : null,
     ings: ings.map(i => ({ id: i.id, nombre0: i.nombre, nombre: i.nombre, cantidad: i.cantidad, unidad: i.al_gusto ? 'al gusto' : (i.unidad || ''), alimento: i.alimento_id || '', compra: i.nombre_compra || '', marca: i.marca || '', base: i.receta_base_id || '', noCompra: !!i.no_se_compra, nota: i.nota || '', gpu: i.g_por_unidad, texto: i.texto_original, origen: i.origen })),
     abierto: null, q: '' };
   if (!RE.ings.length) { RE.ings.push(nuevoIng()); RE.abierto = 0; }
@@ -3058,7 +3073,7 @@ function pintarEditorReceta() {
     const t = textoIng(x), ab = R.abierto === k;
     const cab = `<div class="re-ing${ab ? ' ab' : ''}" data-reabre="${k}" role="button" tabindex="0" aria-expanded="${ab}"><span class="t"><b>${h(x.nombre || 'Ingrediente sin nombre')}</b><small class="${x.alimento || x.noCompra ? '' : 'mi'}">${h(t.ficha)}</small></span><span class="q">${h(t.cant)}</span><span class="go" aria-hidden="true">${ab ? '⌃' : '›'}</span></div>`;
     if (!ab) return cab;
-    const qn = clean(R.q.trim()), lista = qn ? data.products.filter(p => clean(p.name).includes(qn) || clean(shopName(p)).includes(qn)).sort((a, b) => (brandOf(a) ? 1 : 0) - (brandOf(b) ? 1 : 0) || byFoodName(a, b)).slice(0, 8) : [];
+    const qn = clean(R.q.trim()), lista = qn ? data.products.filter(p => (R.owner || !p.owner) && (clean(p.name).includes(qn) || clean(shopName(p)).includes(qn))).sort((a, b) => (brandOf(a) ? 1 : 0) - (brandOf(b) ? 1 : 0) || byFoodName(a, b)).slice(0, 8) : [];
     const p = x.alimento ? product(x.alimento) : null;
     return cab + `<div class="re-panel" data-reing="${k}">
       <label class="cp-lbl" for="reIq">Ficha de Alimentos</label>
@@ -3093,13 +3108,13 @@ async function guardarReceta() {
   if (!ings.length) { aviso('Añade al menos un ingrediente.'); return; }
   for (const x of ings) { if (!x.nombre.trim()) { aviso('Hay un ingrediente sin nombre.'); return; } if (x.unidad !== 'al gusto' && x.cantidad != null && x.cantidad !== '' && !(Number(x.cantidad) >= 0)) { aviso('Revisa la cantidad de ' + x.nombre + '.'); return; } }
   const nombres = ings.map(x => clean(x.nombre.trim())); if (new Set(nombres).size !== nombres.length) { aviso('Hay dos ingredientes con el mismo nombre: cambia uno.'); return; }
-  const id = R.id || (R.owner ? 'RU-' + uuid().slice(0, 8) : siguientePW());
+  const id = R.id || (R.owner ? 'RU-' + uuid().slice(0, 8) : await idLibre('recetas', siguientePW()));
   const rowR = { id, owner: R.owner, nombre: nom, categoria: R.categoria || null, frecuencia: R.frecuencia || null, raciones_lote: R.raciones, pasos: R.pasos.trim() || null, conservacion: R.cons.trim() || null, dias_nevera: R.nevera || null, congelable: R.congela, fuente: R.fuente || 'Creada en la web', actualizado: new Date().toISOString() };
   const rowsI = ings.map((x, k) => ({ id: x.id || uuid(), receta_id: id, orden: k + 1, nombre: x.nombre.trim(), alimento_id: x.alimento || null, receta_base_id: x.base || null, cantidad: x.unidad === 'al gusto' || x.cantidad === '' || x.cantidad == null ? null : Number(x.cantidad), unidad: x.unidad === 'al gusto' ? null : x.unidad, al_gusto: x.unidad === 'al gusto', no_se_compra: !!x.noCompra, nota: x.nota.trim() || null, nombre_compra: x.noCompra ? null : (x.compra || null), marca: x.marca || null, g_por_unidad: x.gpu ?? null, texto_original: x.texto || null, origen: x.origen || { fuente: 'web' } }));
   // kcal calculadas (para la lista y las demás personas): se calculan antes de guardar
-  const tmpR = aReceta(rowR), tmpI = rowsI.map(i => aIngrediente(i, [tmpR])), antesR = data.recipes, antesI = data.ingredients;
+  const delPdf = !R.id || R.fuente === 'Creada en la web', pdf0 = R.pdf || {}, tmpR = aReceta(Object.assign({ origen: R.origen, kcal_pdf: pdf0.kcal_pdf, proteina_pdf: pdf0.proteina_pdf, grasa_pdf: pdf0.grasa_pdf, hidratos_pdf: pdf0.hidratos_pdf }, rowR)), tmpI = rowsI.map(i => aIngrediente(i, [tmpR])), antesR = data.recipes, antesI = data.ingredients;
   data.recipes = antesR.filter(r => r.id !== id).concat([tmpR]); data.ingredients = antesI.filter(i => i.id !== id).concat(tmpI); calcularRecetas();
-  const v = CALC[id]; rowR.kcal_pdf = v && v.ok ? Math.round(v.c.kcal * 10) / 10 : null; rowR.proteina_pdf = v && v.ok ? Math.round(v.c.protein * 10) / 10 : null; rowR.grasa_pdf = v && v.ok ? Math.round(v.c.fat * 10) / 10 : null; rowR.hidratos_pdf = v && v.ok ? Math.round(v.c.carbs * 10) / 10 : null;
+  const v = CALC[id]; if (delPdf) { rowR.kcal_pdf = v && v.ok ? Math.round(v.c.kcal * 10) / 10 : null; rowR.proteina_pdf = v && v.ok ? Math.round(v.c.protein * 10) / 10 : null; rowR.grasa_pdf = v && v.ok ? Math.round(v.c.fat * 10) / 10 : null; rowR.hidratos_pdf = v && v.ok ? Math.round(v.c.carbs * 10) / 10 : null; }
   $('#reGo').disabled = true;
   const e1 = (await sb.from('recetas').upsert(rowR)).error;
   const quitar = R.id ? (await sb.from('ingredientes_receta').select('id').eq('receta_id', id)) : { data: [] };
@@ -3108,8 +3123,8 @@ async function guardarReceta() {
   const e3 = e1 || e2 || !sobran.length ? null : (await sb.from('ingredientes_receta').delete().in('id', sobran)).error;
   $('#reGo').disabled = false;
   if (e1 || e2 || e3) { data.recipes = antesR; data.ingredients = antesI; calcularRecetas(); aviso('No se ha podido guardar la receta: ' + es(e1 || e2 || e3)); return; }
-  tmpR.kcal = rowR.kcal_pdf; tmpR.pdf = { kcal: rowR.kcal_pdf, protein: rowR.proteina_pdf, fat: rowR.grasa_pdf, carbs: rowR.hidratos_pdf }; calcularRecetas();
-  if (REC) { const viejo = REC.find(x => x.id === id), nuevo = Object.assign({}, rowR, { kcal_pdf_orig: rowR.kcal_pdf }); if (viejo) Object.assign(viejo, nuevo); else REC.push(nuevo); REC.sort((a, b) => a.nombre.localeCompare(b.nombre, 'es')); ING_TXT[id] = rowsI.map(i => ' ' + norm(i.nombre)).join(''); }
+  if (delPdf) tmpR.pdf = { kcal: rowR.kcal_pdf, protein: rowR.proteina_pdf, fat: rowR.grasa_pdf, carbs: rowR.hidratos_pdf }; calcularRecetas();
+  if (REC) { const viejo = REC.find(x => x.id === id), nuevo = Object.assign({}, rowR, delPdf ? {} : pdf0, { kcal_pdf_orig: delPdf ? rowR.kcal_pdf : pdf0.kcal_pdf }); { const vv = valoresReceta(id); if (vv) Object.assign(nuevo, { kcal_pdf: vv.kcal, proteina_pdf: vv.protein, grasa_pdf: vv.fat, hidratos_pdf: vv.carbs }); } if (viejo) Object.assign(viejo, nuevo); else REC.push(nuevo); REC.sort((a, b) => a.nombre.localeCompare(b.nombre, 'es')); ING_TXT[id] = rowsI.map(i => ' ' + norm(i.nombre)).join(''); }
   for (const x of ings) { const viejo = x.nombre0, nuevo = x.nombre.trim(), mio = viejo && MISP[id + '¦' + viejo]; if (mio && viejo !== nuevo) { await guardarMiProducto(id, nuevo, mio); await guardarMiProducto(id, viejo, ''); } }
   $('#reDlg').close(); RE = null; pintarTodo(); pintarGlobito();
   aviso(R.id ? 'Receta guardada.' : 'Receta nueva: ' + nom + '.');

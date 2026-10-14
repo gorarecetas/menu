@@ -1,5 +1,5 @@
 // Mi Menú · trabajador sin conexión (v0.14 de prueba)
-const VERSION = 'mimenu-v0.19b';
+const VERSION = 'mimenu-v0.20';
 const CORE = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png', './apple-touch-icon.png', './ojo-cerrado.png', './ojo-abierto.png'];
 
 self.addEventListener('install', e => {
@@ -18,9 +18,9 @@ self.addEventListener('fetch', e => {
   e.respondWith(
     // lo de la propia app se pide sin la caché del navegador; lo de fuera (letras, librería) tal cual
     (new URL(e.request.url).origin === self.location.origin ? fetch(e.request.url, { cache: 'no-cache' }) : fetch(e.request)).then(res => {
-      const copy = res.clone();
-      caches.open(VERSION).then(c => c.put(e.request, copy)).catch(() => {});
-      return res;
-    }).catch(() => caches.match(e.request).then(r => r || caches.match('./index.html')))
+      // 0.20 · solo se guarda lo que ha llegado bien (una página de error no sustituye a la buena)
+      if (res.ok) { const copy = res.clone(); caches.open(VERSION).then(c => c.put(e.request, copy)).catch(() => {}); return res; }
+      return caches.match(e.request).then(r => r || res);
+    }).catch(() => caches.match(e.request).then(r => r || (e.request.mode === 'navigate' ? caches.match('./index.html') : Response.error())))
   );
 });
