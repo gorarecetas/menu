@@ -469,6 +469,35 @@
   .mp-cant{display:grid;grid-template-columns:96px minmax(0,1fr);gap:8px;align-items:start} .mp-cant .cp-inp{width:100%;text-align:center}
   #mpQInf .verrec{margin:0}
   #csPer b{display:block;margin-bottom:2px}
+  /* ---------- 0.26 · repaso de Rocío ---------- */
+  /* Botones de 36 px que responden como 44 (zona de toque invisible) */
+  .btn, .btn.ancho, .rec-acc .btn, .pdf-acc .btn, .rec-top .btn, .shf .btn, .cp-acts .btn, .g3a .btn, .g2b .btn, .re-sel .btn, .re-acc .btn, .libre-av .btn, .cp-dec .btn, .cp-sug .btn, .anadirsem, .rec-pdf, .pill{min-height:36px;padding-top:4px;padding-bottom:4px;position:relative}
+  .btn{font-size:14px;border-radius:10px} .btn::after,.pill::after{content:'';position:absolute;left:0;right:0;top:-4px;bottom:-4px}
+  /* Barras del día: gris oscuro mientras se llenan; roja si te pasas de kcal; verde al cumplir la proteína */
+  .barra i, .barra i.prot{background:var(--muted)} .barra i.ok{background:var(--ok)} .barra i.over{background:var(--red)}
+  .sum .t .verrec{min-height:0;position:relative;font-size:13px} .sum .t .verrec::after{content:'';position:absolute;inset:-12px -6px}
+  /* Franjas: toda la barra pliega */
+  .frh{cursor:pointer}
+  /* Compra */
+  .cp-n small.az{color:var(--azul-texto)}
+  /* Calendario */
+  .fecha26{text-align:left;cursor:pointer}
+  #calBody{padding-bottom:12px}
+  .calh{display:flex;align-items:center;justify-content:space-between;margin:0 0 10px} .calh b{font-size:17px} .calh .ib{font-size:20px}
+  .dow,.cgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px} .dow span{text-align:center;font:600 12px var(--font);color:var(--muted);padding-bottom:4px}
+  .cd{height:46px;border:1px solid var(--line);border-radius:12px;background:var(--white);font:700 15px var(--font);color:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:0;cursor:pointer}
+  .cd i{width:5px;height:5px;border-radius:50%} .cd i.pt{background:var(--ink)}
+  .cd.pas{color:#b9ad9e;background:transparent;border-color:#e3d9cb} .cd.pas i.pt{background:#c9bfae}
+  .cd.hoy{border:1.5px solid var(--ink)} .cd.lib{background:var(--cream)} .cd.on{background:var(--ink);border-color:var(--ink);color:var(--white)} .cd.on i.pt{background:#d9d1c5}
+  .ley{display:flex;gap:14px;flex-wrap:wrap;margin:12px 2px 0;font-size:12.5px;color:var(--muted)} .ley span{display:inline-flex;align-items:center;gap:6px}
+  .ley .m{width:14px;height:14px;border-radius:4px;border:1px solid var(--line);background:var(--white);display:inline-block} .ley .m.hoy{border:1.5px solid var(--ink)} .ley .m.on{background:var(--ink);border-color:var(--ink)} .ley .m.lib{background:var(--cream)}
+  .ley i.pt{width:5px;height:5px;border-radius:50%;background:var(--ink);display:inline-block}
+  #calDlg .shf{justify-content:flex-end} #calDlg .shf span{display:flex;gap:10px} #calVacio{margin-right:auto}
+  /* «⋯» de la franja y mover */
+  .frm-ops button{justify-content:space-between} .frm-ops button span small{display:block;font-size:12.5px;color:var(--muted)} .frm-ops em{font-style:normal;font-size:20px;color:var(--muted)} .frm-ops button[disabled]{opacity:.45}
+  .mv-dias{display:grid;grid-template-columns:repeat(7,1fr);gap:4px} .mv-fr{grid-template-columns:repeat(3,1fr)} .mv-fr button{border-top:1px solid var(--line)}
+  /* Congelador */
+  .pc-modo{margin:0 10px 10px}
 </style>
 </head>
 <body>
@@ -478,7 +507,7 @@
     <div><span class="brand">MI MENÚ</span><p class="sub">Semana, compra y recetas</p></div>
   </div>
 
-  <div class="top" id="top" hidden><img src="icon-192.png" alt=""><span class="brand">MI MENÚ</span><span class="sp"></span><span class="st ok" id="guardado" role="status"><i></i><span>Guardado</span></span><button class="ib" type="button" id="ajustes" aria-label="Ajustes"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#151311" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button></div>
+  <div class="top" id="top" hidden><img src="icon-192.png" alt=""><span class="brand">MI MENÚ</span><span class="sp"></span><span class="st ok" id="guardado" role="status"><i></i><span>Guardado</span></span><button class="ib" type="button" id="ajustes" aria-label="Ajustes"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button></div>
   <section class="card" id="auth" hidden>
     <h2 id="authTitle">Entrar</h2>
     <form id="authForm" autocomplete="on">
@@ -541,7 +570,7 @@
     <button class="cp-act" type="button" id="cpAct" hidden></button>
   </section>
 
-  <p class="ver">Versión de prueba 0.25 · tu cantidad en las recetas</p>
+  <p class="ver">Versión de prueba 0.26 · repaso de Rocío</p>
 </main>
 <nav class="nav" id="nav" hidden><button type="button" data-nav="semana" id="navSemana"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Semana</button><button type="button" data-nav="compra" id="navCompra"><i class="nbd" id="navNum" hidden></i><svg viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h3l2.6 12.4a2 2 0 0 0 2 1.6h8.2a2 2 0 0 0 2-1.6L21 7H6"/></svg>Compra</button><button type="button" data-nav="recetas" id="navRecetas"><svg viewBox="0 0 24 24"><path d="M12 6.5C10 5 7 4.5 3.5 5v14c3.5-.5 6.5 0 8.5 1.5 2-1.5 5-2 8.5-1.5V5C17 4.5 14 5 12 6.5zM12 6.5v14"/><path d="M6.5 9.5h2.5M6.5 12.5h2.5M15 9.5h2.5M15 12.5h2.5"/></svg>Recetas</button><button type="button" data-nav="alimentos" id="navAlimentos"><svg viewBox="0 0 24 24"><path d="M12 8.2c-1.3-.9-2.8-1.2-4.2-.9C5.3 7.8 4 10 4 12.8 4 17 7 21 9.6 21c1 0 1.5-.5 2.4-.5s1.4.5 2.4.5C17 21 20 17 20 12.8c0-2.8-1.3-5-3.8-5.5-1.4-.3-2.9 0-4.2.9z"/><path d="M12 8.2V5.5M12 5.5c.3-1.6 1.7-2.6 3.4-2.6-.2 1.7-1.6 2.8-3.4 2.6z"/></svg>Alimentos</button></nav>
 <dialog class="sheet" id="picker" aria-labelledby="pkTit"><div class="shh"><h2 id="pkTit">Añadir</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb">
@@ -559,7 +588,7 @@
 <dialog class="sheet" id="semDlg" aria-labelledby="asTit"><div class="shh"><h2 id="asTit">Añadir a la semana</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb"><p class="sub2"><b id="asRec"></b></p><div class="wkm"><button type="button" class="ar" data-assem="-1" aria-label="Semana anterior">‹</button><b id="asRango"></b><button type="button" class="ar" data-assem="1" aria-label="Semana siguiente">›</button></div><h3 class="q3">Día</h3><div class="d7s" id="asDias"></div><h3 class="q3">Franja</h3><div class="f4s" id="asFr"></div><p class="nota2" id="asCuando"></p></div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="asGo">Continuar</button></div></dialog>
 <dialog class="sheet" id="cpFicha" aria-labelledby="cfTit"><div class="shh"><h2 id="cfTit">Compra</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="cfBody"></div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="cfGo">Guardar</button></div></dialog>
 <dialog class="sheet" id="cpAnadir" aria-labelledby="caTit"><div class="shh"><h2 id="caTit">Añadir a la compra</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb"><label class="cp-lbl" for="caNom">Producto</label><input class="cp-inp" id="caNom" type="search" enterkeyhint="done" autocomplete="off" autocorrect="off" autocapitalize="sentences" spellcheck="false" maxlength="200"><div class="cp-sugs" id="caLista" role="listbox" hidden></div><div class="cp-two" style="margin-top:12px"><label class="cp-q" for="caCant">Cantidad (si quieres)<input class="cp-inp" id="caCant" type="text" inputmode="decimal" autocomplete="off"></label><label class="cp-q" for="caUni">Unidad<select class="cp-inp" id="caUni"></select></label></div><p class="cp-nota" id="caNota"></p></div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="caGo">Añadir</button></div></dialog>
-<dialog class="sheet" id="mpDlg" aria-labelledby="mpTit"><div class="shh"><h2 id="mpTit">Tu producto</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="mpBody"></div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="mpGo">Guardar</button></div></dialog><dialog class="sheet" id="mcDlg" aria-labelledby="mcTit"><div class="shh"><h2 id="mcTit">Marca</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="mcBody"></div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="mcGo">Guardar</button></div></dialog><dialog class="sheet" id="bsDlg" aria-labelledby="bsTit"><div class="shh"><h2 id="bsTit">Receta tuya</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="bsBody"></div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="bsGo">Guardar</button></div></dialog><dialog class="sheet" id="alDlg" aria-labelledby="alTit"><div class="shh"><h2 id="alTit">Alimento</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="alBody"></div><div class="shf"><button class="btn" type="button" id="alEditar">Editar</button><button class="btn main" type="button" id="alSemana">Añadir a la semana</button></div></dialog><dialog class="sheet" id="aeDlg" aria-labelledby="aeTit"><div class="shh"><h2 id="aeTit">Nueva ficha</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="aeBody"></div><div class="shf"><button class="btn main" type="button" id="aeGo">Guardar</button></div></dialog><dialog class="sheet" id="prpDlg" aria-labelledby="prpTit"><div class="shh"><h2 id="prpTit">Preparación</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="prpBody"></div><div class="shf"><p id="prpInfo" role="status"></p><button class="btn main" type="button" id="prpGo" disabled>Guardado</button></div></dialog><dialog class="sheet" id="swDlg" aria-labelledby="swTit"><div class="shh"><h2 id="swTit">Semanas guardadas</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="swBody"></div><div class="shf" style="justify-content:space-between"><button class="btn rojo" type="button" id="swBorrar" hidden>Borrar</button><span></span><button class="btn main" type="button" id="swGo">Guardar</button></div></dialog><dialog class="sheet" id="pdfDlg" aria-labelledby="pdfTit"><div class="shh"><h2 id="pdfTit">PDF</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb"><p id="pdfStatus" role="status" aria-live="polite" style="margin:0;font-size:15px"></p><div class="pdf-acc"><a id="pdfOpen" class="btn" target="_blank" rel="noopener" hidden>Abrir</a><button type="button" class="btn" id="pdfShare" hidden>Compartir</button><a id="pdfDownload" class="btn" download hidden>Descargar</a></div><p class="aj-h" id="pdfHint" hidden></p></div></dialog><dialog class="sheet" id="csDlg" aria-labelledby="csTit"><div class="shh"><h2 id="csTit">Guardar como producto casero</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="csBody"></div><div class="shf"><button class="btn main" type="button" id="csGo">Guardar ficha</button></div></dialog><dialog class="sheet" id="rpDlg" aria-labelledby="rpTit"><div class="shh"><h2 id="rpTit">Repartir en raciones</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="rpBody"></div><div class="shf" style="justify-content:space-between"><button class="btn" type="button" id="rpVaciar">Vaciar</button><button class="btn main" type="button" id="rpGo">Listo</button></div></dialog><dialog class="sheet" id="cbDlg" aria-labelledby="cbTit"><div class="shh"><h2 id="cbTit">Comprado</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="cbBody"></div><div class="shf"><button class="btn main" type="button" id="cbGo">Guardar</button></div></dialog><dialog class="sheet" id="reDlg" aria-labelledby="reTit"><div class="shh"><h2 id="reTit">Receta</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="reBody"></div><div class="shf"><button class="btn main" type="button" id="reGo">Guardar</button></div></dialog><div id="toast" role="status" hidden></div>
+<dialog class="sheet" id="calDlg" aria-labelledby="calTit"><div class="shh"><h2 id="calTit">Elegir fecha</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="calBody"></div><div class="shf"><button class="btn" type="button" id="calVacio" hidden>Sin fecha</button><span><button class="btn" type="button" id="calHoy">Hoy</button><button class="btn main" type="button" id="calGo">Elegir</button></span></div></dialog><dialog class="sheet" id="frmDlg" aria-labelledby="frmTit"><div class="shh"><h2 id="frmTit">Franja</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="frmBody"></div></dialog><dialog class="sheet" id="mvDlg" aria-labelledby="mvTit"><div class="shh"><h2 id="mvTit">Mover a otro día o franja</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="mvBody"></div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="mvGo">Mover</button></div></dialog><dialog class="sheet" id="mpDlg" aria-labelledby="mpTit"><div class="shh"><h2 id="mpTit">Tu producto</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="mpBody"></div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="mpGo">Guardar</button></div></dialog><dialog class="sheet" id="mcDlg" aria-labelledby="mcTit"><div class="shh"><h2 id="mcTit">Marca</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="mcBody"></div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="mcGo">Guardar</button></div></dialog><dialog class="sheet" id="bsDlg" aria-labelledby="bsTit"><div class="shh"><h2 id="bsTit">Receta tuya</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="bsBody"></div><div class="shf"><button class="btn" type="button" data-cerrar>Cancelar</button><button class="btn main" type="button" id="bsGo">Guardar</button></div></dialog><dialog class="sheet" id="alDlg" aria-labelledby="alTit"><div class="shh"><h2 id="alTit">Alimento</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="alBody"></div><div class="shf"><button class="btn" type="button" id="alEditar">Editar</button><button class="btn main" type="button" id="alSemana">Añadir a la semana</button></div></dialog><dialog class="sheet" id="aeDlg" aria-labelledby="aeTit"><div class="shh"><h2 id="aeTit">Nueva ficha</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="aeBody"></div><div class="shf"><button class="btn main" type="button" id="aeGo">Guardar</button></div></dialog><dialog class="sheet" id="prpDlg" aria-labelledby="prpTit"><div class="shh"><h2 id="prpTit">Preparación</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="prpBody"></div><div class="shf"><p id="prpInfo" role="status"></p><button class="btn main" type="button" id="prpGo" disabled>Guardado</button></div></dialog><dialog class="sheet" id="swDlg" aria-labelledby="swTit"><div class="shh"><h2 id="swTit">Semanas guardadas</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="swBody"></div><div class="shf" style="justify-content:space-between"><button class="btn rojo" type="button" id="swBorrar" hidden>Borrar</button><span></span><button class="btn main" type="button" id="swGo">Guardar</button></div></dialog><dialog class="sheet" id="pdfDlg" aria-labelledby="pdfTit"><div class="shh"><h2 id="pdfTit">PDF</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb"><p id="pdfStatus" role="status" aria-live="polite" style="margin:0;font-size:15px"></p><div class="pdf-acc"><a id="pdfOpen" class="btn" target="_blank" rel="noopener" hidden>Abrir</a><button type="button" class="btn" id="pdfShare" hidden>Compartir</button><a id="pdfDownload" class="btn" download hidden>Descargar</a></div><p class="aj-h" id="pdfHint" hidden></p></div></dialog><dialog class="sheet" id="csDlg" aria-labelledby="csTit"><div class="shh"><h2 id="csTit">Guardar como producto casero</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="csBody"></div><div class="shf"><button class="btn main" type="button" id="csGo">Guardar ficha</button></div></dialog><dialog class="sheet" id="rpDlg" aria-labelledby="rpTit"><div class="shh"><h2 id="rpTit">Repartir en raciones</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="rpBody"></div><div class="shf" style="justify-content:space-between"><button class="btn" type="button" id="rpVaciar">Vaciar</button><button class="btn main" type="button" id="rpGo">Listo</button></div></dialog><dialog class="sheet" id="cbDlg" aria-labelledby="cbTit"><div class="shh"><h2 id="cbTit">Comprado</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="cbBody"></div><div class="shf"><button class="btn main" type="button" id="cbGo">Guardar</button></div></dialog><dialog class="sheet" id="reDlg" aria-labelledby="reTit"><div class="shh"><h2 id="reTit">Receta</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb" id="reBody"></div><div class="shf"><button class="btn main" type="button" id="reGo">Guardar</button></div></dialog><div id="toast" role="status" hidden></div>
 <script>
   const SUPABASE_URL = 'https://cawmvpfjaehennkknmoy.supabase.co';
   const SUPABASE_KEY = 'sb_publishable_vQDbCf2dlzKlFgpbMj7u2A_1wDlteT3'; // clave pública: la protección la ponen las reglas de cada tabla
@@ -753,9 +782,9 @@
       <div class="dchips">${frec(r.frecuencia)}${chips.join('')}</div>
       <div class="rec-acc"><button type="button" class="btn main anadirsem" data-anadirsem="${h(r.id)}">Añadir a la semana</button><button type="button" class="btn" data-recpdf aria-label="Receta en PDF">PDF</button>${puedoEditarReceta(r) ? `<button type="button" class="btn" data-reedit="${h(r.id)}">Editar</button>` : ''}</div>
       <div class="box"><div class="kc"><div><b>${r.kcal_pdf == null ? '—' : num(Math.round(r.kcal_pdf))}</b><span>kcal</span></div>
-        <div><b>${r.proteina_pdf == null ? '—' : num(r.proteina_pdf)}</b><span>g proteína</span></div>
-        <div><b>${r.hidratos_pdf == null ? '—' : num(r.hidratos_pdf)}</b><span>g hidratos</span></div>
-        <div><b>${r.grasa_pdf == null ? '—' : num(r.grasa_pdf)}</b><span>g grasa</span></div></div>
+        <div><b>${r.proteina_pdf == null ? '—' : num1(Number(r.proteina_pdf))}</b><span>g proteína</span></div>
+        <div><b>${r.hidratos_pdf == null ? '—' : num1(Number(r.hidratos_pdf))}</b><span>g hidratos</span></div>
+        <div><b>${r.grasa_pdf == null ? '—' : num1(Number(r.grasa_pdf))}</b><span>g grasa</span></div></div>
         ${origenHtml(v, id)}</div>
       <div class="box"><h3>Ingredientes</h3>${lista.length ? `<div class="rec-esc"><span>Cantidades para</span><div class="aj-st"><button type="button" data-esc="-1" aria-label="Menos raciones">−</button><output>${h(raciones(ESC.n))}</output><button type="button" data-esc="1" aria-label="Más raciones">+</button></div></div>${ESCALA !== 1 ? `<p class="src" style="margin:0 0 6px">Los pasos siguen con las cantidades de la receta original (${h(raciones(r.raciones_lote))}).</p>` : ''}<div class="ihd"><span>Para ${h(raciones(ESC.n))}</span><span>Cantidad</span><span>${Number(ESC.n) > 1 ? 'kcal 1 rac.' : 'kcal'}</span></div>` : ''}${lista.map(i => fija(i) ? ingHtml(i, v, r) : gustoHtml(i)).join('') || '<p class="note">Sin ingredientes apuntados.</p>'}${lista.some(i => !i.receta_base_id) ? '<p class="src nota-s"><span class="subraya">Toca un ingrediente para elegir tu producto o poner tu cantidad.</span></p>' : ''}</div>
       ${d.data && d.data.pasos ? `<div class="box"><h3>Pasos</h3>${pasosHtml(d.data.pasos)}</div>` : ''}
@@ -920,7 +949,7 @@ function lineMeasureOptions(p){if(!p)return [];const def=productMeasure(p),dc=de
 function lineMeasure(e,p){const def=productMeasure(p),code=lineMeasureCode(e);if(code&&code!==defaultMeasureCode(p)){const o=lineMeasureOptions(p).find(x=>x.u===code);if(o)return {unit:code==='pulv'?'pulverizaciones':code,factor:o.g,code};}return {unit:def.unit,factor:def.factor,code:defaultMeasureCode(p)};}
 function measureLabel(u){return u==='pulverizaciones'||u==='pulv'?'pulv.':u;}
 function brandOf(p){const m=p&&/\(([^()]*)\)\s*$/.exec(p.name||'');return m&&/^[A-ZÁÉÍÓÚÑ0-9]/.test(m[1].trim())&&!/referencia/i.test(m[1])?m[1].trim():'';}
-function recipeWeighPer(e){if(!e||!e.lotId||isProduct(e.itemId)||isPrep(e.itemId)||isFree(e.itemId))return null;const lot=data.lots.find(l=>l.lotId===e.lotId),g=lot&&lotWeigh(lot);if(!g)return null;const food=g.p.reduce((a,x)=>a+Math.max(0,(Number(x.t)||0)-(Number(x.r)||0)),0),per=food/Math.max(1,Number(g.n)||1);return per>0?per:null;}
+function recipeWeighPer(e){{const pc=perCongelador26(e);if(pc)return pc;}if(!e||!e.lotId||isProduct(e.itemId)||isPrep(e.itemId)||isFree(e.itemId))return null;const lot=data.lots.find(l=>l.lotId===e.lotId),g=lot&&lotWeigh(lot);if(!g)return null;const food=g.p.reduce((a,x)=>a+Math.max(0,(Number(x.t)||0)-(Number(x.r)||0)),0),per=food/Math.max(1,Number(g.n)||1);return per>0?per:null;}
 function recipeGramsMode(e){return lineMeasureCode(e)==='g'&&!!recipeWeighPer(e);}
 
 /* ---------- Semana (0.12) ---------- */
@@ -1127,10 +1156,10 @@ function pintarSemana() {
   }).join('');
   $('#diaTit').textContent = fechaLarga(fecha);
   const pk = gk ? Math.min(100, t.kcal / gk * 100) : 0, pp = gp ? Math.min(100, t.protein / gp * 100) : 0;
-  const kcalTxt = !gk ? 'kcal' : Math.abs(gk - t.kcal) < 0.5 ? 'kcal · objetivo justo' : t.kcal < gk ? 'kcal · quedan ' + kc(gk - t.kcal) : 'kcal · te pasas ' + kc(t.kcal - gk);
+  const kcalTxt = !gk ? 'kcal · <button type="button" class="verrec az" data-irajustes>sin objetivo · ponlo en Ajustes ›</button>' : Math.abs(gk - t.kcal) < 0.5 ? 'kcal · objetivo justo' : t.kcal < gk ? 'kcal · quedan ' + kc(gk - t.kcal) : 'kcal · te pasas ' + kc(t.kcal - gk);
   const protOk = gp && t.protein >= gp;
   $('#resumen').innerHTML = `<div class="t"><span>${kcalTxt}${t.parcial ? ' · <span class="parc">parcial*</span>' : ''}</span><span><b>${kc(t.kcal)}</b>${gk ? ' de ' + kc(gk) : ''}</span></div><div class="barra"><i class="${gk && t.kcal > gk + 0.5 ? 'over' : ''}" style="width:${pk}%"></i></div>
-    <div class="t"><span>Proteína · ${protOk ? 'objetivo cumplido' : gp ? 'faltan ' + num1(gp - t.protein) + ' g' : ''}</span><span><b>${num1(t.protein)}</b>${gp ? ' de ' + num1(gp) + ' g' : ' g'}</span></div><div class="barra"><i class="${protOk ? 'ok' : 'prot'}" style="width:${pp}%"></i></div>
+    <div class="t"><span>Proteína · ${protOk ? 'objetivo cumplido' : gp ? 'faltan ' + num1(gp - t.protein) + ' g' : '<button type="button" class="verrec az" data-irajustes>sin objetivo ›</button>'}</span><span><b>${num1(t.protein)}</b>${gp ? ' de ' + num1(gp) + ' g' : ' g'}</span></div><div class="barra"><i class="${protOk ? 'ok' : 'prot'}" style="width:${pp}%"></i></div>
     <div class="macros"><span><b>${num1(t.fat)}</b> g grasa</span><span><b>${num1(t.carbs)}</b> g hidratos</span></div>`;
   $('#franjas').innerHTML = FR.map(m => franjaHTML(fecha, m)).join('');
   $('#otrosDias').innerHTML = otrosDiasHTML();
@@ -1334,14 +1363,14 @@ function initSemana() {
     const t = e.target.closest('button,[data-dia]'); if (!t) return;
     if (t.dataset.dia) { SEM.dia = Number(t.dataset.dia); pintarSemana(); return; }
     if (t.id === 'wkPrev' || t.id === 'wkNext') { SEM.lunes = addDays(SEM.lunes, t.id === 'wkPrev' ? -7 : 7); SEM.dia = SEM.lunes === mondayOf(hoyIso()) ? (parseIso(hoyIso()).getDay() + 6) % 7 : 0; pintarSemana(); return; }
-    if (t.id === 'wkPick') { const i = $('#wkDate'); i.value = diaSel(); try { i.showPicker(); } catch (_) { i.click(); } return; }
+    if (t.id === 'wkPick') { elegirFecha26({ titulo: 'Ir a un día', valor: diaSel(), onOk: v => { if (!v) return; SEM.lunes = mondayOf(v); SEM.dia = (parseIso(v).getDay() + 6) % 7; pintarSemana(); } }); return; }
     if (t.id === 'wkMenu') { $('#wkPop').hidden = !$('#wkPop').hidden; return; }
     if (t.dataset.wk17) { $('#wkPop').hidden = true; if (t.dataset.wk17 === 'guardar') abrirGuardarSemana(); else if (t.dataset.wk17 === 'pdf') prepareWeekPdf(); else abrirCargarSemana(); return; }
     if (t.dataset.wk16) { $('#wkPop').hidden = true; if (t.dataset.wk16 === 'resumen') abrirResumen(); else alternarLibre(diaSel()); return; }
     if (t.dataset.pronto) { $('#wkPop').hidden = true; aviso(PRONTO[t.dataset.pronto]); return; }
     if (t.id === 'leyenda') { aviso('Recetas en raciones; productos en g, ml o ud. Solo se suman tus consumos. * = kcal parciales: faltan cantidades o etiquetas.'); return; }
     if (t.dataset.plegar) { const k = t.dataset.plegar; plegadas.has(k) ? plegadas.delete(k) : plegadas.add(k); guardarPlegadas(); pintarSemana(); return; }
-    if (t.dataset.frmenu) { abrirCopia(t.dataset.frmenu); return; }
+    if (t.dataset.frmenu) { abrirMenuFranja26(t.dataset.frmenu); return; }
     if (t.dataset.anadir) { abrirSelector(t.dataset.anadir); return; }
     if (t.dataset.carro) { cambiarCarro(t.dataset.carro); return; }
     if (t.dataset.quitar) { quitarLinea(t.dataset.quitar); return; }
@@ -1513,7 +1542,7 @@ function pintarLote() {
     ${base}
     <h3 class="q3 sep">Comidas de esta preparación</h3>${coms + usos + congs || '<p class="nota2">Todavía no hay comidas de esta preparación.</p>'}
     <details class="box2"${q > 1e-9 ? '' : ' open'}><summary>Editar preparación</summary>
-      <div class="g2c"><label class="q2"><span>Fecha</span><input id="leFecha" type="date" value="${h(l.date)}"></label><label class="q2"><span>Franja</span><select class="selc" id="leFr">${MEALS.map(m => `<option${m === l.meal ? ' selected' : ''}>${m}</option>`).join('')}</select></label>
+      <div class="g2c"><div class="q2"><span>Fecha</span><input id="leFecha" type="hidden" value="${h(l.date)}"><button type="button" class="selc fecha26" data-fecha26="leFecha" data-tit="Fecha de la preparación">${fechaCampo26(l.date)}</button></div><label class="q2"><span>Franja</span><select class="selc" id="leFr">${MEALS.map(m => `<option${m === l.meal ? ' selected' : ''}>${m}</option>`).join('')}</select></label>
       <label class="q2"><span>Preparar · raciones</span><input id="lePrep" type="text" inputmode="decimal" autocomplete="off" value="${blank(l.prepared) ? '' : h(fmt.format(l.prepared * f))}"></label><label class="q2"><span>Estado</span><select class="selc" id="leEst"><option${l.status !== 'Preparado' ? ' selected' : ''}>Planificado</option><option${l.status === 'Preparado' ? ' selected' : ''}>Preparado</option></select></label></div>
       <label class="chk"><input type="checkbox" id="leCompra"${l.includeShopping !== false ? ' checked' : ''}><span>Ingredientes a la compra</span></label>
       <div class="g2b"><button type="button" class="btn rojo" id="leBorrar">Eliminar preparación</button><button type="button" class="btn main" id="leGo">Guardar cambios</button></div></details>`;
@@ -1576,9 +1605,9 @@ function abrirCongelar() {
   CONG = { lotId: l.lotId };
   const k = kcalRacion(l.recipeId, l.lotId);
   $('#cgBody').innerHTML = `<p class="sub2"><b>${h(recipe(l.recipeId)?.name || '')}</b> · preparado el ${h(DIA_CORTO(l.date))}</p>
-    <div class="g2c"><label class="q2"><span>Raciones</span><input id="cgN" type="text" inputmode="decimal" autocomplete="off" value="${h(fmt.format(q * f))}"></label><label class="q2"><span>Gramos por ración</span><input id="cgG" type="text" inputmode="decimal" autocomplete="off" value="${h(pesa)}" placeholder="opcional"></label>
-    <label class="q2"><span>Congelado el</span><input id="cgF" type="date" value="${fecha}"></label><label class="q2"><span>Consumir antes de</span><input id="cgC" type="date" value="${masMeses(fecha, 3)}"></label></div>
-    <div class="info">${k === null ? '' : 'Cada ración: <b>' + kc(k) + ' kcal</b>. '}Cuando la pongas en el menú, se descuenta sola del congelador.</div>
+    <div class="g2c"><label class="q2"><span>Raciones</span><input id="cgN" type="text" inputmode="decimal" autocomplete="off" value="${h(fmt.format(q * f))}"></label><label class="q2"><span>Peso del táper (g)</span><input id="cgG" type="text" inputmode="decimal" autocomplete="off" value="${h(pesa ? String(Math.round(Number(pesa) * q)) : '')}" placeholder="pésalo"></label>
+    <div class="q2"><span>Congelado el</span><input id="cgF" type="hidden" value="${fecha}"><button type="button" class="selc fecha26" data-fecha26="cgF" data-tit="Congelado el">${fechaCampo26(fecha)}</button></div><div class="q2"><span>Consumir antes de</span><input id="cgC" type="hidden" value="${masMeses(fecha, 3)}"><button type="button" class="selc fecha26" data-fecha26="cgC" data-tit="Consumir antes de" data-vacio="1">${fechaCampo26(masMeses(fecha, 3))}</button></div></div>
+    <div class="info">${k === null ? '' : 'Cada ración: <b>' + kc(k) + ' kcal</b>. '}Cuando la pongas en el menú, se descuenta sola del congelador. Si pesas el táper, luego puedes sacar por gramos.</div>
     <p class="nota2">Consumir antes de: 3 meses por defecto; lo puedes cambiar.</p>`;
   $('#congDlg').showModal();
 }
@@ -1590,7 +1619,7 @@ function confirmarCongelar() {
   if (Number.isNaN(g)) { aviso('Los gramos tienen que ser un número.'); return; }
   if (!/^\d{4}-\d{2}-\d{2}$/.test(fecha)) { aviso('Elige el día en que lo congelas.'); return; }
   if (cad && cad < fecha) { aviso('«Consumir antes de» no puede ser anterior a cuando se congela.'); return; }
-  const c = { id: uuid(), owner: SESION.user.id, lote_id: l.lotId, receta_id: l.recipeId, nombre: recipe(l.recipeId)?.name || 'Receta', raciones: k, gramos_racion: g, fecha_congelado: fecha, caduca: cad || null, nota: null };
+  const c = { id: uuid(), owner: SESION.user.id, lote_id: l.lotId, receta_id: l.recipeId, nombre: recipe(l.recipeId)?.name || 'Receta', raciones: k, gramos_racion: g ? Math.round(g / k * 100) / 100 : null, fecha_congelado: fecha, caduca: cad || null, nota: null };
   data.freezer.push(c); guardarFila('congelador', c);
   $('#congDlg').close(); pintarLote(); pintarTodo(); aviso(racionTxt(l.recipeId, k).replace(/^./, x => x.toUpperCase()) + ' al congelador.');
 }
@@ -1664,11 +1693,12 @@ function pintarSelectorCongelador() {
   const lista = (data.freezer || []).filter(c => congQuedan(c) > 1e-9).sort((a, b) => String(a.caduca || '9999').localeCompare(String(b.caduca || '9999')) || String(a.fecha_congelado).localeCompare(String(b.fecha_congelado)));
   if (!lista.length) { $('#pkCLista').innerHTML = '<div class="empty">El congelador está vacío. Desde una preparación, «Congelar lo que sobra».</div>'; return; }
   $('#pkCLista').innerHTML = lista.map(c => { const k = kcalRacion(c.receta_id, c.lote_id && data.lots.some(l => l.lotId === c.lote_id) ? c.lote_id : ''), on = PICK.cong === c.id, f = recipeMeasure(c.receta_id).factor, pronto = caducaPronto(c);
-    return `<div class="cgrow${on ? ' on' : ''}"><button type="button" class="cgh" data-pkc="${h(c.id)}" aria-expanded="${on}"><span class="pkn"><b>${h(c.nombre)}</b><small>${h(racionTxt(c.receta_id, congQuedan(c)))} · congelado el ${h(fechaCorta(c.fecha_congelado))}${c.caduca ? ' · <span class="' + (pronto ? 'rojo2' : '') + '">' + (c.caduca < hoyIso() ? 'caducó el ' : 'antes del ') + h(fechaCorta(c.caduca)) + '</span>' : ''}</small></span><span class="pkk">${k === null ? '—' : kc(k)}<small>kcal/ración</small></span></button>
-      ${on ? `<div class="g3a"><label class="q2"><span>Yo</span><input id="pcYo" type="text" inputmode="decimal" autocomplete="off" value="${h(fmt.format(Math.min(1, congQuedan(c)) * f))}"></label><label class="q2"><span>Otros</span><input id="pcOt" type="text" inputmode="decimal" autocomplete="off" value="${h(fmt.format(Math.max(0, Math.min(((['Comida', 'Cena'].includes(PICK.meal) ? (Number(data.settings.people) || 1) - 1 : 0)), congQuedan(c) - Math.min(1, congQuedan(c)))) * f))}"></label><button type="button" class="btn main" id="pcAdd">Añadir</button></div>` : ''}</div>`; }).join('') + `<p class="nota2">${ICO_CONGELA} Lo que caduca antes sale primero y en rojo.</p>`;
+    return `<div class="cgrow${on ? ' on' : ''}"><button type="button" class="cgh" data-pkc="${h(c.id)}" aria-expanded="${on}"><span class="pkn"><b>${h(c.nombre)}</b><small>${h(racionTxt(c.receta_id, congQuedan(c)))}${quedanG26(c) ? ' · ' + quedanG26(c) + ' g' : ''} · congelado el ${h(fechaCorta(c.fecha_congelado))}${c.caduca ? ' · <span class="' + (pronto ? 'rojo2' : '') + '">' + (c.caduca < hoyIso() ? 'caducó el ' : 'antes del ') + h(fechaCorta(c.caduca)) + '</span>' : ''}</small></span><span class="pkk">${k === null ? '—' : kc(k)}<small>kcal/ración</small></span></button>
+      ${on ? sacarHtml26(c, f) : ''}</div>`; }).join('') + `<p class="nota2">${ICO_CONGELA} Lo que caduca antes sale primero y en rojo.</p>`;
 }
 function anadirDelCongelador() {
   const c = data.freezer.find(x => x.id === PICK.cong); if (!c) return;
+  if (PICK.congG) { anadirPorPeso26(c); return; }
   const g = s => { const v = parseNum($(s).value); return Number.isNaN(v) ? NaN : recipeInput(c.receta_id, v ?? 0); }, own = g('#pcYo'), others = g('#pcOt');
   if (Number.isNaN(own) || Number.isNaN(others)) { aviso('Escribe números (con coma o punto).'); return; }
   if (!(own + others > 0)) { aviso('Pon al menos una ración.'); return; }
@@ -2004,7 +2034,7 @@ function semanaHtml(e) {
 function caldoNota(e, result) {
   if (!e.card) return ''; const seen = new Set();
   return (result.brothChosen || []).filter(b => e.parts.some(p => p.allocs.some(a => a.origin === 'lote:' + b.lotId && a.key === b.key)) && !seen.has(b.lotId + '|' + b.ing) && seen.add(b.lotId + '|' + b.ing))
-    .map(b => `<small>${esc(b.recipe)} · caldo en lugar de agua · <button type="button" class="lk" data-broth-lot="${esc(b.lotId)}" data-broth-ing="${esc(b.ing)}" data-broth-val="" aria-label="Cambiar la elección de caldo de ${esc(b.recipe)}">cambiar</button></small>`).join('');
+    .map(b => `<small>${esc(b.recipe)} · caldo en lugar de agua</small>`).join('');
 }
 function filaHtml(e, done, result) {
   const section = done ? 'done' : 'pending', field = done ? 'bought' : 'pending';
@@ -2021,7 +2051,7 @@ function filaHtml(e, done, result) {
     target = loose ? `data-buy="${esc(c.items[0].key)}"` : `data-buy-card="${esc(name)}"${done ? ` data-buy-part="${esc(e.parts[0].label)}"` : ''}`;
   const subs = !done && e.parts.length + e.extras.length > 1 ? e.parts.map((p, k) => `<div class="cp-sub">${ckHtml(`data-buy-card="${esc(name)}" data-buy-part="${esc(p.label)}" data-buy-section="${section}"`, queued[k], false, name + ' · ' + (p.label || 'sin marca'), false)}<span><b>${esc(p.label || 'Sin marca')}</b> · ${sinAst(allocAmountText(name, p.allocs, field).shown) || 'sin cantidad'}</span></div>`).join('')
     + e.extras.map((i, k) => `<div class="cp-sub">${ckHtml(`data-buy="${esc(i.key)}" data-buy-section="${section}"`, extraQ[k], false, name + ' · ' + (i.adjusted ? 'compra ajustada' : 'añadido a mano'), false)}<span><b>${i.adjusted ? 'Compra ajustada' : 'Añadido a mano'}</b> · ${i.amount == null || i.amount === '' ? 'sin cantidad' : fmt.format(i.amount) + ' ' + esc(i.unit)}</span></div>`).join('') : '';
-  return `<div class="cp-row${done ? ' done' : ''}${!done && checked && !partial ? ' marc' : ''}">${ckHtml(target + ` data-buy-section="${section}"`, checked, partial, name, done)}<div class="cp-n"><b>${esc(name)}</b>${done ? '' : marcaBtn(name, single, e)}${notas ? `<small>${esc(notas)}</small>` : ''}${done ? '' : casaHtml(e) + caldoNota(e, result)}</div><div class="cp-a">${noAmount ? '' : done ? sinAst(e.amount.shown) : cantHtml(e, e.amount.shown)}</div>${done ? (e.card.parts.length <= 1 ? masHtml(`data-fdone="${esc(name)}"`, name) : '') : masHtml(`data-ficha="${esc(name)}"`, name)}</div>${subs}${done ? '' : semanaHtml(e)}`;
+  return `<div class="cp-row${done ? ' done' : ''}${!done && checked && !partial ? ' marc' : ''}">${ckHtml(target + ` data-buy-section="${section}"`, checked, partial, name, done)}<div class="cp-n"><b>${esc(tituloCompra26(name, single))}</b>${(n26 => n26 ? `<small>${esc(n26)}</small>` : '')(notasSin26(notas, tituloCompra26(name, single)))}${done ? '' : casaHtml(e) + caldoNota(e, result)}</div><div class="cp-a">${noAmount ? '' : done ? sinAst(e.amount.shown) : cantHtml(e, e.amount.shown)}</div>${done ? (e.card.parts.length <= 1 ? masHtml(`data-fdone="${esc(name)}"`, name) : '') : masHtml(`data-ficha="${esc(name)}"`, name)}</div>${subs}${done ? '' : semanaHtml(e)}`;
 }
 function decideHtml(b) {
   const amt = brothAmountText(b), d = `data-broth-lot="${esc(b.lotId)}" data-broth-ing="${esc(b.ing)}"`;
@@ -2094,10 +2124,11 @@ function abrirFicha(name, manualId) {
   })).concat(m.removed.map(r => `<div class="cp-o" data-se-removed="${esc(r.id)}"><div class="t"><b>Quitado de la compra</b><span></span></div><small>Parte de una receta que quitaste esta semana.</small>${quitar('Volver a ponerlo en la compra')}</div>`));
   if (false) html += `<label class="cp-q" id="cfTodoW" style="margin-top:4px">Poner todo de…<select class="cp-inp" id="cfTodo"><option value="">Elegir producto…</option>${fam.map(p => opt(p, '')).join('')}</select><small style="font-weight:500">Cambia de golpe el producto de todas las filas.</small></label>`;
   if (filas.length) html += `<p class="cp-lbl">De dónde sale</p><div class="cp-org">${filas.join('')}</div>`;
+  html += caldoFicha26(e, result);
   if (e.homeKey) html += `<label class="cp-lbl" for="cfCasa">Tengo en casa</label><div class="cp-casa"><input class="cp-inp" id="cfCasa" type="text" inputmode="decimal" autocomplete="off" placeholder="0" value="${e.home > 0 ? String(r2(e.home)).replace('.', ',') : ''}"><span>${esc(e.homeUnit)}</span></div>`;
   html += '<p class="cp-nota">Los cambios de la compra se guardan al pulsar «Actualizar compra». El menú y las kcal solo cambian si tocas un producto puesto en el menú o el producto de una receta.</p>';
   const tot = e.covered ? homeQty(e.total, e.homeUnit) : e.manual ? (/\d/.test(shoppingAmountText(e.manual)) ? shoppingAmountText(e.manual) : '') : e.home > 0 && e.net !== undefined ? homeQty(e.net, e.homeUnit) : sinAst(e.amount && e.amount.shown);
-  $('#cfTit').textContent = name + (tot ? ' · ' + tot.replace(/<[^>]*>/g, '').replace(/&amp;/g, '&') : '');
+  $('#cfTit').textContent = (manualId ? name : tituloCompra26(name, '')) + (tot ? ' · ' + tot.replace(/<[^>]*>/g, '').replace(/&amp;/g, '&') : '');
   $('#cfBody').innerHTML = html; const tw = $('#cfTodoW'); if (tw) tw.hidden = !document.querySelector('#cfBody [data-se-p]'); $('#cpFicha').showModal();
 }
 function guardarFicha() {
@@ -3257,11 +3288,7 @@ function init021() {
 
 /* ---------- 0.22 · «Tengo en casa» y «Quitar» en cada fila de Compra, cambiar el producto de una línea, receta para más raciones y su PDF original ---------- */
 let ESC = null, ESCALA = 1;
-function casaHtml(e) {
-  if (!e.homeKey) return e.home > 0 ? `<small class="az">En casa: ${homeQty(e.home, e.homeUnit)}</small>` : '';
-  if (CP.casa === e.name) return `<div class="cp-casa-in"><input class="cp-inp" type="text" inputmode="decimal" autocomplete="off" data-casain="${esc(e.name)}" value="${e.home > 0 ? String(r2(e.home)).replace('.', ',') : ''}" placeholder="0" aria-label="Cuánto tienes en casa de ${esc(e.name)}"><span>${esc(e.homeUnit)}</span><button type="button" class="btn" data-casaok="${esc(e.name)}">OK</button></div>`;
-  return `<button type="button" class="lk${e.home > 0 ? ' az' : ''}" data-casa="${esc(e.name)}">${e.home > 0 ? 'En casa: ' + homeQty(e.home, e.homeUnit) + ' · cambiar' : 'Tengo en casa'}</button>`;
-}
+function casaHtml(e) { return e.home > 0 ? `<small class="az">En casa: ${homeQty(e.home, e.homeUnit)}</small>` : ''; }
 function guardarCasaFila(name) {
   const e = shopCardEntries(shopping(), false).concat(shopCardEntries(shopping(), true)).find(x => x.name === name && x.homeKey), inp = document.querySelector(`[data-casain="${CSS.escape(name)}"]`); if (!e || !inp) { CP.casa = null; pintarCompra(); return; }
   const v = parseNum(inp.value); if (Number.isNaN(v) || (v !== null && v > 1e6)) { aviso('Escribe una cantidad válida, o déjala vacía.'); return; }
@@ -3717,6 +3744,149 @@ function init025() {
   $('#mpBody').addEventListener('input', ev => { if (ev.target.id === 'mpQ' && MP && MP.cant) { MP.cant.q = ev.target.value; $('#mpQInf').innerHTML = infoCant25(); } });
 }
 
+/* ---------- 0.26 · repaso de Rocío (14/10): Compra como la 0.14 b, calendario propio, congelador por peso real,
+   franjas que se pliegan tocando toda la barra, «⋯» de la franja con más opciones, barras sin objetivo ---------- */
+
+/* Compra: el nombre de la tarjeta es la marca elegida (la referencia se queda con el nombre corto) */
+function tituloCompra26(name, single) {
+  let t = single || '';
+  if (!t && marcaElegible(name)) { const cur = actualMarca24(modeloMarca24(name)); t = cur && product(cur) ? product(cur).name : ''; }
+  return t && t !== 'Sin marca' && !/referencia/i.test(t) ? t : name;
+}
+function notasSin26(notas, titulo) { return String(notas || '').split(' · ').filter(x => x && x !== titulo).join(' · '); }
+/* Caldo o agua: se cambia dentro de «⋯» */
+function caldoFicha26(e, result) {
+  if (!e || !e.card) return ''; const seen = new Set();
+  return (result.brothChosen || []).filter(b => e.parts.some(p => p.allocs.some(a => a.origin === 'lote:' + b.lotId && a.key === b.key)) && !seen.has(b.lotId + '|' + b.ing) && seen.add(b.lotId + '|' + b.ing)).map(b => {
+    const lot = data.lots.find(l => l.lotId === b.lotId), v = lot ? lotBroth(lot)[b.ing] : '', d = `data-broth-lot="${esc(b.lotId)}" data-broth-ing="${esc(b.ing)}"`;
+    return `<p class="cp-lbl">${esc(b.recipe)} · ¿caldo o agua?</p><div class="al-sg c2" style="margin-bottom:6px"><button type="button" ${d} data-broth-val="caldo" class="${v === 'caldo' ? 'on' : ''}">Uso caldo</button><button type="button" ${d} data-broth-val="agua" class="${v === 'agua' ? 'on' : ''}">Uso agua</button></div>`;
+  }).join('');
+}
+
+/* ---------- Calendario propio ---------- */
+const MES26 = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+const fechaCampo26 = v => { if (!/^\d{4}-\d{2}-\d{2}$/.test(v || '')) return 'Sin fecha'; const d = parseIso(v); return d.getDate() + ' ' + MES26[d.getMonth()].slice(0, 3) + ' ' + d.getFullYear(); };
+let CAL = null;
+function elegirFecha26(o) {
+  const v = /^\d{4}-\d{2}-\d{2}$/.test(o.valor || '') ? o.valor : hoyIso(), d = parseIso(v);
+  CAL = { sel: /^\d{4}-\d{2}-\d{2}$/.test(o.valor || '') ? o.valor : '', y: d.getFullYear(), m: d.getMonth(), onOk: o.onOk, vacio: !!o.vacio };
+  $('#calTit').textContent = o.titulo || 'Elegir fecha'; pintarCal26(); $('#calDlg').showModal();
+}
+function pintarCal26() {
+  const c = CAL, ini = new Date(c.y, c.m, 1), salto = (ini.getDay() + 6) % 7, dias = new Date(c.y, c.m + 1, 0).getDate(), hoy = hoyIso();
+  const iso = dd => c.y + '-' + String(c.m + 1).padStart(2, '0') + '-' + String(dd).padStart(2, '0');
+  let g = ''; for (let i = 0; i < salto; i++) g += '<span></span>';
+  for (let dd = 1; dd <= dias; dd++) {
+    const f = iso(dd), con = (data.entries || []).some(e => e.date === f && e.itemId), cls = ['cd', f < hoy ? 'pas' : '', f === hoy ? 'hoy' : '', f === c.sel ? 'on' : '', typeof esLibre === 'function' && esLibre(f) ? 'lib' : ''].filter(Boolean).join(' ');
+    g += `<button type="button" class="${cls}" data-cald="${f}" aria-pressed="${f === c.sel}" aria-label="${dd} de ${MES26[c.m]}${con ? ', con comidas' : ''}">${dd}<i class="${con ? 'pt' : ''}"></i></button>`;
+  }
+  $('#calBody').innerHTML = `<div class="calh"><button type="button" class="ib" data-calm="-1" aria-label="Mes anterior">‹</button><b>${MES26[c.m].replace(/^./, x => x.toUpperCase())} ${c.y}</b><button type="button" class="ib" data-calm="1" aria-label="Mes siguiente">›</button></div>
+    <div class="dow"><span>L</span><span>M</span><span>X</span><span>J</span><span>V</span><span>S</span><span>D</span></div><div class="cgrid">${g}</div>
+    <div class="ley"><span><i class="m hoy"></i>hoy</span><span><i class="m on"></i>elegido</span><span><i class="pt"></i>con comidas</span><span><i class="m lib"></i>día libre</span></div>`;
+  const s = c.sel ? parseIso(c.sel) : null;
+  $('#calGo').textContent = s ? 'Elegir ' + DAYS[(s.getDay() + 6) % 7].toLowerCase() + ' ' + s.getDate() : 'Elegir';
+  $('#calGo').disabled = !c.sel; $('#calVacio').hidden = !c.vacio;
+}
+function cerrarCal26(v) { const fn = CAL && CAL.onOk; $('#calDlg').close(); CAL = null; if (fn) fn(v); }
+
+/* ---------- Congelador por peso real ---------- */
+const pesoTaper26 = c => Number(c && c.gramos_racion) > 0 ? Number(c.gramos_racion) : null; // gramos por ración, sacados del peso real del táper
+const quedanG26 = c => { const per = pesoTaper26(c); return per ? Math.round(congQuedan(c) * per) : null; };
+function perCongelador26(e) { if (!e || !e.lineId || typeof movDeLinea !== 'function') return null; const m = movDeLinea(e.lineId), c = m && (data.freezer || []).find(x => x.id === m.congelador_id); return pesoTaper26(c); }
+
+/* ---------- «⋯» de la franja ---------- */
+let FRM = null;
+function abrirMenuFranja26(meal) {
+  const fecha = diaSel(), hay = dayEntries(fecha, meal).filter(e => e.itemId); FRM = { meal, fecha };
+  $('#frmTit').textContent = meal + ' · ' + DIA_CORTO(fecha);
+  const op = (k, t, s, dis) => `<button type="button" data-frm="${k}"${dis ? ' disabled' : ''}><span>${t}<small>${s}</small></span><em aria-hidden="true">›</em></button>`;
+  $('#frmBody').innerHTML = `<div class="mp-ops frm-ops">${op('copiar', 'Copiar a otros días', 'Lo mismo en los días que elijas', !hay.length)}${op('mover', 'Mover a otro día o franja', 'Pasa todo a otro sitio', !hay.length)}${op('vaciar', 'Vaciar', 'Quita todo lo de esta franja; se puede deshacer', !hay.length)}${op('compra', 'Todo a la compra', 'Pone el carrito en todo', !hay.length)}${op('nocompra', 'Nada a la compra', 'Quita el carrito de todo', !hay.length)}</div>${hay.length ? '' : '<p class="aj-h">Esta franja está vacía.</p>'}`;
+  $('#frmDlg').showModal();
+}
+function lotesDe26(es) { return [...new Set(es.filter(e => e.lotId && !isProduct(e.itemId) && !isPrep(e.itemId)).map(e => e.lotId))].map(id => data.lots.find(l => l.lotId === id)).filter(Boolean); }
+function carritosFranja26(si) {
+  const es = dayEntries(FRM.fecha, FRM.meal).filter(e => e.itemId), antes = es.map(e => [e, e.includeShopping]), lotes = lotesDe26(es), antesL = lotes.map(l => [l, l.includeShopping]);
+  es.forEach(e => { if (isProduct(e.itemId) || isPrep(e.itemId) || isFree(e.itemId)) { e.includeShopping = si; marcar(e); } });
+  lotes.forEach(l => { l.includeShopping = si; marcarLote(l); });
+  $('#frmDlg').close(); pintarTodo(); pintarGlobito();
+  aviso(si ? 'Todo a la compra.' : 'Nada de esta franja va a la compra.', 'Deshacer', () => { antes.forEach(([e, v]) => { e.includeShopping = v; marcar(e); }); antesL.forEach(([l, v]) => { l.includeShopping = v; marcarLote(l); }); pintarTodo(); pintarGlobito(); });
+}
+function vaciarFranja26() {
+  const es = dayEntries(FRM.fecha, FRM.meal).filter(e => e.itemId), mvs = es.map(e => movDeLinea(e.lineId)).filter(Boolean);
+  mvs.forEach(m => { data.freezerMoves = data.freezerMoves.filter(x => x !== m); borrarFila('congelador_movimientos', m.id); });
+  const ids = new Set(es.map(e => e.lineId)); data.entries = data.entries.filter(e => !ids.has(e.lineId)); ids.forEach(id => marcarBorrado(id));
+  $('#frmDlg').close(); pintarTodo(); pintarGlobito();
+  aviso(FRM.meal + ' vaciada.' + (mvs.length ? ' Lo del congelador vuelve al congelador.' : ''), 'Deshacer', () => { es.forEach(e => { data.entries.push(e); marcar(e); }); mvs.forEach(m => { data.freezerMoves.push(m); guardarFila('congelador_movimientos', m); }); pintarTodo(); pintarGlobito(); });
+}
+let MV = null;
+function abrirMover26() {
+  MV = { fecha: FRM.fecha, meal: FRM.meal, desde: { fecha: FRM.fecha, meal: FRM.meal } }; $('#frmDlg').close(); pintarMover26(); $('#mvDlg').showModal();
+}
+function pintarMover26() {
+  const dias = [0, 1, 2, 3, 4, 5, 6].map(i => addDays(SEM.lunes, i));
+  $('#mvBody').innerHTML = `<p class="sub2">${h(MV.desde.meal)} del ${h(DIA_CORTO(MV.desde.fecha))}</p><p class="cp-lbl" style="margin-top:0">Día</p><div class="mv-dias">${dias.map((f, i) => `<button type="button" class="day${f === MV.fecha ? ' on' : ''}" data-mvd="${f}">${DMIN[i]}<small>${parseIso(f).getDate()}</small></button>`).join('')}</div>
+    <p class="cp-lbl">Franja</p><div class="al-sg mv-fr">${MEALS.map(m => `<button type="button" data-mvm="${m}" class="${m === MV.meal ? 'on' : ''}">${m}</button>`).join('')}</div>
+    ${MV.fecha === MV.desde.fecha && MV.meal === MV.desde.meal ? '<p class="aj-h">Elige otro día o franja.</p>' : dayEntries(MV.fecha, MV.meal).some(e => e.itemId) ? '<p class="aj-h">Ahí ya hay comida: se añade detrás.</p>' : ''}`;
+  $('#mvGo').disabled = MV.fecha === MV.desde.fecha && MV.meal === MV.desde.meal;
+}
+function moverFranja26() {
+  const { fecha, meal, desde } = MV, es = dayEntries(desde.fecha, desde.meal).filter(e => e.itemId); if (!es.length) { $('#mvDlg').close(); return; }
+  const antes = es.map(e => [e, { date: e.date, meal: e.meal, order: e.order }]), lotes = lotesDe26(es).filter(l => l.date === desde.fecha && l.meal === desde.meal), antesL = lotes.map(l => [l, { date: l.date, meal: l.meal }]);
+  let o = siguienteOrden(fecha, meal); es.forEach(e => { e.date = fecha; e.meal = meal; e.order = o++; marcar(e); });
+  lotes.forEach(l => { l.date = fecha; l.meal = meal; marcarLote(l); });
+  $('#mvDlg').close(); pintarTodo(); pintarGlobito();
+  aviso('Movido a ' + meal.toLowerCase() + ' del ' + DIA_CORTO(fecha) + '.', 'Deshacer', () => { antes.forEach(([e, v]) => { Object.assign(e, v); marcar(e); }); antesL.forEach(([l, v]) => { Object.assign(l, v); marcarLote(l); }); pintarTodo(); pintarGlobito(); });
+}
+
+function init026() {
+  // Franjas: se pliegan tocando toda la barra (menos «⋯»)
+  $('#semana').addEventListener('click', ev => { const frh = ev.target.closest('.frh'); if (!frh || ev.target.closest('[data-frmenu],[data-plegar]')) return; const b = frh.querySelector('[data-plegar]'); if (b) b.click(); });
+  document.addEventListener('click', ev => { if (ev.target.closest('[data-irajustes]')) { ev.preventDefault(); $('#ajustes').click(); } });
+  // «⋯» de la franja
+  $('#frmBody').addEventListener('click', ev => { const b = ev.target.closest('[data-frm]'); if (!b || !FRM) return; const k = b.dataset.frm;
+    if (k === 'copiar') { $('#frmDlg').close(); abrirCopia(FRM.meal); } else if (k === 'mover') abrirMover26(); else if (k === 'vaciar') vaciarFranja26(); else carritosFranja26(k === 'compra'); });
+  $('#mvBody').addEventListener('click', ev => { const d = ev.target.closest('[data-mvd]'), m = ev.target.closest('[data-mvm]'); if (d) MV.fecha = d.dataset.mvd; else if (m) MV.meal = m.dataset.mvm; else return; pintarMover26(); });
+  $('#mvGo').onclick = moverFranja26;
+  // Calendario
+  $('#calBody').addEventListener('click', ev => { const d = ev.target.closest('[data-cald]'), m = ev.target.closest('[data-calm]'); if (!CAL) return;
+    if (m) { CAL.m += Number(m.dataset.calm); if (CAL.m < 0) { CAL.m = 11; CAL.y--; } if (CAL.m > 11) { CAL.m = 0; CAL.y++; } pintarCal26(); return; }
+    if (d) { CAL.sel = d.dataset.cald; pintarCal26(); } });
+  $('#calGo').onclick = () => { if (CAL && CAL.sel) cerrarCal26(CAL.sel); };
+  $('#calHoy').onclick = () => { if (!CAL) return; const d = parseIso(hoyIso()); CAL.sel = hoyIso(); CAL.y = d.getFullYear(); CAL.m = d.getMonth(); pintarCal26(); };
+  $('#calVacio').onclick = () => { if (CAL) cerrarCal26(''); };
+  document.addEventListener('click', ev => { const b = ev.target.closest('[data-fecha26]'); if (!b) return; const inp = document.getElementById(b.dataset.fecha26); if (!inp) return;
+    elegirFecha26({ titulo: b.dataset.tit, valor: inp.value, vacio: b.dataset.vacio === '1', onOk: v => { inp.value = v; b.textContent = fechaCampo26(v); inp.dispatchEvent(new Event('input', { bubbles: true })); } }); });
+  // Caldo o agua dentro de «⋯» de la Compra
+  $('#cfBody').addEventListener('click', ev => { const t = ev.target.closest('[data-broth-lot]'); if (!t) return; const lot = data.lots.find(l => l.lotId === t.dataset.brothLot); if (!lot) return;
+    const w = { ...lotBroth(lot) }; w[t.dataset.brothIng] = t.dataset.brothVal; setLotBroth(lot, w); $('#cpFicha').close(); pintarCompra(); aviso(t.dataset.brothVal === 'caldo' ? 'Caldo añadido a la compra.' : 'Con agua: no se compra nada.'); });
+  // Congelador: rac. o g al sacarlo
+  $('#pkCLista').addEventListener('click', ev => { const b = ev.target.closest('[data-pcmodo]'); if (!b) return; PICK.congG = b.dataset.pcmodo === 'g'; pintarSelectorCongelador(); });
+}
+
+/* Sacar del congelador: por raciones o pesando lo que sacas */
+function sacarHtml26(c, f) {
+  const q = congQuedan(c), per = pesoTaper26(c), g = !!PICK.congG, otrosDef = ['Comida', 'Cena'].includes(PICK.meal) ? (Number(data.settings.people) || 1) - 1 : 0;
+  const yo = Math.min(1, q), ot = Math.max(0, Math.min(otrosDef, q - yo)), num = (id, lab, v) => `<label class="q2"><span>${lab}</span><input id="${id}" type="text" inputmode="decimal" autocomplete="off" value="${h(v)}"></label>`;
+  const seg = `<div class="al-sg c2 pc-modo"><button type="button" data-pcmodo="r" class="${g ? '' : 'on'}" aria-pressed="${!g}">Por raciones</button><button type="button" data-pcmodo="g" class="${g ? 'on' : ''}" aria-pressed="${g}">Pesando (g)</button></div>`;
+  if (!g) return seg + `<div class="g3a">${num('pcYo', 'Yo', fmt.format(yo * f))}${num('pcOt', 'Otros', fmt.format(ot * f))}<button type="button" class="btn main" id="pcAdd">Añadir</button></div>`;
+  return seg + (per ? `<p class="aj-h">Quedan ${quedanG26(c)} g en el táper. Pesa lo que sacas.</p>` : `<div class="g2c">${num('pcTaper', 'Pesa lo que queda (g)', '')}</div><p class="aj-h">Solo esta vez: con ese peso se sabe lo que pesa cada ración.</p>`)
+    + `<div class="g3a">${num('pcYoG', 'Yo · g', '')}${num('pcOtG', 'Otros · g', '')}<button type="button" class="btn main" id="pcAdd">Añadir</button></div>`;
+}
+function anadirPorPeso26(c) {
+  let per = pesoTaper26(c);
+  if (!per) { const t = parseNum(($('#pcTaper') || {}).value || ''); if (!(t > 0)) { aviso('Pesa lo que queda en el táper.'); return; } per = t / congQuedan(c); }
+  const gy = parseNum($('#pcYoG').value), go = parseNum($('#pcOtG').value);
+  if (Number.isNaN(gy) || Number.isNaN(go)) { aviso('Escribe números (con coma o punto).'); return; }
+  const own = Math.round((gy || 0) / per * 1e6) / 1e6, others = Math.round((go || 0) / per * 1e6) / 1e6;
+  if (!(own + others > 0)) { aviso('Pon los gramos que sacas.'); return; }
+  if (own + others > congQuedan(c) + 1e-6) { aviso('En el táper solo quedan ' + Math.round(congQuedan(c) * per) + ' g.'); return; }
+  if (!pesoTaper26(c)) { c.gramos_racion = Math.round(per * 100) / 100; guardarFila('congelador', c); }
+  const lotId = c.lote_id && data.lots.some(l => l.lotId === c.lote_id) ? c.lote_id : '';
+  const e = nuevaLinea(PICK.fecha, PICK.meal, c.receta_id, { own, others, lotId, includeShopping: false }); setLineMeasure(e, 'g'); data.entries.push(e); marcar(e);
+  const m = { id: uuid(), owner: SESION.user.id, congelador_id: c.id, linea_id: e.lineId, raciones: own + others, motivo: 'comida', fecha: PICK.fecha }; data.freezerMoves.push(m); guardarFila('congelador_movimientos', m);
+  $('#picker').close(); pintarTodo(); aviso('Del congelador a ' + PICK.meal.toLowerCase() + ' · ' + DIA_CORTO(PICK.fecha) + ' · ' + Math.round((gy || 0) + (go || 0)) + ' g.');
+}
+
 async function abrirSemana() {
   if (!SEM.lunes) { const hoy = hoyIso(); SEM.lunes = mondayOf(hoy); SEM.dia = (parseIso(hoy).getDay() + 6) % 7; }
   if (!SEM.cargada) {
@@ -3726,7 +3896,7 @@ async function abrirSemana() {
   pintarSemana(); pintarEstado();
 }
 
-  initSemana(); init013(); initCompra(); init014b(); init014c(); init015(); init016(); init017a(); init017b(); init017c(); init017d(); init017e(); init018(); init019(); init021(); init022(); init023(); init024(); init025();
+  initSemana(); init013(); initCompra(); init014b(); init014c(); init015(); init016(); init017a(); init017b(); init017c(); init017d(); init017e(); init018(); init019(); init021(); init022(); init023(); init024(); init025(); init026();
   sb.auth.onAuthStateChange((_ev, session) => { if ((session && session.user.id) !== (SESION && SESION.user.id)) { SEM.cargada = false; data = null; } show(session); });
   sb.auth.getSession().then(({ data }) => show(data.session));
   setMode('login');
