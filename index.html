@@ -458,6 +458,17 @@
   .prpsolos{padding:0 0 6px} .prpsolo{display:block;width:100%;min-height:52px;margin:6px 0 0;padding:10px 12px;border:1.5px dashed #c9bfae;border-radius:14px;background:#fdfbf7;text-align:left;font:500 14px var(--font);color:var(--ink);cursor:pointer}
   .prpsolo small{display:block;color:var(--muted);font-size:12.5px;margin-top:2px}
 
+  /* ---------- 0.25 · tu cantidad, subrayador y «Ver receta» en azul ---------- */
+  .subraya{display:inline;padding:.05em .35em;margin:0 -.1em;border-radius:.7em .25em .8em .3em;-webkit-box-decoration-break:clone;box-decoration-break:clone;color:var(--ink);
+    background:linear-gradient(100deg,rgba(255,221,64,0) .8%,rgba(255,221,64,.85) 2.5%,rgba(255,221,64,.55) 6%,rgba(255,221,64,.35) 92%,rgba(255,221,64,.75) 96%,rgba(255,221,64,0) 99%),linear-gradient(183deg,rgba(255,221,64,0) 0%,rgba(255,221,64,.3) 8%,rgba(255,221,64,0) 16%)}
+  p.src.nota-s,.rs-nota{font-size:13px;line-height:1.9}
+  p.src.nota-s{margin-top:10px}
+  .verrec.az{color:var(--azul-texto)} .ing small .verrec.az{margin:-10px 0 -8px}
+  .ing.c3.g > span.gtap{text-decoration:underline dotted;text-underline-offset:4px;text-decoration-thickness:1.5px}
+  .ing .tucant{display:inline-block;margin-left:6px;padding:1px 7px;border-radius:999px;background:var(--azul-fondo);color:var(--azul-texto);font:700 11px var(--font);vertical-align:middle}
+  .mp-cant{display:grid;grid-template-columns:96px minmax(0,1fr);gap:8px;align-items:start} .mp-cant .cp-inp{width:100%;text-align:center}
+  #mpQInf .verrec{margin:0}
+  #csPer b{display:block;margin-bottom:2px}
 </style>
 </head>
 <body>
@@ -530,7 +541,7 @@
     <button class="cp-act" type="button" id="cpAct" hidden></button>
   </section>
 
-  <p class="ver">Versión de prueba 0.24 · marca y recetas tuyas en la Compra</p>
+  <p class="ver">Versión de prueba 0.25 · tu cantidad en las recetas</p>
 </main>
 <nav class="nav" id="nav" hidden><button type="button" data-nav="semana" id="navSemana"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Semana</button><button type="button" data-nav="compra" id="navCompra"><i class="nbd" id="navNum" hidden></i><svg viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h3l2.6 12.4a2 2 0 0 0 2 1.6h8.2a2 2 0 0 0 2-1.6L21 7H6"/></svg>Compra</button><button type="button" data-nav="recetas" id="navRecetas"><svg viewBox="0 0 24 24"><path d="M12 6.5C10 5 7 4.5 3.5 5v14c3.5-.5 6.5 0 8.5 1.5 2-1.5 5-2 8.5-1.5V5C17 4.5 14 5 12 6.5zM12 6.5v14"/><path d="M6.5 9.5h2.5M6.5 12.5h2.5M15 9.5h2.5M15 12.5h2.5"/></svg>Recetas</button><button type="button" data-nav="alimentos" id="navAlimentos"><svg viewBox="0 0 24 24"><path d="M12 8.2c-1.3-.9-2.8-1.2-4.2-.9C5.3 7.8 4 10 4 12.8 4 17 7 21 9.6 21c1 0 1.5-.5 2.4-.5s1.4.5 2.4.5C17 21 20 17 20 12.8c0-2.8-1.3-5-3.8-5.5-1.4-.3-2.9 0-4.2.9z"/><path d="M12 8.2V5.5M12 5.5c.3-1.6 1.7-2.6 3.4-2.6-.2 1.7-1.6 2.8-3.4 2.6z"/></svg>Alimentos</button></nav>
 <dialog class="sheet" id="picker" aria-labelledby="pkTit"><div class="shh"><h2 id="pkTit">Añadir</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb">
@@ -705,18 +716,18 @@
     return '<p class="src">Por ración · dato del PDF (orientativo).</p><div class="warn">' + que + (fijo ? ` Con los ingredientes apuntados salen ${num(c.kcal)} kcal.` : ya) + '</div>';
   }
   function ingHtml(i, v, r) {
-    const mio = !i.receta_base_id && MISP[r.id + '¦' + i.nombre], pm = mio && product(mio), tap = !i.receta_base_id && opcionesMiProducto(r.id, i.nombre).length > 1;
+    const mio = !i.receta_base_id && MISP[r.id + '¦' + i.nombre], pm = mio && product(mio), tap = !i.receta_base_id;
     const fila = v && v.c ? v.c.rows.find(x => x.name === i.nombre) : null, falta = v && v.c ? v.c.missing.find(m => m.startsWith(i.nombre + ' (')) : null;
     const base = i.receta_base_id && REC.some(x => x.id === i.receta_base_id);
     const corte = fila ? fila.sub.lastIndexOf(' · ') : -1, ficha = fila ? (corte > 0 ? fila.sub.slice(0, corte) : fila.sub) : '', gr = fila && corte > 0 ? fila.sub.slice(corte + 3) : '';
     /* Rocío (13/10): la ficha de referencia no se enseña; solo la marca cuando la receta usa una concreta */
     const marca = !pm && fila && ficha !== 'Base casera' && !/referencia/i.test(ficha) ? h(ficha) : '', porRacion = fila && Number(r.raciones_lote) > 1 && gr ? h(gr) + ' por ración' : '';
-    const sub = base ? `Tu receta base · <button class="verrec" type="button" data-base="${h(i.receta_base_id)}">Ver receta ›</button>` : fila ? [marca, porRacion].filter(Boolean).join(' · ') : falta && !/sin ficha/.test(falta) ? h(falta.slice(i.nombre.length + 2, -1)) : '';
+    const sub = base ? `<button class="verrec az" type="button" data-base="${h(i.receta_base_id)}">Ver receta ›</button>` : fila ? [i._mia ? 'En la receta: ' + h(cantTxt25(i._cant0 == null ? null : i._cant0 * ESCALA, i._uni0)) : '', marca, porRacion].filter(Boolean).join(' · ') : falta && !/sin ficha/.test(falta) ? h(falta.slice(i.nombre.length + 2, -1)) : '';
     const kk = fila ? `<span class="kk">${num(Math.round(fila.kcal))}</span>` : falta ? '<span class="kk mi">sin ficha</span>' : '<span class="kk"></span>';
-    return `<div class="ing c3${tap ? ' tap' : ''}"${tap ? ` data-miprod="${h(i.nombre)}" role="button" tabindex="0" aria-label="Elegir tu producto para ${h(i.nombre)}"` : ''}><div>${pm ? `<span class="mio">${h(pm.name)}</span><span class="tu">tuyo</span><span class="gen">${h(i.nombre)}</span>` : h(i.nombre)}${i.nota && !base ? `<small>${h(i.nota)}</small>` : ''}</div><span>${i.cantidad == null ? '' : num(Math.round(i.cantidad * ESCALA * 100) / 100) + ' ' + h(i.unidad || '')}</span>${kk}${sub ? `<small>${sub}</small>` : ''}</div>`;
+    return `<div class="ing c3${tap ? ' tap' : ''}"${tap ? ` data-miprod="${h(i.nombre)}" role="button" tabindex="0" aria-label="Tu producto y tu cantidad de ${h(i.nombre)}"` : ''}><div>${pm ? `<span class="mio">${h(pm.name)}</span><span class="tu">tuyo</span><span class="gen">${h(i.nombre)}</span>` : h(i.nombre)}${i._mia ? '<span class="tucant">tu cantidad</span>' : ''}${i.nota && !base ? `<small>${h(i.nota)}</small>` : ''}</div><span>${i.cantidad == null ? '' : num(Math.round(i.cantidad * ESCALA * 100) / 100) + ' ' + h(measureLabel(unitWord(i.cantidad * ESCALA, i.unidad) || i.unidad || ''))}</span>${kk}${sub ? `<small>${sub}</small>` : ''}</div>`;
   }
 
-  function gustoHtml(i) { const t = i.nombre.replace(/\s+al gusto\b/i, '').trim(), m = /^(.*?)\s*(\(opcional\))$/i.exec(t); return `<div class="ing c3 g"><div>${h(m ? m[1] : t)}${m ? ' <small style="display:inline">(opcional)</small>' : ''}${i.nota ? `<small>${h(i.nota)}</small>` : ''}</div><span>al gusto</span><span class="kk">—</span></div>`; }
+  function gustoHtml(i) { const t = i.nombre.replace(/\s+al gusto\b/i, '').trim(), m = /^(.*?)\s*(\(opcional\))$/i.exec(t); return `<div class="ing c3 g tap" data-miprod="${h(i.nombre)}" role="button" tabindex="0" aria-label="Tu producto y tu cantidad de ${h(m ? m[1] : t)}"><div>${h(m ? m[1] : t)}${m ? ' <small style="display:inline">(opcional)</small>' : ''}${i.nota ? `<small>${h(i.nota)}</small>` : ''}</div><span class="gtap">al gusto</span><span class="kk">—</span></div>`; }
   async function pintarReceta(id) {
     { const r0 = REC.find(x => x.id === id); if (!ESC || ESC.id !== id) ESC = { id, n: r0 ? Number(r0.raciones_lote) || 1 : 1 }; ESCALA = r0 ? ESC.n / (Number(r0.raciones_lote) || 1) : 1; }
     const r = REC.find(x => x.id === id);
@@ -729,7 +740,7 @@
       sb.from('ingredientes_receta').select('orden, nombre, cantidad, unidad, al_gusto, nota, receta_base_id').eq('receta_id', id).order('orden')
     ]);
     if (d.error || ing.error) { $('#rdet').innerHTML = `<p class="msg err">${h(es(d.error || ing.error))}</p>`; return; }
-    const lista = ing.data || [];
+    const lista = (ing.data || []).map(i => filaConMiCantidad25(id, i));
     const fija = i => (i.cantidad != null && !i.al_gusto) || i.receta_base_id;
     const conCant = lista.filter(fija);
     const gusto = lista.filter(i => !fija(i)).map(i => i.nombre.replace(/\s+al gusto\b/i, '').trim()).map(t => /^.[A-ZÁÉÍÓÚÑ]/.test(t) ? t : t.charAt(0).toLowerCase() + t.slice(1));
@@ -746,9 +757,9 @@
         <div><b>${r.hidratos_pdf == null ? '—' : num(r.hidratos_pdf)}</b><span>g hidratos</span></div>
         <div><b>${r.grasa_pdf == null ? '—' : num(r.grasa_pdf)}</b><span>g grasa</span></div></div>
         ${origenHtml(v, id)}</div>
-      <div class="box"><h3>Ingredientes</h3>${lista.length ? `<div class="rec-esc"><span>Cantidades para</span><div class="aj-st"><button type="button" data-esc="-1" aria-label="Menos raciones">−</button><output>${h(raciones(ESC.n))}</output><button type="button" data-esc="1" aria-label="Más raciones">+</button></div></div>${ESCALA !== 1 ? `<p class="src" style="margin:0 0 6px">Los pasos siguen con las cantidades de la receta original (${h(raciones(r.raciones_lote))}).</p>` : ''}<div class="ihd"><span>Para ${h(raciones(ESC.n))}</span><span>Cantidad</span><span>${Number(ESC.n) > 1 ? 'kcal 1 rac.' : 'kcal'}</span></div>` : ''}${lista.map(i => fija(i) ? ingHtml(i, v, r) : gustoHtml(i)).join('') || '<p class="note">Sin ingredientes apuntados.</p>'}${lista.some(i => fija(i) && !i.receta_base_id && opcionesMiProducto(r.id, i.nombre).length > 1) ? '<p class="src">Toca un ingrediente para elegir el producto que usas tú.</p>' : ''}</div>
+      <div class="box"><h3>Ingredientes</h3>${lista.length ? `<div class="rec-esc"><span>Cantidades para</span><div class="aj-st"><button type="button" data-esc="-1" aria-label="Menos raciones">−</button><output>${h(raciones(ESC.n))}</output><button type="button" data-esc="1" aria-label="Más raciones">+</button></div></div>${ESCALA !== 1 ? `<p class="src" style="margin:0 0 6px">Los pasos siguen con las cantidades de la receta original (${h(raciones(r.raciones_lote))}).</p>` : ''}<div class="ihd"><span>Para ${h(raciones(ESC.n))}</span><span>Cantidad</span><span>${Number(ESC.n) > 1 ? 'kcal 1 rac.' : 'kcal'}</span></div>` : ''}${lista.map(i => fija(i) ? ingHtml(i, v, r) : gustoHtml(i)).join('') || '<p class="note">Sin ingredientes apuntados.</p>'}${lista.some(i => !i.receta_base_id) ? '<p class="src nota-s"><span class="subraya">Toca un ingrediente para elegir tu producto o poner tu cantidad.</span></p>' : ''}</div>
       ${d.data && d.data.pasos ? `<div class="box"><h3>Pasos</h3>${pasosHtml(d.data.pasos)}</div>` : ''}
-      ${cons ? `<div class="box"><h3>Conservación</h3><p class="ptext">${h(cons)}</p></div>` : ''}${d.data && /^https?:\/\//.test(d.data.pdf_url || '') ? `<a class="btn ancho rec-pdf" href="${h(d.data.pdf_url)}" target="_blank" rel="noopener">Ver la ficha original (PDF) ›</a>` : ''}<div class="box"><button type="button" class="btn ancho" data-casero="recipe" style="margin-bottom:6px">Guardar como producto casero</button><p class="aj-h" style="margin:0">Para algo que cocinas y vas comiendo a ratos: queda como ficha en «Alimentos», sin pasar por el menú.</p></div>`;
+      ${cons ? `<div class="box"><h3>Conservación</h3><p class="ptext">${h(cons)}</p></div>` : ''}${esAdmin() && d.data && /^https?:\/\//.test(d.data.pdf_url || '') ? `<a class="btn ancho rec-pdf" href="${h(d.data.pdf_url)}" target="_blank" rel="noopener">Ver la ficha original (PDF) ›</a>` : ''}<div class="box"><button type="button" class="btn ancho" data-casero="recipe" style="margin-bottom:6px">Guardar como producto casero</button><p class="aj-h" style="margin:0">Para algo que cocinas y vas comiendo a ratos: queda como ficha en «Alimentos», sin pasar por el menú.</p></div>`;
     window.scrollTo(0, 0);
   }
 
@@ -956,8 +967,8 @@ function calcularRecetas() {
 function valoresReceta(id) { const r = data && recipe(id), x = CALC[id]; return r ? { kcal: r.kcal, protein: r.protein, fat: r.fat, carbs: r.carbs, ok: !!(x && x.ok), pdf: r.pdf || {}, c: x && x.c } : null; }
 function aIngrediente(i, recetas) {
   const r = recetas.find(x => x.id === i.receta_id);
-  return { id: i.receta_id, name: i.nombre, amount: i.al_gusto ? null : i.cantidad, unit: i.unidad || '', portions: r ? r.portions : 1, brand: MISP[i.receta_id + '¦' + i.nombre] || i.marca || '', marcaReceta: i.marca || '',
-    shop: i.no_se_compra ? NO_SHOP : (i.nombre_compra || ''), unitGrams: i.g_por_unidad, productId: i.alimento_id || '', baseRecipe: i.receta_base_id || '' };
+  return conMiCantidad25({ id: i.receta_id, name: i.nombre, amount: i.al_gusto ? null : i.cantidad, unit: i.unidad || '', portions: r ? r.portions : 1, brand: MISP[i.receta_id + '¦' + i.nombre] || i.marca || '', marcaReceta: i.marca || '',
+    shop: i.no_se_compra ? NO_SHOP : (i.nombre_compra || ''), unitGrams: i.g_por_unidad, productId: i.alimento_id || '', baseRecipe: i.receta_base_id || '' });
 }
 function aLinea(l) {
   const itemId = l.tipo === 'alimento' ? l.alimento_id : l.tipo === 'receta' ? l.receta_id : l.tipo === 'libre' ? 'LIBRE:' + (l.nombre_libre || '') : 'PREP:' + (l.nombre_libre || '');
@@ -1000,12 +1011,13 @@ async function cargarDatos() {
     todo(() => sb.from('congelador').select('*').eq('owner', uid)),
     todo(() => sb.from('congelador_movimientos').select('*').eq('owner', uid)),
     todo(() => sb.from('compra').select('id,semana,clave,tipo,cantidad,unidad,nombre,origen').eq('owner', uid)),
-    todo(() => sb.from('mis_productos').select('receta_id,ingrediente,alimento_id').eq('owner', uid)),
+    todo(() => sb.from('mis_productos').select('receta_id,ingrediente,alimento_id,cantidad,unidad').eq('owner', uid)),
     todo(() => sb.from('valoraciones').select('alimento_id,valoracion,nota').eq('owner', uid))
   ]);
   if (per.error) throw per.error;
   VAL = Object.fromEntries(vl.map(x => [x.alimento_id, { valoracion: x.valoracion, nota: x.nota }]));
-  MISP = Object.fromEntries(mp.map(x => [x.receta_id + '¦' + x.ingrediente, x.alimento_id]));
+  MISP = Object.fromEntries(mp.filter(x => x.alimento_id).map(x => [x.receta_id + '¦' + x.ingrediente, x.alimento_id]));
+  MISC = Object.fromEntries(mp.filter(x => x.cantidad !== null && x.cantidad !== undefined).map(x => [x.receta_id + '¦' + x.ingrediente, { q: Number(x.cantidad), u: x.unidad || 'g' }]));
   const recipes = rec.map(aReceta), measures = {};
   med.forEach(m => { if (!m.alimento_id) return; (measures[m.alimento_id] = measures[m.alimento_id] || {})[normMeasure(m.medida)] = { g: Number(m.gramos), check: !!m.por_comprobar }; });
   const p = per.data || {}, eqv = p.equivalencias || {};
@@ -2261,13 +2273,14 @@ async function guardarMiProducto(rid, nombre, val) {
   if ((val || '') === antes) return true;
   poner(val);
   const uid = SESION.user.id, q = val ? sb.from('mis_productos').upsert({ owner: uid, receta_id: rid, ingrediente: nombre, alimento_id: val, actualizado: new Date().toISOString() })
+    : MISC[k] ? sb.from('mis_productos').upsert({ owner: uid, receta_id: rid, ingrediente: nombre, alimento_id: null, cantidad: MISC[k].q, unidad: MISC[k].u, actualizado: new Date().toISOString() })
     : sb.from('mis_productos').delete().eq('owner', uid).eq('receta_id', rid).eq('ingrediente', nombre);
   const { error } = await q;
   if (error) { poner(antes); pintarTodo(); aviso('No se ha podido guardar tu producto. Vuelve a intentarlo con conexión.'); return false; }
   return true;
 }
 let MP = null;
-function abrirMiProducto(rid, nombre) {
+function abrirMiProducto14c(rid, nombre) {
   const ops = opcionesMiProducto(rid, nombre); if (ops.length < 2) return;
   const ref = refMiProducto(rid, nombre), cur = MISP[rid + '¦' + nombre] || '', r = recipe(rid);
   const hoy = hoyIso(), comidas = l => data.entries.filter(e => e.lotId === l.lotId && e.date >= hoy).sort((a, b) => a.date.localeCompare(b.date) || FR.indexOf(a.meal) - FR.indexOf(b.meal));
@@ -2579,7 +2592,7 @@ function resumenHTML(lunes) {
     <p class="cp-lbl">Calorías</p>${celdas(kc1)}<p class="cp-lbl">Proteína</p>${celdas(pc)}
     <p class="rs-nota">${notas.join(' ')}</p>
     <p class="cp-lbl">Día a día</p>${dias.map(diaHTML).join('')}
-    <p class="rs-nota">Las kcal son de tus consumos. Toca un día para abrirlo.</p>`;
+    <p class="rs-nota">Las kcal son de tus consumos. <span class="subraya">Toca un día para abrirlo.</span></p>`;
 }
 function pintarResumen() { $('#rsBody').innerHTML = resumenHTML(RS.lunes); }
 function abrirResumen() { RS = { lunes: SEM.lunes }; pintarResumen(); $('#rsDlg').showModal(); $('#rsBody').scrollTop = 0; }
@@ -2685,7 +2698,7 @@ function pintarPrp() {
     const otrosAbiertos = row.gs.some(q => q.id === s.p);
     const enReceta = tot === null ? (/al gusto/i.test(i.name) ? 'al gusto' : 'sin medida') : fmt.format(tot) + ' ' + h(unitWord(tot, i.unit) || '') + (row.g !== null && normMeasure(i.unit) !== 'g' ? ' (' + fmt.format(Math.round(row.g * 10) / 10) + ' g)' : '');
     return cab + `<div class="prp-panel" data-prpbox="${h(i.name)}">
-      <p class="aj-h" style="margin-top:0">En la receta, para ${h(racionTxt(id, l.prepared))}: ${enReceta}</p>
+      <p class="aj-h" style="margin-top:0">${i.mia ? 'Tu cantidad' : 'En la receta'}, para ${h(racionTxt(id, l.prepared))}: ${enReceta}</p>
       <p class="cp-lbl">Producto</p><div class="mp-ops" role="radiogroup">${row.ps.map(opt).join('')}</div>
       ${row.gs.length ? `<details class="al-fu"${otrosAbiertos ? ' open' : ''}><summary>Otros de ${h(String(aisleOf(i) || 'su pasillo').toLowerCase())} (${row.gs.length})</summary><div class="mp-ops" role="radiogroup" style="margin-bottom:10px">${row.gs.map(opt).join('')}</div></details>` : ''}
       ${changed ? `<p class="cp-lbl">¿Para cuándo vale?</p><div class="al-sg c2 prp-sc"><button type="button" data-prps="once" class="${s.scope !== 'always' ? 'on' : ''}" aria-pressed="${s.scope !== 'always'}">Solo esta preparación</button><button type="button" data-prps="always" class="${s.scope === 'always' ? 'on' : ''}" aria-pressed="${s.scope === 'always'}">Siempre en esta receta</button></div>
@@ -2699,7 +2712,7 @@ function pintarPrp() {
   const hay = todos.some(i => st.rows.some(x => x.i === i && !x.noFicha));
   $('#prpBody').innerHTML = `<div class="info"><b>Ingredientes para preparar ${h(racionTxt(id, l.prepared))}</b><br>Preparación del ${h(DIA_CORTO(l.date))}, ${h(l.meal.toLowerCase())}. Incluye todo el lote, también lo de otros días.</div>
     <div class="box prp-box"><h3>${lotAdjust(l).length || Object.keys(lotBuyMark(l)).length ? 'Ingredientes de esta preparación' : 'Ingredientes'}</h3>${todos.map(filaHTML).join('') || '<p class="note">Sin ingredientes apuntados.</p>'}
-    ${hay ? '<p class="src">Toca un ingrediente para cambiar el producto o la cantidad que has usado.</p>' : ''}</div>
+    ${hay ? '<p class="src nota-s"><span class="subraya">Toca un ingrediente para cambiar el producto o la cantidad que has usado.</span></p>' : ''}</div>
     <button type="button" class="btn ancho rp" data-reparto>${weighSummary(l) ? 'Repartir en raciones · ' + h(weighSummary(l)) : 'Repartir en raciones (báscula)'}</button><button type="button" class="btn ancho" data-prpver>Ver la receta completa ›</button><div class="box"><button type="button" class="btn ancho" data-casero="lot" style="margin-bottom:6px">Guardar como producto casero</button><p class="aj-h" style="margin:0">Para algo que vas comiendo a ratos y no repartes: queda como ficha en «Alimentos».</p></div>`;
   $('#prpInfo').innerHTML = (st.bad ? '<span>Revisa las cantidades: alguna no es un número.</span>' : (always ? '<span>Cambia tu producto en la receta.</span>' : cambio ? '<span>La receta no cambia.</span>' : '')) + (kr === null || st.bad ? '' : `<b>Esta preparación: ${kc(kr)} kcal por ración</b>`);
   $('#prpGo').disabled = st.bad || !cambio; $('#prpGo').textContent = cambio ? 'Guardar' : 'Guardado';
@@ -2950,7 +2963,7 @@ function caseroFromLot(lotId) { const lot = data.lots.find(l => l.lotId === lotI
 function caseroTotals(src) { if (src.totals) return src.totals; const t = {}; for (const k of CK) { let sum = 0, miss = false; src.rows.forEach(x => { const p = product(x.p), v = p ? n(p[k]) : null; if (v === null) { if (k !== 'salt') miss = true; } else sum += v * (Number(x.g) || 0) / 100; }); t[k] = miss ? null : sum; } return t; }
 const caseroRaw = src => src.rows.reduce((a, x) => a + (Number(x.g) || 0), 0);
 function caseroPer100(src) { const out = n(src.out), t = caseroTotals(src); if (!(out > 0)) return null; const per = {}; for (const k of CK) per[k] = t[k] === null ? null : t[k] / out * 100; return per; }
-function caseroPerHTML(per) { if (!per) return '<b>Por 100 g de lo cocinado</b>Escribe cuánto ha salido.'; if (['kcal', 'protein', 'fat', 'carbs'].some(k => per[k] === null)) return '<b>Por 100 g de lo cocinado</b>Falta la etiqueta de algún ingrediente: no se puede calcular.'; return '<b>Por 100 g de lo cocinado</b>' + kc(per.kcal) + ' kcal · ' + fmt.format(Math.round(per.protein * 10) / 10) + ' g proteína · ' + fmt.format(Math.round(per.fat * 10) / 10) + ' g grasa · ' + fmt.format(Math.round(per.carbs * 10) / 10) + ' g hidratos'; }
+function caseroPerHTML(per) { if (!per) return '<b>Por 100 g ya cocinado</b>Escribe arriba cuánto ha salido y aquí verás las kcal y los macros.'; if (['kcal', 'protein', 'fat', 'carbs'].some(k => per[k] === null)) return '<b>Por 100 g ya cocinado</b>Falta la etiqueta de algún ingrediente: no se puede calcular.'; return '<b>Por 100 g ya cocinado</b>' + kc(per.kcal) + ' kcal · ' + fmt.format(Math.round(per.protein * 10) / 10) + ' g proteína · ' + fmt.format(Math.round(per.fat * 10) / 10) + ' g grasa · ' + fmt.format(Math.round(per.carbs * 10) / 10) + ' g hidratos'; }
 async function abrirCasero(kind, id) {
   if (!SEM.cargada) { try { await cargarDatos(); } catch (err) { aviso(es(err)); return; } }
   const src = kind === 'lot' ? caseroFromLot(id) : caseroFromRecipe(id); if (!src) return;
@@ -3154,7 +3167,7 @@ async function guardarReceta() {
   const rowR = { id, owner: R.owner, nombre: nom, categoria: R.categoria || null, frecuencia: R.frecuencia || null, raciones_lote: R.raciones, pasos: R.pasos.trim() || null, conservacion: R.cons.trim() || null, dias_nevera: R.nevera || null, congelable: R.congela, fuente: R.fuente || 'Creada en la web', actualizado: new Date().toISOString() };
   const rowsI = ings.map((x, k) => ({ id: x.id || uuid(), receta_id: id, orden: k + 1, nombre: x.nombre.trim(), alimento_id: x.alimento || null, receta_base_id: x.base || null, cantidad: x.unidad === 'al gusto' || x.cantidad === '' || x.cantidad == null ? null : Number(x.cantidad), unidad: x.unidad === 'al gusto' ? null : x.unidad, al_gusto: x.unidad === 'al gusto', no_se_compra: !!x.noCompra, nota: x.nota.trim() || null, nombre_compra: x.noCompra ? null : (x.compra || null), marca: x.marca || null, g_por_unidad: x.gpu ?? null, texto_original: x.texto || null, origen: x.origen || { fuente: 'web' } }));
   // kcal calculadas (para la lista y las demás personas): se calculan antes de guardar
-  const delPdf = !R.id || R.fuente === 'Creada en la web', pdf0 = R.pdf || {}, tmpR = aReceta(Object.assign({ origen: R.origen, kcal_pdf: pdf0.kcal_pdf, proteina_pdf: pdf0.proteina_pdf, grasa_pdf: pdf0.grasa_pdf, hidratos_pdf: pdf0.hidratos_pdf }, rowR)), tmpI = rowsI.map(i => aIngrediente(i, [tmpR])), antesR = data.recipes, antesI = data.ingredients;
+  const delPdf = !R.id || R.fuente === 'Creada en la web', pdf0 = R.pdf || {}, tmpR = aReceta(Object.assign({ origen: R.origen, kcal_pdf: pdf0.kcal_pdf, proteina_pdf: pdf0.proteina_pdf, grasa_pdf: pdf0.grasa_pdf, hidratos_pdf: pdf0.hidratos_pdf }, rowR)), tmpI = sinMiCantidad25(() => rowsI.map(i => aIngrediente(i, [tmpR]))), antesR = data.recipes, antesI = data.ingredients;
   data.recipes = antesR.filter(r => r.id !== id).concat([tmpR]); data.ingredients = antesI.filter(i => i.id !== id).concat(tmpI); calcularRecetas();
   const v = CALC[id]; if (delPdf) { rowR.kcal_pdf = v && v.ok ? Math.round(v.c.kcal * 10) / 10 : null; rowR.proteina_pdf = v && v.ok ? Math.round(v.c.protein * 10) / 10 : null; rowR.grasa_pdf = v && v.ok ? Math.round(v.c.fat * 10) / 10 : null; rowR.hidratos_pdf = v && v.ok ? Math.round(v.c.carbs * 10) / 10 : null; }
   $('#reGo').disabled = true;
@@ -3165,9 +3178,11 @@ async function guardarReceta() {
   const e3 = e1 || e2 || !sobran.length ? null : (await sb.from('ingredientes_receta').delete().in('id', sobran)).error;
   $('#reGo').disabled = false;
   if (e1 || e2 || e3) { data.recipes = antesR; data.ingredients = antesI; calcularRecetas(); aviso('No se ha podido guardar la receta: ' + es(e1 || e2 || e3)); return; }
+  tmpI.forEach(conMiCantidad25);
   if (delPdf) tmpR.pdf = { kcal: rowR.kcal_pdf, protein: rowR.proteina_pdf, fat: rowR.grasa_pdf, carbs: rowR.hidratos_pdf }; calcularRecetas();
   if (REC) { const viejo = REC.find(x => x.id === id), nuevo = Object.assign({}, rowR, delPdf ? {} : pdf0, { kcal_pdf_orig: delPdf ? rowR.kcal_pdf : pdf0.kcal_pdf }); { const vv = valoresReceta(id); if (vv) Object.assign(nuevo, { kcal_pdf: vv.kcal, proteina_pdf: vv.protein, grasa_pdf: vv.fat, hidratos_pdf: vv.carbs }); } if (viejo) Object.assign(viejo, nuevo); else REC.push(nuevo); REC.sort((a, b) => a.nombre.localeCompare(b.nombre, 'es')); ING_TXT[id] = rowsI.map(i => ' ' + norm(i.nombre)).join(''); }
   for (const x of ings) { const viejo = x.nombre0, nuevo = x.nombre.trim(), mio = viejo && MISP[id + '¦' + viejo]; if (mio && viejo !== nuevo) { await guardarMiProducto(id, nuevo, mio); await guardarMiProducto(id, viejo, ''); } }
+  for (const x of ings) { const viejo = x.nombre0, nuevo = x.nombre.trim(), mc = viejo && MISC[id + '¦' + viejo]; if (mc && viejo !== nuevo) { await guardarMiCantidad(id, nuevo, mc.q, mc.u); await guardarMiCantidad(id, viejo, null, null); } }
   $('#reDlg').close(); RE = null; pintarTodo(); pintarGlobito();
   aviso(R.id ? 'Receta guardada.' : 'Receta nueva: ' + nom + '.');
   if (location.hash === '#receta/' + encodeURIComponent(id)) ruta(); else { pila = [location.hash.replace(/^#/, '') || 'recetas']; location.hash = 'receta/' + encodeURIComponent(id); }
@@ -3224,6 +3239,7 @@ const firmaRE = R => JSON.stringify([R.nombre, R.categoria, R.frecuencia, R.raci
 const firmaCampos = d => [...d.querySelectorAll('input,select,textarea')].map(x => x.type === 'checkbox' ? x.checked : x.value).join('¦') + '|' + [...d.querySelectorAll('.on')].map(x => x.dataset ? JSON.stringify(x.dataset) : '').join('¦');
 function sucio(d) {
   if (d.id === 'reDlg') { if (!RE) return false; leerCamposReceta(); return firmaRE(RE) !== RE._f; }
+  if (d.id === 'mpDlg') return mpSucio25();
   if (d.id === 'prpDlg') { if (!PRP) return false; const st = leerPrp(); return !!st && prpCambiado(st); }
   if (['aeDlg', 'ajDlg', 'csDlg', 'cbDlg'].includes(d.id)) return d._f !== undefined && firmaCampos(d) !== d._f;
   return false;
@@ -3569,6 +3585,138 @@ function init024() {
   $('#bsGo').onclick = () => guardarBase();
 }
 
+/* ---------- 0.25 · Tu cantidad en las recetas ----------
+   Rocío (14/10): «que todo se pueda editar»: al tocar cualquier ingrediente de una receta (también los «al gusto»)
+   pones tu producto y tu cantidad. Solo lo ves tú (mis_productos.cantidad / unidad, sobre las raciones de la
+   receta, igual que ingredientes_receta.cantidad); cuenta en tus kcal y en tu compra. Con «¿Dónde?» se puede
+   dejar solo en unas preparaciones (cambios ⟦ingredientes⟧ de cada una, como «Cantidad usada»). */
+let MISC = {}; // receta¦ingrediente → { q, u }
+function conMiCantidad25(x) {
+  if (x.amountReceta === undefined) { x.amountReceta = x.amount; x.unitReceta = x.unit; }
+  const m = !x.baseRecipe && MISC[x.id + '¦' + x.name];
+  x.amount = m ? m.q : x.amountReceta; x.unit = m ? m.u : x.unitReceta; x.mia = !!m;
+  return x;
+}
+/* La lista de Recetas guarda sus kcal: se rehacen al cambiar tu producto o tu cantidad */
+function recalcularRec25() { calcularRecetas(); if (REC) REC.forEach(r => { const v = valoresReceta(r.id); if (v) { r.kcal_pdf = v.kcal; r.proteina_pdf = v.protein; r.grasa_pdf = v.fat; r.hidratos_pdf = v.carbs; } }); }
+function sinMiCantidad25(fn) { const antes = MISC; MISC = {}; try { return fn(); } finally { MISC = antes; } }
+function aplicarCantidad25(rid, nombre) { data.ingredients.filter(x => x.id === rid && x.name === nombre).forEach(conMiCantidad25); }
+/* La fila de la receta (ingredientes_receta) con tu cantidad, para la pantalla de la receta y su PDF */
+function filaConMiCantidad25(rid, i) {
+  const m = !i.receta_base_id && MISC[rid + '¦' + i.nombre]; if (!m) return i;
+  return Object.assign({}, i, { cantidad: m.q, unidad: m.u, al_gusto: false, _mia: true, _cant0: i.al_gusto ? null : i.cantidad, _uni0: i.unidad });
+}
+const cantTxt25 = (q, u) => q === null || q === undefined ? 'al gusto' : num(Math.round(q * 100) / 100) + ' ' + measureLabel(unitWord(q, u) || u || '');
+async function guardarMiCantidad(rid, nombre, q, u) {
+  const k = rid + '¦' + nombre, antes = MISC[k] || null, poner = v => { if (v) MISC[k] = v; else delete MISC[k]; aplicarCantidad25(rid, nombre); recalcularRec25(); };
+  const nuevo = q === null ? null : { q, u };
+  if (JSON.stringify(nuevo) === JSON.stringify(antes)) return true;
+  poner(nuevo);
+  const uid = SESION.user.id, prod = MISP[k] || null, ahora = new Date().toISOString();
+  const qy = nuevo || prod ? sb.from('mis_productos').upsert({ owner: uid, receta_id: rid, ingrediente: nombre, alimento_id: prod, cantidad: nuevo ? q : null, unidad: nuevo ? u : null, actualizado: ahora })
+    : sb.from('mis_productos').delete().eq('owner', uid).eq('receta_id', rid).eq('ingrediente', nombre);
+  const { error } = await qy;
+  if (error) { poner(antes); pintarTodo(); aviso('No se ha podido guardar tu cantidad. Vuelve a intentarlo con conexión.'); return false; }
+  return true;
+}
+
+/* Ventana «Tu producto» con «Tu cantidad» */
+function prodCant25() { const di = data.ingredients.find(x => x.id === MP.rid && x.name === MP.nombre), ref = refMiProducto(MP.rid, MP.nombre); return product(MP.val) || (di && cookBase(di)) || ref || null; }
+function unidadesCant25(di, p, u) { const ms = cookMeasures(di, p); if (u && !ms.includes(u)) ms.push(u); return ms; }
+function leerCant25() {
+  const c = MP.cant, raw = String(c.q).replace(',', '.').trim(), val = raw === '' ? null : Number(raw);
+  if (raw !== '' && (!Number.isFinite(val) || val < 0)) return { bad: true };
+  const r0 = c.receta, base = val === null ? null : Math.round(val / c.f * 1e6) / 1e6;
+  // vacío = lo de la receta; igual que la receta = lo de la receta
+  const igual = base === null || (r0.q !== null && Math.abs(base - r0.q) < 1e-6 && normMeasure(c.u) === normMeasure(r0.u));
+  const q = igual ? null : base, u = igual ? null : c.u, m0 = MISC[MP.rid + '¦' + MP.nombre] || null;
+  const cambia = JSON.stringify(q === null ? null : { q, u }) !== JSON.stringify(m0);
+  return { bad: false, val, q, u, cambia };
+}
+function infoCant25() {
+  const di = data.ingredients.find(x => x.id === MP.rid && x.name === MP.nombre), c = MP.cant, st = leerCant25(), r0 = c.receta;
+  const enReceta = 'En la receta: ' + (r0.q === null ? 'al gusto' : cantTxt25(r0.q * c.f, r0.u)) + '.';
+  let t;
+  if (st.bad) t = 'Revisa la cantidad: no es un número.';
+  else if (st.val === null) t = r0.q === null ? 'Vacío: al gusto, no cuenta en las kcal.' : 'Vacío: se usa la de la receta.';
+  else { const p = prodCant25(), w = p ? measureInfo(di, p, c.u) : (normMeasure(c.u) === 'g' ? { g: 1 } : null);
+    t = !p ? 'Sin ficha: no cuenta en las kcal.' : w ? 'Son ' + num(Math.round(st.val * w.g * 10) / 10) + ' g' + (w.check ? ' (peso por comprobar)' : '') + '.' : 'Sin peso de 1 ' + measureLabel(c.u) + ' de ' + p.name + ': no cuenta en las kcal.'; }
+  const vuelve = MISC[MP.rid + '¦' + MP.nombre] || (st.val !== null && st.q !== null);
+  return `${h(enReceta)} ${h(t)}${vuelve ? ` <button type="button" class="verrec az" data-mpreset>${r0.q === null ? 'Volver a «al gusto»' : 'Volver a la de la receta'}</button>` : ''}`;
+}
+function unidadesHtml25() { const di = data.ingredients.find(x => x.id === MP.rid && x.name === MP.nombre), ms = unidadesCant25(di, prodCant25(), MP.cant.u); return ms.map(m => `<button type="button" data-mpu="${h(m)}" class="${m === MP.cant.u ? 'on' : ''}" aria-pressed="${m === MP.cant.u}">${h(measureLabel(m))}</button>`).join(''); }
+function textoInfoMp25() { return MP.donde === 'siempre' ? 'Solo lo ves tú. Cuenta en tus kcal de esta receta y en tu compra. La receta sigue igual para los demás.' : 'Solo cambian las preparaciones marcadas. La receta sigue como estaba.'; }
+function abrirMiProducto(rid, nombre) {
+  const di = data.ingredients.find(x => x.id === rid && x.name === nombre); if (!di || di.baseRecipe) return;
+  const ref = refMiProducto(rid, nombre), cur = MISP[rid + '¦' + nombre] || '', r = recipe(rid);
+  // las fichas unidas a otra («PR-07 (unido a PR-62)») ya no se ofrecen
+  const ops = opcionesMiProducto(rid, nombre).filter(p => !/unido a/i.test(p.id) || p.id === cur);
+  // Rocío (14/10): arriba el mismo producto (la referencia y sus marcas); los demás del grupo (p. ej. «AOVE a la trufa»), plegados
+  const fam = new Set(familyProducts(di).map(p => p.id).concat([cur, di.marcaReceta].filter(Boolean))), mismos = ops.filter(p => fam.has(p.id) || (ref && p.id === ref.id)), otros = ops.filter(p => !mismos.includes(p));
+  const opMp = p => { const v = ref && p.id === ref.id ? '' : p.id; return `<button type="button" role="radio" aria-checked="${v === cur}" class="${v === cur ? 'on' : ''}" data-mpv="${h(v)}"><i></i><span>${h(p.name)}${v === '' ? '<small>El de la receta</small>' : ''}</span></button>`; };
+  const hoy = hoyIso(), comidas = l => data.entries.filter(e => e.lotId === l.lotId && e.date >= hoy).sort((a, b) => a.date.localeCompare(b.date) || FR.indexOf(a.meal) - FR.indexOf(b.meal));
+  const lotes = data.lots.filter(l => l.recipeId === rid && (l.date >= hoy || comidas(l).length)).sort((a, b) => a.date.localeCompare(b.date) || FR.indexOf(a.meal) - FR.indexOf(b.meal)).slice(0, 4);
+  const por = Number(di.portions || 1), nR = ESC && ESC.id === rid ? Number(ESC.n) || por : por, f = nR / por, m = MISC[rid + '¦' + nombre];
+  const rq = n(di.amountReceta) === null ? null : Number(di.amountReceta), ru = normMeasure(di.unitReceta) || '';
+  const q0 = m ? m.q : rq, u0 = normMeasure(m ? m.u : ru) || (/spray/i.test(nombre) ? 'pulv' : 'g');
+  MP = { rid, nombre, val: cur, val0: cur, donde: 'siempre', lotes: new Set(), cant: { f, nR, q: q0 === null ? '' : String(Math.round(q0 * f * 100) / 100).replace('.', ','), u: u0, receta: { q: rq, u: ru || u0 } } };
+  MP.cant.q0 = MP.cant.q; MP.cant.u0 = MP.cant.u;
+  $('#mpTit').textContent = nombre.replace(/\s+al gusto\b/i, '');
+  $('#mpBody').innerHTML = `<p class="sub2">${h(r ? r.name : '')}</p>`
+    + `<p class="cp-lbl" style="margin-top:0">Tu cantidad · para ${h(raciones(nR))}</p><div class="mp-cant"><input class="cp-inp" id="mpQ" type="text" inputmode="decimal" autocomplete="off" value="${h(MP.cant.q)}" placeholder="${rq === null ? 'al gusto' : '—'}" aria-label="Tu cantidad de ${h(nombre)}"><div class="re-us" id="mpU">${unidadesHtml25()}</div></div><p class="aj-h" id="mpQInf">${infoCant25()}</p>`
+    + (ops.length > 1 ? '<p class="cp-lbl">¿Cuál usas tú?</p><div class="mp-ops" role="radiogroup">' + [ref].concat(mismos.filter(p => !ref || p.id !== ref.id)).filter(Boolean).map(opMp).join('') + '</div>'
+      + (otros.length ? `<details class="al-fu"${otros.some(p => p.id === cur) ? ' open' : ''}><summary>Otros de ${h(String(aisleOf(di) || 'su grupo').toLowerCase())} (${otros.length})</summary><div class="mp-ops" role="radiogroup">${otros.map(opMp).join('')}</div></details>` : '') : '')
+    + (lotes.length ? '<p class="cp-lbl">¿Dónde?</p><div class="mp-ops" id="mpDonde" role="radiogroup"><button type="button" role="radio" aria-checked="true" class="on" data-mpw="siempre"><i></i><span>Siempre en esta receta</span></button><div class="mp-sep">o solo en estas preparaciones (puedes marcar varias)</div>' + lotes.map(l => `<button type="button" role="checkbox" aria-checked="false" class="ckb" data-mpw="lote:${h(l.lotId)}"><i></i><span>Solo en la preparación del ${h(DIA_CORTO(l.date))}<small>${h(l.meal)}${comidas(l).length ? ' · para ' + h(comidas(l).map(e => DIA_CORTO(e.date) + ' ' + e.meal.toLowerCase()).join(', ')) : ''}</small></span></button>`).join('') + '</div>' : '')
+    + `<div class="info" style="margin-top:12px" id="mpInfo">${h(textoInfoMp25())}</div>`;
+  $('#mpDlg').showModal();
+}
+function mpSucio25() { if (!MP || !MP.cant) return false; const st = leerCant25(); return (MP.val || '') !== (MP.val0 || '') || st.bad || st.cambia; }
+/* Solo en unas preparaciones: la cantidad va a sus cambios ⟦ingredientes⟧ (como «Cantidad usada» de la preparación) */
+function cantidadEnLote25(l, di, prodId, st) {
+  const row = l._row || (l._row = nuevaFilaLote(l.lotId)), adj = (row.cambios || []).filter(x => x && x.i !== di.name);
+  if (st.val !== null) {
+    const p = product(prodId), qLote = Math.round(st.val / MP.cant.nR * Number(l.prepared) * 100) / 100, w = p ? measureInfo(di, p, MP.cant.u) : null;
+    if (!p || !w) return false;
+    adj.push({ i: di.name, p: p.id, g: Math.round(qLote * w.g * 100) / 100, q: qLote, u: MP.cant.u });
+  }
+  row.cambios = adj; return true;
+}
+async function guardarMp25() {
+  if (!MP || !MP.cant) return; const { rid, nombre, val, donde } = MP, st = leerCant25();
+  if (st.bad) { $('#mpQInf').innerHTML = infoCant25(); return; }
+  const prodCambia = (val || '') !== (MP.val0 || ''), cantCambia = donde === 'lotes' ? MP.cant.q !== MP.cant.q0 || MP.cant.u !== MP.cant.u0 : st.cambia;
+  $('#mpDlg').close(); if (!prodCambia && !cantCambia) return;
+  const di = data.ingredients.find(x => x.id === rid && x.name === nombre);
+  if (donde === 'lotes') {
+    const ref = refMiProducto(rid, nombre), quiero = val || (ref && ref.id) || '', normal = di ? (cookBase(di) || {}).id : '', hechos = [], sinPeso = [];
+    MP.lotes.forEach(id => { const l = data.lots.find(x => x.lotId === id); if (!l) return; const row = l._row || (l._row = nuevaFilaLote(l.lotId)), buy = Object.assign({}, row.compra_producto || {});
+      if (prodCambia) { if (!quiero || quiero === normal) delete buy[nombre]; else buy[nombre] = quiero; row.compra_producto = buy; }
+      if (cantCambia && !cantidadEnLote25(l, di, buy[nombre] || quiero || normal, st)) sinPeso.push(l);
+      rehacerNota(l); marcarLote(l); hechos.push(l); });
+    pintarTodo(); pintarGlobito(); hechos.sort((a, b) => a.date.localeCompare(b.date));
+    aviso(sinPeso.length ? 'No sé cuánto pesa 1 ' + measureLabel(MP.cant.u) + ': pon la cantidad en gramos.' : 'Solo en ' + (hechos.length === 1 ? 'la preparación del ' : 'las preparaciones del ') + hechos.map(l => DIA_CORTO(l.date)).join(' y ') + '.');
+    return;
+  }
+  const ok1 = prodCambia ? await guardarMiProducto(rid, nombre, val) : true, ok2 = ok1 && cantCambia ? await guardarMiCantidad(rid, nombre, st.q, st.u) : ok1;
+  if (!ok1 || !ok2) return;
+  recalcularRec25();
+  if (location.hash === '#receta/' + encodeURIComponent(rid)) pintarReceta(rid); pintarTodo(); pintarGlobito();
+  const partes = []; if (prodCambia) partes.push(val ? 'usas ' + (product(val) || {}).name : 'vuelves al producto de la receta');
+  if (cantCambia) partes.push(st.q === null ? 'vuelves a la cantidad de la receta' : 'tu cantidad es ' + cantTxt25(st.val, st.u));
+  aviso('Guardado: ' + partes.join(' y ') + '.');
+}
+function init025() {
+  $('#mpGo').onclick = guardarMp25;
+  $('#mpBody').addEventListener('click', ev => {
+    if (!MP || !MP.cant) return;
+    const u = ev.target.closest('[data-mpu]'); if (u) { MP.cant.u = u.dataset.mpu; $('#mpU').innerHTML = unidadesHtml25(); $('#mpQInf').innerHTML = infoCant25(); return; }
+    if (ev.target.closest('[data-mpreset]')) { const r0 = MP.cant.receta; MP.cant.q = r0.q === null ? '' : String(Math.round(r0.q * MP.cant.f * 100) / 100).replace('.', ','); if (r0.q !== null) MP.cant.u = normMeasure(r0.u) || MP.cant.u; $('#mpQ').value = MP.cant.q; $('#mpU').innerHTML = unidadesHtml25(); $('#mpQInf').innerHTML = infoCant25(); return; }
+    if (ev.target.closest('[data-mpv]')) { $('#mpU').innerHTML = unidadesHtml25(); $('#mpQInf').innerHTML = infoCant25(); }
+    if (ev.target.closest('[data-mpw]') && $('#mpInfo')) $('#mpInfo').textContent = textoInfoMp25();
+  });
+  $('#mpBody').addEventListener('input', ev => { if (ev.target.id === 'mpQ' && MP && MP.cant) { MP.cant.q = ev.target.value; $('#mpQInf').innerHTML = infoCant25(); } });
+}
+
 async function abrirSemana() {
   if (!SEM.lunes) { const hoy = hoyIso(); SEM.lunes = mondayOf(hoy); SEM.dia = (parseIso(hoy).getDay() + 6) % 7; }
   if (!SEM.cargada) {
@@ -3578,7 +3726,7 @@ async function abrirSemana() {
   pintarSemana(); pintarEstado();
 }
 
-  initSemana(); init013(); initCompra(); init014b(); init014c(); init015(); init016(); init017a(); init017b(); init017c(); init017d(); init017e(); init018(); init019(); init021(); init022(); init023(); init024();
+  initSemana(); init013(); initCompra(); init014b(); init014c(); init015(); init016(); init017a(); init017b(); init017c(); init017d(); init017e(); init018(); init019(); init021(); init022(); init023(); init024(); init025();
   sb.auth.onAuthStateChange((_ev, session) => { if ((session && session.user.id) !== (SESION && SESION.user.id)) { SEM.cargada = false; data = null; } show(session); });
   sb.auth.getSession().then(({ data }) => show(data.session));
   setMode('login');
