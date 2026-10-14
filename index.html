@@ -419,6 +419,12 @@
   .re-acc{display:flex;gap:8px;margin-top:12px} .re-acc .btn{min-height:44px} .re-acc .rojo{flex:1}
   .re-ta{height:180px;padding:10px;resize:vertical;line-height:1.45}
 
+  /* ---------- 0.21 · repaso ---------- */
+  .btn{min-height:44px} .pill{min-height:44px} .ord{min-height:44px} .back{min-height:44px} .opt{min-height:44px} .tabs button{min-height:44px}
+  .verrec{min-height:44px;display:inline-flex;align-items:center} .cp-n .lk{min-height:44px} .cp-sug .btn{min-height:44px}
+  .cp-row.marc .cp-n b{text-decoration:line-through;color:var(--muted)} .cp-row.marc .cp-a{color:var(--muted)} .cp-row.marc{background:#faf6ee}
+  .cp-otra{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 10px} .cp-otra .btn{flex:none}
+
 </style>
 </head>
 <body>
@@ -491,7 +497,7 @@
     <button class="cp-act" type="button" id="cpAct" hidden></button>
   </section>
 
-  <p class="ver">Versión de prueba 0.20 · arreglos</p>
+  <p class="ver">Versión de prueba 0.21 · repaso</p>
 </main>
 <nav class="nav" id="nav" hidden><button type="button" data-nav="semana" id="navSemana"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Semana</button><button type="button" data-nav="compra" id="navCompra"><i class="nbd" id="navNum" hidden></i><svg viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h3l2.6 12.4a2 2 0 0 0 2 1.6h8.2a2 2 0 0 0 2-1.6L21 7H6"/></svg>Compra</button><button type="button" data-nav="recetas" id="navRecetas"><svg viewBox="0 0 24 24"><path d="M12 6.5C10 5 7 4.5 3.5 5v14c3.5-.5 6.5 0 8.5 1.5 2-1.5 5-2 8.5-1.5V5C17 4.5 14 5 12 6.5zM12 6.5v14"/><path d="M6.5 9.5h2.5M6.5 12.5h2.5M15 9.5h2.5M15 12.5h2.5"/></svg>Recetas</button><button type="button" data-nav="alimentos" id="navAlimentos"><svg viewBox="0 0 24 24"><path d="M12 8.2c-1.3-.9-2.8-1.2-4.2-.9C5.3 7.8 4 10 4 12.8 4 17 7 21 9.6 21c1 0 1.5-.5 2.4-.5s1.4.5 2.4.5C17 21 20 17 20 12.8c0-2.8-1.3-5-3.8-5.5-1.4-.3-2.9 0-4.2.9z"/><path d="M12 8.2V5.5M12 5.5c.3-1.6 1.7-2.6 3.4-2.6-.2 1.7-1.6 2.8-3.4 2.6z"/></svg>Alimentos</button></nav>
 <dialog class="sheet" id="picker" aria-labelledby="pkTit"><div class="shh"><h2 id="pkTit">Añadir</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb">
@@ -1272,7 +1278,7 @@ function aviso(txt, accion, fn) {
   const t = $('#toast'); t.innerHTML = h(txt) + (accion ? ` <button type="button" id="toastAcc">${h(accion)}</button>` : ''); t.hidden = false;
   const dlg = [...document.querySelectorAll('dialog[open]')].pop(); (dlg || document.body).appendChild(t);
   if (accion) $('#toastAcc').onclick = () => { t.hidden = true; fn(); };
-  clearTimeout(tAviso); tAviso = setTimeout(() => { t.hidden = true; }, accion ? 6000 : 3200);
+  clearTimeout(tAviso); tAviso = setTimeout(() => { t.hidden = true; }, Math.max(accion ? 6000 : 3200, String(txt).length * 65));
 }
 const PRONTO = {};
 
@@ -1746,7 +1752,7 @@ function purchaseQueueId(key,section,scope=shopScope(),part=''){return JSON.stri
 function queuedPurchases(){return [...purchaseQueue.values()].filter(x=>x.week===data.activeWeek);}
 function purchaseAllocations(key,done){return shopping().allocations.filter(x=>x.key===key).map(x=>({origin:x.origin,itemId:x.itemId,amount:done?x.bought:x.pending,unmeasured:x.unmeasured||(done&&x.boughtWithoutQuantity===true)})).filter(x=>x.amount>1e-8);}
 function shopMarksPending(){return queuedPurchases().some(c=>c.section==='pending'&&c.checked);}
-function shopping(filtered=true,days=null){
+function shopping0(filtered=true,days=null){
       const map=new Map(),pantry=new Map(),unknown=new Map(),pantryUnknown=new Map(),conditional=new Map(),shopDates=new Set((days||(filtered?shopDayList():[0,1,2,3,4,5,6])).map(i=>shiftDate(data.activeWeek,i))),inDays=d=>shopDates.has(String(d).slice(0,10));
       const add=(name,unit,amount)=>{if(!(amount>0))return;const shownName=tapWaterName(name)?'Agua del grifo':name,key=shownName+'♦'+(unit||''),target=pantryName(name)?pantry:map;target.set(key,{key,name:shownName,unit:unit||'',amount:(target.get(key)?.amount||0)+amount});};
       const addAove=grams=>{if(!(grams>0))return;const key='AOVE♦g',target=pantry;target.set(key,{key,name:'AOVE',unit:'g',amount:(target.get(key)?.amount||0)+grams});};
@@ -1926,7 +1932,7 @@ function marcarTodo() {
   const seen = new Set();
   for (let k = 0; k < 600; k++) {
     const box = [...document.querySelectorAll('#cpCuerpo .cp-main input.cp-ck[data-buy-section="pending"]')].find(b => !b.disabled && !('buyPart' in b.dataset) && (!b.checked || b.classList.contains('is-partial')) && !seen.has(b.dataset.buyCard || b.dataset.buy));
-    if (!box) break; seen.add(box.dataset.buyCard || box.dataset.buy); box.checked = true; marcarCompra(box); pintarCompra();
+    if (!box) break; seen.add(box.dataset.buyCard || box.dataset.buy); box.checked = true; marcarCompra(box);
   }
   pintarCompra();
 }
@@ -1960,7 +1966,7 @@ function filaHtml(e, done, result) {
   if (e.manual) {
     const i = e.manual, checked = purchaseQueue.has(purchaseQueueId(i.key, section)) ? !done : done, txt = shoppingAmountText(i, done), sinCant = /por definir/i.test(txt) && !/\d/.test(txt);
     const notas = [i.adjusted ? 'Compra ajustada' : 'Añadido a mano', sinCant ? 'Sin cantidad' : ''].filter(Boolean).join(' · ');
-    return `<div class="cp-row${done ? ' done' : ''}">${ckHtml(`data-buy="${esc(i.key)}" data-buy-section="${section}"`, checked, false, i.name, done)}<div class="cp-n"><b>${esc(i.name)}</b><small>${esc(notas)}</small>${done ? '' : casaHtml(e)}</div><div class="cp-a">${sinCant ? '' : done ? sinAst(txt) : cantHtml(e, txt)}</div>${masHtml(done ? `data-fdoneman="${esc(i.manualId)}"` : `data-fman="${esc(i.manualId)}"`, i.name)}</div>`;
+    return `<div class="cp-row${done ? ' done' : ''}${!done && checked ? ' marc' : ''}">${ckHtml(`data-buy="${esc(i.key)}" data-buy-section="${section}"`, checked, false, i.name, done)}<div class="cp-n"><b>${esc(i.name)}</b><small>${esc(notas)}</small>${done ? '' : casaHtml(e)}</div><div class="cp-a">${sinCant ? '' : done ? sinAst(txt) : cantHtml(e, txt)}</div>${masHtml(done ? `data-fdoneman="${esc(i.manualId)}"` : `data-fman="${esc(i.manualId)}"`, i.name)}</div>`;
   }
   const c = e.card, name = c.name, queued = e.parts.map(p => partQueued(p, section)), extraQ = e.extras.map(i => purchaseQueue.has(purchaseQueueId(i.key, section))), every = [...queued, ...extraQ], all = every.length > 0 && every.every(Boolean),
     partial = !all && (every.some(Boolean) || e.parts.some(p => p.allocs.some(a => allocQueued(a, section)))), loose = !e.parts.length, checked = loose ? (purchaseQueue.has(purchaseQueueId(c.items[0].key, section)) ? !done : done) : (done ? !all : all),
@@ -1969,7 +1975,7 @@ function filaHtml(e, done, result) {
     target = loose ? `data-buy="${esc(c.items[0].key)}"` : `data-buy-card="${esc(name)}"${done ? ` data-buy-part="${esc(e.parts[0].label)}"` : ''}`;
   const subs = !done && e.parts.length + e.extras.length > 1 ? e.parts.map((p, k) => `<div class="cp-sub">${ckHtml(`data-buy-card="${esc(name)}" data-buy-part="${esc(p.label)}" data-buy-section="${section}"`, queued[k], false, name + ' · ' + (p.label || 'sin marca'), false)}<span><b>${esc(p.label || 'Sin marca')}</b> · ${sinAst(allocAmountText(name, p.allocs, field).shown) || 'sin cantidad'}</span></div>`).join('')
     + e.extras.map((i, k) => `<div class="cp-sub">${ckHtml(`data-buy="${esc(i.key)}" data-buy-section="${section}"`, extraQ[k], false, name + ' · ' + (i.adjusted ? 'compra ajustada' : 'añadido a mano'), false)}<span><b>${i.adjusted ? 'Compra ajustada' : 'Añadido a mano'}</b> · ${i.amount == null || i.amount === '' ? 'sin cantidad' : fmt.format(i.amount) + ' ' + esc(i.unit)}</span></div>`).join('') : '';
-  return `<div class="cp-row${done ? ' done' : ''}">${ckHtml(target + ` data-buy-section="${section}"`, checked, partial, name, done)}<div class="cp-n"><b>${esc(name)}</b>${notas ? `<small>${esc(notas)}</small>` : ''}${done ? '' : casaHtml(e) + caldoNota(e, result)}</div><div class="cp-a">${noAmount ? '' : done ? sinAst(e.amount.shown) : cantHtml(e, e.amount.shown)}</div>${done ? (e.card.parts.length <= 1 ? masHtml(`data-fdone="${esc(name)}"`, name) : '') : masHtml(`data-ficha="${esc(name)}"`, name)}</div>${subs}${done ? '' : semanaHtml(e)}`;
+  return `<div class="cp-row${done ? ' done' : ''}${!done && checked && !partial ? ' marc' : ''}">${ckHtml(target + ` data-buy-section="${section}"`, checked, partial, name, done)}<div class="cp-n"><b>${esc(name)}</b>${notas ? `<small>${esc(notas)}</small>` : ''}${done ? '' : casaHtml(e) + caldoNota(e, result)}</div><div class="cp-a">${noAmount ? '' : done ? sinAst(e.amount.shown) : cantHtml(e, e.amount.shown)}</div>${done ? (e.card.parts.length <= 1 ? masHtml(`data-fdone="${esc(name)}"`, name) : '') : masHtml(`data-ficha="${esc(name)}"`, name)}</div>${subs}${done ? '' : semanaHtml(e)}`;
 }
 function decideHtml(b) {
   const amt = brothAmountText(b), d = `data-broth-lot="${esc(b.lotId)}" data-broth-ing="${esc(b.ing)}"`;
@@ -1980,7 +1986,8 @@ function sugHtml(i) {
   const added = manualShopRows().some(r => r.source === i.source), queued = manualShopChanges().some(r => r.source === i.source && !r.remove);
   return `<div class="cp-sug"><span><b>${esc(i.name)}</b><small>${i.amount == null ? 'Cantidad opcional' : fmt.format(r2(i.amount)) + ' ' + esc(i.unit)}</small></span><button type="button" class="btn" data-sug="${esc(i.source)}" data-sug-on="${added ? '0' : '1'}"${added && !queued ? ' disabled' : ''}>${added ? (queued ? 'Quitar' : 'En la compra') : 'Añadir'}</button></div>`;
 }
-function pintarCompra() {
+function pintarCompra() { return conMemo(pintarCompra0); }
+function pintarCompra0() {
   if (!data || $('#compra').hidden) return;
   data.activeWeek = SEM.lunes;
   const result = shopping(), q = clean(CP.q.trim());
@@ -1993,7 +2000,8 @@ function pintarCompra() {
     + `<button type="button" class="day todo${shopDays.size ? '' : ' on'}" data-cpdia="todo" aria-pressed="${!shopDays.size}">Todo<small>sem.</small></button>`;
   const filtra = e => !q || clean(e.name).includes(q);
   const filas = pend.filter(filtra), caldos = caldo.filter(b => !q || clean(b.ing).includes(q) || clean(b.recipe).includes(q));
-  let html = `<div class="cp-pend"><span>Pendientes (${nPend})${shopDays.size ? ' · ' + esc(shopRangeLabel()) : ''}</span>${pend.length ? `<button type="button" id="cpTodo">${shopMarksPending() ? 'Desmarcar todo' : 'Marcar todo'}</button>` : ''}</div><div class="cp-main">`;
+  const otras = marcasOtrasSemanas();
+  let html = (otras.length ? `<div class="info cp-otra"><span>Tienes cambios sin actualizar en la compra de la semana del ${otras.map(w => h(rangoSemana(w))).join(' y del ')}.</span><button type="button" class="btn" data-irsem="${h(otras[0])}">Ir</button></div>` : '') + `<div class="cp-pend"><span>Pendientes (${nPend})${shopDays.size ? ' · ' + esc(shopRangeLabel()) : ''}</span>${pend.length ? `<button type="button" id="cpTodo">${shopMarksPending() ? 'Desmarcar todo' : 'Marcar todo'}</button>` : ''}</div><div class="cp-main">`;
   html += (caldos.length ? '<div class="cp-cat">Decide antes de comprar</div>' : '') + caldos.map(decideHtml).join('');
   if (!filas.length && !caldos.length) html += `<div class="empty">${q ? 'Nada pendiente con «' + esc(CP.q.trim()) + '».' : 'No hay nada pendiente de comprar en esta vista.'}</div>`;
   html += shopGroups(filas).map(g => `<div class="cp-cat">${esc(g.category)}</div><div class="cp-list">${g.rows.map(e => filaHtml(e, false, result)).join('')}</div>`).join('') + '</div>';
@@ -2183,7 +2191,7 @@ function init014b() {
     const zona = t => t.closest('.grab, .shh');
     d.addEventListener('touchstart', ev => { y0 = zona(ev.target) ? ev.touches[0].clientY : null; d.style.transition = ''; }, { passive: true });
     d.addEventListener('touchmove', ev => { if (y0 === null) return; const dy = ev.touches[0].clientY - y0; d.style.transform = dy > 0 ? `translateY(${dy}px)` : ''; }, { passive: true });
-    d.addEventListener('touchend', ev => { if (y0 === null) return; const dy = ev.changedTouches[0].clientY - y0; y0 = null; d.style.transition = 'transform .15s'; d.style.transform = ''; if (dy > 90) d.close(); });
+    d.addEventListener('touchend', ev => { if (y0 === null) return; const dy = ev.changedTouches[0].clientY - y0; y0 = null; d.style.transition = 'transform .15s'; d.style.transform = ''; if (dy > 90) intentarCerrar(d); });
   });
   // Con una ventana abierta, lo de detrás no se mueve
   const bloquear = () => { const b = document.body; if (b.dataset.fijo) return; const y = window.scrollY; b.dataset.fijo = String(y); Object.assign(b.style, { position: 'fixed', top: -y + 'px', left: '0', right: '0', overflow: 'hidden' }); };
@@ -3163,6 +3171,39 @@ function init019() {
   document.addEventListener('click', ev => { const b = ev.target.closest('[data-reedit],[data-renueva]'); if (!b) return; abrirEditarReceta(b.dataset.reedit || null); });
 }
 
+
+/* ---------- 0.21 · repaso: compra más clara y rápida, avisos legibles y no perder cambios al cerrar ---------- */
+let SHOPMEMO = null;
+function shopping(filtered = true, days = null) {
+  if (!SHOPMEMO) return shopping0(filtered, days);
+  const k = JSON.stringify([filtered, days, data.activeWeek, [...shopDays].sort()]);
+  if (!SHOPMEMO.has(k)) SHOPMEMO.set(k, shopping0(filtered, days));
+  return SHOPMEMO.get(k);
+}
+function conMemo(fn) { const ya = !!SHOPMEMO; if (!ya) SHOPMEMO = new Map(); try { return fn(); } finally { if (!ya) SHOPMEMO = null; } }
+function marcasOtrasSemanas() {
+  const w = new Set(); [...purchaseQueue.values(), ...manualShopQueue.values(), ...homeQueue.values()].forEach(c => { if (c && c.week && c.week !== data.activeWeek) w.add(c.week); });
+  return [...w].sort();
+}
+/* Cerrar una ventana con cambios sin guardar: se pregunta antes */
+const firmaRE = R => JSON.stringify([R.nombre, R.categoria, R.frecuencia, R.raciones, R.nevera, R.congela, R.pasos, R.cons, R.ings]);
+const firmaCampos = d => [...d.querySelectorAll('input,select,textarea')].map(x => x.type === 'checkbox' ? x.checked : x.value).join('¦') + '|' + [...d.querySelectorAll('.on')].map(x => x.dataset ? JSON.stringify(x.dataset) : '').join('¦');
+function sucio(d) {
+  if (d.id === 'reDlg') { if (!RE) return false; leerCamposReceta(); return firmaRE(RE) !== RE._f; }
+  if (d.id === 'prpDlg') { if (!PRP) return false; const st = leerPrp(); return !!st && prpCambiado(st); }
+  if (['aeDlg', 'ajDlg', 'csDlg', 'cbDlg'].includes(d.id)) return d._f !== undefined && firmaCampos(d) !== d._f;
+  return false;
+}
+function intentarCerrar(d) { if (d && d.open && sucio(d)) aviso('Tienes cambios sin guardar.', 'Cerrar sin guardar', () => d.close()); else if (d) d.close(); }
+function init021() {
+  document.querySelectorAll('[data-cerrar]').forEach(b => b.onclick = () => intentarCerrar(b.closest('dialog')));
+  document.querySelectorAll('dialog').forEach(d => d.addEventListener('cancel', ev => { if (sucio(d)) { ev.preventDefault(); intentarCerrar(d); } }));
+  const abre = HTMLDialogElement.prototype.showModal;
+  HTMLDialogElement.prototype.showModal = function () { abre.call(this); const d = this; if (['aeDlg', 'ajDlg', 'csDlg', 'cbDlg'].includes(d.id)) d._f = firmaCampos(d); };
+  const aRE = abrirEditarReceta; abrirEditarReceta = async id => { await aRE(id); if (RE) RE._f = firmaRE(RE); };
+  $('#cpCuerpo').addEventListener('click', ev => { const b = ev.target.closest('[data-irsem]'); if (!b) return; SEM.lunes = b.dataset.irsem; pintarCompra(); window.scrollTo(0, 0); });
+}
+
 async function abrirSemana() {
   if (!SEM.lunes) { const hoy = hoyIso(); SEM.lunes = mondayOf(hoy); SEM.dia = (parseIso(hoy).getDay() + 6) % 7; }
   if (!SEM.cargada) {
@@ -3172,7 +3213,7 @@ async function abrirSemana() {
   pintarSemana(); pintarEstado();
 }
 
-  initSemana(); init013(); initCompra(); init014b(); init014c(); init015(); init016(); init017a(); init017b(); init017c(); init017d(); init017e(); init018(); init019();
+  initSemana(); init013(); initCompra(); init014b(); init014c(); init015(); init016(); init017a(); init017b(); init017c(); init017d(); init017e(); init018(); init019(); init021();
   sb.auth.onAuthStateChange((_ev, session) => { if ((session && session.user.id) !== (SESION && SESION.user.id)) { SEM.cargada = false; data = null; } show(session); });
   sb.auth.getSession().then(({ data }) => show(data.session));
   setMode('login');
