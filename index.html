@@ -433,6 +433,13 @@
   .rec-esc .aj-st button{width:44px;height:44px} .rec-esc .aj-st output{line-height:44px;min-width:88px;font-size:15px}
   .rec-pdf{display:flex;align-items:center;justify-content:center;min-height:48px;text-decoration:none}
 
+  /* ---------- 0.23 · lo que se come el iPhone por abajo y X con contorno (Rocío, 14/10) ---------- */
+  .shf{padding:12px max(22px, calc(env(safe-area-inset-right) + 22px)) max(30px, calc(env(safe-area-inset-bottom) + 18px)) max(22px, calc(env(safe-area-inset-left) + 22px))}
+  .cp-row, .cp-sub{cursor:pointer}
+  .shh .ib[data-cerrar] span{border:1.5px solid var(--ink);box-sizing:border-box}
+  /* la hoja nunca pasa de la pantalla: cabecera y pie fijos, el centro se desplaza */
+  dialog.sheet[open]{display:flex;flex-direction:column;overflow:hidden} dialog.sheet .shh, dialog.sheet .shf, dialog.sheet .grab{flex:none} dialog.sheet .shb{flex:1 1 auto;min-height:0;max-height:none}
+
 </style>
 </head>
 <body>
@@ -505,7 +512,7 @@
     <button class="cp-act" type="button" id="cpAct" hidden></button>
   </section>
 
-  <p class="ver">Versión de prueba 0.22 · más cómodo</p>
+  <p class="ver">Versión de prueba 0.23 · ajustes del iPhone</p>
 </main>
 <nav class="nav" id="nav" hidden><button type="button" data-nav="semana" id="navSemana"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Semana</button><button type="button" data-nav="compra" id="navCompra"><i class="nbd" id="navNum" hidden></i><svg viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h3l2.6 12.4a2 2 0 0 0 2 1.6h8.2a2 2 0 0 0 2-1.6L21 7H6"/></svg>Compra</button><button type="button" data-nav="recetas" id="navRecetas"><svg viewBox="0 0 24 24"><path d="M12 6.5C10 5 7 4.5 3.5 5v14c3.5-.5 6.5 0 8.5 1.5 2-1.5 5-2 8.5-1.5V5C17 4.5 14 5 12 6.5zM12 6.5v14"/><path d="M6.5 9.5h2.5M6.5 12.5h2.5M15 9.5h2.5M15 12.5h2.5"/></svg>Recetas</button><button type="button" data-nav="alimentos" id="navAlimentos"><svg viewBox="0 0 24 24"><path d="M12 8.2c-1.3-.9-2.8-1.2-4.2-.9C5.3 7.8 4 10 4 12.8 4 17 7 21 9.6 21c1 0 1.5-.5 2.4-.5s1.4.5 2.4.5C17 21 20 17 20 12.8c0-2.8-1.3-5-3.8-5.5-1.4-.3-2.9 0-4.2.9z"/><path d="M12 8.2V5.5M12 5.5c.3-1.6 1.7-2.6 3.4-2.6-.2 1.7-1.6 2.8-3.4 2.6z"/></svg>Alimentos</button></nav>
 <dialog class="sheet" id="picker" aria-labelledby="pkTit"><div class="shh"><h2 id="pkTit">Añadir</h2><button class="ib" type="button" data-cerrar aria-label="Cerrar">×</button></div><div class="shb">
@@ -2902,7 +2909,7 @@ function pdfDrawRecipe(doc,m){const p=pdfPainter(doc),ML=p.ML,CW=p.CW;p.header(m
   if(m.note){p.font(500,13*PX);const ls=p.lines(m.note,CW-30*PX),h=ls.length*13*PX*1.5+22*PX;p.ensure(h+18*PX);p.y+=18*PX;p.rrect(ML,p.y,CW,h,14*PX,PDFC.cream);p.text(ls,ML+15*PX,p.y+11*PX);p.y+=h;}
   p.y+=20*PX;p.ensure(12*PX*1.5,30*PX);p.font(500,12*PX,PDFC.muted);p.text(m.foot,ML,p.y);}
 /* --- entrega: «Compartir» (Archivos, WhatsApp, correo…) si el móvil lo permite; si no, «Descargar» --- */
-function showPdfResult(blob,filename,title,status){if(pdfObjectUrl)URL.revokeObjectURL(pdfObjectUrl);pdfObjectUrl=URL.createObjectURL(blob);pdfFile=new File([blob],filename,{type:'application/pdf'});const download=$('#pdfDownload'),open=$('#pdfOpen'),share=$('#pdfShare');$('#pdfTit').textContent=title;download.href=pdfObjectUrl;download.download=filename;open.href=pdfObjectUrl;download.hidden=false;open.hidden=false;share.hidden=!(navigator.canShare&&navigator.canShare({files:[pdfFile]}));share.classList.toggle('main',!share.hidden);download.classList.toggle('main',share.hidden);$('#pdfHint').textContent=share.hidden?'En iPhone, puedes abrirlo y usar Compartir → Guardar en Archivos.':'Con «Compartir» puedes guardarlo en Archivos o enviarlo por WhatsApp, correo…';$('#pdfHint').hidden=false;$('#pdfStatus').textContent=status;}
+function showPdfResult(blob,filename,title,status){if(pdfObjectUrl)URL.revokeObjectURL(pdfObjectUrl);pdfObjectUrl=URL.createObjectURL(blob);pdfFile=new File([blob],filename,{type:'application/pdf'});const download=$('#pdfDownload'),open=$('#pdfOpen'),share=$('#pdfShare');$('#pdfTit').textContent=title;download.href=pdfObjectUrl;download.download=filename;open.href=pdfObjectUrl;open.hidden=false;share.hidden=!(navigator.canShare&&navigator.canShare({files:[pdfFile]}));download.hidden=!share.hidden;share.classList.toggle('main',!share.hidden);download.classList.toggle('main',share.hidden);$('#pdfHint').textContent=share.hidden?'En iPhone, puedes abrirlo y usar Compartir → Guardar en Archivos.':'Con «Compartir» puedes guardarlo en Archivos o enviarlo por WhatsApp, correo…';$('#pdfHint').hidden=false;$('#pdfStatus').textContent=status;}
 async function sharePdf(){if(!pdfFile)return;try{await navigator.share({files:[pdfFile],title:pdfFile.name});}catch(e){if(e&&e.name==='AbortError')return;aviso('No se ha podido compartir. Usa «Descargar».');}}
 function openPdfDialog(title){$('#pdfTit').textContent=title;$('#pdfStatus').textContent='Preparando tu PDF…';$('#pdfDownload').hidden=true;$('#pdfOpen').hidden=true;$('#pdfShare').hidden=true;$('#pdfHint').hidden=true;if(!$('#pdfDlg').open)$('#pdfDlg').showModal();}
 async function prepareWeekPdf(){const L=SEM.lunes;openPdfDialog('Menú y compra en PDF');try{await loadPdfKit();}catch(e){$('#pdfStatus').textContent='No se ha podido crear el PDF. Inténtalo con conexión.';return;}
@@ -3261,6 +3268,17 @@ function init022() {
   $('#rdet').addEventListener('click', ev => { const b = ev.target.closest('[data-esc]'); if (!b || !ESC) return; ESC.n = Math.max(1, Math.min(50, ESC.n + Number(b.dataset.esc))); pintarReceta(ESC.id); });
 }
 
+
+/* ---------- 0.23 · Compra: tocar la tarjeta marca el producto (no hace falta acertar en el cuadrado) ---------- */
+function init023() {
+  $('#cpCuerpo').addEventListener('click', ev => {
+    if (ev.target.closest('button, input, a, label, select, textarea, .cp-casa-in')) return;
+    const fila = ev.target.closest('.cp-row, .cp-sub'); if (!fila) return;
+    const ck = fila.querySelector(':scope > .cp-ckw input.cp-ck'); if (!ck || ck.disabled) return;
+    ck.click();
+  });
+}
+
 async function abrirSemana() {
   if (!SEM.lunes) { const hoy = hoyIso(); SEM.lunes = mondayOf(hoy); SEM.dia = (parseIso(hoy).getDay() + 6) % 7; }
   if (!SEM.cargada) {
@@ -3270,7 +3288,7 @@ async function abrirSemana() {
   pintarSemana(); pintarEstado();
 }
 
-  initSemana(); init013(); initCompra(); init014b(); init014c(); init015(); init016(); init017a(); init017b(); init017c(); init017d(); init017e(); init018(); init019(); init021(); init022();
+  initSemana(); init013(); initCompra(); init014b(); init014c(); init015(); init016(); init017a(); init017b(); init017c(); init017d(); init017e(); init018(); init019(); init021(); init022(); init023();
   sb.auth.onAuthStateChange((_ev, session) => { if ((session && session.user.id) !== (SESION && SESION.user.id)) { SEM.cargada = false; data = null; } show(session); });
   sb.auth.getSession().then(({ data }) => show(data.session));
   setMode('login');
